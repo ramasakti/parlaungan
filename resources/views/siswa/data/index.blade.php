@@ -1,9 +1,10 @@
 <a class="uk-margin" href="#modal-center" uk-toggle="target: #add-siswa" uk-icon="icon: plus"></a>
 @include('siswa.data.add-siswa')
 
-<form action="/siswa" method="get">
+<script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+<form action="/siswa" method="get" id="submitKelas">
     <div class="uk-margin">
-        <select name="id_kelas" class="uk-select" id="" onchange="this.form.submit()">
+        <select name="id_kelas" class="uk-select" id="" onchange="this.form.submit()" onsubmit="submitKelas(); return false">
             <option value="">Pilih Kelas</option>
             @foreach ($dataKelas as $kelas)
                 &nbsp; <option {{ ($kelas->id_kelas === request('id_kelas')) ? 'selected' : '' }} value="{{ $kelas->id_kelas }}">{{ $kelas->tingkat }} {{ $kelas->jurusan }}</option>
@@ -50,3 +51,11 @@
         @endforeach
     </tbody>
 </table>
+<script>
+    $(document).ready(function() {
+        $(document).on('submit', '#submitKelas', function() {
+            // do your things
+            return false;
+        });
+    });
+</script>

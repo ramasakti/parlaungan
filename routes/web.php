@@ -9,6 +9,7 @@ use App\Http\Controllers\AbsenController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\GaleriController;
+use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\SekolahController;
 
 /*
@@ -89,3 +90,6 @@ Route::post('/absen/engine', [AbsenController::class, 'engineRFID'])->middleware
 //Engine Absen QRCode
 Route::get('/absen/qrcode', [AbsenController::class, 'qrcode'])->middleware('auth');
 Route::get('/absen/engine/{userabsen}', [AbsenController::class, 'engineQR'])->middleware('auth');
+
+//Jadwal
+Route::get('/jadwal', [JadwalController::class, 'index'])->middleware('auth');
