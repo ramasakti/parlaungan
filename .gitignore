@@ -6,7 +6,6 @@
 /public/images
 /public/louie
 /storage/*.key
-/vendor
 .env
 .env.backup
 .phpunit.result.cache
