@@ -93,3 +93,4 @@ Route::get('/absen/engine/{userabsen}', [AbsenController::class, 'engineQR'])->m
 
 //Jadwal
 Route::get('/jadwal', [JadwalController::class, 'index'])->middleware('auth');
+Route::get('/jadwal/test', [JadwalController::class, 'kelas'])->middleware('auth');

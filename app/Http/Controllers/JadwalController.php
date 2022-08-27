@@ -11,9 +11,9 @@ class JadwalController extends Controller
     {
         return DB::table('guru')
                 ->crossJoin('jadwal')
-                ->select('jadwal.id_jadwal', 'jadwal.hari', 'jadwal.mapel', 'jadwal.mulai', 'jadwal.sampai', 'guru.nama_guru')
+                ->select('jadwal.id_jadwal', 'jadwal.hari', 'jadwal.kelas_id', 'jadwal.mapel', 'jadwal.mulai', 'jadwal.sampai', 'guru.nama_guru')
                 ->where('guru.id_guru', '=', DB::raw('jadwal.guru_id'));
-    }
+    }   
 
     public function jadwalSenin()
     {

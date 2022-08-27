@@ -15,7 +15,7 @@
                     <option value=""></option>
                     <option {{ ($siswa->keterangan === 'S') ? 'selected' : '' }} value="S">Sakit</option>
                     <option {{ ($siswa->keterangan === 'I') ? 'selected' : '' }} value="I">Izin</option>
-                    <option {{ ($siswa->keterangan === 'A') ? 'selected' : '' }} value="Alfa">Alfa</option>
+                    <option {{ ($siswa->keterangan === 'A') ? 'selected' : '' }} value="A">Alfa</option>
                     <option value="Hadir">Hadir</option>
                 </select>
             </div>

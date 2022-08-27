@@ -4,14 +4,16 @@
 @section('konten')
     <ul uk-tab>
         @foreach ($dataHari as $hari)
-            <li class="uk-active"><a href="/jadwal?hari={{ $hari->nama_hari }}">{{ $hari->nama_hari }}</a></li>
+            <li class="uk-active"><a href="#">{{ $hari->nama_hari }}</a></li>
         @endforeach
     </ul>
 
-    <ul class="uk-switcher uk-margin">   
-        <li class="uk-active">
-            @include('jadwal.hari.Senin')
-        </li> 
+    <ul class="uk-switcher uk-margin">
+        @foreach ($dataHari as $hari)    
+            <li class="uk-active">
+                @include('jadwal.hari.Senin'{{ $hari->nama_hari }})
+            </li> 
+        @endforeach
         <li class="uk-active">
             @include('jadwal.hari.Selasa')
         </li>
