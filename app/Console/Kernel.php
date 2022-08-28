@@ -15,7 +15,18 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('rekap:exec');
+        $schedule->call(function ()
+        {
+            DB::table('absen')
+                ->update([
+                    'waktu_absen' => NULL
+                ]);
+
+            DB::table('jadwal')
+                ->update([
+                    'status' => ''
+                ]);
+        })->daily();
     }
 
     /**

@@ -1,5 +1,7 @@
 <a class="mx-2" href="#modal-center" uk-toggle="target: #add-jadwal" uk-icon="icon: plus"></a>
 @include('jadwal.add-jadwal')
+@include('jadwal.hari.kelas')
+<h5>Jadwal Pelajaran {{ $kelasSelected[0]->tingkat }} {{ $kelasSelected[0]->jurusan }} hari Senin</h5>
 <table class="table table-borderless">
     <thead>
         <tr>

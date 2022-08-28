@@ -8,12 +8,10 @@
         @endforeach
     </ul>
 
-    <ul class="uk-switcher uk-margin">
-        @foreach ($dataHari as $hari)    
-            <li class="uk-active">
-                @include('jadwal.hari.Senin'{{ $hari->nama_hari }})
-            </li> 
-        @endforeach
+    <ul class="uk-switcher uk-margin">  
+        <li class="uk-active">
+            @include('jadwal.hari.Senin')
+        </li> 
         <li class="uk-active">
             @include('jadwal.hari.Selasa')
         </li>

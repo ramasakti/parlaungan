@@ -52,14 +52,15 @@ class JadwalController extends Controller
             'navactive' => 'jadwal',
             'ai' => 1,
             'dataKelas' => DB::table('kelas')->get(),
+            'kelasSelected' => DB::table('kelas')->where('id_kelas', request('id_kelas'))->get(),
             'dataGuru' => DB::table('guru')->get(),
             'dataHari' => DB::table('hari')->get(),
-            'dataSenin' => $this->jadwalSenin()->get(),
+            'dataSenin' => $this->jadwalSenin()->where('jadwal.kelas_id', request('id_kelas'))->get(),
             'dataSelasa' => $this->jadwalSelasa()->get(),
             'dataRabu' => $this->jadwalRabu()->get(),   
             'dataKamis' => $this->jadwalKamis()->get(),
             'dataJumat' => $this->jadwalJumat()->get(),
-            'dataSabtu' => $this->jadwalSabtu()->get(),
+            'dataSabtu' => $this->jadwalSabtu()->where('jadwal.kelas_id', request('id_kelas'))->get(),
         ]);
     }
 

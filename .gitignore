@@ -1,10 +1,4 @@
 /node_modules
-/public
-/public/hot
-/public/storage
-/public/css
-/public/images
-/public/louie
 /storage/*.key
 .env
 .env.backup
