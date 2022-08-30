@@ -40,10 +40,11 @@ class Rekap extends Command
     public function handle()
     {
         //Cek Pengondisian Hari Libur/Minggu
-        $cekHari = Hari::all()->where('nama_hari', Carbon::now()->isoFormat('dddd'));
-        $cekLibur = Libur::all()
+        $cekHari = DB::table('hari')->where('nama_hari', Carbon::now()->isoFormat('dddd'))->get();
+        $cekLibur = DB::table('libur')
                         ->where('mulai', '<=', date('Y-m-d'))
-                        ->where('sampai', '>=', date('Y-m-d'));
+                        ->where('sampai', '>=', date('Y-m-d'))
+                        ->get();
 
         if (count($cekHari) > 0){
             if (count($cekLibur) == 0){
