@@ -28,7 +28,7 @@ class LoginController extends Controller
         $detailUser = User::all()->where('username', request('username'));
         if (Auth::attempt($credentials)){
             if ($request->username == 'adminabsen'){
-                $response = new Response(redirect('/absen/engine'));
+                $response = new Response(redirect('/absen/rfid'));
                 $response->withCookie(cookie()->forever('username', 'adminabsen'));
                 return $response;
             }else{
