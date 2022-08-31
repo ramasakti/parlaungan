@@ -26,7 +26,7 @@
             <h2 class="uk-margin-small">
                 <div id="txt"></div>
             </h2>
-            <p class="uk-margin-small uk-text-default"> Aplikasi ini dibuat dan dikembangkan oleh &copy; SMA Islam Parlaungan</p>
+            <p class="uk-margin-small uk-text-default">Aplikasi ini dibuat dan dikembangkan oleh &copy; Staff IT Development And Infrastructure - SMA Islam Parlaungan</p>
             @if (session()->has('unregistered'))
                 <div class="uk-alert-danger" uk-alert>
                     <p>{{ session('unregistered') }}</p>
