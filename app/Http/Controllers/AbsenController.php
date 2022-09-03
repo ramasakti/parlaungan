@@ -51,7 +51,7 @@ class AbsenController extends Controller
             'hariIni' => Carbon::now()->isoFormat('dddd, DD MMMM Y'),
             'dataKelas' => DB::table('kelas')->get(),
             'jamMasuk' => DB::table('hari')->where('nama_hari', Carbon::now()->isoFormat('dddd'))->get(),
-            'dataAbsen' => $this->absen()->where('siswa.kelas_id', request('id_kelas'))->get(),
+            'dataAbsen' => $this->absen()->where('siswa.kelas_id', request('id_kelas'))->orderBy('siswa.nama_siswa')->get(),
             'dataTerlambat' => $this->terlambat()->get(),
             'dataKetidakhadiran' => $this->ketidakhadiran()->get(),
         ]);

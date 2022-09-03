@@ -18,7 +18,7 @@ class SiswaController extends Controller
             'navactive' => 'siswa',
             'ai' => 1,
             'dataKelas' => DB::table('kelas')->get(),
-            'dataSiswa' => DB::table('siswa')->where('kelas_id', request('id_kelas'))->get(),
+            'dataSiswa' => DB::table('siswa')->where('kelas_id', request('id_kelas'))->orderBy('nama_siswa')->get(),
             'dataGuru' => DB::table('guru')->get(),
         ]);
     }
