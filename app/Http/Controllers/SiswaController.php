@@ -104,9 +104,11 @@ class SiswaController extends Controller
 
     public function updateSiswa(Request $request)
     {
-        $validatedSiswa = $request->validate([
-            'id_siswa' => 'required|unique:siswa'
-        ]);
+        if ($request->id_lama != $request->id_siswa){
+            $validatedSiswa = $request->validate([
+                'id_siswa' => 'required|unique:siswa'
+            ]);
+        }
 
         DB::table('siswa')
             ->where('id_siswa', $request->id_lama)
