@@ -50,6 +50,7 @@ class AbsenController extends Controller
             'ai' => 1,
             'hariIni' => Carbon::now()->isoFormat('dddd, DD MMMM Y'),
             'dataKelas' => DB::table('kelas')->get(),
+            'kelasSelected' => DB::table('kelas')->where('id_kelas', request('id_kelas'))->get(),
             'jamMasuk' => DB::table('hari')->where('nama_hari', Carbon::now()->isoFormat('dddd'))->get(),
             'dataAbsen' => $this->absen()->where('siswa.kelas_id', request('id_kelas'))->orderBy('siswa.nama_siswa')->get(),
             'dataTerlambat' => $this->terlambat()->get(),

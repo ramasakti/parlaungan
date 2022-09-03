@@ -13,9 +13,11 @@
     </div>
 </form>
 
-<div class="uk-margin">
-    <h5>Daftar Siswa</h5>
-</div>
+@foreach ($kelasSelected as $kelas)    
+    <div class="uk-margin">
+        <h5>Absen Siswa Kelas {{ $kelas->tingkat }} {{ $kelas->jurusan }}</h5>
+    </div>
+@endforeach
 <table class="table table-borderless">
     <thead>
         <tr>
