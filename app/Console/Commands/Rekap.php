@@ -58,19 +58,19 @@ class Rekap extends Command
 
                 //Ambil data keterangan absen siswa untuk direkap
                 $dataRekap = DB::table('absen')
-                    ->select('kode_siswa','rekap', 'keterangan')
+                    ->select('id_siswa','rekap', 'keterangan')
                     ->where('keterangan', '!=', '')
                     ->get();
 
                 //Ambil data jadwal yang notset untuk direkap ketidakhadirannya
                 $dataJadwal = DB::table('jadwal')
-                    ->select('id', 'mulai', 'sampai')
+                    ->select('id_jadwal', 'mulai', 'sampai')
                     ->where('hari', Carbon::now()->isoFormat('dddd'))
                     ->get();
 
                 foreach ($dataRekap as $updateRekap){
                     DB::table('absen')
-                        ->where('kode_siswa', $updateRekap->kode_siswa)
+                        ->where('id_siswa', $updateRekap->id_siswa)
                         ->update([
                             'rekap' => $updateRekap->rekap ."". $updateRekap->keterangan
                         ]);

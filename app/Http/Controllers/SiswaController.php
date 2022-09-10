@@ -3,10 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\SiswaImport;
+use App\Models\Siswa;
 use DB;
 
 class SiswaController extends Controller
 {
+    public function import(Request $request)
+    {
+        Excel::import(new SiswaImport, request()->file('file')); //'file' diisi dengan name uploader
+        return back()->with('imported', 'Berhasil import siswa!');
+    }
 
     public function index(Request $request)
     {

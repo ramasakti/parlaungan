@@ -1,5 +1,7 @@
 <a class="uk-margin" href="#modal-center" uk-toggle="target: #add-siswa" uk-icon="icon: plus"></a>
 @include('siswa.data.add-siswa')
+<a class="uk-margin" href="#modal-center" uk-toggle="target: #import-siswa" uk-icon="icon: upload"></a>
+@include('siswa.data.import-siswa')
 
 <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
 <form action="/siswa" method="get" id="submitKelas">
