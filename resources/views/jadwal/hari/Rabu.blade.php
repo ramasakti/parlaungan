@@ -1,7 +1,9 @@
 <a class="mx-2" href="#modal-center" uk-toggle="target: #add-jadwal" uk-icon="icon: plus"></a>
 @include('jadwal.add-jadwal')
 @include('jadwal.hari.kelas')
-<h5>Jadwal Pelajaran {{ $kelasSelected[0]->tingkat }} {{ $kelasSelected[0]->jurusan }} hari Rabu</h5>
+@foreach ($kelasSelected as $kelas)
+    <h5>Jadwal Pelajaran {{ $kelas->tingkat }} {{ $kelas->jurusan }} hari Rabu</h5>
+@endforeach
 <table class="table table-borderless">
     <thead>
         <tr>

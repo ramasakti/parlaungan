@@ -20,7 +20,7 @@
 
     UIkit.upload('.js-upload', {
 
-        url: '',
+        url: '/siswa/import',
         multiple: true,
 
         beforeSend: function () {
