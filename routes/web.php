@@ -11,6 +11,7 @@ use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\SekolahController;
+use App\Http\Controllers\TestingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -85,12 +86,14 @@ Route::post('/siswa/delete', [SiswaController::class, 'destroySiswa'])->middlewa
 Route::get('/absen', [AbsenController::class, 'index'])->middleware('auth');
 Route::post('/absen/update', [AbsenController::class, 'updateAbsen'])->middleware('auth');
 //Engine Absen RFID
-Route::get('/absen/rfid', [AbsenController::class, 'rfid'])->middleware('auth');
-Route::post('/absen/engine', [AbsenController::class, 'engineRFID'])->middleware('auth');
+Route::get('/absen/rfid', [AbsenController::class, 'rfid']);
+Route::post('/absen/engine', [AbsenController::class, 'engineRFID']);
 //Engine Absen QRCode
 Route::get('/absen/qrcode', [AbsenController::class, 'qrcode'])->middleware('auth');
 Route::get('/absen/engine/{userabsen}', [AbsenController::class, 'engineQR'])->middleware('auth');
 
 //Jadwal
 Route::get('/jadwal', [JadwalController::class, 'index'])->middleware('auth');
-Route::get('/jadwal/test', [JadwalController::class, 'kelas'])->middleware('auth');
+
+//AdminLTE
+Route::get('/testing', [TestingController::class, 'index']);

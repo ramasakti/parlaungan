@@ -84,6 +84,9 @@ class AbsenController extends Controller
 
     public function rfid(Request $request)
     {
+        if (!$request->cookie('username')){
+            return redirect('/login');
+        }
         return view('absen.rfid', [
             'title' => 'Sistem Absen',
         ]);
@@ -99,40 +102,46 @@ class AbsenController extends Controller
     public function engineRFID(Request $request)
     {
         $userAbsen = DB::table('user')->where('username', $request->userabsen)->get();
-        if (count($userAbsen) > 0){
+        switch (count($userAbsen)) {
             //Guru
-        }else{
-            $siswaAbsen = DB::table('absen')
+            case 1:
+                # code...
+            break;
+            
+            //Siswa
+            case 0:
+                $siswaAbsen = DB::table('absen')
                                 ->join('siswa', 'siswa.id_siswa', '=', 'absen.id_siswa')
                                 ->where('absen.id_siswa', $request->userabsen)
                                 ->get();
-                               
-            if (count($siswaAbsen) > 0){
-                if ($siswaAbsen[0]->waktu_absen === NULL){
-                    $jamMasuk = $this->jamSekarang();
-                    if (date('H:i:s') > $jamMasuk[0]->masuk){
+            
+                if (count($siswaAbsen) > 0){
+                    if ($siswaAbsen[0]->waktu_absen === NULL){
+                        $jamMasuk = $this->jamSekarang();
                         DB::table('absen')->where('id_siswa', $request->userabsen)->increment('jumlah_terlambat');
+                        if (date('H:i:s') > $jamMasuk[0]->masuk){
+                        }
+                        DB::table('absen')
+                            ->where('id_siswa', $request->userabsen)
+                            ->update([
+                                'waktu_absen' => date('H:i:s'),
+                                'izin' => NULL,
+                                'keterangan' => '',
+                            ]);
+                        return back()->with('success', $siswaAbsen[0]->nama_siswa);
+                    }else{
+                        return back()->with('bePresent', $siswaAbsen[0]->nama_siswa);
                     }
-                    DB::table('absen')
-                        ->where('id_siswa', $request->userabsen)
-                        ->update([
-                            'waktu_absen' => date('H:i:s'),
-                            'izin' => NULL,
-                            'keterangan' => '',
-                        ]);
-                    return back()->with('success', $siswaAbsen[0]->nama_siswa);
                 }else{
-                    return back()->with('bePresent', $siswaAbsen[0]->nama_siswa);
+                    return back()->with('unregistered', 'ID Anda tidak terdaftar!');
                 }
-            }else{
-                return back()->with('unregistered', 'ID Anda tidak terdaftar!');
-            }
+            break;
         }
     }
 
     public function engineQR($userabsen)
     {
-        $userAbsen = DB::table('user')->where('username', $userabsen)->get();
+        $userAbsen = DB::table('user')->where('status', '!=', 'Siswa')->where('username', $userabsen)->get();
         if (count($userAbsen) > 0){
             //Guru
         }else{
