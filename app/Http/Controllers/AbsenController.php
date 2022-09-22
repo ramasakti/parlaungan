@@ -118,8 +118,8 @@ class AbsenController extends Controller
                 if (count($siswaAbsen) > 0){
                     if ($siswaAbsen[0]->waktu_absen === NULL){
                         $jamMasuk = $this->jamSekarang();
-                        DB::table('absen')->where('id_siswa', $request->userabsen)->increment('jumlah_terlambat');
                         if (date('H:i:s') > $jamMasuk[0]->masuk){
+                            DB::table('absen')->where('id_siswa', $request->userabsen)->increment('jumlah_terlambat');
                         }
                         DB::table('absen')
                             ->where('id_siswa', $request->userabsen)
