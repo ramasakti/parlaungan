@@ -105,7 +105,41 @@ class AbsenController extends Controller
         switch (count($userAbsen)) {
             //Guru
             case 1:
-                # code...
+                $dataJadwal = DB::table('jadwal')
+                                ->where('guru_id', $request->userabsen)
+                                ->where('hari', Carbon::now()->isoFormat('dddd'))
+                                ->where('mulai', '<', date('H:i:s'))
+                                ->where('sampai', '>', date('H:i:s'))
+                                ->get();
+                if (count($dataJadwal) > 0){
+                    $dataJurnal = DB::table('jurnal')
+                                    ->where('jadwal_id', $dataJadwal[0]->id_jadwal)
+                                    ->where('tanggal', date('Y-m-d'))
+                                    ->get();
+                    if (count($dataJurnal) < 1){
+                        //Update status jadwal menjadi hadir
+                        DB::table('jadwal')
+                            ->where('id_jadwal', $dataJadwal[0]->id_jadwal)
+                            ->where('mulai', '<', date('H:i:s'))
+                            ->where('sampai', '>', date('H:i:s'))
+                            ->update(['status' => 'HADIR']); //HVSIA
+                        //Insert ke jurnal
+                        DB::table('jurnal')
+                            ->insert([
+                                'tanggal' => date('Y-m-d'),
+                                'jadwal_id' => $dataJadwal[0]->id_jadwal,
+                                'masuk' => date('H:i:s'),
+                                'lama' => ceil((strtotime($dataJadwal[0]->sampai)-strtotime(date('H:i:s')))/40/60),
+                                'transport' => 1,
+                                'materi' => ''
+                            ]);
+                    }else{
+                        return back()->with('filled', 'Kelas sudah terisi!');
+                    }
+                }else{
+                    return back()->with('unschedule', 'Anda tidak memiliki jadwal');
+                }
+                return back()->with('inserted', 'Selamat mengajar!');
             break;
             
             //Siswa
@@ -141,35 +175,76 @@ class AbsenController extends Controller
 
     public function engineQR($userabsen)
     {
-        $userAbsen = DB::table('user')->where('status', '!=', 'Siswa')->where('username', $userabsen)->get();
-        if (count($userAbsen) > 0){
+        $userAbsen = DB::table('user')->where('username', $userabsen)->get();
+        switch (count($userAbsen)) {
             //Guru
-        }else{
-            $siswaAbsen = DB::table('absen')
+            case 1:
+                $dataJadwal = DB::table('jadwal')
+                                ->where('guru_id', $userabsen)
+                                ->where('hari', Carbon::now()->isoFormat('dddd'))
+                                ->where('mulai', '<', date('H:i:s'))
+                                ->where('sampai', '>', date('H:i:s'))
+                                ->get();
+                if (count($dataJadwal) > 0){
+                    $dataJurnal = DB::table('jurnal')
+                                    ->where('jadwal_id', $dataJadwal[0]->id_jadwal)
+                                    ->where('tanggal', date('Y-m-d'))
+                                    ->get();
+                    if (count($dataJurnal) < 1){
+                        //Update status jadwal menjadi hadir
+                        DB::table('jadwal')
+                            ->where('id_jadwal', $dataJadwal[0]->id_jadwal)
+                            ->where('mulai', '<', date('H:i:s'))
+                            ->where('sampai', '>', date('H:i:s'))
+                            ->update(['status' => 'HADIR']); //HVSIA
+                        //Insert ke jurnal
+                        $jamPelajaran = $this->jamSekarang()[0]->jampel;
+                        DB::table('jurnal')
+                            ->insert([
+                                'tanggal' => date('Y-m-d'),
+                                'jadwal_id' => $dataJadwal[0]->id_jadwal,
+                                'masuk' => date('H:i:s'),
+                                'lama' => ceil((strtotime($dataJadwal[0]->sampai)-strtotime(date('H:i:s')))/intval(substr($jamPelajaran, 3, 2))/60),
+                                'transport' => 1,
+                                'materi' => ''
+                            ]);
+                        return back()->with('inserted', 'Selamat mengajar!');
+                    }else{
+                        return back()->with('filled', 'Kelas sudah terisi!');
+                    }
+                }else{
+                    return back()->with('unschedule', 'Anda tidak memiliki jadwal');
+                }
+            break;
+            
+            //Siswa
+            case 0:
+                $siswaAbsen = DB::table('absen')
                                 ->join('siswa', 'siswa.id_siswa', '=', 'absen.id_siswa')
                                 ->where('absen.id_siswa', $userabsen)
                                 ->get();
-                               
-            if (count($siswaAbsen) > 0){
-                if ($siswaAbsen[0]->waktu_absen === NULL){
-                    $jamMasuk = $this->jamSekarang();
-                    if (date('H:i:s') > $jamMasuk[0]->masuk){
-                        DB::table('absen')->where('id_siswa', $userabsen)->increment('jumlah_terlambat');
+            
+                if (count($siswaAbsen) > 0){
+                    if ($siswaAbsen[0]->waktu_absen === NULL){
+                        $jamMasuk = $this->jamSekarang();
+                        if (date('H:i:s') > $jamMasuk[0]->masuk){
+                            DB::table('absen')->where('id_siswa', $userabsen)->increment('jumlah_terlambat');
+                        }
+                        DB::table('absen')
+                            ->where('id_siswa', $userabsen)
+                            ->update([
+                                'waktu_absen' => date('H:i:s'),
+                                'izin' => NULL,
+                                'keterangan' => '',
+                            ]);
+                        return back()->with('success', $siswaAbsen[0]->nama_siswa);
+                    }else{
+                        return back()->with('bePresent', $siswaAbsen[0]->nama_siswa);
                     }
-                    DB::table('absen')
-                        ->where('id_siswa', $userabsen)
-                        ->update([
-                            'waktu_absen' => date('H:i:s'),
-                            'izin' => NULL,
-                            'keterangan' => '',
-                        ]);
-                    return back()->with('success', $siswaAbsen[0]->nama_siswa);
                 }else{
-                    return back()->with('bePresent', $siswaAbsen[0]->nama_siswa);
+                    return back()->with('unregistered', 'ID Anda tidak terdaftar!');
                 }
-            }else{
-                return back()->with('unregistered', 'ID Anda tidak terdaftar!');
-            }
+            break;
         }
     }
 }

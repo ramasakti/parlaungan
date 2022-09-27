@@ -18,7 +18,6 @@
     <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">ID</th>
             <th scope="col">Nama</th>
             <th scope="col">Status</th>
             <th scope="col">Handler</th>
@@ -28,7 +27,6 @@
         @foreach ($dataAbsen as $siswa)    
             <tr>
                 <td>{{ $ai++ }}</td>
-                <td>{{ $siswa->id_siswa }}</td>
                 <td>{{ $siswa->nama_siswa }}</td>
                 <td>
                     @if ($siswa->waktu_absen === NULL)

@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class LoginController extends Controller
 {
@@ -25,7 +27,7 @@ class LoginController extends Controller
             'password' => 'required'
         ]);
 
-        $detailUser = User::all()->where('username', request('username'));
+        $detailUser = DB::table('user')->where('username', request('username'))->get();
         if (Auth::attempt($credentials)){
             if ($request->username == 'adminabsen'){
                 $response = new Response(redirect('/absen/rfid'));
@@ -33,6 +35,7 @@ class LoginController extends Controller
                 return $response;
             }else{
                 $request->session()->put('username', $request->username);
+                $request->session()->put('status', $detailUser[0]->status);
                 return redirect()->intended('/dashboard');
             }
         }else{
@@ -52,7 +55,11 @@ class LoginController extends Controller
     {
         return view('dashboard', [
             'title' => 'Dashboard',
-            'navactive' => 'dashboard'
+            'navactive' => 'dashboard',
+            'dataSiswa' => count(DB::table('siswa')->get()),
+            'dataGuru' => count(DB::table('guru')->get()),
+            'dataKelas' => count(DB::table('kelas')->get()),
+            'dataQR' => QrCode::size(200)->generate(session('username'))
         ]);
     }
 }

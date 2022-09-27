@@ -56,17 +56,27 @@ class JadwalController extends Controller
             'dataGuru' => DB::table('guru')->get(),
             'dataHari' => DB::table('hari')->get(),
             'dataSenin' => $this->jadwalSenin()->where('jadwal.kelas_id', request('id_kelas'))->get(),
-            'dataSelasa' => $this->jadwalSelasa()->get(),
-            'dataRabu' => $this->jadwalRabu()->get(),   
-            'dataKamis' => $this->jadwalKamis()->get(),
-            'dataJumat' => $this->jadwalJumat()->get(),
+            'dataSelasa' => $this->jadwalSelasa()->where('jadwal.kelas_id', request('id_kelas'))->get(),
+            'dataRabu' => $this->jadwalRabu()->where('jadwal.kelas_id', request('id_kelas'))->get(),   
+            'dataKamis' => $this->jadwalKamis()->where('jadwal.kelas_id', request('id_kelas'))->get(),
+            'dataJumat' => $this->jadwalJumat()->where('jadwal.kelas_id', request('id_kelas'))->get(),
             'dataSabtu' => $this->jadwalSabtu()->where('jadwal.kelas_id', request('id_kelas'))->get(),
         ]);
     }
 
-    public function addJadwal(Request $request)
+    public function storeJadwal(Request $request)
     {
-
+        DB::table('jadwal')
+            ->insert([
+                'hari' => $request->hari,
+                'guru_id' => $request->guru_id,
+                'kelas_id' => $request->kelas_id,
+                'mapel' => $request->mapel,
+                'mulai' => $request->mulai,
+                'sampai' => $request->sampai,
+                'status' => ''
+            ]);
+        return back();
     }
 
     public function deleteJadwal(Request $request)

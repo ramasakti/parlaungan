@@ -89,11 +89,12 @@ Route::post('/absen/update', [AbsenController::class, 'updateAbsen'])->middlewar
 Route::get('/absen/rfid', [AbsenController::class, 'rfid']);
 Route::post('/absen/engine', [AbsenController::class, 'engineRFID']);
 //Engine Absen QRCode
-Route::get('/absen/qrcode', [AbsenController::class, 'qrcode'])->middleware('auth');
-Route::get('/absen/engine/{userabsen}', [AbsenController::class, 'engineQR'])->middleware('auth');
+Route::get('/absen/qrcode', [AbsenController::class, 'qrcode']);
+Route::get('/absen/engine/{userabsen}', [AbsenController::class, 'engineQR']);
 
 //Jadwal
 Route::get('/jadwal', [JadwalController::class, 'index'])->middleware('auth');
+Route::post('/jadwal/store', [JadwalController::class, 'storeJadwal'])->middleware('auth');
 
-//AdminLTE
+//Testing
 Route::get('/testing', [TestingController::class, 'index']);

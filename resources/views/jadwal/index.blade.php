@@ -2,10 +2,14 @@
 @extends('layout.navdash')
 @extends('layout.headerlouie')
 @section('konten')
+@include('jadwal.hari.kelas')
     <ul uk-tab>
-        @foreach ($dataHari as $hari)
-            <li class="uk-active"><a href="#">{{ $hari->nama_hari }}</a></li>
-        @endforeach
+        <li class="uk-active"><a href="#">Senin</a></li>
+        <li class="uk-active"><a href="#">Selasa</a></li>
+        <li class="uk-active"><a href="#">Rabu</a></li>
+        <li class="uk-active"><a href="#">Kamis</a></li>
+        <li class="uk-active"><a href="#">Jumat</a></li>
+        <li class="uk-active"><a href="#">Sabtu</a></li>
     </ul>
 
     <ul class="uk-switcher uk-margin">  
