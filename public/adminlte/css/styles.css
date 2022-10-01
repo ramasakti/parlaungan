@@ -90,11 +90,11 @@
 
 .main-content {
     width: 100%;
-    background: #F3F8FB;
+    background: #FFFFFF;
 }
 
 .main-content-inner {
-    padding: 0 30px 50px;
+    padding: 15px 30px 50px;
 }
 
 /*------------------------- END Core Css -------------------*/
@@ -687,7 +687,7 @@ ul.breadcrumbs {
     display: block;
     font-size: 14px;
     font-weight: 400;
-    color: #7801ff;
+    color: #1e87f0;
     letter-spacing: 0;
     margin-right: 16px;
     position: relative;
@@ -717,8 +717,8 @@ ul.breadcrumbs {
             align-items: center;
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
-    background: -webkit-linear-gradient(left, #8914fe 0%, #8063f5 100%);
-    background: linear-gradient(to right, #8914fe 0%, #8063f5 100%);
+    background: -webkit-linear-gradient(left, #1e87f0 0%, #1e87f0 100%);
+    background: linear-gradient(to right, #1e87f0 0%, #1e87f0 100%);
     padding: 17px 38px;
     position: relative;
 }
@@ -1699,8 +1699,8 @@ table.dbkit-table tr td {
 }
 
 .gradiant-bg .card-header a {
-    background-image: -webkit-linear-gradient(top left, #8914fe, #8160f6);
-    background-image: linear-gradient(to bottom right, #8914fe, #8160f6);
+    background-image: -webkit-linear-gradient(top left, #1e87f0, #FFFFFF);
+    background-image: linear-gradient(to bottom right, #1e87f0, #FFFFFF);
     color: #fff;
 }
 

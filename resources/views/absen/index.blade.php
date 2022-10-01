@@ -1,7 +1,4 @@
-@extends('layout.closer')
-@extends('layout.navdash')
-@extends('layout.headerlouie')
-@section('konten')
+<x-admintemplate title='Absen' active='Siswa'>
     <ul uk-tab>
         <li class="{{ (session()->has('absen')) ? 'uk-active' : '' }}"><a href="#">Absen</a></li>
         <li><a href="#">Keterlambatan</a></li>
@@ -23,4 +20,5 @@
             @include('absen.rekap')
         </li>
     </ul>
-@endsection
+</x-admintemplate>
+    

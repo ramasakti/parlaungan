@@ -81,6 +81,7 @@ Route::get('/siswa', [SiswaController::class, 'index'])->middleware('auth');
 Route::post('/siswa/store', [SiswaController::class, 'storeSiswa'])->middleware('auth');
 Route::post('/siswa/update', [SiswaController::class, 'updateSiswa'])->middleware('auth');
 Route::post('/siswa/delete', [SiswaController::class, 'destroySiswa'])->middleware('auth');
+Route::post('/siswa/import', [SiswaController::class, 'import'])->middleware('auth');
 
 //Absen
 Route::get('/absen', [AbsenController::class, 'index'])->middleware('auth');
@@ -98,3 +99,4 @@ Route::post('/jadwal/store', [JadwalController::class, 'storeJadwal'])->middlewa
 
 //Testing
 Route::get('/testing', [TestingController::class, 'index']);
+Route::get('/tesapi', [TestingController::class, 'getApi']);

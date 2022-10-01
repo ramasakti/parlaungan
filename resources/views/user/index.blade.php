@@ -1,7 +1,4 @@
-@extends('layout.closer')
-@extends('layout.navdash')
-@extends('layout.headerlouie')
-@section('konten')
+<x-admintemplate title='User' active='User' user=''>
     <ul class="uk-iconnav">
         <li>
             <a href="#modal-center" class="mx-2" uk-toggle="target: #add-user" uk-icon="icon: plus"></a>
@@ -26,7 +23,7 @@
         </div>
     @enderror
 
-    <table class="table table-borderless">
+    <table class="table table-borderless" id="tabel-data">
         <thead>
             <tr>
                 <th scope="col">#</th>
@@ -63,4 +60,4 @@
             @endforeach
         </tbody>
     </table>
-@endsection
+</x-admintemplate>

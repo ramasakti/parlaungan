@@ -1,7 +1,4 @@
-@extends('layout.closer')
-@extends('layout.navdash')
-@extends('layout.headerlouie')
-@section('konten')
+<x-admintemplate title='Jadwal' active='Jadwal'>
 @include('jadwal.hari.kelas')
     <ul uk-tab>
         <li class="uk-active"><a href="#">Senin</a></li>
@@ -32,4 +29,4 @@
             @include('jadwal.hari.Sabtu')
         </li>
     </ul>
-@endsection
+</x-admintemplate>

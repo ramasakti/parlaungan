@@ -13,8 +13,8 @@ class User extends Authenticatable
     use HasFactory;
 
     public $timestamps = false;
-    public $table = 'user';
 
+    protected $table = 'user';
     protected $primaryKey = 'username';
     protected $fillable = [
         'username',

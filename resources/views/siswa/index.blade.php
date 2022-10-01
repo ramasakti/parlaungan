@@ -1,7 +1,4 @@
-@extends('layout.closer')
-@extends('layout.navdash')
-@extends('layout.headerlouie')
-@section('konten')
+<x-admintemplate title='Siswa' active='Siswa'>
     <ul uk-tab>
         <li class="{{ (session()->has('kelas')) ? 'uk-active' : '' }}"><a href="#">Kelas</a></li>
         <li class="{{ (session()->has('siswa')) ? 'uk-active' : '' }}"><a href="#">Data Siswa</a></li>
@@ -15,4 +12,4 @@
             @include('siswa.data.index')
         </li>
     </ul>
-@endsection
+</x-admintemplate>

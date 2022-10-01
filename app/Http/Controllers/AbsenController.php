@@ -94,6 +94,9 @@ class AbsenController extends Controller
 
     public function qrcode(Request $request)
     {
+        if (!$request->cookie('username')){
+            return redirect('/login');
+        }
         return view('absen.qrcode', [
             'title' => 'Sistem Absen',
         ]);
