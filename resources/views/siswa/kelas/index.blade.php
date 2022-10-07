@@ -18,7 +18,7 @@
                 <td>{{ $kelas->id_kelas }}</td>
                 <td>{{ $kelas->tingkat }}</td>
                 <td>{{ $kelas->jurusan }}</td>
-                <td>{{ $kelas->walas }}</td>
+                <td>{{ $kelas->nama_guru }}</td>
                 <td>
                     <a href="#modal-center" uk-toggle="target: #edit-kelas-{{ $kelas->id_kelas }}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">

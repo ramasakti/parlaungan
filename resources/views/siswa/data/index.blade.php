@@ -17,7 +17,7 @@
 
 @foreach ($kelasSelected as $kelas)    
     <div class="uk-margin">
-        <h5>Absen Siswa Kelas {{ $kelas->tingkat }} {{ $kelas->jurusan }}</h5>
+        <h5>Data Siswa Kelas {{ $kelas->tingkat }} {{ $kelas->jurusan }}</h5>
     </div>
 @endforeach
 <table class="table table-borderless">

@@ -6,8 +6,11 @@ use Illuminate\Http\Request;
 
 class WebController extends Controller
 {
-    public function control()
+    public function index()
     {
-
+        return view('web.index', [
+            'title' => 'Web',
+            'navactive' => 'web'
+        ]);
     }
 }

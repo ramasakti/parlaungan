@@ -1,13 +1,13 @@
-<x-admintemplate title='User' active='User' user=''>
-    <ul class="uk-iconnav">
+<x-admintemplate title='{{ $title }}' navactive='{{ $navactive }}'>
+    <ul class="uk-iconnav uk-margin">
         <li>
             <a href="#modal-center" class="mx-2" uk-toggle="target: #add-user" uk-icon="icon: plus"></a>
             @include('user.add-user')
         </li>
-        <li>
+        {{-- <li>
             <a href="#modal-center" uk-toggle="target: #import-user" uk-icon="icon: upload"></a>
             @include('user.import-user')
-        </li>
+        </li> --}}
     </ul>
 
     @error('username') 

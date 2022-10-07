@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\JadwalImport;
+use App\Models\Jadwal;
 use DB;
 
 class JadwalController extends Controller
@@ -77,6 +80,12 @@ class JadwalController extends Controller
                 'status' => ''
             ]);
         return back();
+    }
+
+    public function import(Request $request)
+    {
+        Excel::import(new JadwalImport, request()->file('jadwal')); //'file' diisi dengan name uploader
+        return back()->with('imported', 'Berhasil jadwa pelajaran!');
     }
 
     public function deleteJadwal(Request $request)

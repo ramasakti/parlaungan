@@ -4,12 +4,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\WebController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\GuruController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AbsenController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\JadwalController;
+use App\Http\Controllers\JurnalController;
 use App\Http\Controllers\SekolahController;
 use App\Http\Controllers\TestingController;
 
@@ -53,7 +55,7 @@ Route::get('/galeri', [GaleriController::class, 'index']);
 
 //Web
 //Update galeri, blog, about
-Route::get('/web', [WebController::class, 'control'])->middleware('auth');
+Route::get('/web', [WebController::class, 'index'])->middleware('auth');
 
 //User
 Route::get('/user', [UserController::class, 'index']);
@@ -82,6 +84,8 @@ Route::post('/siswa/store', [SiswaController::class, 'storeSiswa'])->middleware(
 Route::post('/siswa/update', [SiswaController::class, 'updateSiswa'])->middleware('auth');
 Route::post('/siswa/delete', [SiswaController::class, 'destroySiswa'])->middleware('auth');
 Route::post('/siswa/import', [SiswaController::class, 'import'])->middleware('auth');
+//Keuangan Siswa
+Route::get('/siswa/keuangan', [SiswaController::class, 'keuanganSiswa'])->middleware('auth');
 
 //Absen
 Route::get('/absen', [AbsenController::class, 'index'])->middleware('auth');
@@ -96,7 +100,15 @@ Route::get('/absen/engine/{userabsen}', [AbsenController::class, 'engineQR']);
 //Jadwal
 Route::get('/jadwal', [JadwalController::class, 'index'])->middleware('auth');
 Route::post('/jadwal/store', [JadwalController::class, 'storeJadwal'])->middleware('auth');
+Route::post('/jadwal/import', [JadwalController::class, 'importJadwal'])->middleware('auth');
+
+//Jurnal
+Route::get('/jurnal', [JurnalController::class, 'index'])->middleware('auth');
 
 //Testing
 Route::get('/testing', [TestingController::class, 'index']);
 Route::get('/tesapi', [TestingController::class, 'getApi']);
+
+//Guru
+Route::get('/guru', [GuruController::class, 'index']);
+Route::get('/guru/keuangan', [GuruController::class, 'keuangan']);

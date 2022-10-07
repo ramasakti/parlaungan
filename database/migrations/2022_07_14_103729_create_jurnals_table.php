@@ -14,7 +14,7 @@ class CreateJurnalsTable extends Migration
     public function up()
     {
         Schema::create('jurnal', function (Blueprint $table) {
-            $table->id();
+            $table->id('id_jurnal');
             $table->date('tanggal');
             $table->integer('jadwal_id')->unsigned();
             $table->time('masuk');

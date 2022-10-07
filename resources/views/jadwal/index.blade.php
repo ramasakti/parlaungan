@@ -1,5 +1,4 @@
-<x-admintemplate title='Jadwal' active='Jadwal'>
-@include('jadwal.hari.kelas')
+<x-admintemplate title='{{ $title }}' navactive='{{ $navactive }}'>
     <ul uk-tab>
         <li class="uk-active"><a href="#">Senin</a></li>
         <li class="uk-active"><a href="#">Selasa</a></li>
@@ -8,7 +7,7 @@
         <li class="uk-active"><a href="#">Jumat</a></li>
         <li class="uk-active"><a href="#">Sabtu</a></li>
     </ul>
-
+    
     <ul class="uk-switcher uk-margin">  
         <li class="uk-active">
             @include('jadwal.hari.Senin')

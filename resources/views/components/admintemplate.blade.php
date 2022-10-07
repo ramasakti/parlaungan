@@ -15,22 +15,22 @@
     <!-- UIkit JS -->
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.15.10/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.15.10/dist/js/uikit-icons.min.js"></script>
-    <link rel="shortcut icon" type="image/png" href="adminlte/images/icon/favicon.ico">
-    <link rel="stylesheet" href="adminlte/css/bootstrap.min.css">
-    <link rel="stylesheet" href="adminlte/css/font-awesome.min.css">
-    <link rel="stylesheet" href="adminlte/css/themify-icons.css">
-    <link rel="stylesheet" href="adminlte/css/metisMenu.css">
-    <link rel="stylesheet" href="adminlte/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="adminlte/css/slicknav.min.css">
+    <link rel="shortcut icon" type="image/png" href="/adminlte/images/icon/favicon.ico">
+    <link rel="stylesheet" href="/adminlte/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/adminlte/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/adminlte/css/themify-icons.css">
+    <link rel="stylesheet" href="/adminlte/css/metisMenu.css">
+    <link rel="stylesheet" href="/adminlte/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/adminlte/css/slicknav.min.css">
     <!-- amchart css -->
     <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
     <!-- others css -->
-    <link rel="stylesheet" href="adminlte/css/typography.css">
-    <link rel="stylesheet" href="adminlte/css/default-css.css">
-    <link rel="stylesheet" href="adminlte/css/styles.css">
-    <link rel="stylesheet" href="adminlte/css/responsive.css">
+    <link rel="stylesheet" href="/adminlte/css/typography.css">
+    <link rel="stylesheet" href="/adminlte/css/default-css.css">
+    <link rel="stylesheet" href="/adminlte/css/styles.css">
+    <link rel="stylesheet" href="/adminlte/css/responsive.css">
     <!-- modernizr css -->
-    <script src="adminlte/js/vendor/modernizr-2.8.3.min.js"></script>
+    <script src="/adminlte/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 
 <body>
@@ -48,26 +48,28 @@
         <div class="sidebar-menu">
             <div class="sidebar-header">
                 <div class="logo">
-                    <a href="#"><img src="img/mid-white.png" class="uk-border-circle" alt="logo"></a>
+                    <a href="#"><img src="/img/mid-white.png" class="uk-border-circle" alt="logo"></a>
                 </div>
             </div>
             <div class="main-menu">
                 <div class="menu-inner">
                     <nav>
                         <ul class="metismenu" id="menu">
-                            <li class="{{ ($active === 'Dashboard' ? 'active' : '') }}"><a href="/dashboard">
-                                <span>Dashboard</span></a>
+                            <li class="{{ ($navactive === 'dashboard' ? 'active' : '') }}">
+                                <a href="/dashboard">
+                                    <span>Dashboard</span>
+                                </a>
                             </li>
-                            <li class="{{ ($active === 'Web' ? 'active' : '') }}">
+                            <li class="{{ ($navactive === 'web' ? 'active' : '') }}">
                                 <a href="/web"><span>Web</span></a>
                             </li>
-                            <li class="{{ ($active === 'Sekolah' ? 'active' : '') }}">
+                            <li class="{{ ($navactive === 'sekolah' ? 'active' : '') }}">
                                 <a href="/sekolah"><span>Sekolah</span></a>
                             </li>
-                            <li class="{{ ($active === 'User' ? 'active' : '') }}">
+                            <li class="{{ ($navactive === 'user' ? 'active' : '') }}">
                                 <a href="/user"><span>User</span></a>
                             </li>
-                            <li class="{{ ($active === 'Siswa' ? 'active' : '') }}">
+                            <li class="{{ ($navactive === 'siswa' ? 'active' : '') }}">
                                 <a href="javascript:void(0)" aria-expanded="true"><span>Siswa</span></a>
                                 <ul class="collapse">
                                     <li><a href="/siswa">Data Siswa</a></li>
@@ -75,14 +77,14 @@
                                     <li><a href="/siswa/keuangan">Keuangan Siswa</a></li>
                                 </ul>
                             </li>
-                            <li class="{{ ($active === 'Guru' ? 'active' : '') }}">
+                            <li class="{{ ($navactive === 'guru' ? 'active' : '') }}">
                                 <a href="javascript:void(0)" aria-expanded="true"><span>Guru</span></a>
                                 <ul class="collapse">
                                     <li><a href="/guru">Data Guru</a></li>
-                                    <li><a href="/guru/keuangan">Keuangan Guru</a></li>
+                                    <li><a href="/guru/keuangan?dari={{ date('Y-m-15') }}&sampai={{ date('Y-m-15') }}">Keuangan Guru</a></li>
                                 </ul>
                             </li>
-                            <li class="{{ ($active === 'Akademik' ? 'active' : '') }}">
+                            <li class="{{ ($navactive === 'akademik' ? 'active' : '') }}">
                                 <a href="javascript:void(0)" aria-expanded="true"><span>Akademik</span></a>
                                 <ul class="collapse">
                                     <li><a href="/jadwal">Jadwal Pelajaran</a></li>
@@ -120,7 +122,7 @@
                 <div class="row align-items-center">
                     <div class="col-sm-6">
                         <div class="breadcrumbs-area clearfix">
-                            <h4 class="page-title pull-left">{{ $active }}</h4>
+                            <h4 class="page-title pull-left">{{ $title }}</h4>
                             <ul class="breadcrumbs pull-left">
                                 <li><a href="/">Home</a></li>
                                 <li><span>{{ request()->path() }}</span></li>
@@ -129,7 +131,7 @@
                     </div>
                     <div class="col-sm-6 clearfix">
                         <div class="user-profile pull-right">
-                            <img class="avatar user-thumb" src="adminlte/images/author/avatar.png" alt="avatar">
+                            <img class="avatar user-thumb" src="/adminlte/images/author/avatar.png" alt="avatar">
                             <h4 class="user-name dropdown-toggle" data-toggle="dropdown">{{ session('username') }}<i class="fa fa-angle-down"></i></h4>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="/logout">Log Out</a>
@@ -239,14 +241,14 @@
     </div>
     <!-- offset area end -->
     <!-- jquery latest version -->
-    <script src="adminlte/js/vendor/jquery-2.2.4.min.js"></script>
+    <script src="/adminlte/js/vendor/jquery-2.2.4.min.js"></script>
     <!-- bootstrap 4 js -->
-    <script src="adminlte/js/popper.min.js"></script>
-    <script src="adminlte/js/bootstrap.min.js"></script>
-    <script src="adminlte/js/owl.carousel.min.js"></script>
-    <script src="adminlte/js/metisMenu.min.js"></script>
-    <script src="adminlte/js/jquery.slimscroll.min.js"></script>
-    <script src="adminlte/js/jquery.slicknav.min.js"></script>
+    <script src="/adminlte/js/popper.min.js"></script>
+    <script src="/adminlte/js/bootstrap.min.js"></script>
+    <script src="/adminlte/js/owl.carousel.min.js"></script>
+    <script src="/adminlte/js/metisMenu.min.js"></script>
+    <script src="/adminlte/js/jquery.slimscroll.min.js"></script>
+    <script src="/adminlte/js/jquery.slicknav.min.js"></script>
 
     <!-- start chart js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
@@ -259,12 +261,12 @@
         ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "ee6b7db5b51705a13dc2339db3edaf6d"];
     </script>
     <!-- all line chart activation -->
-    <script src="adminlte/js/line-chart.js"></script>
+    <script src="/adminlte/js/line-chart.js"></script>
     <!-- all pie chart -->
-    <script src="adminlte/js/pie-chart.js"></script>
+    <script src="/adminlte/js/pie-chart.js"></script>
     <!-- others plugins -->
-    <script src="adminlte/js/plugins.js"></script>
-    <script src="adminlte/js/scripts.js"></script>
+    <script src="/adminlte/js/plugins.js"></script>
+    <script src="/adminlte/js/scripts.js"></script>
     {{-- Data Tables --}}
     <script>
         $(document).ready(function(){

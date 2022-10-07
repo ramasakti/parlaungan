@@ -1,4 +1,4 @@
-<x-admintemplate title='Absen' active='Siswa'>
+<x-admintemplate title='{{ $title }}' navactive='{{ $navactive }}'>
     <ul uk-tab>
         <li class="{{ (session()->has('absen')) ? 'uk-active' : '' }}"><a href="#">Absen</a></li>
         <li><a href="#">Keterlambatan</a></li>

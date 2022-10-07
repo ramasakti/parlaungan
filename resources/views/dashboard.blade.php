@@ -1,4 +1,4 @@
-<x-admintemplate title='Dashboard' active='Dashboard'>
+<x-admintemplate title='{{ $title }}' navactive='{{ $navactive }}'>
     <div class="uk-child-width-1-2@m uk-grid-small uk-grid-match uk-margin-top-small" uk-grid>
         <div>
             <div class="uk-card uk-card-default uk-card-body">

@@ -1,4 +1,4 @@
-<a class="uk-button uk-button-default mx-1" href="#modal-center" uk-toggle="target: #add-libur">ADD LIBUR</a>
+<a class="uk-margin" href="#modal-center" uk-toggle="target: #add-libur" uk-icon="icon: plus"></a>
 @include('sekolah.libur.add-libur')
 <table class="table table-borderless">
     <thead>

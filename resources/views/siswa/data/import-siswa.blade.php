@@ -6,7 +6,7 @@
             @csrf
             <div class="mb-3">
                 <label for="formFileSm" class="form-label">Small file input example</label>
-                <input class="form-control form-control-sm" id="formFileSm" name="file" type="file">
+                <input class="form-control form-control-sm" id="formFileSm" name="siswa" type="file">
                 <button class="uk-button uk-button-primary uk-button-small uk-margin uk-margin-remove-bottom" type="submit">UPLOAD</button>
             </div>
         </form>

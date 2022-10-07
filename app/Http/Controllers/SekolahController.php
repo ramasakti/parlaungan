@@ -36,22 +36,28 @@ class SekolahController extends Controller
                 'jampel' => $request->jampel,
                 'piket' => $request->piket,
             ]);
-        return back();
+        return back()->with('update-hari', 'Berhasil mengubah detail hari');;
     }
 
     public function storeLibur(Request $request)
     {
+        if ($request->mulai > $request->sampai) {
+            return back()->with('gagal', 'Gagal menambahkan / mengubah hari libur');
+        }
         DB::table('libur')
             ->insert([
                 'keterangan' => $request->keterangan,
                 'mulai' => $request->mulai,
                 'sampai' => $request->sampai,
             ]);
-        return back();
+        return back()->with('add-libur', 'Berhasil menambahkan hari libur');
     }
 
     public function updateLibur(Request $request)
     {
+        if ($request->mulai > $request->sampai) {
+            return back()->with('gagal', 'Gagal menambahkan / mengubah hari libur');
+        }
         DB::table('libur')
             ->where('id_libur', $request->id_libur)
             ->update([
@@ -59,7 +65,7 @@ class SekolahController extends Controller
                 'mulai' => $request->mulai,
                 'sampai' => $request->sampai,
             ]);
-        return back();
+        return back()->with('update-libur', 'Berhasil mengubah detail hari libur');
     }
 
     public function destroyLibur(Request $request)
@@ -67,6 +73,6 @@ class SekolahController extends Controller
         DB::table('libur')
             ->where('id_libur', $request->id_libur)
             ->delete();
-        return back();
+        return back()->with('delete-libur','Berhasil menghapus hari libur');
     }
 }

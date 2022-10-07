@@ -18,7 +18,7 @@ class TestingController extends Controller
 
     public function getApi(Request $request)
     {
-        $api = Http::get('https://feriirawan-api.herokuapp.com/list/symbols/province/200');
+
         return view('tesapi', [
             'data' => $api
         ]);

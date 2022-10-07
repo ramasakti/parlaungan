@@ -1,5 +1,7 @@
-<a class="mx-2" href="#modal-center" uk-toggle="target: #add-jadwal" uk-icon="icon: plus"></a>
+@include('jadwal.funct-icon')
 @include('jadwal.add-jadwal')
+@include('jadwal.import-jadwal')
+@include('jadwal.hari.kelas')
 @foreach ($kelasSelected as $kelas)
     <h5>Jadwal Pelajaran {{ $kelas->tingkat }} {{ $kelas->jurusan }} hari Rabu</h5>
 @endforeach

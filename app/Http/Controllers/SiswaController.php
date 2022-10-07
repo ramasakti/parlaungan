@@ -10,9 +10,26 @@ use DB;
 
 class SiswaController extends Controller
 {
+    public function importAbsenData()
+    {
+        $dataAbsen = DB::table('absen')->select('id_siswa')->get();
+        $dataSiswa = DB::table('siswa')->whereNotIn('id_siswa', json_decode($dataAbsen, TRUE))->get();
+        if (count($dataSiswa) > 0) {
+            DB::table('absen')
+                ->insert([
+                    'id_siswa' => $dataSiswa[0]->id_siswa,
+                    'waktu_absen' => NULL,
+                    'rekap' => '',
+                    'jumlah_terlambat' => 0,
+                    'izin' => NULL,
+                    'keterangan' => '',
+                ]);
+        }
+    }
+
     public function import(Request $request)
     {
-        Excel::import(new SiswaImport, request()->file('file')); //'file' diisi dengan name uploader
+        Excel::import(new SiswaImport, request()->file('siswa')); //'file' diisi dengan name uploader
         return back()->with('imported', 'Berhasil import siswa!');
     }
 
@@ -21,11 +38,12 @@ class SiswaController extends Controller
         if (request()->has('id_kelas')){
             session()->put('siswa', 'uk-active');
         }
+        $this->importAbsenData();
         return view('siswa.index', [
             'title' => 'Siswa',
             'navactive' => 'siswa',
             'ai' => 1,
-            'dataKelas' => DB::table('kelas')->get(),
+            'dataKelas' => DB::table('kelas')->join('guru', 'guru.id_guru', '=', 'kelas.walas')->get(),
             'kelasSelected' => DB::table('kelas')->where('id_kelas', request('id_kelas'))->get(),
             'dataSiswa' => DB::table('siswa')->where('kelas_id', request('id_kelas'))->orderBy('nama_siswa')->get(),
             'dataGuru' => DB::table('guru')->get(),
@@ -146,5 +164,13 @@ class SiswaController extends Controller
             ->delete();
 
         return back()->with('siswa', 'uk-active');
+    }
+
+    public function keuanganSiswa()
+    {
+        return view('siswa.keuangan.index', [
+            'title' => 'Keuangan Siswa',
+            'navactive' => 'siswa',
+        ]);
     }
 }
