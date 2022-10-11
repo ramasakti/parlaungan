@@ -29,6 +29,7 @@ class BlogController extends Controller
     {
         return view('blog.create', [
             'title' => 'Create Post',
+            'navactive' => 'web'
         ]);
     }
 

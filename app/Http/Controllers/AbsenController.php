@@ -61,7 +61,10 @@ class AbsenController extends Controller
     public function updateAbsen(Request $request)
     {
         if ($request->keterangan === 'Hadir'){
-            DB::table('absen')->increment('jumlah_terlambat');
+            $jamMasuk = $this->jamSekarang();
+            if (date('H:i:s') > $jamMasuk[0]->masuk){
+                DB::table('absen')->where('id_siswa', $request->id_siswa)->increment('jumlah_terlambat');
+            }
             DB::table('absen')
                 ->where('id_siswa', $request->id_siswa)
                 ->update([

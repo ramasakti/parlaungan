@@ -13,4 +13,11 @@ class WebController extends Controller
             'navactive' => 'web'
         ]);
     }
+    
+    public function about()
+    {
+        return view('about', [
+            'title' => 'About',
+        ]);
+    }
 }

@@ -53,9 +53,13 @@ Route::get('/blog/delete/{slug}', [BlogController::class, 'update'])->middleware
 //Galeri
 Route::get('/galeri', [GaleriController::class, 'index']);
 
+//About
+Route::get('/about', [WebController::class, 'about']);
+
 //Web
 //Update galeri, blog, about
 Route::get('/web', [WebController::class, 'index'])->middleware('auth');
+Route::get('/web/blog/create', [BlogController::class, 'create'])->middleware('auth');
 
 //User
 Route::get('/user', [UserController::class, 'index']);
