@@ -19,54 +19,22 @@
                 <th>S</th>
                 <th>I</th>
                 <th>A</th>
+                <th>Total</th>
             </tr>
         </thead>
-        @foreach ($dataJadwal as $showJadwal)                
+        @foreach ($dataJadwal as $showJadwal)
         <tbody>
             <tr>
                 <td>{{ $showJadwal->nama_guru }}</td>
                 <td>{{ ceil($showJadwal->jumlah_jam) }}</td>
                 <td>
-                    @php
-                        $dataTertunaikan = DB::table('jurnal')
-                                            ->crossJoin('jadwal')
-                                            ->select('jadwal.guru_id', DB::raw('SUM(jurnal.lama) as tertunaikan'))
-                                            ->where('jadwal.guru_id', $showJadwal->id_guru)
-                                            ->where('jurnal.jadwal_id', '=', DB::raw('jadwal.id_jadwal'))
-                                            ->where('jurnal.tanggal', '>=', request('dari'))
-                                            ->where('jurnal.tanggal', '<=', request('sampai'))
-                                            ->groupBy('jurnal.jadwal_id')
-                                            ->get();
-                        if (count($dataTertunaikan) > 0){
-                            echo $dataTertunaikan[0]->tertunaikan;
-                            echo " Jam";
-                        }else{
-                            echo 0;
-                            echo " Jam";
-                        }
-                    @endphp
+                    @if (count($dataTertunaikan) > 0)
+                        {{ $dataTertunaikan[0]->tertunaikan }} Jam
+                    @else
+                        0 Jam
+                    @endif
                 </td>
-                <td>
-                    @php
-                        $dataTransport = DB::table('jurnal')
-                                            ->crossJoin('jadwal')
-                                            ->select('jadwal.guru_id', DB::raw('SUM(jurnal.lama) as transport'))
-                                            ->where('jadwal.guru_id', $showJadwal->id_guru)
-                                            ->where('jurnal.jadwal_id','=',DB::raw('jadwal.id_jadwal'))
-                                            ->where('jurnal.transport', '=', 1)
-                                            ->where('jurnal.tanggal', '>=', request('dari'))
-                                            ->where('jurnal.tanggal', '<=', request('sampai'))
-                                            ->groupBy('jurnal.jadwal_id')
-                                            ->get();
-                        if (count($dataTransport) > 0){
-                            echo $dataTransport[0]->transport;
-                            echo " Jam";
-                        }else{
-                            echo 0;
-                            echo " Jam";
-                        }
-                    @endphp
-                </td>
+                <td>{{ count($dataTransport) * $dataNominal[1]->harga; }}</td>
                 <td>
                     @php
                         $dataSakit = DB::table('jadwal')
@@ -133,6 +101,7 @@
                         }
                     @endphp 
                 </td>
+                <td>{{ $total }}</td>
             </tr>
         </tbody>
         @endforeach

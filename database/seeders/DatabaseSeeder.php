@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
         DB::table('user')->insert([
             'username' => 'ramasakti27',
             'password' => bcrypt('ramasakti27'),
+            'id' => '',
             'foto' => '',
             'telp' => '6285157177034',
             'status' => 'Admin',
@@ -25,6 +26,7 @@ class DatabaseSeeder extends Seeder
         DB::table('user')->insert([
             'username' => 'adminabsen',
             'password' => bcrypt('parlaungan1980'),
+            'id' => '',
             'foto' => '',
             'telp' => '6285157177034',
             'status' => 'Admin'
@@ -33,6 +35,7 @@ class DatabaseSeeder extends Seeder
         DB::table('user')->insert([
             'username' => 'alfansasmiko',
             'password' => bcrypt('alfansasmiko'),
+            'id' => '',
             'foto' => '',
             'telp' => '6281235605030',
             'status' => 'Admin'
@@ -125,6 +128,14 @@ class DatabaseSeeder extends Seeder
             'piket' => 'alfansasmiko'
         ]);
 
-        DB::table('nominal')->insert(['nom' => 30000]);
+        DB::table('nominal')->insert([
+            'jenis' => 'Mengajar',
+            'harga' => 33000
+        ]);
+        
+        DB::table('nominal')->insert([
+            'jenis' => 'Transport',
+            'harga' => 5000
+        ]);
     }
 }

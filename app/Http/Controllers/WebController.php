@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 
 class WebController extends Controller
 {
@@ -10,7 +11,8 @@ class WebController extends Controller
     {
         return view('web.index', [
             'title' => 'Web',
-            'navactive' => 'web'
+            'navactive' => 'web',
+            'dataBlog' => DB::table('blog')->get()
         ]);
     }
     

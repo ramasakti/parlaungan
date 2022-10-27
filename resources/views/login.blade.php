@@ -22,7 +22,7 @@
                     <label for="exampleInputPassword1" class="form-label">Password</label>
                     <input type="password" name="password" class="form-control" id="password" required>
                 </div>
-                <button type="submit" class="uk-button uk-button-primary">Login</button>
+                <button type="submit" class="uk-button uk-button-primary uk-width-1-1">Login</button>
             </form>
         </div>
     </div>	

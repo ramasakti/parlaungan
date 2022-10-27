@@ -31,6 +31,7 @@
     <link rel="stylesheet" href="/adminlte/css/responsive.css">
     <!-- modernizr css -->
     <script src="/adminlte/js/vendor/modernizr-2.8.3.min.js"></script>
+    <script src="https://cdn.tiny.cloud/1/zgg0gxpkj4s833bnso32wri5w42hrq17ebnjci64yppegu0j/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 </head>
 
 <body>
@@ -59,6 +60,9 @@
                                 <a href="/dashboard">
                                     <span>Dashboard</span>
                                 </a>
+                            </li>
+                            <li class="{{ ($navactive === 'rapat' ? 'active' : '') }}">
+                                <a href="/rapat"><span>Rapat</span></a>
                             </li>
                             <li class="{{ ($navactive === 'web' ? 'active' : '') }}">
                                 <a href="/web"><span>Web</span></a>
@@ -239,6 +243,13 @@
             </div>
         </div>
     </div>
+    <script>
+        tinymce.init({
+          selector: 'textarea',
+          plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+          toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+        });
+    </script>
     <!-- offset area end -->
     <!-- jquery latest version -->
     <script src="/adminlte/js/vendor/jquery-2.2.4.min.js"></script>

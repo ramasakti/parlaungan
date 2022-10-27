@@ -15,7 +15,8 @@ class Nominal extends Migration
     {
         Schema::create('nominal', function (Blueprint $table) {
             $table->id();
-            $table->integer('nom');
+            $table->string('jenis');
+            $table->integer('harga');
         });
     }
 

@@ -8,6 +8,7 @@ use App\Http\Controllers\GuruController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AbsenController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RapatController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\JadwalController;
@@ -95,11 +96,8 @@ Route::get('/siswa/keuangan', [SiswaController::class, 'keuanganSiswa'])->middle
 Route::get('/absen', [AbsenController::class, 'index'])->middleware('auth');
 Route::post('/absen/update', [AbsenController::class, 'updateAbsen'])->middleware('auth');
 //Engine Absen RFID
-Route::get('/absen/rfid', [AbsenController::class, 'rfid']);
-Route::post('/absen/engine', [AbsenController::class, 'engineRFID']);
-//Engine Absen QRCode
-Route::get('/absen/qrcode', [AbsenController::class, 'qrcode']);
-Route::get('/absen/engine/{userabsen}', [AbsenController::class, 'engineQR']);
+Route::get('/absen/engine', [AbsenController::class, 'viewEngine']);
+Route::post('/absen/engine', [AbsenController::class, 'engine']);
 
 //Jadwal
 Route::get('/jadwal', [JadwalController::class, 'index'])->middleware('auth');
@@ -116,3 +114,12 @@ Route::get('/tesapi', [TestingController::class, 'getApi']);
 //Guru
 Route::get('/guru', [GuruController::class, 'index']);
 Route::get('/guru/keuangan', [GuruController::class, 'keuangan']);
+
+
+//Absen Rapat
+Route::get('/rapat', [RapatController::class, 'index']);
+Route::post('/rapat/store', [RapatController::class, 'store']);
+Route::post('/rapat/delete', [RapatController::class, 'delete']);
+Route::post('/rapat/update', [RapatController::class, 'update']);
+Route::get('/rapat/{slug}', [RapatController::class, 'detail']);
+Route::post('/rapat/{slug}', [RapatController::class, 'engine']);
