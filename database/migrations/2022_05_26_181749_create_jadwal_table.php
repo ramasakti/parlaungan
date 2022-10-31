@@ -21,7 +21,7 @@ class CreateJadwalTable extends Migration
             $table->string('mapel');
             $table->time('mulai');
             $table->time('sampai');
-            $table->string('status', '10');
+            $table->string('status', '10')->default('');
         });
 
         Schema::table('jadwal', function (Blueprint $table) {

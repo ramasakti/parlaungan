@@ -43,7 +43,10 @@ class DatabaseSeeder extends Seeder
 
         DB::table('guru')->insert([
             'id_guru' => 'alfansasmiko',
-            'nama_guru' => 'Alfan Sasmiko, SH.I'
+            'nama_guru' => 'Alfan Sasmiko, SH.I',
+            'alamat' => 'Jl. Dukuh Pakis V / 35B',
+            'tempat_lahir' => 'Surabaya',
+            'tanggal_lahir' => '1979-09-09'
         ]);
 
         DB::table('kelas')->insert([

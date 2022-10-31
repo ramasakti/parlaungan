@@ -15,14 +15,12 @@ class JadwalImport implements ToModel
     public function model(array $row)
     {
         return new Jadwal([
-            'id_jadwal' => $row[0],
-            'hari' => $row[1],
-            'guru_id' => $row[2],
-            'kelas_id' => $row[3],
-            'mapel' => $row[4],
-            'mulai' => $row[5],
-            'sampai' => $row[6],
-            'status' => $row[7]
+            'hari' => $row[0],
+            'guru_id' => $row[1],
+            'kelas_id' => $row[2],
+            'mapel' => $row[3],
+            'mulai' => $row[4],
+            'sampai' => $row[5]
         ]);
     }
 }

@@ -18,6 +18,18 @@
                     @endforeach
                 </select>
             </div>
+            <div class="uk-margin">
+                <textarea class="uk-textarea" rows="5" placeholder="Alamat" name="alamat">{{ $siswa->alamat }}</textarea>
+            </div>
+            <div class="uk-margin">
+                <input class="uk-input" type="text" name="telp" placeholder="Telp / WA" value="{{ $siswa->telp }}" required>
+            </div>
+            <div class="uk-margin">
+                <input class="uk-input" type="text" name="tempat_lahir" placeholder="Tempat Lahir" value="{{ $siswa->tempat_lahir }}" required>
+            </div>
+            <div class="uk-margin">
+                <input name="tanggal_lahir" placeholder="Tanggal Lahir" class="textbox-n uk-input" type="text" onfocus="(this.type='date')" id="date" value="{{ $siswa->tanggal_lahir }}">
+            </div>
             <button type="submit" class="uk-button uk-button-primary uk-button-small">Simpan</button>
         </form>
     </div>

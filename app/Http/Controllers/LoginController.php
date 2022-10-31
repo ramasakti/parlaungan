@@ -28,6 +28,7 @@ class LoginController extends Controller
         ]);
 
         $detailUser = DB::table('user')->where('username', request('username'))->get();
+        $statusWalas = DB::table('kelas')->where('walas', request('username'))->get();
         if (Auth::attempt($credentials)){
             if ($request->username == 'adminabsen'){
                 $response = new Response(redirect('/absen/rfid'));
@@ -36,6 +37,9 @@ class LoginController extends Controller
             }else{
                 $request->session()->put('username', $request->username);
                 $request->session()->put('status', $detailUser[0]->status);
+                if (count($statusWalas) > 0){
+                    $request->session()->put('walas', $statusWalas[0]);
+                }
                 return redirect()->intended('/dashboard');
             }
         }else{
@@ -48,6 +52,8 @@ class LoginController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         $request->session()->forget('username');
+        $request->session()->forget('status');
+        $request->session()->forget('walas');
         return redirect()->intended('/login');
     }
 

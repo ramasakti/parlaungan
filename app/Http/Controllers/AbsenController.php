@@ -46,7 +46,7 @@ class AbsenController extends Controller
     {
         return view('absen.index', [
             'title' => 'Absen Siswa',
-            'navactive' => 'absen',
+            'navactive' => 'siswa',
             'ai' => 1,
             'hariIni' => Carbon::now()->isoFormat('dddd, DD MMMM Y'),
             'dataKelas' => DB::table('kelas')->get(),

@@ -37,7 +37,8 @@ class UserController extends Controller
         DB::table('user')
             ->insert([
                 'username' => $request->username,
-                'password' => $request->password,
+                'password' => bcrypt($request->password),
+                'id' => '',
                 'foto' => '',
                 'telp' => $request->telp,
                 'status' => $request->status

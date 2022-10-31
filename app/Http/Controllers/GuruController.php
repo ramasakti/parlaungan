@@ -36,6 +36,9 @@ class GuruController extends Controller
 
     public function dataTransport()
     {
+        if (count($this->dataJadwal()) < 1) {
+            return [];
+        }
         $dataTransport = DB::table('jurnal')
                             ->crossJoin('jadwal')
                             ->select('jurnal.id_jurnal')
@@ -48,6 +51,9 @@ class GuruController extends Controller
 
     public function tertunaikan()
     {
+        if (count($this->dataJadwal()) < 1) {
+            return [];
+        }
         $dataTertunaikan = DB::table('jurnal')
                             ->crossJoin('jadwal') 
                             ->select('jadwal.guru_id', DB::raw('SUM(jurnal.lama) as tertunaikan'))
@@ -62,11 +68,10 @@ class GuruController extends Controller
 
     public function total()
     {
-        if (count($this->tertunaikan()) > 0) {
-            return $this->tertunaikan()[0]->tertunaikan * ($this->nominal()[0]->harga / 4);
-        }else{
-            return 0;
+        if (count($this->tertunaikan()) < 1) {
+            return [];
         }
+        return $this->tertunaikan()[0]->tertunaikan * ($this->nominal()[0]->harga / 4);
     }
 
     public function keuangan(Request $request)
@@ -86,7 +91,9 @@ class GuruController extends Controller
     {
         return view('guru.data.index', [
             'title' => 'Data Guru',
-            'navactive' => 'guru'
+            'navactive' => 'guru',
+            'ai' => 1,
+            'dataGuru' => DB::table('guru')->get()
         ]);
     }
 }

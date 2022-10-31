@@ -60,41 +60,113 @@
                                 <a href="/dashboard">
                                     <span>Dashboard</span>
                                 </a>
+                                <li class="{{ ($navactive === 'web' ? 'active' : '') }}">
+                                    <a href="/web"><span>Web</span></a>
+                                </li>
                             </li>
-                            <li class="{{ ($navactive === 'rapat' ? 'active' : '') }}">
-                                <a href="/rapat"><span>Rapat</span></a>
-                            </li>
-                            <li class="{{ ($navactive === 'web' ? 'active' : '') }}">
-                                <a href="/web"><span>Web</span></a>
-                            </li>
-                            <li class="{{ ($navactive === 'sekolah' ? 'active' : '') }}">
-                                <a href="/sekolah"><span>Sekolah</span></a>
-                            </li>
-                            <li class="{{ ($navactive === 'user' ? 'active' : '') }}">
-                                <a href="/user"><span>User</span></a>
-                            </li>
-                            <li class="{{ ($navactive === 'siswa' ? 'active' : '') }}">
-                                <a href="javascript:void(0)" aria-expanded="true"><span>Siswa</span></a>
-                                <ul class="collapse">
-                                    <li><a href="/siswa">Data Siswa</a></li>
-                                    <li><a href="/absen">Absen Siswa</a></li>
-                                    <li><a href="/siswa/keuangan">Keuangan Siswa</a></li>
-                                </ul>
-                            </li>
-                            <li class="{{ ($navactive === 'guru' ? 'active' : '') }}">
-                                <a href="javascript:void(0)" aria-expanded="true"><span>Guru</span></a>
-                                <ul class="collapse">
-                                    <li><a href="/guru">Data Guru</a></li>
-                                    <li><a href="/guru/keuangan?dari={{ date('Y-m-15') }}&sampai={{ date('Y-m-15') }}">Keuangan Guru</a></li>
-                                </ul>
-                            </li>
-                            <li class="{{ ($navactive === 'akademik' ? 'active' : '') }}">
-                                <a href="javascript:void(0)" aria-expanded="true"><span>Akademik</span></a>
-                                <ul class="collapse">
-                                    <li><a href="/jadwal">Jadwal Pelajaran</a></li>
-                                    <li><a href="/jurnal">Jurnal Kelas</a></li>
-                                </ul>
-                            </li>
+                            @switch(session('status'))
+                                @case('Admin')
+                                    <li class="{{ ($navactive === 'rapat' ? 'active' : '') }}">
+                                        <a href="/rapat"><span>Rapat</span></a>
+                                    </li>
+                                    <li class="{{ ($navactive === 'sekolah' ? 'active' : '') }}">
+                                        <a href="/sekolah"><span>Sekolah</span></a>
+                                    </li>
+                                    <li class="{{ ($navactive === 'user' ? 'active' : '') }}">
+                                        <a href="/user"><span>User</span></a>
+                                    </li>
+                                    <li class="{{ ($navactive === 'siswa' ? 'active' : '') }}">
+                                        <a href="javascript:void(0)" aria-expanded="true"><span>Siswa</span></a>
+                                        <ul class="collapse">
+                                            <li><a href="/siswa">Data Siswa</a></li>
+                                            <li><a href="/absen">Absen Siswa</a></li>
+                                            <li><a href="/siswa/keuangan">Keuangan Siswa</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="{{ ($navactive === 'guru' ? 'active' : '') }}">
+                                        <a href="javascript:void(0)" aria-expanded="true"><span>Guru</span></a>
+                                        <ul class="collapse">
+                                            <li><a href="/guru">Data Guru</a></li>
+                                            <li><a href="/guru/keuangan?dari={{ date('Y-m-15') }}&sampai={{ date('Y-m-15') }}">Keuangan Guru</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="{{ ($navactive === 'akademik' ? 'active' : '') }}">
+                                        <a href="javascript:void(0)" aria-expanded="true"><span>Akademik</span></a>
+                                        <ul class="collapse">
+                                            <li><a href="/jadwal">Jadwal Pelajaran</a></li>
+                                            <li><a href="/jurnal">Jurnal Kelas</a></li>
+                                        </ul>
+                                    </li>
+                                    @break
+                                @case('Bendahara')
+                                    <li class="{{ ($navactive === 'siswa' ? 'active' : '') }}">
+                                        <a href="javascript:void(0)" aria-expanded="true"><span>Siswa</span></a>
+                                        <ul class="collapse">
+                                            <li><a href="/siswa">Data Siswa</a></li>
+                                            <li><a href="/absen">Absen Siswa</a></li>
+                                            <li><a href="/siswa/keuangan">Keuangan Siswa</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="{{ ($navactive === 'guru' ? 'active' : '') }}">
+                                        <a href="javascript:void(0)" aria-expanded="true"><span>Guru</span></a>
+                                        <ul class="collapse">
+                                            <li><a href="/guru">Data Guru</a></li>
+                                            <li><a href="/guru/keuangan?dari={{ date('Y-m-15') }}&sampai={{ date('Y-m-15') }}">Keuangan Guru</a></li>
+                                        </ul>
+                                    </li>
+                                    @break
+                                @case('Kurikulum')
+                                    <li class="{{ ($navactive === 'sekolah' ? 'active' : '') }}">
+                                        <a href="/sekolah"><span>Sekolah</span></a>
+                                    </li>
+                                    <li class="{{ ($navactive === 'guru' ? 'active' : '') }}">
+                                        <a href="javascript:void(0)" aria-expanded="true"><span>Guru</span></a>
+                                        <ul class="collapse">
+                                            <li><a href="/guru">Data Guru</a></li>
+                                            <li><a href="/guru/keuangan?dari={{ date('Y-m-15') }}&sampai={{ date('Y-m-15') }}">Keuangan Guru</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="{{ ($navactive === 'akademik' ? 'active' : '') }}">
+                                        <a href="javascript:void(0)" aria-expanded="true"><span>Akademik</span></a>
+                                        <ul class="collapse">
+                                            <li><a href="/jadwal">Jadwal Pelajaran</a></li>
+                                            <li><a href="/jurnal">Jurnal Kelas</a></li>
+                                        </ul>
+                                    </li>
+                                    @break    
+                                @case('Kesiswaan')
+                                    <li class="{{ ($navactive === 'sekolah' ? 'active' : '') }}">
+                                        <a href="/sekolah"><span>Sekolah</span></a>
+                                    </li>
+                                    <li class="{{ ($navactive === 'siswa' ? 'active' : '') }}">
+                                        <a href="javascript:void(0)" aria-expanded="true"><span>Siswa</span></a>
+                                        <ul class="collapse">
+                                            <li><a href="/siswa">Data Siswa</a></li>
+                                            <li><a href="/absen">Absen Siswa</a></li>
+                                            <li><a href="/siswa/keuangan">Keuangan Siswa</a></li>
+                                        </ul>
+                                    </li>
+                                    @break    
+                                @case('Guru')
+                                    @if (session('walas'))
+                                        <li class="{{ ($navactive === 'siswa' ? 'active' : '') }}">
+                                            <a href="javascript:void(0)" aria-expanded="true"><span>{{ session('walas')->tingkat }} {{ session('walas')->jurusan }}</span></a>
+                                            <ul class="collapse">
+                                                <li><a href="/absen?id_kelas={{ session('walas')->id_kelas }}">Absen {{ session('walas')->tingkat }} {{ session('walas')->jurusan }}</a></li>
+                                                <li><a href="/siswa/keuangan">Keuangan {{ session('walas')->tingkat }} {{ session('walas')->jurusan }}</a></li>
+                                            </ul>
+                                        </li>
+                                    @endif
+                                    <li class="{{ ($navactive === 'akademik' ? 'active' : '') }}">
+                                        <a href="javascript:void(0)" aria-expanded="true"><span>Akademik</span></a>
+                                        <ul class="collapse">
+                                            <li><a href="/jadwal">Jadwal Pelajaran</a></li>
+                                            <li><a href="/jurnal">Jurnal Kelas</a></li>
+                                        </ul>
+                                    </li>
+                                    @break    
+                            @endswitch
+                            
                         </ul>
                     </nav>
                 </div>
@@ -243,13 +315,7 @@
             </div>
         </div>
     </div>
-    <script>
-        tinymce.init({
-          selector: 'textarea',
-          plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
-          toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
-        });
-    </script>
+    
     <!-- offset area end -->
     <!-- jquery latest version -->
     <script src="/adminlte/js/vendor/jquery-2.2.4.min.js"></script>

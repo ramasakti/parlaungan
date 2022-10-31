@@ -1,4 +1,4 @@
-<a class="mx-2" href="#modal-center" uk-toggle="target: #add-kelas" uk-icon="icon: plus"></a>
+<a class="mx-2 my-2" href="#modal-center" uk-toggle="target: #add-kelas" uk-icon="icon: plus"></a>
 @include('siswa.kelas.add-kelas')
 <table class="table table-borderless">
     <thead>

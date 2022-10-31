@@ -113,6 +113,10 @@ class SiswaController extends Controller
                 'id_siswa' => $request->id_siswa,
                 'nama_siswa' => $request->nama_siswa,
                 'kelas_id' => $request->kelas_id,
+                'alamat' => $request->alamat,
+                'telp' => $request->telp,
+                'tempat_lahir' => $request->tempat_lahir,
+                'tanggal_lahir' => $request->tanggal_lahir
             ]);
         
         DB::table('absen')
@@ -142,6 +146,10 @@ class SiswaController extends Controller
                 'id_siswa' => $request->id_siswa,
                 'nama_siswa' => $request->nama_siswa,
                 'kelas_id' => $request->kelas_id,
+                'alamat' => $request->alamat,
+                'telp' => $request->telp,
+                'tanggal_lahir' => $request->tanggal_lahir,
+                'tempat_lahir' => $request->tempat_lahir,
             ]);
 
         DB::table('absen')

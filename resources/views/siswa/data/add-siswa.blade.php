@@ -18,6 +18,18 @@
                     @endforeach
                 </select>
             </div>
+            <div class="uk-margin">
+                <textarea class="uk-textarea" rows="5" placeholder="Alamat" name="alamat"></textarea>
+            </div>
+            <div class="uk-margin">
+                <input class="uk-input" type="text" name="telp" placeholder="Telp / WA" required>
+            </div>
+            <div class="uk-margin">
+                <input class="uk-input" type="text" name="tempat_lahir" placeholder="Tempat Lahir" required>
+            </div>
+            <div class="uk-margin">
+                <input name="tanggal_lahir" placeholder="Tanggal Lahir" class="textbox-n uk-input" type="text" onfocus="(this.type='date')" id="date">
+            </div>
             <button type="submit" class="uk-button uk-button-primary uk-button-small">Tambah</button>
         </form>
     </div>

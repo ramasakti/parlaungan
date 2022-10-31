@@ -102,7 +102,7 @@ Route::post('/absen/engine', [AbsenController::class, 'engine']);
 //Jadwal
 Route::get('/jadwal', [JadwalController::class, 'index'])->middleware('auth');
 Route::post('/jadwal/store', [JadwalController::class, 'storeJadwal'])->middleware('auth');
-Route::post('/jadwal/import', [JadwalController::class, 'importJadwal'])->middleware('auth');
+Route::post('/jadwal/import', [JadwalController::class, 'import'])->middleware('auth');
 
 //Jurnal
 Route::get('/jurnal', [JurnalController::class, 'index'])->middleware('auth');
@@ -110,11 +110,11 @@ Route::get('/jurnal', [JurnalController::class, 'index'])->middleware('auth');
 //Testing
 Route::get('/testing', [TestingController::class, 'index']);
 Route::get('/tesapi', [TestingController::class, 'getApi']);
+Route::get('/csv', [TestingController::class, 'csv']);
 
 //Guru
 Route::get('/guru', [GuruController::class, 'index']);
 Route::get('/guru/keuangan', [GuruController::class, 'keuangan']);
-
 
 //Absen Rapat
 Route::get('/rapat', [RapatController::class, 'index']);

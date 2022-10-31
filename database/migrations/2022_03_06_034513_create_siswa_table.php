@@ -14,9 +14,13 @@ class CreateSiswaTable extends Migration
     public function up()
     {
         Schema::create('siswa', function (Blueprint $table) {
-            $table->string('id_siswa')->primary()->onDelete('cascade')->onUpdate('cascade');;
+            $table->string('id_siswa')->primary()->onDelete('cascade')->onUpdate('cascade');
             $table->string('nama_siswa');
             $table->integer('kelas_id')->unsigned();
+            $table->string('alamat');
+            $table->text('telp');
+            $table->string('tempat_lahir');
+            $table->date('tanggal_lahir');
         });
 
         Schema::table('siswa', function (Blueprint $table) {
