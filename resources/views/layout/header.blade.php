@@ -4,6 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Primary Meta Tags -->
+    <title>SMA Islam Parlaungan</title>
+    <meta name="title" content="SMA Islam Parlaungan">
+    <meta name="description" content="Berkarya, berkarakter, berakhlakul karimah">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://metatags.io/">
+    <meta property="og:title" content="SMA Islam Parlaungan">
+    <meta property="og:description" content="Berkarya, berkarakter, berakhlakul karimah">
+    <meta property="og:image" content="https://smaispa.sch.id/img/smaispa.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://metatags.io/">
+    <meta property="twitter:title" content="SMA Islam Parlaungan">
+    <meta property="twitter:description" content="Berkarya, berkarakter, berakhlakul karimah">
+    <meta property="twitter:image" content="https://smaispa.sch.id/img/smaispa.png">
+
     <link href="/css/style.css" rel="stylesheet" type="text/css">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApiController;
+use App\Http\Controllers\KeuanganSiswa;
 use App\Http\Controllers\WebController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\GuruController;
@@ -90,7 +91,9 @@ Route::post('/siswa/update', [SiswaController::class, 'updateSiswa'])->middlewar
 Route::post('/siswa/delete', [SiswaController::class, 'destroySiswa'])->middleware('auth');
 Route::post('/siswa/import', [SiswaController::class, 'import'])->middleware('auth');
 //Keuangan Siswa
-Route::get('/siswa/keuangan', [SiswaController::class, 'keuanganSiswa'])->middleware('auth');
+Route::get('/siswa/keuangan', [KeuanganSiswa::class, 'index'])->middleware('auth');
+Route::post('/pembayaran/store', [KeuanganSiswa::class, 'addPembayaran'])->middleware('auth');
+Route::post('/pembayaran/update', [KeuanganSiswa::class, 'updatePembayaran'])->middleware('auth');
 
 //Absen
 Route::get('/absen', [AbsenController::class, 'index'])->middleware('auth');

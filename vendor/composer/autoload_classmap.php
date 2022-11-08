@@ -17,6 +17,7 @@ return array(
     'App\\Http\\Controllers\\GuruController' => $baseDir . '/app/Http/Controllers/GuruController.php',
     'App\\Http\\Controllers\\JadwalController' => $baseDir . '/app/Http/Controllers/JadwalController.php',
     'App\\Http\\Controllers\\JurnalController' => $baseDir . '/app/Http/Controllers/JurnalController.php',
+    'App\\Http\\Controllers\\KeuanganSiswa' => $baseDir . '/app/Http/Controllers/KeuanganSiswa.php',
     'App\\Http\\Controllers\\LoginController' => $baseDir . '/app/Http/Controllers/LoginController.php',
     'App\\Http\\Controllers\\QRController' => $baseDir . '/app/Http/Controllers/QRController.php',
     'App\\Http\\Controllers\\RapatController' => $baseDir . '/app/Http/Controllers/RapatController.php',

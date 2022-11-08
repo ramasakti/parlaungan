@@ -173,12 +173,4 @@ class SiswaController extends Controller
 
         return back()->with('siswa', 'uk-active');
     }
-
-    public function keuanganSiswa()
-    {
-        return view('siswa.keuangan.index', [
-            'title' => 'Keuangan Siswa',
-            'navactive' => 'siswa',
-        ]);
-    }
 }
