@@ -3,6 +3,7 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">Kwitansi</th>
+            <th scope="col">Tgl Transaksi</th>
             <th scope="col">Siswa</th>
             <th scope="col">Total</th>
             <th scope="col">Handler</th>
@@ -13,7 +14,9 @@
             <tr>
                 <td>{{ $ai++ }}</td>
                 <td>{{ $transaksi->kwitansi }}</td>
+                <td>{{ $transaksi->waktu_transaksi }}</td>
                 <td>{{ $transaksi->nama_siswa }}</td>
+                <td>{{ number_format($transaksi->terbayar,0,'','.') }}</td>
                 <td>
                     <a href="#modal-center" uk-toggle="target: #edit-transaksi-{{ $transaksi->id_transaksi }}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-square" viewBox="0 0 16 16">

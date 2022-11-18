@@ -133,6 +133,11 @@
                                             <li><a href="/jurnal">Jurnal Kelas</a></li>
                                         </ul>
                                     </li>
+                                    @if (session('piket'))
+                                        <li class="{{ ($navactive === 'siswa' ? 'active' : '') }}">
+                                            <a href="/absen"><span>Absen Siswa</span></a>
+                                        </li>
+                                    @endif
                                     @break    
                                 @case('Kesiswaan')
                                     <li class="{{ ($navactive === 'sekolah' ? 'active' : '') }}">
@@ -156,6 +161,12 @@
                                                 <li><a href="/siswa/keuangan">Keuangan {{ session('walas')->tingkat }} {{ session('walas')->jurusan }}</a></li>
                                             </ul>
                                         </li>
+                                    @else
+                                        @if (session('piket'))
+                                            <li class="{{ ($navactive === 'siswa' ? 'active' : '') }}">
+                                                <a href="/absen"><span>Absen Siswa</span></a>
+                                            </li>
+                                        @endif
                                     @endif
                                     <li class="{{ ($navactive === 'akademik' ? 'active' : '') }}">
                                         <a href="javascript:void(0)" aria-expanded="true"><span>Akademik</span></a>

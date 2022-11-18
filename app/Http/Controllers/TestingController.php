@@ -12,8 +12,23 @@ class TestingController extends Controller
 {
     public function index(Request $request)
     {
-        $api = DB::table('siswa')->get();
-        return response()->json($api);
+        $absen = DB::table('absen')
+                    ->select('id_siswa', 'keterangan')
+                    ->where('keterangan', '!=', '')
+                    ->get();
+        foreach ($absen as $siswa) {
+            $data =  '#'. $siswa->id_siswa .':'. $siswa->keterangan;
+            DB::table('rekap_siswa')
+                ->upsert([
+                    [
+                        'tanggal' => date('Y-m-d'),
+                        'rekapitulasi' => $data,
+                    ]
+                ],
+                ['tanggal', 'rekapitulasi']
+                );
+            
+        }
     }
 
     public function getApi(Request $request)

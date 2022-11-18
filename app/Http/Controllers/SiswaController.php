@@ -15,15 +15,17 @@ class SiswaController extends Controller
         $dataAbsen = DB::table('absen')->select('id_siswa')->get();
         $dataSiswa = DB::table('siswa')->whereNotIn('id_siswa', json_decode($dataAbsen, TRUE))->get();
         if (count($dataSiswa) > 0) {
-            DB::table('absen')
-                ->insert([
-                    'id_siswa' => $dataSiswa[0]->id_siswa,
-                    'waktu_absen' => NULL,
-                    'rekap' => '',
-                    'jumlah_terlambat' => 0,
-                    'izin' => NULL,
-                    'keterangan' => '',
-                ]);
+            for ($i=0; $i<count($dataSiswa); $i++) {
+                DB::table('absen')
+                    ->insert([
+                        'id_siswa' => $dataSiswa[$i]->id_siswa,
+                        'waktu_absen' => NULL,
+                        'rekap' => '',
+                        'jumlah_terlambat' => 0,
+                        'izin' => NULL,
+                        'keterangan' => ''
+                    ]);
+            }
         }
     }
 

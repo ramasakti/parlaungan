@@ -27,9 +27,40 @@ class Rekap extends Command
      *
      * @return void
      */
+    
     public function __construct()
     {
         parent::__construct();
+    }
+    
+    public function hariIni()
+    {
+        $cekHari = DB::table('hari')->where('nama_hari', Carbon::now()->isoFormat('dddd'))->get();
+        return $cekHari;
+    }
+
+    public function rekapAbsenHarian()
+    {
+        $absen = DB::table('absen')
+                    ->where('keterangan', '!=', '')
+                    ->get();
+        DB::table('rekap_siswa')
+            ->insert([
+                'tanggal' => date('Y-m-d'),
+                'rekapitulasi' => '',
+            ]);
+    }
+
+    public function rekapTerlambat()
+    {
+        $terlambat = DB::table('absen')
+                        ->where('waktu_absen', '>', $this->hariIni()->masuk)
+                        ->get();
+        DB::table('siswa_terlambat')
+            ->insert([
+                'tanggal' => date('Y-m-d'),
+                'list' => '',
+            ]);
     }
 
     /**
@@ -87,8 +118,10 @@ class Rekap extends Command
                             'transport' => 0,
                             'materi' => "Libur"
                         ]);
-                } 
+                }
             }
         }
+
+
     }
 }

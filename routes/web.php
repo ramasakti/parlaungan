@@ -65,9 +65,8 @@ Route::get('/web/blog/create', [BlogController::class, 'create'])->middleware('a
 
 //User
 Route::get('/user', [UserController::class, 'index']);
-Route::post('/user/store', [UserController::class, 'store'])->middleware('auth');
-Route::post('/user/update', [UserController::class, 'update'])->middleware('auth');
-Route::post('/user/delete', [UserController::class, 'destroy'])->middleware('auth');
+Route::post('/user/import', [UserController::class, 'import'])->middleware('auth');
+Route::post('/user/update', [UserController::class, 'updateUser'])->middleware('auth');
 
 //Sekolah
 Route::get('/sekolah', [SekolahController::class, 'index'])->middleware('auth');
@@ -94,6 +93,8 @@ Route::post('/siswa/import', [SiswaController::class, 'import'])->middleware('au
 Route::get('/siswa/keuangan', [KeuanganSiswa::class, 'index'])->middleware('auth');
 Route::post('/pembayaran/store', [KeuanganSiswa::class, 'addPembayaran'])->middleware('auth');
 Route::post('/pembayaran/update', [KeuanganSiswa::class, 'updatePembayaran'])->middleware('auth');
+Route::post('/pembayaran/transaksi', [KeuanganSiswa::class, 'engineTransaction'])->middleware('auth');
+Route::post('/pembayaran/payment', [KeuanganSiswa::class, 'payment'])->middleware('auth');
 
 //Absen
 Route::get('/absen', [AbsenController::class, 'index'])->middleware('auth');
@@ -118,6 +119,9 @@ Route::get('/csv', [TestingController::class, 'csv']);
 //Guru
 Route::get('/guru', [GuruController::class, 'index']);
 Route::get('/guru/keuangan', [GuruController::class, 'keuangan']);
+Route::post('/guru/store', [GuruController::class, 'addGuru']);
+Route::post('/guru/update', [GuruController::class, 'updateGuru']);
+Route::post('/guru/delete', [GuruController::class, 'deleteGuru']);
 
 //Absen Rapat
 Route::get('/rapat', [RapatController::class, 'index']);

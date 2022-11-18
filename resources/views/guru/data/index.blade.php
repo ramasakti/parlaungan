@@ -1,4 +1,6 @@
 <x-admintemplate title='{{ $title }}' navactive='{{ $navactive }}'>
+    <a href="#modal-center" class="mb-2" uk-toggle="target: #add-guru" uk-icon="icon: plus"></a>
+    @include('guru.data.add-guru')
     <table class="table table-borderless" id="data-table">
         <thead>
             <tr>

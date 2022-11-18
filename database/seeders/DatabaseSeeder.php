@@ -19,7 +19,6 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('ramasakti27'),
             'id' => '',
             'foto' => '',
-            'telp' => '6285157177034',
             'status' => 'Admin',
         ]);
 
@@ -28,7 +27,6 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('parlaungan1980'),
             'id' => '',
             'foto' => '',
-            'telp' => '6285157177034',
             'status' => 'Admin'
         ]);
 
@@ -37,7 +35,6 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('alfansasmiko'),
             'id' => '',
             'foto' => '',
-            'telp' => '6281235605030',
             'status' => 'Admin'
         ]);
 
@@ -45,6 +42,7 @@ class DatabaseSeeder extends Seeder
             'id_guru' => 'alfansasmiko',
             'nama_guru' => 'Alfan Sasmiko, SH.I',
             'alamat' => 'Jl. Dukuh Pakis V / 35B',
+            'telp' => '+62 812-3560-5030',
             'tempat_lahir' => 'Surabaya',
             'tanggal_lahir' => '1979-09-09'
         ]);

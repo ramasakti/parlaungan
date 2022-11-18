@@ -68,7 +68,12 @@ class KeuanganSiswa extends Controller
     public function allTransaksi()
     {
         $transaksi = DB::table('transaksi')
+                        ->select(
+                            '*',
+                            DB::raw('SUM(terbayar) as terbayar')
+                        )
                         ->join('siswa', 'siswa.id_siswa', '=', 'transaksi.siswa_id')
+                        ->orderBy('transaksi.waktu_transaksi', 'desc')
                         ->groupBy('transaksi.kwitansi')
                         ->get();
         return $transaksi;
@@ -83,6 +88,7 @@ class KeuanganSiswa extends Controller
                         )
                         ->where('transaksi.siswa_id', request('siswa_id'))
                         ->join('siswa', 'siswa.id_siswa', '=', 'transaksi.siswa_id')
+                        ->orderBy('transaksi.waktu_transaksi', 'desc')
                         ->groupBy('transaksi.kwitansi')
                         ->get();
         return $detailTransaksi;
@@ -96,10 +102,37 @@ class KeuanganSiswa extends Controller
                             DB::raw('SUM(terbayar) as pembayaran_terbayar')
                         )
                         ->where('siswa_id', request('siswa_id'))
-                        ->where('pembayaran_id', $this->detailPembayaran())
+                        ->where('pembayaran_id', $this->detailPembayaran()->id_pembayaran)
                         ->groupBy('pembayaran_id')
                         ->get();
         return $terbayar;
+    }
+
+    public function engineTransaction(Request $request)
+    {
+        return view('siswa.keuangan.transaksi.checkout', [
+            'title' => 'Siswa',
+            'navactive' => 'siswa',
+            'id_siswa' => $request->id_siswa,
+            'detailPembayaran' => DB::table('pembayaran')->whereIn('id_pembayaran', $request->pembayaran)->get()
+        ]);
+    }
+
+    public function payment(Request $request)
+    {
+        $kwitansi = 'K' . date('Ymdhis') . 
+        $jenisPem = count($request->id_pembayaran);
+        for ($i=0; $i < $jenisPem; $i++) {
+            DB::table('transaksi')
+                ->insert([
+                    'kwitansi' => $kwitansi,
+                    'waktu_transaksi' => date('Y-m-d H:i:s'),
+                    'siswa_id' => $request->id_siswa,
+                    'pembayaran_id' => $request->id_pembayaran[$i],
+                    'terbayar' => $request->nominal[$i],
+                ]);
+        }
+        return back()->with('success', 'Berhasil melakukan transaksi!');
     }
 
     public function numberFormat($angka)

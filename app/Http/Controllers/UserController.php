@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Auth;
+use \Crypt;
 
 class UserController extends Controller
 {
@@ -19,53 +21,85 @@ class UserController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function username()
     {
-        $validatedUser = $request->validate([
-            'username' => 'required|min:8|unique:user',
-            'password' => 'required|min:8',
-        ]);
-        
-        if($request->status != 'Walmur'){
-            DB::table('guru')
-                ->insert([
-                    'id_guru' => $request->username,
-                    'nama_guru' => $request->nama,
-                ]);
-        }
-        
-        DB::table('user')
-            ->insert([
-                'username' => $request->username,
-                'password' => bcrypt($request->password),
-                'id' => '',
-                'foto' => '',
-                'telp' => $request->telp,
-                'status' => $request->status
-            ]);
-        return back(); 
+        $dataUser = DB::table('user')->select('username')->get();
+        $username = array_column($dataUser->toArray(), 'username');
+        return $username;
     }
 
-    public function update(Request $request)
+    public function guru()
     {
-        $validatedUser = $request->validate([
-            'status' => 'required',
-        ]);
-        
+        $dataGuru = DB::table('guru')->whereNotIn('id_guru', $this->username())->get();
+        foreach ($dataGuru as $guru) {
+            DB::table('user')
+                ->insert([
+                    'username' => $guru->id_guru,
+                    'password' => bcrypt($guru->id_guru),
+                    'id' => '',
+                    'foto' => '',
+                    'status' => 'Guru',
+                ]);
+        }
+    }
+
+    public function siswa()
+    {
+        $dataSiswa = DB::table('siswa')->whereNotIn('id_siswa', $this->username())->get();
+        foreach ($dataSiswa as $siswa) {
+            DB::table('user')
+                ->insert([
+                    'username' => $siswa->id_siswa,
+                    'password' => bcrypt($siswa->id_siswa),
+                    'id' => '',
+                    'foto' => '',
+                    'status' => 'Siswa',
+                ]);
+        }
+    }
+
+    public function walmur()
+    {
+        $dataWalmur = DB::table('walmur')->whereNotIn('id_walmur', $this->username())->get();
+        foreach ($dataWalmur as $walmur) {
+            DB::table('user')
+                ->insert([
+                    'username' => $walmur->id_walmur,
+                    'password' => bcrypt($walmur->id_walmur),
+                    'id' => '',
+                    'foto' => '',
+                    'status' => 'Walmur',
+                ]);
+        }
+    }
+
+    public function import(Request $request)
+    {
+        foreach ($request->data as $data) {
+            switch ($data) {
+                case 'guru':
+                    $this->guru();
+                    break;
+                case 'siswa':
+                    $this->siswa();
+                    break;
+                case 'walmur':
+                    $this->walmur();
+                    break;
+            }
+        }
+        return back()->with('success', 'Berhasil import user!');
+    }
+
+    public function updateUser(Request $request)
+    {
         DB::table('user')
             ->where('username', $request->username)
             ->update([
-                'status' => $request->status
+                'foto' => '',
+                'status' => $request->status,
             ]);
-        return back();
-    }
-
-
-    public function destroy(Request $request)
-    {
-        DB::table('user')
-            ->where('username', $request->username)
-            ->delete();
-        return back();
+        return back()->with('success', 'Berhasil update data!');
     }
 }
+  

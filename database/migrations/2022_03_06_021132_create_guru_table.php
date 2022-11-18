@@ -17,6 +17,7 @@ class CreateGuruTable extends Migration
             $table->string('id_guru')->primary();
             $table->string('nama_guru');
             $table->text('alamat');
+            $table->string('telp');
             $table->string('tempat_lahir');
             $table->date('tanggal_lahir');
         });

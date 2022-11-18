@@ -15,7 +15,7 @@ class GuruController extends Controller
                     ->select(DB::raw('TIME_TO_SEC(jampel)/60 as jampel'))
                     ->where('nama_hari', Carbon::now()->isoFormat('dddd'))
                     ->get();
-        }
+    }
 
     public function dataJadwal()
     {
@@ -95,5 +95,19 @@ class GuruController extends Controller
             'ai' => 1,
             'dataGuru' => DB::table('guru')->get()
         ]);
+    }
+
+    public function addGuru(Request $request)
+    {
+        DB::table('guru')
+            ->insert([
+                'id_guru' => $request->id_guru,
+                'nama_guru' => $request->nama_guru,
+                'alamat' => $request->alamat,
+                'telp' => $request->telp,
+                'tempat_lahir' => $request->tempat_lahir,
+                'tanggal_lahir' => $request->tanggal_lahir,
+            ]);
+        return back()->with('success', 'Berhasil menambah data guru!');
     }
 }
