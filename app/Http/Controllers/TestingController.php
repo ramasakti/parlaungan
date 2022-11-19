@@ -5,30 +5,16 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use DB;
 use Illuminate\Support\Facades\Http;
+use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Client;
+use DB;
 
 class TestingController extends Controller
 {
     public function index(Request $request)
     {
-        $absen = DB::table('absen')
-                    ->select('id_siswa', 'keterangan')
-                    ->where('keterangan', '!=', '')
-                    ->get();
-        foreach ($absen as $siswa) {
-            $data =  '#'. $siswa->id_siswa .':'. $siswa->keterangan;
-            DB::table('rekap_siswa')
-                ->upsert([
-                    [
-                        'tanggal' => date('Y-m-d'),
-                        'rekapitulasi' => $data,
-                    ]
-                ],
-                ['tanggal', 'rekapitulasi']
-                );
-            
-        }
+        echo date('Y-m-d', strtotime('+1 days', strtotime(date('Y-m-d'))));
     }
 
     public function getApi(Request $request)

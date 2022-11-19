@@ -14,9 +14,13 @@ class RekapSiswa extends Migration
     public function up()
     {
         Schema::create('rekap_siswa', function (Blueprint $table) {
-            $table->id('id_rekap');
             $table->date('tanggal');
-            $table->text('rekapitulasi');
+            $table->string('siswa_id');
+            $table->char('keterangan', 1);
+        });
+
+        Schema::table('rekap_siswa', function (Blueprint $table) {
+            $table->foreign('siswa_id')->references('id_siswa')->on('siswa')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

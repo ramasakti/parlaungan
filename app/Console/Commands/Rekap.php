@@ -39,30 +39,6 @@ class Rekap extends Command
         return $cekHari;
     }
 
-    public function rekapAbsenHarian()
-    {
-        $absen = DB::table('absen')
-                    ->where('keterangan', '!=', '')
-                    ->get();
-        DB::table('rekap_siswa')
-            ->insert([
-                'tanggal' => date('Y-m-d'),
-                'rekapitulasi' => '',
-            ]);
-    }
-
-    public function rekapTerlambat()
-    {
-        $terlambat = DB::table('absen')
-                        ->where('waktu_absen', '>', $this->hariIni()->masuk)
-                        ->get();
-        DB::table('siswa_terlambat')
-            ->insert([
-                'tanggal' => date('Y-m-d'),
-                'list' => '',
-            ]);
-    }
-
     /**
      * Execute the console command.
      *
@@ -99,13 +75,27 @@ class Rekap extends Command
                     ->where('hari', Carbon::now()->isoFormat('dddd'))
                     ->get();
 
-                foreach ($dataRekap as $updateRekap){
+                foreach ($dataRekap as $updateRekap) {
                     DB::table('absen')
                         ->where('id_siswa', $updateRekap->id_siswa)
                         ->update([
                             'rekap' => $updateRekap->rekap ."". $updateRekap->keterangan
                         ]);
-                }        
+                }
+                
+                $absen = DB::table('absen')
+                            ->select('id_siswa', 'keterangan')
+                            ->where('keterangan', '!=', '')
+                            ->get();
+
+                foreach ($absen as $siswa) {
+                    DB::table('rekap_siswa')
+                        ->insert([
+                            'tanggal' => date('Y-m-d'),
+                            'siswa_id' => $siswa->id_siswa,
+                            'keterangan' => $siswa->keterangan
+                        ]);
+                }
             }else{
                 //Jika libur masukkan data jadwal di hari tsb ke jurnal
                 foreach ($dataJadwal as $insertJadwal){

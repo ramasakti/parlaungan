@@ -14,8 +14,13 @@ class SiswaTerlambat extends Migration
     public function up()
     {
         Schema::create('siswa_terlambat', function (Blueprint $table) {
-            $table->date('tanggal')->primary();
-            $table->text('list');
+            $table->date('tanggal');
+            $table->string('siswa_id');
+            $table->time('waktu');
+        });
+        
+        Schema::table('siswa_terlambat', function (Blueprint $table) {
+            $table->foreign('siswa_id')->references('id_siswa')->on('siswa')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

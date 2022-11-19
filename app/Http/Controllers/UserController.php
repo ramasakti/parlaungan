@@ -17,7 +17,9 @@ class UserController extends Controller
             'title' => 'Daftar Akun',
             'navactive' => 'user',
             'ai' => 1,
-            'data' => DB::table('user')->get()
+            'userGuru' => DB::table('user')->where('status', '!=', 'Siswa')->where('status', '!=', 'Walmur')->get(),
+            'userSiswa' => DB::table('user')->where('status', 'Siswa')->get(),
+            'userWalmur' => DB::table('user')->where('status', 'Walmur')->get()
         ]);
     }
 
