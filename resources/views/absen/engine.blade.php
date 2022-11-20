@@ -5,30 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Sistem Absen</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <!-- UIkit CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.15.3/dist/css/uikit.min.css" />
     <!-- UIkit JS -->
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.15.3/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.15.3/dist/js/uikit-icons.min.js"></script>
 </head>
-<body>
-    {{-- <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script> --}}
-    <script src="/js/html5-qrcode.min.js" type="text/javascript"></script>
-
-    <center>
-        <div class="uk-postion-center" style="width: 500px" id="reader"></div>
-    </center>
-
-    <div class="container">
+<body onload="startTime()">
+    <script src="/js/html5-qrcode.min.js" type="text/javascript"></script>  
+    <style>
+        .input {
+            border: 0px;
+            color: white;
+        }
+    </style>
+    <div class="uk-position-center">
         <center>
+            <div class="uk-postion-center" style="width: 500px" id="reader"></div>
+
             <article class="uk-article uk-margin-top">
                 <h1 class="uk-article-title">Sistem Absensi</h1>
             </article>
+
             <h2 class="uk-margin-small">
                 <div id="txt"></div>
             </h2>
-            <p class="uk-margin-small uk-text-default">Aplikasi ini dibuat dan dikembangkan oleh &copy; Staff IT Development and Infrastructure - SMA Islam Parlaungan</p>
+
+            <p class="uk-margin-small uk-text-default">Aplikasi ini dibuat dan dikembangkan oleh &copy; Staff IT Development And Infrastructure - SMA Islam Parlaungan</p>
+            <form action="/absen/engine" method="POST">
+                @csrf
+                <input type="text" class="input" name="userabsen" style="outline: 0ch" id="userabsen" autofocus autocomplete="off">
+                <input id="submitButton" class="button" type="submit" hidden>
+            </form>
             @if (session()->has('unregistered'))
                 <div class="uk-alert-danger" uk-alert>
                     <p>{{ session('unregistered') }}</p>
@@ -42,7 +50,6 @@
                     <p>{{ session('success') }} berhasil absen!</p>
                 </div>
             @endif
-            
             @if (session()->has('filled'))
                 <div class="uk-alert-warning" uk-alert>
                     <p>{{ session('filled') }}</p>
@@ -58,22 +65,41 @@
             @endif
         </center>
     </div>
-            
+
     <audio id="success">
         <source src="/audio/success.mp3" type="audio/mpeg">
     </audio>
     <script>
+        function startTime() {
+          const today = new Date();
+          let h = today.getHours();
+          let m = today.getMinutes();
+          let s = today.getSeconds();
+          m = checkTime(m);
+          s = checkTime(s);
+          document.getElementById('txt').innerHTML =  h + ":" + m + ":" + s;
+          setTimeout(startTime, 1000);
+        }
+        
+        function checkTime(i) {
+          if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+          return i;
+        }
+        
         function onScanSuccess(decodedText) {
             //Handle on success condition with the decoded text or result.
             const audio = document.getElementById('success')
             audio.play()
-            window.location.href = '/absen/engine/' + `${decodedText}`;
+            const inputan = document.getElementById('userabsen')
+            inputan.setAttribute('value', decodedText)
+            const form = document.getElementsByTagName('form')[0]
+            form.submit()
+            form.remove()
         }
 
         let html5QrcodeScanner = new Html5QrcodeScanner(
             "reader", { fps: 120, qrbox: 250 });
         html5QrcodeScanner.render(onScanSuccess);
-    </script>
-    
+        </script>
 </body>
 </html>

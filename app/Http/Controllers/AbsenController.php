@@ -102,7 +102,7 @@ class AbsenController extends Controller
         if (!$request->cookie('username')){
             return redirect('/login');
         }
-        return view('absen.rfid', [
+        return view('absen.engine', [
             'title' => 'Sistem Absen',
         ]);
     }

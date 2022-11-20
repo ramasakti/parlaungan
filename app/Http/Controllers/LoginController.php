@@ -32,7 +32,7 @@ class LoginController extends Controller
         $statusPiket = DB::table('hari')->where('piket', request('username'))->get();
         if (Auth::attempt($credentials)){
             if ($request->username == 'adminabsen'){
-                $response = new Response(redirect('/absen/rfid'));
+                $response = new Response(redirect('/absen/engine'));
                 $response->withCookie(cookie()->forever('username', 'adminabsen'));
                 return $response;
             }else{
