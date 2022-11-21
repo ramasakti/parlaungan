@@ -25,6 +25,19 @@
             <article class="uk-article uk-margin-top">
                 <h1 class="uk-article-title">Sistem Absensi Rapat</h1>
             </article>
+            @if (session('success'))
+                <div class="uk-alert-success" uk-alert>
+                    <a class="uk-alert-close" uk-close></a>
+                    <p>{{ session('success') }}</p>
+                </div>
+            @endif
+
+            @if (session('fail'))
+                <div class="uk-alert-danger" uk-alert>
+                    <a class="uk-alert-close" uk-close></a>
+                    <p>{{ session('fail') }}</p>
+                </div>
+            @endif
             <h2 class="uk-margin-small">
                 <div id="txt"></div>
             </h2>
@@ -32,7 +45,7 @@
             
             <form method="post">
                 @csrf
-                <input type="text" name="userabsen" id="userabsen" onchange="this.form.submit()" required autofocus readonly>
+                <input type="text" name="userabsen" id="userabsen" required autofocus readonly>
             </form>
 
             <table class="table table-borderless">
@@ -44,10 +57,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($dataRapat as $rapat)
+                    @foreach ($dataPeserta as $user)
                         <tr>
                             <td>{{ $ai++ }}</td>
-                            <td></td>
+                            <td>{{ $user->username }}</td>
                             <td></td>
                         </tr>
                     @endforeach
@@ -70,9 +83,9 @@
             audio.play()
             const inputan = document.getElementById('userabsen')
             inputan.setAttribute('value', decodedText)
-            console.log(decodedText)
-            // form.submit()
-            // window.location.href = urlEngine + `${decodedText}`;
+            const form = document.getElementsByTagName('form')[0]
+            form.submit()
+            form.remove()
         }
 
         let html5QrcodeScanner = new Html5QrcodeScanner(

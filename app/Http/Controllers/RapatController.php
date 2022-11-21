@@ -23,7 +23,7 @@ class RapatController extends Controller
         if ($request->mulai > $request->sampai) {
             return back()->with('failed', 'Format waktu rapat salah!');
         }
-
+        $kategori = implode('#', $request->kategori);
         DB::table('rapat')
             ->insert([
                 'judul' => $request->judul,
@@ -32,6 +32,7 @@ class RapatController extends Controller
                 'mulai' => $request->mulai,
                 'sampai' => $request->sampai,
                 'penyelenggara' => $request->penyelenggara,
+                'kategori_peserta' => '#' .$kategori,
                 'peserta' => '',
             ]);
         return back()->with('success', 'Berhasil menambahkan jadwal rapat!');
@@ -40,31 +41,40 @@ class RapatController extends Controller
     public function detail(Request $request, $slug)
     {
         $dataRapat = DB::table('rapat')->where('slug', $slug)->get();
-        $exploder = explode('#', $dataRapat[0]->peserta);   
+        $exploder = explode('#', $dataRapat[0]->peserta);
         $arrayKosong = [''];
         $arrayUser = array_diff(array_unique($exploder), $arrayKosong);
         $dataUser = DB::table('user')->whereIn('username', $arrayUser)->get();
-        if ($dataUser[0]->status === 'Siswa') {
-            $pesertaRapat = DB::table('siswa')->where('');
-        }
         return view('rapat.detail-rapat', [
             'title' => 'Sistem Absen Rapat',
             'ai' => 1,
-            'dataRapat' => ''
+            'dataRapat' => $dataRapat,
+            'dataPeserta' => $dataUser
         ]);
     }
 
     public function engine(Request $request, $slug)
     {
         $dataRapat = DB::table('rapat')
-                        ->select(DB::raw("CONCAT(peserta, '#', '$request->userabsen') as peserta"))
+                        ->where('slug', $slug)
+                        ->select(
+                            '*', 
+                            DB::raw("CONCAT(peserta, '#', '$request->userabsen') as peserta"))
                         ->get();
-        DB::table('rapat')
-            ->where('slug', $slug)
-            ->update([
-                'peserta' => $dataRapat[0]->peserta
-            ]);
-        return back();
+        $kategori = explode('#', $dataRapat[0]->kategori_peserta);
+        $arrayKosong = [''];
+        $arrayUser = array_diff(array_unique($kategori), $arrayKosong);
+        $userabsen = DB::table('user')->where('username', $request->userabsen)->get();
+        if (array_search($userabsen[0]->status, $arrayUser)) {
+            DB::table('rapat')
+                ->where('slug', $slug)
+                ->update([
+                    'peserta' => $dataRapat[0]->peserta
+                ]);
+            return back()->with('success', 'Berhasil absen!');
+        }else{
+            return back()->with('fail', 'Anda bukan peserta rapat!');
+        }
     }
 
     public function delete(Request $request)

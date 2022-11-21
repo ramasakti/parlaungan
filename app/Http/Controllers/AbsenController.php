@@ -93,7 +93,6 @@ class AbsenController extends Controller
                     'izin' => date('Y-m-d')
                 ]);
         }
-
         return back();
     }
 

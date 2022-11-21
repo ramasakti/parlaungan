@@ -46,6 +46,15 @@ class DatabaseSeeder extends Seeder
             'tempat_lahir' => 'Surabaya',
             'tanggal_lahir' => '1979-09-09'
         ]);
+        
+        DB::table('guru')->insert([
+            'id_guru' => 'ramasakti27',
+            'nama_guru' => 'Rama Sakti Hafidz FA',
+            'alamat' => 'Kp. Baru Tb. Sumur Waru Sidoarjo',
+            'telp' => '6285157177034',
+            'tempat_lahir' => 'Surabaya',
+            'tanggal_lahir' => '2002-09-27'
+        ]);
 
         DB::table('kelas')->insert([
             'tingkat' => 'XII',

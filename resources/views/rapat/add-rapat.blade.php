@@ -19,6 +19,12 @@
                 <p>Sampai</p>
                 <input type="time" name="sampai" class="uk-input">
             </div>
+            <div class="uk-margin-small-top">
+                <p>Kategori Peserta Rapat</p>
+                <label class="uk-margin-small-right"><input class="uk-checkbox" type="checkbox" name="kategori[]" value="Siswa"> Siswa</label>
+                <label class="uk-margin-small-right"><input class="uk-checkbox" type="checkbox" name="kategori[]" value="Guru"> Guru</label>
+                <label class="uk-margin-small-right"><input class="uk-checkbox" type="checkbox" name="kategori[]" value="Walmur"> Wali Murid</label>
+            </div>
             <button type="submit" class="uk-button uk-button-primary uk-button-small uk-margin">Simpan</button>
         </form>
     </div>

@@ -69,7 +69,32 @@ class LoginController extends Controller
             'dataSiswa' => count(DB::table('siswa')->get()),
             'dataGuru' => count(DB::table('guru')->get()),
             'dataKelas' => count(DB::table('kelas')->get()),
+            'detailUser' => $this->userCard(),
             'dataQR' => QrCode::size(200)->generate(session('username'))
         ]);
+    }
+
+    public function userCard()
+    {
+        switch (session('status')) {
+            case 'Siswa':
+                $detailUser = DB::table('siswa')
+                                ->where('id_siswa', session('username'))
+                                ->get();
+                return $detailUser;
+                break;
+            case 'Walmur':
+                $detailUser = DB::table('walmur')
+                                ->where('id_walmur', session('username'))
+                                ->get();
+                return $detailUser;
+                break;
+            default:
+                $detailUser = DB::table('guru')
+                                ->where('id_guru', session('username'))
+                                ->get();
+                return $detailUser;
+                break;
+        }
     }
 }

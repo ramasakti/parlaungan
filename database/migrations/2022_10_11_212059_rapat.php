@@ -21,6 +21,7 @@ class Rapat extends Migration
             $table->time('mulai');
             $table->time('sampai');
             $table->string('penyelenggara');
+            $table->text('kategori_peserta');
             $table->text('peserta');
         });
     }

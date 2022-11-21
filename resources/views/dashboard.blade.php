@@ -6,13 +6,26 @@
             </div>
         </div>
         <div>
-            <div class="uk-card uk-card-default uk-card-body">
+            <div class="uk-card uk-card-default uk-card-body" id="card" onclick="printDiv()">
+                <p class="uk-margin-remove uk-position-top-right"><span class="uk-margin-small-right" uk-icon="print"></span></p>
                 <div class="uk-panel">
                     <img class="uk-border-circle uk-align-left uk-margin-small-right uk-margin-small-bottom" width="35%" height="35%" src="img/default-user.jpg">
-                    <h5 class="uk-card-title uk-margin-remove ">{{ session('username') }}</h5>
+                    <h5 class="uk-card-title uk-margin-remove ">
+                        @switch(session('status'))
+                            @case('Siswa')
+                                {{ $detailUser[0]->nama_siswa }}
+                                @break
+                            @case('Walmur')
+                                {{ $detailUser[0]->nama_walmur }}
+                                @break
+                            @default
+                                {{ $detailUser[0]->nama_guru }}
+                        @endswitch
+                    </h5>
+                    <p class="uk-margin-remove"><span class="uk-margin-small-right" uk-icon="calendar"></span>{{ $detailUser[0]->tempat_lahir }}, {{ $detailUser[0]->tanggal_lahir }}</p>
+                    <p class="uk-margin-remove"><span class="uk-margin-small-right" uk-icon="location"></span>{{ $detailUser[0]->alamat }}</p>
+                    <p class="uk-margin-remove"><span class="uk-margin-small-right" uk-icon="whatsapp"></span>{{ $detailUser[0]->telp }}</p>
                 </div>
-                <p class="uk-margin-remove"><span class="uk-margin-small-right" uk-icon="calendar"></span>Surabaya, 27 September 1986</p>
-                <p class="uk-margin-remove"><span class="uk-margin-small-right" uk-icon="location"></span>Jl. Berbek I 2 - 4 Waru Sidoarjo</p>
             </div>
         </div>
     </div>
@@ -41,5 +54,17 @@
         svg.setAttribute('class', 'uk-align-center')
         svg.setAttribute('height', '40%')
         svg.setAttribute('width', '40%')
+    </script>
+    <script>
+        function printDiv() {
+            const card = document.getElementById('card').innerHTML
+            const a = window.open('', '', 'height=900 width=900')
+            a.document.write('<html>');
+            a.document.write('<body > <h1>Div contents are <br>');
+            a.document.write(card);
+            a.document.write('</body></html>');
+            a.document.close();
+            a.print()
+        }
     </script>
 </x-admintemplate>
