@@ -180,7 +180,7 @@ class AbsenController extends Controller
                         DB::table('siswa_terlambat')
                             ->insert([
                                 'tanggal' => date('Y-m-d'),
-                                'siswa_id' => $request->id_siswa,
+                                'siswa_id' => $request->userabsen,
                                 'waktu' => date('H:i:s'),
                             ]);
                     }
@@ -210,6 +210,12 @@ class AbsenController extends Controller
                     $jamMasuk = jam();
                     if (date('H:i:s') > $jamMasuk[0]->masuk){
                         DB::table('absen')->where('id_siswa', $request->userabsen)->increment('jumlah_terlambat');
+                        DB::table('siswa_terlambat')
+                            ->insert([
+                                'tanggal' => date('Y-m-d'),
+                                'siswa_id' => $request->userabsen,
+                                'waktu' => date('H:i:s'),
+                            ]);
                     }
                     DB::table('absen')
                         ->where('id_siswa', $request->userabsen)
