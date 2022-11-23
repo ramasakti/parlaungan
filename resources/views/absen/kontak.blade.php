@@ -3,7 +3,7 @@
         <button class="uk-modal-close-default" type="button" uk-close></button>
         <h5>Detail Kontak</h5>
         <div class="uk-margin">
-            {{-- @php
+            @php
                 $regex = '/[0-9]/';
                 $result = [];
                 preg_match_all($regex, $siswa->telp, $result);
@@ -13,9 +13,9 @@
                 }else{
                     $nope = implode('', $result[0]);
                 }
-            @endphp --}}
+            @endphp
             <p>
-                <a href="https://wa.me/">{{ $siswa->nama_siswa }}</a>
+                <a href="https://wa.me/{{ $nope }}">{{ $siswa->nama_siswa }}</a>
             </p>
             <p>
                 <a href="https://wa.me/"></a>
