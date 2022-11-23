@@ -7,18 +7,19 @@
                 $regex = '/[0-9]/';
                 $result = [];
                 preg_match_all($regex, $siswa->telp, $result);
-                if ($result[0][0] == '0') {
-                    unset($result[0][0]);
-                    $nope = '62'.implode('', $result[0]);
+                if (count($result[0]) > 0) {
+                    if ($result[0][0] == '0') {
+                        unset($result[0][0]);
+                        $nope = '62'.implode('', $result[0]);
+                    }else{
+                        $nope = implode('', $result[0]);
+                    }
                 }else{
-                    $nope = implode('', $result[0]);
+                    $nope = '-';
                 }
             @endphp
             <p>
                 <a href="https://wa.me/{{ $nope }}">{{ $siswa->nama_siswa }}</a>
-            </p>
-            <p>
-                <a href="https://wa.me/"></a>
             </p>
         </div>
     </div>
