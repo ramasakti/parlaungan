@@ -19,7 +19,11 @@
                 }
             @endphp
             <p>
-                <a href="https://wa.me/{{ $nope }}">{{ $siswa->nama_siswa }}</a>
+                @if ($nope === '-')
+                    Belum mengisi nomor WA
+                @else
+                    <a href="https://wa.me/{{ $nope }}">{{ $siswa->nama_siswa }}</a>
+                @endif
             </p>
         </div>
     </div>
