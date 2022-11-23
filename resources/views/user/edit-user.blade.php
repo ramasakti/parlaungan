@@ -15,7 +15,7 @@
                     <span class="uk-link">select one</span>
                 </div>
             </div>
-            @if ($user[0]->status === 'Siswa' or $user[0]->status === 'Walmur')
+            @if ($user[0]->status !== 'Siswa' or $user[0]->status !== 'Walmur')
                 <div class="uk-margin">
                     <select class="uk-select" name="status" required>
                         <option value="Siswa" {{ ($user[0]->status === 'Siswa') ? 'selected' : '' }}>Siswa</option>
