@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use DB;
+use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -61,6 +62,35 @@ class LoginController extends Controller
         return redirect()->intended('/login');
     }
 
+    public function jamSekarang()
+    {
+        $jamMasuk = DB::table('hari')
+                        ->where('nama_hari', Carbon::now()->isoFormat('dddd'))
+                        ->get();
+        return $jamMasuk;
+    }
+
+    public function diagramAbsen()
+    {
+        $hadir = DB::table('absen')
+                    ->where('waktu_absen', '<', $this->jamSekarang()[0]->masuk)
+                    ->get();
+        $terlambat = DB::table('absen')
+                        ->where('waktu_absen', '>', $this->jamSekarang()[0]->masuk)
+                        ->get();
+        $izin = DB::table('absen')
+                    ->where('keterangan', 'I')
+                    ->get();
+        $sakit = DB::table('absen')
+                    ->where('keterangan', 'S')
+                    ->get();
+        $alfa = DB::table('absen')
+                    ->where('waktu_absen', NULL)
+                    ->orWhere('keterangan', 'A')
+                    ->get();
+        return [count($hadir), count($terlambat), count($izin), count($sakit), count($alfa)];
+    }
+
     public function dashboard()
     {
         return view('dashboard', [
@@ -70,7 +100,8 @@ class LoginController extends Controller
             'dataGuru' => count(DB::table('guru')->get()),
             'dataKelas' => count(DB::table('kelas')->get()),
             'detailUser' => $this->userCard(),
-            'dataQR' => QrCode::size(200)->generate(session('username'))
+            'dataQR' => QrCode::size(200)->generate(session('username')),
+            'dataAbsen' => $this->diagramAbsen()
         ]);
     }
 
