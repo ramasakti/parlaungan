@@ -16,6 +16,7 @@ use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\JurnalController;
 use App\Http\Controllers\SekolahController;
 use App\Http\Controllers\TestingController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,7 +42,7 @@ Route::get('/', function () {
 Route::get('/login', [LoginController::class, 'index'])->middleware('guest')->name('login');
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::get('/logout', [LoginController::class, 'logout'])->middleware('auth');
-Route::get('/dashboard', [LoginController::class, 'dashboard'])->middleware('auth');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 
 //Blog
 Route::get('/blog', [BlogController::class, 'index']);

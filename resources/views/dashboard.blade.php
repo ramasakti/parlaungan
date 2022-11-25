@@ -52,23 +52,33 @@
     <div class="uk-child-width-1-2@m uk-grid-small uk-grid-match" uk-grid>
         <div>
             <div class="uk-card uk-card-default uk-card-body uk-padding-small">
-                <h3 class="uk-card-title">Diagram Absensi Siswa</h3>
+                <h3 class="uk-card-title">Diagram Absensi Siswa Hari Ini</h3>
                 <canvas class="uk-height-max-medium" id="absenChart"></canvas>
+            </div>
+        </div>
+        <div>
+            <div class="uk-card uk-card-default uk-card-body uk-padding-small">
+                <h3 class="uk-card-title">Grafik Keterlambatan Siswa Minggu Ini</h3>
+                <canvas class="uk-height-max-medium" id="terlambatChart"></canvas>
             </div>
         </div>
     </div>
     <script type="text/javascript">
+        //Data Diagram
         let dataAbsen = {!! json_encode($dataAbsen)!!}
-        console.log(dataAbsen)
+        let rangeTanggal = {!! json_encode($rangeTanggal)!!}
+        let dataTerlambat = {!! json_encode($dataTerlambat)!!}
     </script>
     <script type="text/javascript" src="{{ mix('/js/app.js') }}"></script>
     <script>
+        //QR Code
         const svg = document.getElementsByTagName('svg')[0]
         svg.setAttribute('class', 'uk-align-center')
         svg.setAttribute('height', '40%')
         svg.setAttribute('width', '40%')
     </script>
     <script>
+        //Print Card
         function printDiv() {
             const card = document.getElementById('card').innerHTML
             const a = window.open('', '', 'height=900 width=900')

@@ -2089,6 +2089,37 @@ new chart_js_auto__WEBPACK_IMPORTED_MODULE_0__["default"](document.getElementByI
 
 /***/ }),
 
+/***/ "./resources/js/DiagramTerlambat.js":
+/*!******************************************!*\
+  !*** ./resources/js/DiagramTerlambat.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var chart_js_auto__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! chart.js/auto */ "./node_modules/chart.js/auto/auto.js");
+
+var label = rangeTanggal;
+var data = {
+  labels: label,
+  datasets: [{
+    label: 'Keterlambatan',
+    backgroundColor: ['rgb(240, 80, 110)', 'rgb(240, 80, 110)', 'rgb(240, 80, 110)', 'rgb(240, 80, 110)', 'rgb(240, 80, 110)', 'rgb(240, 80, 110)'],
+    fill: false,
+    borderColor: 'rgb(240, 80, 110)',
+    data: dataTerlambat,
+    tension: 0.1
+  }]
+};
+var config = {
+  type: 'line',
+  data: data,
+  options: {}
+};
+new chart_js_auto__WEBPACK_IMPORTED_MODULE_0__["default"](document.getElementById('terlambatChart').getContext('2d'), config);
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -2098,7 +2129,9 @@ new chart_js_auto__WEBPACK_IMPORTED_MODULE_0__["default"](document.getElementByI
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DiagramAbsen__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DiagramAbsen */ "./resources/js/DiagramAbsen.js");
+/* harmony import */ var _DiagramTerlambat__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DiagramTerlambat */ "./resources/js/DiagramTerlambat.js");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+
 
 
 /***/ }),
