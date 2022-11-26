@@ -41,7 +41,7 @@ class DashboardController extends Controller
                     ->where('waktu_absen', NULL)
                     ->orWhere('keterangan', 'A')
                     ->get();
-        return [count($hadir), count($terlambat), count($izin), count($sakit), count($alfa)];
+        return [count($hadir), count($terlambat), count($izin), count($sakit), count($alfa)-(count($sakit)+count($izin))];
     }
 
     public function rangeTanggal()
@@ -62,6 +62,24 @@ class DashboardController extends Controller
         return (array_column($dataTerlambat, 'terlambat'));
     }
 
+    public function dataKehadiran()
+    {
+        $hadir = DB::table('rekap_siswa')
+                        ->select('tanggal', DB::raw("COUNT(tanggal) as hadir"))
+                        ->groupBy('tanggal')
+                        ->get()->toArray();
+        $dataKehadiran = count(DB::table('siswa')->get());
+        $x = [
+            $dataKehadiran-$hadir[0]->hadir,
+            $dataKehadiran-$hadir[1]->hadir,
+            $dataKehadiran-$hadir[2]->hadir,
+            $dataKehadiran-$hadir[3]->hadir,
+            $dataKehadiran-$hadir[4]->hadir,
+            $dataKehadiran-$hadir[5]->hadir,
+        ];
+        return $x;
+    }
+
     public function index()
     {
         return view('dashboard', [
@@ -75,6 +93,7 @@ class DashboardController extends Controller
             'dataAbsen' => $this->diagramAbsen(),
             'rangeTanggal' => $this->rangeTanggal(),
             'dataTerlambat' => $this->dataTerlambat(),
+            'dataKehadiran' => $this->dataKehadiran(),
         ]);
     }
 

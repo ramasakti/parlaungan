@@ -65,9 +65,10 @@
     </div>
     <script type="text/javascript">
         //Data Diagram
-        let dataAbsen = {!! json_encode($dataAbsen)!!}
-        let rangeTanggal = {!! json_encode($rangeTanggal)!!}
-        let dataTerlambat = {!! json_encode($dataTerlambat)!!}
+        let dataAbsen = {!! json_encode($dataAbsen) !!}
+        let rangeTanggal = {!! json_encode($rangeTanggal) !!}
+        let dataTerlambat = {!! json_encode($dataTerlambat) !!}
+        let dataKehadiran = {!! json_encode($dataKehadiran) !!}
     </script>
     <script type="text/javascript" src="{{ mix('/js/app.js') }}"></script>
     <script>
