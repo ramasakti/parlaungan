@@ -76,6 +76,7 @@ class DashboardController extends Controller
             $dataKehadiran-$hadir[2]->hadir-$terlambat[2],
             $dataKehadiran-$hadir[3]->hadir-$terlambat[3],
             $dataKehadiran-$hadir[4]->hadir-$terlambat[4],
+            $this->diagramAbsen()[0]
         ];
         return $x;
     }
