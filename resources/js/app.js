@@ -1,3 +1,3 @@
 require('./bootstrap');
 import './DiagramAbsen';
-import './DiagramTerlambat';
+import './GrafikMingguan';
