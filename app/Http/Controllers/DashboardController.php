@@ -75,7 +75,6 @@ class DashboardController extends Controller
             $dataKehadiran-$hadir[2]->hadir,
             $dataKehadiran-$hadir[3]->hadir,
             $dataKehadiran-$hadir[4]->hadir,
-            $dataKehadiran-$hadir[5]->hadir,
         ];
         return $x;
     }
