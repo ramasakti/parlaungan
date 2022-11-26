@@ -68,13 +68,14 @@ class DashboardController extends Controller
                         ->select('tanggal', DB::raw("COUNT(tanggal) as hadir"))
                         ->groupBy('tanggal')
                         ->get()->toArray();
+        $terlambat = $this->dataTerlambat();
         $dataKehadiran = count(DB::table('siswa')->get());
         $x = [
-            $dataKehadiran-$hadir[0]->hadir,
-            $dataKehadiran-$hadir[1]->hadir,
-            $dataKehadiran-$hadir[2]->hadir,
-            $dataKehadiran-$hadir[3]->hadir,
-            $dataKehadiran-$hadir[4]->hadir,
+            $dataKehadiran-$hadir[0]->hadir-$terlambat[0],
+            $dataKehadiran-$hadir[1]->hadir-$terlambat[1],
+            $dataKehadiran-$hadir[2]->hadir-$terlambat[2],
+            $dataKehadiran-$hadir[3]->hadir-$terlambat[3],
+            $dataKehadiran-$hadir[4]->hadir-$terlambat[4],
         ];
         return $x;
     }
