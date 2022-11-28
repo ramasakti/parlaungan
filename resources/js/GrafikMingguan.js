@@ -5,7 +5,7 @@ const data = {
     labels: label,
     datasets: [
         {
-            label: 'Kehadiran',
+            label: 'Hadir',
             backgroundColor: 'rgb(50, 210, 150)',
             fill: false,
             borderColor: 'rgb(50, 210, 150)',
@@ -13,7 +13,7 @@ const data = {
             tension: 0.1
         },
         {
-            label: 'Keterlambatan',
+            label: 'Terlambat',
             backgroundColor: 'rgb(250, 160, 90)',
             fill: false,
             borderColor: 'rgb(250, 160, 90)',

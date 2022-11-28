@@ -81,6 +81,16 @@ class DashboardController extends Controller
         return $x;
     }
 
+    public function dataIzin()
+    {
+        $izin = DB::table('rekap_siswa')
+                    ->select('tanggal', DB::raw("COUNT(tanggal) as izin"))
+                    ->where('keterangan', 'I')
+                    ->groupBy('tanggal')
+                    ->get()->toArray();
+        return count($izin);
+    }
+
     public function index()
     {
         return view('dashboard', [

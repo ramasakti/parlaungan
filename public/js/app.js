@@ -2089,10 +2089,10 @@ new chart_js_auto__WEBPACK_IMPORTED_MODULE_0__["default"](document.getElementByI
 
 /***/ }),
 
-/***/ "./resources/js/DiagramTerlambat.js":
-/*!******************************************!*\
-  !*** ./resources/js/DiagramTerlambat.js ***!
-  \******************************************/
+/***/ "./resources/js/GrafikMingguan.js":
+/*!****************************************!*\
+  !*** ./resources/js/GrafikMingguan.js ***!
+  \****************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -2103,18 +2103,18 @@ var label = rangeTanggal;
 var data = {
   labels: label,
   datasets: [{
-    label: 'Keterlambatan',
-    backgroundColor: 'rgb(250, 160, 90)',
-    fill: false,
-    borderColor: 'rgb(250, 160, 90)',
-    data: dataTerlambat,
-    tension: 0.1
-  }, {
     label: 'Kehadiran',
     backgroundColor: 'rgb(50, 210, 150)',
     fill: false,
     borderColor: 'rgb(50, 210, 150)',
     data: dataKehadiran,
+    tension: 0.1
+  }, {
+    label: 'Terlambat',
+    backgroundColor: 'rgb(250, 160, 90)',
+    fill: false,
+    borderColor: 'rgb(250, 160, 90)',
+    data: dataTerlambat,
     tension: 0.1
   }]
 };
@@ -2136,7 +2136,7 @@ new chart_js_auto__WEBPACK_IMPORTED_MODULE_0__["default"](document.getElementByI
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DiagramAbsen__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DiagramAbsen */ "./resources/js/DiagramAbsen.js");
-/* harmony import */ var _DiagramTerlambat__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DiagramTerlambat */ "./resources/js/DiagramTerlambat.js");
+/* harmony import */ var _GrafikMingguan__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GrafikMingguan */ "./resources/js/GrafikMingguan.js");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 

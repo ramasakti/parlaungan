@@ -52,23 +52,23 @@
     <div class="uk-child-width-1-2@m uk-grid-small uk-grid-match" uk-grid>
         <div>
             <div class="uk-card uk-card-default uk-card-body uk-padding-small">
-                <h3 class="uk-card-title">Diagram Absensi Siswa Hari Ini</h3>
+                <h3 class="uk-card-title">Diagram Presensi Siswa Hari Ini</h3>
                 <canvas class="uk-height-max-medium" id="absenChart"></canvas>
             </div>
         </div>
         <div>
             <div class="uk-card uk-card-default uk-card-body uk-padding-small">
-                <h3 class="uk-card-title">Grafik Keterlambatan Siswa Minggu Ini</h3>
+                <h3 class="uk-card-title">Grafik Presensi Siswa Minggu Ini</h3>
                 <canvas class="uk-height-max-medium" id="terlambatChart"></canvas>
             </div>
         </div>
     </div>
     <script type="text/javascript">
         //Data Diagram
-        let dataAbsen = {!! json_encode($dataAbsen) !!}
-        let rangeTanggal = {!! json_encode($rangeTanggal) !!}
-        let dataTerlambat = {!! json_encode($dataTerlambat) !!}
-        let dataKehadiran = {!! json_encode($dataKehadiran) !!}
+        const dataAbsen = {!! json_encode($dataAbsen) !!}
+        const rangeTanggal = {!! json_encode($rangeTanggal) !!}
+        const dataTerlambat = {!! json_encode($dataTerlambat) !!}
+        const dataKehadiran = {!! json_encode($dataKehadiran) !!}
     </script>
     <script type="text/javascript" src="{{ mix('/js/app.js') }}"></script>
     <script>
