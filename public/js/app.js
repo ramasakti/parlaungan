@@ -2103,7 +2103,7 @@ var label = rangeTanggal;
 var data = {
   labels: label,
   datasets: [{
-    label: 'Kehadiran',
+    label: 'Hadir',
     backgroundColor: 'rgb(50, 210, 150)',
     fill: false,
     borderColor: 'rgb(50, 210, 150)',
