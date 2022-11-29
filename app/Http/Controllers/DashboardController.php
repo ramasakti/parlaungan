@@ -77,7 +77,6 @@ class DashboardController extends Controller
             'dataAbsen' => $this->diagramAbsen(),
             'rangeTanggal' => $this->rangeTanggal(),
             'dataTerlambat' => $this->dataTerlambat(),
-            'dataKehadiran' => $this->dataKehadiran(),
         ]);
     }
 
