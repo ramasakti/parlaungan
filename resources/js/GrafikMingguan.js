@@ -5,14 +5,6 @@ const data = {
     labels: label,
     datasets: [
         {
-            label: 'Hadir',
-            backgroundColor: 'rgb(50, 210, 150)',
-            fill: false,
-            borderColor: 'rgb(50, 210, 150)',
-            data: dataKehadiran,
-            tension: 0.1
-        },
-        {
             label: 'Terlambat',
             backgroundColor: 'rgb(250, 160, 90)',
             fill: false,
