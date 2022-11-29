@@ -66,8 +66,8 @@
     <script type="text/javascript">
         //Data Diagram
         const dataAbsen = {!! json_encode($dataAbsen) !!}
-        const rangeTanggal = {!! json_encode($rangeTanggal) !!}
-        const dataTerlambat = {!! json_encode($dataTerlambat) !!}
+        const rangeTanggal = {!! json_encode(array_column($dataTerlambat, 'tanggal')) !!}
+        const dataTerlambat = {!! json_encode(array_column($dataTerlambat, 'terlambat')) !!}
     </script>
     <script type="text/javascript" src="{{ mix('/js/app.js') }}"></script>
     <script>

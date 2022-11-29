@@ -44,24 +44,21 @@ class DashboardController extends Controller
         return [count($hadir), count($terlambat), count($izin), count($sakit), count($alfa)-(count($sakit)+count($izin))];
     }
 
-    public function rangeTanggal()
+    public function batasBawah()
     {
-        $rangeTanggal = DB::table('siswa_terlambat')
-                            ->select('tanggal', DB::raw("COUNT(tanggal) as terlambat"))
-                            ->where('tanggal', '<=', date('Y-m-d'))
-                            ->where('tanggal', '>', date('Y-m-d', strtotime('-7 day', strtotime(date('Y-m-d')))))
-                            ->groupBy('tanggal')
-                            ->get()->toArray();
-        return (array_column($rangeTanggal, 'tanggal'));
+        $range = date('Y-m-d', strtotime('-7 day', strtotime(date('Y-m-d'))));
+        return $range;
     }
 
     public function dataTerlambat()
     {
         $dataTerlambat = DB::table('siswa_terlambat')
                             ->select('tanggal', DB::raw("COUNT(tanggal) as terlambat"))
+                            ->where('tanggal', '>=', $this->batasBawah())
+                            ->where('tanggal', '<=', date('Y-m-d'))
                             ->groupBy('tanggal')
                             ->get()->toArray();
-        return (array_column($dataTerlambat, 'terlambat'));
+        return $dataTerlambat;
     }
 
     public function index()
@@ -75,7 +72,7 @@ class DashboardController extends Controller
             'detailUser' => $this->userCard(),
             'dataQR' => QrCode::size(200)->generate(session('username')),
             'dataAbsen' => $this->diagramAbsen(),
-            'rangeTanggal' => $this->rangeTanggal(),
+            'rangeTanggal' => $this->batasBawah(),
             'dataTerlambat' => $this->dataTerlambat(),
         ]);
     }
