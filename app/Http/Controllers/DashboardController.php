@@ -48,6 +48,8 @@ class DashboardController extends Controller
     {
         $rangeTanggal = DB::table('siswa_terlambat')
                             ->select('tanggal', DB::raw("COUNT(tanggal) as terlambat"))
+                            ->where('tanggal', '<=', date('Y-m-d'))
+                            ->where('tanggal', '>', date('Y-m-d', strtotime('-7 day', strtotime(date('Y-m-d')))))
                             ->groupBy('tanggal')
                             ->get()->toArray();
         return (array_column($rangeTanggal, 'tanggal'));
@@ -60,35 +62,6 @@ class DashboardController extends Controller
                             ->groupBy('tanggal')
                             ->get()->toArray();
         return (array_column($dataTerlambat, 'terlambat'));
-    }
-
-    public function dataKehadiran()
-    {
-        $hadir = DB::table('rekap_siswa')
-                        ->select('tanggal', DB::raw("COUNT(tanggal) as hadir"))
-                        ->groupBy('tanggal')
-                        ->get()->toArray();
-        $terlambat = $this->dataTerlambat();
-        $dataKehadiran = count(DB::table('siswa')->get());
-        $x = [
-            $dataKehadiran-$hadir[0]->hadir-$terlambat[0],
-            $dataKehadiran-$hadir[1]->hadir-$terlambat[1],
-            $dataKehadiran-$hadir[2]->hadir-$terlambat[2],
-            $dataKehadiran-$hadir[3]->hadir-$terlambat[3],
-            $dataKehadiran-$hadir[4]->hadir-$terlambat[4],
-            $this->diagramAbsen()[0]
-        ];
-        return $x;
-    }
-
-    public function dataIzin()
-    {
-        $izin = DB::table('rekap_siswa')
-                    ->select('tanggal', DB::raw("COUNT(tanggal) as izin"))
-                    ->where('keterangan', 'I')
-                    ->groupBy('tanggal')
-                    ->get()->toArray();
-        return count($izin);
     }
 
     public function index()
