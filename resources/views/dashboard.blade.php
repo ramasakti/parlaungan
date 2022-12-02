@@ -58,7 +58,7 @@
         </div>
         <div>
             <div class="uk-card uk-card-default uk-card-body uk-padding-small">
-                <h3 class="uk-card-title">Grafik Presensi Siswa Minggu Ini</h3>
+                <h3 class="uk-card-title">Grafik Keterlambatan Siswa Minggu Ini</h3>
                 <canvas class="uk-height-max-medium" id="terlambatChart"></canvas>
             </div>
         </div>
@@ -81,13 +81,7 @@
         //Print Card
         function printDiv() {
             const card = document.getElementById('card').innerHTML
-            const a = window.open('', '', 'height=900 width=900')
-            a.document.write('<html>');
-            a.document.write('<body > <h1>Div contents are <br>');
-            a.document.write(card);
-            a.document.write('</body></html>');
-            a.document.close();
-            a.print()
+            card.print()
         }
     </script>
 </x-admintemplate>
