@@ -17,7 +17,7 @@
                 }else{
                     $nope = '-';
                 }
-                $text = 'Assalamualaikum Wr Wb, Mohon maaf mengganggu Bapak/Ibu Wali Santri. Kami dari Staff Tata Usaha SMA Islam Parlaungan ingin mengonfirmasi apakah benar nomor ini adalah nomor Wali Santri dari ananda ' .$siswa->nama_siswa. '? Jika benar mohon konfirmasinya dengan membalas pesan ini. Dan jika benar maka kami akan menghubungi Bapak/Ibu ketika ananda tidak hadir di sekolah guna mengkonfirmasi. Matur suwun';
+                $text = 'Assalamualaikum Wr Wb, Mohon maaf mengganggu Bapak/Ibu Wali Santri. Saya Rama Sakti dari SMA Islam Parlaungan yang bertugas piket hari ini. Berdasarkan sistem absensi dan hasil pemeriksaan di lapangan, ananda *' .$siswa->nama_siswa. '* tidak hadir di sekolah. Mohon Bapak/Ibu konfirmasi bagaimana keterangan untuk ananda dengan membalas pesan ini. Matur suwun.';
             @endphp
             <p>
                 @if ($nope === '-')
