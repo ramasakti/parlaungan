@@ -196,38 +196,7 @@ class AbsenController extends Controller
                     return back()->with('bePresent', $siswaAbsen[0]->nama_siswa);
                 }
             }else{
-                $dataUser = DB::table('user')
-                        ->where('user.username', $request->userabsen)
-                        ->get();
-                if (count($dataUser) < 1) {
-                    return back()->with('unregistered', 'ID Anda tidak terdaftar!');
-                }
-                $withBarcode = DB::table('absen')
-                                    ->join('siswa', 'siswa.id_siswa', '=', 'absen.id_siswa')
-                                    ->where('absen.id_siswa', $dataUser[0]->id)
-                                    ->get();
-                if ($withBarcode[0]->waktu_absen === NULL){
-                    $jamMasuk = jam();
-                    if (date('H:i:s') > $jamMasuk[0]->masuk){
-                        DB::table('absen')->where('id_siswa', $request->userabsen)->increment('jumlah_terlambat');
-                        DB::table('siswa_terlambat')
-                            ->insert([
-                                'tanggal' => date('Y-m-d'),
-                                'siswa_id' => $request->userabsen,
-                                'waktu' => date('H:i:s'),
-                            ]);
-                    }
-                    DB::table('absen')
-                        ->where('id_siswa', $request->userabsen)
-                        ->update([
-                            'waktu_absen' => date('H:i:s'),
-                            'izin' => NULL,
-                            'keterangan' => ''
-                        ]);
-                    return back()->with('success', $withBarcode[0]->nama_siswa);
-                }else{
-                    return back()->with('bePresent', $withBarcode[0]->nama_siswa);
-                }
+                return back()->with('unregistered', 'ID Anda tidak terdaftar!');
             }
         }
 

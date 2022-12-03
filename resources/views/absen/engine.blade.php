@@ -66,9 +66,6 @@
         </center>
     </div>
 
-    <audio id="success">
-        <source src="/audio/success.mp3" type="audio/mpeg">
-    </audio>
     <script>
         function startTime() {
           const today = new Date();
@@ -88,8 +85,6 @@
         
         function onScanSuccess(decodedText) {
             //Handle on success condition with the decoded text or result.
-            const audio = document.getElementById('success')
-            audio.play()
             const inputan = document.getElementById('userabsen')
             inputan.setAttribute('value', decodedText)
             const form = document.getElementsByTagName('form')[0]
