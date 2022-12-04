@@ -17,7 +17,7 @@
                 }else{
                     $nope = '-';
                 }
-                $text = 'Assalamualaikum Wr Wb, Mohon maaf mengganggu Bapak/Ibu Wali Santri. Saya Rama Sakti dari SMA Islam Parlaungan yang bertugas piket hari ini. Berdasarkan sistem absensi dan hasil pemeriksaan di lapangan, ananda *' .$siswa->nama_siswa. '* tidak hadir di sekolah. Mohon Bapak/Ibu konfirmasi bagaimana keterangan untuk ananda dengan membalas pesan ini. Matur suwun.';
+                $text = 'Assalamualaikum Wr Wb, Mohon maaf mengganggu Bapak/Ibu Wali Santri. Saya dari SMA Islam Parlaungan yang bertugas piket hari ini. Berdasarkan sistem absensi dan hasil pemeriksaan di lapangan, ananda *' .$siswa->nama_siswa. '* tidak hadir di sekolah. Mohon Bapak/Ibu konfirmasi bagaimana keterangan untuk ananda dengan membalas pesan ini. Matur suwun.';
             @endphp
             <p>
                 @if ($nope === '-')
