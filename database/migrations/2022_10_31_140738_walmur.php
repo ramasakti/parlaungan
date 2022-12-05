@@ -17,7 +17,7 @@ class Walmur extends Migration
             $table->string('id_walmur');
             $table->string('siswa_id');
             $table->text('nama_walmur');
-            $table->date('telp');
+            $table->text('telp');
         });
 
         Schema::table('walmur', function (Blueprint $table) {

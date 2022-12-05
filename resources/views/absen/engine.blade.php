@@ -31,7 +31,7 @@
                 <div id="txt"></div>
             </h2>
 
-            <p class="uk-margin-small uk-text-default">Aplikasi ini dibuat dan dikembangkan oleh &copy; Staff IT Development And Infrastructure - SMA Islam Parlaungan</p>
+            <p class="uk-margin-small uk-text-default">Aplikasi ini dibuat dan dikembangkan oleh &copy; Staff IT Development and Infrastructure - SMA Islam Parlaungan</p>
             <form action="/absen/engine" method="POST">
                 @csrf
                 <input type="text" class="input" name="userabsen" style="outline: 0ch" id="userabsen" autofocus autocomplete="off">

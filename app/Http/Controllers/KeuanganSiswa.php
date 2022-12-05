@@ -10,6 +10,7 @@ class KeuanganSiswa extends Controller
 {
     public function index()
     {
+        
         return view('siswa.keuangan.index', [
             'title' => 'Keuangan Siswa',
             'navactive' => 'siswa',
@@ -57,6 +58,9 @@ class KeuanganSiswa extends Controller
 
     public function detailPembayaran()
     {
+        if (!request('siswa_id')) {
+            return [];
+        }
         $siswa = DB::table('siswa')->where('id_siswa', request('siswa_id'))->get()[0]->kelas_id;
         $kelas = '%' .$siswa. '%';
         $detilPembayaran = DB::table('pembayaran')
@@ -129,10 +133,10 @@ class KeuanganSiswa extends Controller
                     'waktu_transaksi' => date('Y-m-d H:i:s'),
                     'siswa_id' => $request->id_siswa,
                     'pembayaran_id' => $request->id_pembayaran[$i],
-                    'terbayar' => $request->nominal[$i],
+                    'terbayar' => $request->nominal[$i]
                 ]);
         }
-        return back()->with('success', 'Berhasil melakukan transaksi!');
+        return redirect('/siswa/keuangan?siswa_id='.$request->id_siswa)->with('success', 'Berhasil melakukan transaksi!');
     }
 
     public function numberFormat($angka)
