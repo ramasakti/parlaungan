@@ -16,6 +16,11 @@ class GuruController extends Controller
                     ->where('nama_hari', Carbon::now()->isoFormat('dddd'))
                     ->get();
     }
+    
+    public function nominal()
+    {
+        return DB::table('nominal')->get();
+    }
 
     public function dataJadwal()
     {
@@ -28,25 +33,10 @@ class GuruController extends Controller
                         ->get();
         return $dataJadwal;
     }
-    
-    public function nominal()
-    {
-        return DB::table('nominal')->get();
-    }
 
-    public function dataTransport()
+    public function dataPerGuru()
     {
-        if (count($this->dataJadwal()) < 1) {
-            return [];
-        }
-        $dataTransport = DB::table('jurnal')
-                            ->crossJoin('jadwal')
-                            ->select('jurnal.id_jurnal')
-                            ->where('jadwal.guru_id', $this->dataJadwal()[0]->id_guru)
-                            ->where('jurnal.tanggal', '>=', request('dari'))
-                            ->where('jurnal.tanggal', '<=', request('sampai'))
-                            ->get();
-        return $dataTransport;
+        
     }
 
     public function tertunaikan()
@@ -66,6 +56,21 @@ class GuruController extends Controller
         return ($dataTertunaikan);
     }
 
+    public function dataTransport()
+    {
+        if (count($this->dataJadwal()) < 1) {
+            return [];
+        }
+        $dataTransport = DB::table('jurnal')
+                            ->crossJoin('jadwal')
+                            ->select('jurnal.id_jurnal')
+                            ->where('jadwal.guru_id', $this->dataJadwal()[0]->id_guru)
+                            ->where('jurnal.tanggal', '>=', request('dari'))
+                            ->where('jurnal.tanggal', '<=', request('sampai'))
+                            ->get();
+        return $dataTransport;
+    }
+
     public function total()
     {
         if (count($this->tertunaikan()) < 1) {
@@ -83,7 +88,7 @@ class GuruController extends Controller
             'dataJadwal' => $this->dataJadwal(),
             'dataTransport' => $this->dataTransport(),
             'dataNominal' => $this->nominal(),
-            'total' => $this->total()
+            'total' => $this->dataPerGuru()
         ]);
     }
 

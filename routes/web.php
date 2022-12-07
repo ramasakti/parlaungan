@@ -118,6 +118,7 @@ Route::get('/tesapi', [TestingController::class, 'getApi']);
 Route::get('/csv', [TestingController::class, 'csv']);
 
 //Guru
+Route::get('/mencowba', [GuruController::class, 'dataPerGuru']);
 Route::get('/guru', [GuruController::class, 'index']);
 Route::get('/guru/keuangan', [GuruController::class, 'keuangan']);
 Route::post('/guru/store', [GuruController::class, 'addGuru']);

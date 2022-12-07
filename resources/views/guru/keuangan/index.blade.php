@@ -28,13 +28,39 @@
                 <td>{{ $showJadwal->nama_guru }}</td>
                 <td>{{ ceil($showJadwal->jumlah_jam) }}</td>
                 <td>
-                    @if (count($dataTertunaikan) > 0)
-                        {{ $dataTertunaikan[0]->tertunaikan }} Jam
-                    @else
-                        0 Jam
-                    @endif
+                    @php
+                        $dataTertunaikan = DB::table('jurnal')
+                                                ->crossJoin('jadwal') 
+                                                ->select('jadwal.guru_id', DB::raw('SUM(jurnal.lama) as tertunaikan'))
+                                                ->where('jadwal.guru_id', $showJadwal->id_guru)
+                                                ->where('jurnal.jadwal_id', '=', DB::raw('jadwal.id_jadwal'))
+                                                ->where('jurnal.tanggal', '>=', request('dari'))
+                                                ->where('jurnal.tanggal', '<=', request('sampai'))
+                                                ->groupBy('jurnal.jadwal_id')
+                                                ->get()->toArray();
+                        if (count($dataTertunaikan) > 0) {
+                            echo $dataTertunaikan[0]->tertunaikan;
+                        }else{
+                            echo 0;
+                        }
+                    @endphp 
                 </td>
-                <td>{{ count($dataTransport) * $dataNominal[1]->harga; }}</td>
+                <td>
+                    @php
+                        $dataTransport = DB::table('jurnal')
+                                            ->crossJoin('jadwal')
+                                            ->select('jurnal.id_jurnal')
+                                            ->where('jadwal.guru_id', $showJadwal->id_guru)
+                                            ->where('jurnal.tanggal', '>=', request('dari'))
+                                            ->where('jurnal.tanggal', '<=', request('sampai'))
+                                            ->get();
+                        if (count($dataTransport)) {
+                            echo count($dataTransport) * $dataNominal[1]->harga;
+                        }else{
+                            echo 0;
+                        }
+                    @endphp
+                </td>
                 <td>
                     @php
                         $dataSakit = DB::table('jadwal')
@@ -101,7 +127,11 @@
                         }
                     @endphp 
                 </td>
-                <td>{{ $total }}</td>
+                <td>
+                    @if ($total === [])
+                        {{ 0 }}
+                    @endif    
+                </td>
             </tr>
         </tbody>
         @endforeach

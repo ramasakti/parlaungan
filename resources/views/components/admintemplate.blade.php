@@ -87,7 +87,16 @@
                                         <a href="javascript:void(0)" aria-expanded="true"><span>Guru</span></a>
                                         <ul class="collapse">
                                             <li><a href="/guru">Data Guru</a></li>
-                                            <li><a href="/guru/keuangan?dari={{ date('Y-m-15') }}&sampai={{ date('Y-m-d', strtotime('+30 days', strtotime(date('Y-m-15')))) }}">Keuangan Guru</a></li>
+                                            @php
+                                                if (date('d') <= 15) {
+                                                    $mulai = date('Y-m-d', strtotime('-1 month', strtotime(date('Y-m-15'))));
+                                                    $sampai = date('Y-m-15');
+                                                }else{
+                                                    $mulai = date('Y-m-15');
+                                                    $sampai = date('Y-m-d', strtotime('+1 month', strtotime(date('Y-m-15'))));
+                                                }
+                                            @endphp
+                                            <li><a href="/guru/keuangan?dari={{ $mulai }}&sampai={{ $sampai }}">Keuangan Guru</a></li>
                                         </ul>
                                     </li>
                                     <li class="{{ ($navactive === 'akademik' ? 'active' : '') }}">
