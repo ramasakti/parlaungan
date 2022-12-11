@@ -7,6 +7,7 @@
     <title>{{ $title }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {{-- Data Tables --}}
+    <meta name="dicoding:email" content="ramasakti1337@gmail.com">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
@@ -246,7 +247,7 @@
         <!-- footer area start-->
         <footer>
             <div class="footer-area">
-                <p>Dibuat dan Dikembangkan oleh <b>Staff IT Development and Infrastructure - SMA Islam Parlaungan Waru Sidoarjo</b></p>
+                <p>Dibuat dan Dikembangkan oleh <b>Dicoding Capstone Team FEBE C22 - 234</b></p>
             </div>
         </footer>
         <!-- footer area end-->

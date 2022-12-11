@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="dicoding:email" content="ramasakti1337@gmail.com">
     <!-- Primary Meta Tags -->
     <title>SMA Islam Parlaungan</title>
     <meta name="title" content="SMA Islam Parlaungan">
