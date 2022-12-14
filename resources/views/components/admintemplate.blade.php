@@ -12,8 +12,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
     <!-- PWA  -->
-    <meta name="theme-color" content="#6777ef"/>
-    <link rel="apple-touch-icon" href="{{ asset('logo.PNG') }}">
+    <meta name="theme-color" content="#FFFFFF"/>
+    <link rel="apple-touch-icon" href="{{ asset('img/mid-white.png') }}">
     <link rel="manifest" href="{{ asset('/manifest.json') }}">
     <!-- UIkit CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.15.10/dist/css/uikit.min.css" />
@@ -370,11 +370,6 @@
     <script src="/adminlte/js/plugins.js"></script>
     <script src="/adminlte/js/scripts.js"></script>
     {{-- Data Tables --}}
-    <script>
-        $(document).ready(function(){
-            $('#tabel-data').DataTable();
-        });
-    </script>
     <script src="{{ asset('/sw.js') }}"></script>
     <script>
         if (!navigator.serviceWorker.controller) {

@@ -2,6 +2,16 @@
 @extends('layout.navbar')
 @extends('layout.header')
 @section('konten')
+<section class="py-4 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-6 mx-auto">
+            <h1 class="fw-light">Galeri SMA Islam Parlaungan</h1>
+            <p class="lead text-muted">
+                Berkarya, berkarakter, berakhlakul karimah!
+            </p>
+        </div>
+    </div>
+</section>
 <div class="album py-5 bg-light">
     <div class="container">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
