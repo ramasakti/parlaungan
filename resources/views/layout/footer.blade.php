@@ -51,23 +51,6 @@
 <script src="https://smaispa.sch.id/form/js/main.js"></script>
 <!-- loader -->
 {{-- <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div> --}}
-<script src="louie/js/jquery.min.js"></script>
-<script src="louie/js/jquery-migrate-3.0.1.min.js"></script>
-<script src="louie/js/popper.min.js"></script>
-<script src="louie/js/bootstrap.min.js"></script>
-<script src="louie/js/jquery.easing.1.3.js"></script>
-<script src="louie/js/jquery.waypoints.min.js"></script>
-<script src="louie/js/jquery.stellar.min.js"></script>
-<script src="louie/js/owl.carousel.min.js"></script>
-<script src="louie/js/jquery.magnific-popup.min.js"></script>
-<script src="louie/js/aos.js"></script>
-<script src="louie/js/jquery.animateNumber.min.js"></script>
-<script src="louie/js/bootstrap-datepicker.js"></script>
-<script src="louie/js/jquery.timepicker.min.js"></script>
-<script src="louie/js/scrollax.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-<script src="louie/js/google-map.js"></script>
-<script src="louie/js/main.js"></script>
 
 <script>
   var slideIndex = 1;
@@ -114,14 +97,6 @@
       rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
       return prefix == undefined ? rupiah : (rupiah ? '' + rupiah : '');
   }
-</script>
-<script src="{{ asset('/sw.js') }}"></script>
-<script>
-    if (!navigator.serviceWorker.controller) {
-        navigator.serviceWorker.register("/sw.js").then(function (reg) {
-            console.log("Service worker has been registered for scope: " + reg.scope);
-        });
-    }
 </script>
 </body>
 </html>

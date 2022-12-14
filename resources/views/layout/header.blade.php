@@ -10,11 +10,6 @@
     <meta name="title" content="SMA Islam Parlaungan">
     <meta name="description" content="Berkarya, berkarakter, berakhlakul karimah">
 
-    <!-- PWA  -->
-    <meta name="theme-color" content="#6777ef"/>
-    <link rel="apple-touch-icon" href="{{ asset('logo.PNG') }}">
-    <link rel="manifest" href="{{ asset('/manifest.json') }}">
-
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://metatags.io/">
