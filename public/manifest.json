@@ -2,61 +2,49 @@
     "name": "ispagram",
     "short_name": "ispagram",
     "start_url": "/dashboard",
-    "background_color": "#1e87f0",
+    "background_color": "#FFFFFF",
     "description": "SMA Islam Parlaungan App",
     "display": "fullscreen",
-    "theme_color": "#1e87f0",
+    "theme_color": "#FFFFFF",
     "icons": [
         {
-            "src": "img/icon/icon-48x48.png",
+            "src": "img/maskable/maskable_icon_x48.png",
             "sizes": "48x48",
             "type": "image/png",
             "purpose": "maskable any"
         },
         {
-            "src": "img/icon/icon-72x72.png",
+            "src": "img/maskable/maskable_icon_x72.png",
             "sizes": "72x72",
             "type": "image/png",
             "purpose": "maskable any"
         },
         {
-            "src": "img/icon/icon-96x96.png",
+            "src": "img/maskable/maskable_icon_x96.png",
             "sizes": "96x96",
             "type": "image/png",
             "purpose": "maskable any"
         },
         {
-            "src": "img/icon/icon-128x128.png",
+            "src": "img/maskable/maskable_icon_x128.png",
             "sizes": "128x128",
             "type": "image/png",
             "purpose": "maskable any"
         },
         {
-            "src": "img/icon/icon-144x144.png",
-            "sizes": "144x144",
-            "type": "image/png",
-            "purpose": "maskable any"
-        },
-        {
-            "src": "img/icon/icon-152x152.png",
-            "sizes": "152x152",
-            "type": "image/png",
-            "purpose": "maskable any"
-        },
-        {
-            "src": "img/icon/icon-192x192.png",
+            "src": "img/maskable/maskable_icon_x192.png",
             "sizes": "192x192",
             "type": "image/png",
             "purpose": "maskable any"
         },
         {
-            "src": "img/icon/icon-384x384.png",
+            "src": "img/maskable/maskable_icon_x384.png",
             "sizes": "384x384",
             "type": "image/png",
             "purpose": "maskable any"
         },
         {
-            "src": "img/icon/icon-512x512.png",
+            "src": "img/maskable/maskable_icon_x512.png",
             "sizes": "512x512",
             "type": "image/png",
             "purpose": "maskable any"
