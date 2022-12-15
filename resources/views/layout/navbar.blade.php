@@ -7,16 +7,16 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link {{ ($title === 'Home | SMA Islam Parlaungan') ? 'active' : '' }} text-decoration-none" aria-current="page" href="/">Home</a>
+                        <a class="nav-link {{ ($navactive === 'home') ? 'active' : '' }} text-decoration-none" aria-current="page" href="/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ ($title === 'Galeri | SMA Islam Parlaungan') ? 'active' : '' }} text-decoration-none " href="/galeri">Galeri</a>
+                        <a class="nav-link {{ ($navactive === 'galeri') ? 'active' : '' }} text-decoration-none " href="/galeri">Galeri</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ ($title === 'Blog | SMA Islam Parlaungan') ? 'active' : '' }} text-decoration-none " href="/blog">Blog</a>
+                        <a class="nav-link {{ ($navactive === 'blog') ? 'active' : '' }} text-decoration-none " href="/blog">Blog</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ ($title === 'About | SMA Islam Parlaungan') ? 'active' : '' }} text-decoration-none " href="/about">About</a>
+                        <a class="nav-link {{ ($navactive === 'about') ? 'active' : '' }} text-decoration-none " href="/about">About</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto mt-0 me-5">    

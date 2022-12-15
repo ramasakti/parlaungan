@@ -34,7 +34,8 @@ Route::get('/api', [ApiController::class, 'userAPI']);
 
 Route::get('/', function () {
     return view('welcome', [
-        'title' => 'Home | SMA Islam Parlaungan'
+        'title' => 'Home | SMA Islam Parlaungan',
+        'navactive' => 'home'
     ]);
 });
 

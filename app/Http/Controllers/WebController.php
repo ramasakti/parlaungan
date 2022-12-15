@@ -20,6 +20,7 @@ class WebController extends Controller
     {
         return view('about', [
             'title' => 'About',
+            'navactive' => 'about',
         ]);
     }
 }

@@ -16,6 +16,7 @@ class GaleriController extends Controller
     {
         return view('galeri', [
             'title' => 'Galeri | SMA Islam Parlaungan',
+            'navactive' => 'galeri',
             'data' => DB::table('galeri')->get()
         ]);
     }

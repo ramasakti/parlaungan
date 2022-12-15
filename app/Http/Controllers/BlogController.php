@@ -17,6 +17,7 @@ class BlogController extends Controller
     {
         return view('blog.index', [
             'title' => 'Blog | SMA Islam Parlaungan',
+            'navactive' => 'blog',
             'data' => Blog::all()
         ]);
     }
