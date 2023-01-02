@@ -13,17 +13,47 @@ class SiswaController extends Controller
     public function importAbsenData()
     {
         $dataAbsen = DB::table('absen')->select('id_siswa')->get();
-        $dataSiswa = DB::table('siswa')->whereNotIn('id_siswa', json_decode($dataAbsen, TRUE))->get();
-        if (count($dataSiswa) > 0) {
-            for ($i=0; $i<count($dataSiswa); $i++) {
+        $insertAbsen = DB::table('siswa')->whereNotIn('id_siswa', json_decode($dataAbsen, TRUE))->get();
+        if (count($insertAbsen) > 0) {
+            for ($i=0; $i<count($insertAbsen); $i++) {
                 DB::table('absen')
                     ->insert([
-                        'id_siswa' => $dataSiswa[$i]->id_siswa,
+                        'id_siswa' => $insertAbsen[$i]->id_siswa,
                         'waktu_absen' => NULL,
                         'rekap' => '',
                         'jumlah_terlambat' => 0,
                         'izin' => NULL,
                         'keterangan' => ''
+                    ]);
+            }
+        }
+    }
+
+    public function importDetailSiswa()
+    {
+        $detailSiswa = DB::table('detail_siswa')->select('siswa_id')->get();
+        $insertDetail = DB::table('siswa')->whereNotIn('id_siswa', json_decode($detailSiswa, TRUE))->get();
+        if (count($insertDetail) > 0) {
+            for ($i=0; $i<count($insertDetail); $i++) {
+                DB::table('detail_siswa')
+                    ->insert([
+                        'siswa_id' => $insertDetail[$i]->id_siswa,
+                        'nik' => '',
+                        'nokk' => '',
+                        'transportasi' => '',
+                        'anak' => '',
+                        'jenis_tinggal' => '',
+                        'askol' => '',
+                        'ibu' => '',
+                        'nik_ibu' => '',
+                        'pendidikan_ibu' => '',
+                        'penghasilan_ibu' => '',
+                        'ayah' => '',
+                        'nik_ayah' => '',
+                        'pendidikan_ayah' => '',
+                        'penghasilan_ayah' => '',
+                        'tinggi' => 0,
+                        'berat' => 0
                     ]);
             }
         }
@@ -41,6 +71,7 @@ class SiswaController extends Controller
             session()->put('siswa', 'uk-active');
         }
         $this->importAbsenData();
+        $this->importDetailSiswa();
         return view('siswa.index', [
             'title' => 'Siswa',
             'navactive' => 'siswa',
@@ -113,6 +144,7 @@ class SiswaController extends Controller
         DB::table('siswa')
             ->insert([
                 'id_siswa' => $request->id_siswa,
+                'rfid' => $request->rfid,
                 'nama_siswa' => $request->nama_siswa,
                 'kelas_id' => $request->kelas_id,
                 'alamat' => $request->alamat,
@@ -138,7 +170,8 @@ class SiswaController extends Controller
     {
         if ($request->id_lama != $request->id_siswa){
             $validatedSiswa = $request->validate([
-                'id_siswa' => 'required|unique:siswa'
+                'id_siswa' => 'required|unique:siswa',
+                'rfid' => 'required|unique:siswa'
             ]);
         }
 
@@ -146,6 +179,7 @@ class SiswaController extends Controller
             ->where('id_siswa', $request->id_lama)
             ->update([
                 'id_siswa' => $request->id_siswa,
+                'rfid' => $request->rfid,
                 'nama_siswa' => $request->nama_siswa,
                 'kelas_id' => $request->kelas_id,
                 'alamat' => $request->alamat,

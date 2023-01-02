@@ -6,7 +6,10 @@
             @csrf
             <input type="hidden" name="id_lama" value="{{ $siswa->id_siswa }}">
             <div class="uk-margin">
-                <input class="uk-input" type="text" name="id_siswa" value="{{ $siswa->id_siswa }}">
+                <input class="uk-input" type="text" name="id_siswa" value="{{ $siswa->id_siswa }}" readonly>
+            </div>
+            <div class="uk-margin">
+                <input class="uk-input" type="text" name="rfid" value="{{ $siswa->rfid }}">
             </div>
             <div class="uk-margin">
                 <input class="uk-input" type="text" name="nama_siswa" value="{{ $siswa->nama_siswa }}">

@@ -34,7 +34,7 @@
             <p class="uk-margin-small uk-text-default">Aplikasi ini dibuat dan dikembangkan oleh &copy; Dicoding Capstone Team FEBE C22 - 234</p>
             <form action="/absen/engine" method="POST">
                 @csrf
-                <input type="text" class="input" name="userabsen" style="outline: 0ch" id="userabsen" autofocus autocomplete="off">
+                <input type="text" class="input" name="userabsen" style="outline: 0ch" id="userabsen" autofocus autocomplete="off" required>
                 <input id="submitButton" class="button" type="submit" hidden>
             </form>
             @if (session()->has('unregistered'))

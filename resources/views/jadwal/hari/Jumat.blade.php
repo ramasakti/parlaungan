@@ -26,9 +26,7 @@
                 <td>{{ $jadwal->mapel }}</td>
                 <td>{{ $jadwal->mulai }} - {{ $jadwal->sampai }}</td>
                 <td>
-                    @if ($jadwal->status != '')
-                        <span class="uk-label uk-label-success">Hadir</span>
-                    @endif
+                    @include('jadwal.hari.conditional-status')
                 </td>
                 @include('jadwal.action-handler')
             </tr>

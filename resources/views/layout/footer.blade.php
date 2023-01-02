@@ -13,6 +13,8 @@
                           <li><a href="#" class="uk-icon-link uk-margin-small-right" uk-icon="location"></a><span class="text">Jl. Berbek I 2-4 Berbek Waru Sidoarjo</span></li>
                           <li><a href="#" class="uk-icon-link uk-margin-small-right" uk-icon="receiver"></a><span class="text">031 8668 298</span></a></li>
                           <li><a href="#" class="uk-icon-link uk-margin-small-right" uk-icon="mail"></a><span class="text">admin@smaispa.sch.id</span></a></li>
+                          <li><a href="https://instagram.com/officialsmaispa" class="uk-icon-link uk-margin-small-right" uk-icon="instagram"></a><span class="text"><a href="https://instagram.com/officialsmaispa">@officialsmaispa</a></span></a></li>
+                          <li><a href="https://www.youtube.com/@officialsmaislamparlaungan3823" class="uk-icon-link uk-margin-small-right" uk-icon="youtube"></a><span class="text"><a href="https://www.youtube.com/@officialsmaislamparlaungan3823">Official SMA Islam Parlaungan</a></span></a></li>
                           </ul>
                       </div>
                   </div>

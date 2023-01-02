@@ -8,6 +8,9 @@
                 <input class="uk-input" type="text" name="id_siswa" placeholder="ID Siswa" required>
             </div>
             <div class="uk-margin">
+                <input class="uk-input" type="text" name="rfid" placeholder="RFID">
+            </div>
+            <div class="uk-margin">
                 <input class="uk-input" type="text" name="nama_siswa" placeholder="Nama Siswa" required>
             </div>
             <div class="uk-margin">

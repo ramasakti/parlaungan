@@ -52,10 +52,11 @@ class DashboardController extends Controller
 
     public function dataTerlambat()
     {
-        $dataTerlambat = DB::table('siswa_terlambat')
+        $dataTerlambat = DB::table('rekap_siswa')
                             ->select('tanggal', DB::raw("COUNT(tanggal) as terlambat"))
                             ->where('tanggal', '>=', $this->batasBawah())
                             ->where('tanggal', '<=', date('Y-m-d'))
+                            ->where('keterangan', 'T')
                             ->groupBy('tanggal')
                             ->get()->toArray();
         return $dataTerlambat;

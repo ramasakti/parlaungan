@@ -17,7 +17,6 @@ class DatabaseSeeder extends Seeder
         DB::table('user')->insert([
             'username' => 'ramasakti27',
             'password' => bcrypt('ramasakti27'),
-            'id' => '',
             'foto' => '',
             'status' => 'Admin',
         ]);
@@ -25,7 +24,6 @@ class DatabaseSeeder extends Seeder
         DB::table('user')->insert([
             'username' => 'adminabsen',
             'password' => bcrypt('parlaungan1980'),
-            'id' => '',
             'foto' => '',
             'status' => 'Admin'
         ]);
@@ -33,7 +31,6 @@ class DatabaseSeeder extends Seeder
         DB::table('user')->insert([
             'username' => 'alfansasmiko',
             'password' => bcrypt('alfansasmiko'),
-            'id' => '',
             'foto' => '',
             'status' => 'Admin'
         ]);
@@ -146,6 +143,118 @@ class DatabaseSeeder extends Seeder
         DB::table('nominal')->insert([
             'jenis' => 'Transport',
             'harga' => 5000
+        ]);
+
+        DB::table('transportasi')->insert([
+            'transport' => 'Jalan Kaki',
+        ]);
+
+        DB::table('transportasi')->insert([
+            'transport' => 'Sepeda',
+        ]);
+
+        DB::table('transportasi')->insert([
+            'transport' => 'Sepeda Motor',
+        ]);
+
+        DB::table('transportasi')->insert([
+            'transport' => 'Antar Jemput',
+        ]);
+
+        DB::table('transportasi')->insert([
+            'transport' => 'Transportasi Umum (Ojek Online/Bus/Angkot/KRL)',
+        ]);
+
+        DB::table('jenis_tinggal')->insert([
+            'jeting' => 'Bersama Orang Tua',
+        ]);
+        
+        DB::table('jenis_tinggal')->insert([
+            'jeting' => 'Bersama Kakek/Nenek/Kerabat',
+        ]);
+        
+        DB::table('jenis_tinggal')->insert([
+            'jeting' => 'Pondok Pesantren',
+        ]);
+        
+        DB::table('jenis_tinggal')->insert([
+            'jeting' => 'Kos / Kontrak',
+        ]);
+
+        DB::table('profesi')->insert([
+            'profesi' => 'Karyawan Swasta',
+        ]);
+
+        DB::table('pendidikan')->insert([
+            'pendidikan' => 'SD Sederajat / Paket A',
+        ]);
+
+        DB::table('pendidikan')->insert([
+            'pendidikan' => 'SMP Sederajat / Paket B',
+        ]);
+
+        DB::table('pendidikan')->insert([
+            'pendidikan' => 'SMA Sederajat / Paket C',
+        ]);
+
+        DB::table('pendidikan')->insert([
+            'pendidikan' => 'S1',
+        ]);
+
+        DB::table('pendidikan')->insert([
+            'pendidikan' => 'S2',
+        ]);
+
+        DB::table('pendidikan')->insert([
+            'pendidikan' => 'S3',
+        ]);
+
+        DB::table('profesi')->insert([
+            'profesi' => 'Nelayan',
+        ]);
+
+        DB::table('profesi')->insert([
+            'profesi' => 'Petani',
+        ]);
+
+        DB::table('profesi')->insert([
+            'profesi' => 'Peternak',            
+        ]);
+        
+        DB::table('profesi')->insert([
+            'profesi' => 'PNS/TNI/Polri',
+        ]);
+        
+        DB::table('profesi')->insert([
+            'profesi' => 'Pedagang',
+        ]);
+        
+        DB::table('profesi')->insert([
+            'profesi' => 'Wiraswasta ([Usaha] Warung Kopi/Penyetan/Bakso/dll)',
+        ]);
+        
+        DB::table('profesi')->insert([
+            'profesi' => 'Wirausaha ([Usaha] Distributor/Produsen/Agen/dll)',
+        ]);
+        
+        DB::table('profesi')->insert([
+            'profesi' => 'Pensiunan',
+        ]);
+        
+        DB::table('profesi')->insert([
+            'profesi' => 'TKI / TKW',
+        ]);
+        
+        DB::table('profesi')->insert([
+            'profesi' => 'Freelance / Serabutan',
+        ]);
+
+        DB::table('profesi')->insert([
+            'profesi' => 'Tidak Berkerja / Sakit / Ibu Rumah Tangga',
+        ]);
+        
+        DB::table('profesi')->insert([
+            'profesi' => 'Sudah Meninggal',
         ]);
     }
 }

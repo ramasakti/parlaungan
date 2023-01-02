@@ -43,7 +43,10 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        
+        DB::table('blog')
+            ->insert([
+
+            ]);
     }
 
     /**

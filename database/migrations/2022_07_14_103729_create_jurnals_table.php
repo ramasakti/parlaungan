@@ -19,6 +19,7 @@ class CreateJurnalsTable extends Migration
             $table->integer('jadwal_id')->unsigned();
             $table->time('masuk');
             $table->integer('lama');
+            $table->boolean('inval');
             $table->boolean('transport');
             $table->text('materi');
         });

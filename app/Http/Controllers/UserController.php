@@ -6,6 +6,7 @@ use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use \Crypt;
 
 class UserController extends Controller
@@ -23,6 +24,33 @@ class UserController extends Controller
         ]);
     }
 
+    public function profile(Request $request)
+    {
+        return view('user.profile', [
+            'title' => 'Update Profil',
+            'navactive' => 'profil',
+            'dataUser' => $this->detailUser(),
+            'transportasi' => DB::table('transportasi')->get(),
+            'jenis_tinggal' => DB::table('jenis_tinggal')->get(),
+            'pendidikan' => DB::table('pendidikan')->get(),
+            'profesi' => DB::table('profesi')->get()
+        ]);
+    }
+
+    public function detailUser()
+    {
+        switch (session('status')) {
+            case 'Siswa':
+                return app('App\Http\Controllers\ProfilController')->siswa();
+                break;
+            case 'Walmur':
+                return DB::table('walmur')->where('id_walmur', session('username'))->get();
+            default:
+                return DB::table('guru')->where('id_guru', session('username'))->get();
+                break;
+        }
+    }
+
     public function username()
     {
         $dataUser = DB::table('user')->select('username')->get();
@@ -38,7 +66,6 @@ class UserController extends Controller
                 ->insert([
                     'username' => $guru->id_guru,
                     'password' => bcrypt($guru->id_guru),
-                    'id' => '',
                     'foto' => '',
                     'status' => 'Guru',
                 ]);
@@ -53,7 +80,6 @@ class UserController extends Controller
                 ->insert([
                     'username' => $siswa->id_siswa,
                     'password' => bcrypt($siswa->id_siswa),
-                    'id' => '',
                     'foto' => '',
                     'status' => 'Siswa',
                 ]);
@@ -68,7 +94,6 @@ class UserController extends Controller
                 ->insert([
                     'username' => $walmur->id_walmur,
                     'password' => bcrypt($walmur->id_walmur),
-                    'id' => '',
                     'foto' => '',
                     'status' => 'Walmur',
                 ]);

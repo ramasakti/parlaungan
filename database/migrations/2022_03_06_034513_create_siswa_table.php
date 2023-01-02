@@ -15,6 +15,7 @@ class CreateSiswaTable extends Migration
     {
         Schema::create('siswa', function (Blueprint $table) {
             $table->string('id_siswa')->primary()->onDelete('cascade')->onUpdate('cascade');
+            $table->string('rfid')->default('');
             $table->string('nama_siswa');
             $table->integer('kelas_id')->unsigned();
             $table->string('alamat');

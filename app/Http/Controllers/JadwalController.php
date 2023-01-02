@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\JadwalImport;
 use App\Models\Jadwal;
+use Carbon\Carbon;
 use DB;
 
 class JadwalController extends Controller
@@ -14,7 +15,7 @@ class JadwalController extends Controller
     {
         return DB::table('guru')
                 ->crossJoin('jadwal')
-                ->select('jadwal.id_jadwal', 'jadwal.hari', 'jadwal.kelas_id', 'jadwal.mapel', 'jadwal.mulai', 'jadwal.sampai', 'jadwal.status', 'guru.nama_guru')
+                ->select('jadwal.id_jadwal', 'jadwal.hari', 'jadwal.guru_id', 'jadwal.kelas_id', 'jadwal.mapel', 'jadwal.mulai', 'jadwal.sampai', 'jadwal.status', 'guru.nama_guru')
                 ->where('guru.id_guru', '=', DB::raw('jadwal.guru_id'));
     }   
 
@@ -85,11 +86,87 @@ class JadwalController extends Controller
     public function import(Request $request)
     {
         Excel::import(new JadwalImport, request()->file('jadwal')); //'file' diisi dengan name uploader
-        return back()->with('imported', 'Berhasil jadwa pelajaran!');
+        return back()->with('imported', 'Berhasil jadwal pelajaran!');
     }
 
     public function deleteJadwal(Request $request)
     {
-        
+        DB::table('jadwal')
+            ->where('id_jadwal', $request->id_jadwal)
+            ->delete();
+        return back()->with('success', 'Berhasil delete jadwal!');
+    }
+
+    public function absenGuruManual(Request $request)
+    {
+        function jam() {
+            $jamMasuk = DB::table('hari')
+                        ->where('nama_hari', Carbon::now()->isoFormat('dddd'))
+                        ->get();
+            return $jamMasuk;
+        }
+
+        $dataJadwal = DB::table('jadwal')
+                ->where('id_jadwal', $request->id_jadwal)
+                ->where('mulai', '<', date('H:i:s'))
+                ->where('sampai', '>', date('H:i:s'))
+                ->get();
+        $dataJurnal = DB::table('jurnal')
+                ->where('jadwal_id', $request->id_jadwal)
+                ->where('tanggal', date('Y-m-d'))
+                ->get();
+
+        if (count($dataJadwal) < 1) {
+            return back()->with('unschedule', 'Jadwal belum dimulai atau telah selesai');
+        }
+
+        if (count($dataJurnal) < 1){
+            if ($request->status != NULL) {
+                //Rekap Ketidakhadiran
+                DB::table('inval')
+                    ->insert([
+                        'tanggal' => date('Y-m-d'),
+                        'jadwal_id' => $request->id_jadwal,
+                        'keterangan' => $request->status,
+                        'penginval' => $request->guru_id
+                    ]);
+                //Update status jadwal menjadi hadir
+                DB::table('jadwal')
+                    ->where('id_jadwal', $request->id_jadwal)
+                    ->update(['status' => $request->status]); //HVSIA
+                //Insert ke jurnal
+                $jamPelajaran = jam()[0]->jampel;
+                DB::table('jurnal')
+                    ->insert([
+                        'tanggal' => date('Y-m-d'),
+                        'jadwal_id' => $request->id_jadwal,
+                        'masuk' => $request->masuk,
+                        'lama' => ceil((strtotime($request->sampai)-strtotime(date('H:i:s')))/intval(substr($jamPelajaran, 3, 2))/60),
+                        'inval' => 1,
+                        'transport' => 1,
+                        'materi' => ''
+                    ]);
+                return back()->with('inserted', 'Selamat mengajar!');
+            }
+            //Update status jadwal menjadi hadir
+            DB::table('jadwal')
+                ->where('id_jadwal', $request->id_jadwal)
+                ->update(['status' => 'H']); //HVSIA
+            //Insert ke jurnal
+            $jamPelajaran = jam()[0]->jampel;
+            DB::table('jurnal')
+                ->insert([
+                    'tanggal' => date('Y-m-d'),
+                    'jadwal_id' => $request->id_jadwal,
+                    'masuk' => $request->masuk,
+                    'lama' => ceil((strtotime($request->sampai)-strtotime(date('H:i:s')))/intval(substr($jamPelajaran, 3, 2))/60),
+                    'inval' => 0,
+                    'transport' => 1,
+                    'materi' => ''
+                ]);
+            return back()->with('inserted', 'Selamat mengajar!');
+        }else{ 
+            return back()->with('filled', 'Kelas sudah terisi!');
+        }
     }
 }

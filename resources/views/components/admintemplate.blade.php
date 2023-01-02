@@ -235,6 +235,7 @@
                             <img class="avatar user-thumb" src="/adminlte/images/author/avatar.png" alt="avatar">
                             <h4 class="user-name dropdown-toggle" data-toggle="dropdown">{{ session('username') }}<i class="fa fa-angle-down"></i></h4>
                             <div class="dropdown-menu">
+                                <a class="dropdown-item" href="/profile">Profile</a>
                                 <a class="dropdown-item" href="/logout">Log Out</a>
                             </div>
                         </div>
@@ -251,7 +252,7 @@
         <!-- footer area start-->
         <footer>
             <div class="footer-area">
-                <p>Dibuat dan Dikembangkan oleh <b>Dicoding Capstone Team FEBE C22 - 234</b></p>
+                <p>Dibuat dan Dikembangkan oleh <b>Staf Data, Informasi, Pengembangan, dan Infrastruktur Teknologi - SMA Islam Parlaungan</b></p>
             </div>
         </footer>
         <!-- footer area end-->

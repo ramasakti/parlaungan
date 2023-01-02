@@ -2,7 +2,7 @@
     <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
         <button class="uk-modal-close-default" type="button" uk-close></button>
         <h5>Add Guru</h5>
-        <form method="POST" action="/guru/store">
+        <form id="fAddGuru" method="POST" action="/guru/store">
             @csrf
             <div class="uk-margin">
                 <input class="uk-input" type="text" name="id_guru" placeholder="ID / Username" required>
@@ -25,7 +25,16 @@
             <div class="uk-margin">
                 <input name="tanggal_lahir" placeholder="Tanggal Lahir" class="textbox-n uk-input" type="date" onfocus="(this.type='date')" id="date">
             </div>
-            <button type="submit" class="uk-button uk-button-primary uk-button-small">Tambah</button>
+            <button id="bAddGuru" type="submit" class="uk-button uk-button-primary uk-button-small" onclick="addGuru()" onsubmit="addGuru()">Tambah</button>
         </form>
     </div>
 </div>
+<script>
+    const fAddGuru = document.getElementById('fAddGuru')
+    const bAddGuru = document.getElementById('bAddGuru')
+    const addGuru = () => {
+        bAddGuru.setAttribute('disabled', '')
+        fAddGuru.innerHTML = `<div uk-spinner="ratio: 0.5"></div>`
+        fAddGuru.submit()
+    }
+</script>

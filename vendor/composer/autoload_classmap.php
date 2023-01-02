@@ -20,6 +20,7 @@ return array(
     'App\\Http\\Controllers\\JurnalController' => $baseDir . '/app/Http/Controllers/JurnalController.php',
     'App\\Http\\Controllers\\KeuanganSiswa' => $baseDir . '/app/Http/Controllers/KeuanganSiswa.php',
     'App\\Http\\Controllers\\LoginController' => $baseDir . '/app/Http/Controllers/LoginController.php',
+    'App\\Http\\Controllers\\ProfilController' => $baseDir . '/app/Http/Controllers/ProfilController.php',
     'App\\Http\\Controllers\\QRController' => $baseDir . '/app/Http/Controllers/QRController.php',
     'App\\Http\\Controllers\\RapatController' => $baseDir . '/app/Http/Controllers/RapatController.php',
     'App\\Http\\Controllers\\SekolahController' => $baseDir . '/app/Http/Controllers/SekolahController.php',

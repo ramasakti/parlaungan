@@ -4,7 +4,7 @@
         <a href="https://wa.me/?text=Data Siswa Terlambat {{ $hariIni }} %0A @foreach($dataTerlambat as $terlambat) *{{ $terlambat->nama_siswa }}* kelas *{{ $terlambat->tingkat }} {{ $terlambat->jurusan }}* hadir: *{{ $terlambat->waktu_absen }}* %0A @endforeach" class="uk-icon-link" uk-icon="social"></a>
     </h5>
 </div>
-<table class="table table-borderless">
+<table class="uk-table uk-table-hover uk-table-small">
     <thead>
         <tr>
             <th scope="col">#</th>

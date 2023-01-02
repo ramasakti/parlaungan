@@ -69,11 +69,12 @@ class AbsenController extends Controller
             $jamMasuk = $this->jamSekarang();
             if (date('H:i:s') > $jamMasuk[0]->masuk){
                 DB::table('absen')->where('id_siswa', $request->id_siswa)->increment('jumlah_terlambat');
-                DB::table('siswa_terlambat')
+                DB::table('rekap_siswa')
                     ->insert([
                         'tanggal' => date('Y-m-d'),
                         'siswa_id' => $request->id_siswa,
-                        'waktu' => date('Y-m-d H:i:s'),
+                        'keterangan' => 'T',
+                        'waktu_absen' => date('H:i:s')
                     ]);
             }
 
@@ -105,16 +106,6 @@ class AbsenController extends Controller
             'title' => 'Sistem Absen',
         ]);
     }
-
-    public function qrcode(Request $request)
-    {
-        if (!$request->cookie('username')){
-            return redirect('/login');
-        }
-        return view('absen.qrcode', [
-            'title' => 'Sistem Absen',
-        ]);
-    }
  
     public function engine(Request $request)
     {
@@ -142,9 +133,7 @@ class AbsenController extends Controller
                     //Update status jadwal menjadi hadir
                     DB::table('jadwal')
                         ->where('id_jadwal', $dataJadwal[0]->id_jadwal)
-                        ->where('mulai', '<', date('H:i:s'))
-                        ->where('sampai', '>', date('H:i:s'))
-                        ->update(['status' => 'HADIR']); //HVSIA
+                        ->update(['status' => 'H']); //HVSIA
                     //Insert ke jurnal
                     $jamPelajaran = jam()[0]->jampel;
                     DB::table('jurnal')
@@ -153,6 +142,7 @@ class AbsenController extends Controller
                             'jadwal_id' => $dataJadwal[0]->id_jadwal,
                             'masuk' => date('H:i:s'),
                             'lama' => ceil((strtotime($dataJadwal[0]->sampai)-strtotime(date('H:i:s')))/intval(substr($jamPelajaran, 3, 2))/60),
+                            'inval' => 0,
                             'transport' => 1,
                             'materi' => ''
                         ]);
@@ -170,22 +160,24 @@ class AbsenController extends Controller
             $siswaAbsen = DB::table('absen')
                             ->join('siswa', 'siswa.id_siswa', '=', 'absen.id_siswa')
                             ->where('absen.id_siswa', $request->userabsen)
+                            ->orWhere('siswa.rfid', $request->userabsen)
                             ->get();
             
             if (count($siswaAbsen) > 0){
                 if ($siswaAbsen[0]->waktu_absen === NULL){
                     $jamMasuk = jam();
                     if (date('H:i:s') > $jamMasuk[0]->masuk){
-                        DB::table('absen')->where('id_siswa', $request->userabsen)->increment('jumlah_terlambat');
-                        DB::table('siswa_terlambat')
+                        DB::table('absen')->where('id_siswa', $siswaAbsen[0]->id_siswa)->increment('jumlah_terlambat');
+                        DB::table('rekap_siswa')
                             ->insert([
                                 'tanggal' => date('Y-m-d'),
-                                'siswa_id' => $request->userabsen,
-                                'waktu' => date('H:i:s'),
+                                'siswa_id' => $siswaAbsen[0]->id_siswa,
+                                'keterangan' => 'T',
+                                'waktu_absen' => date('H:i:s')
                             ]);
                     }
                     DB::table('absen')
-                        ->where('id_siswa', $request->userabsen)
+                        ->where('id_siswa', $siswaAbsen[0]->id_siswa)
                         ->update([
                             'waktu_absen' => date('H:i:s'),
                             'izin' => NULL,

@@ -591,6 +591,7 @@ class ComposerStaticInit398c4bbcca9c2dd2750d19eedd068038
         'App\\Http\\Controllers\\JurnalController' => __DIR__ . '/../..' . '/app/Http/Controllers/JurnalController.php',
         'App\\Http\\Controllers\\KeuanganSiswa' => __DIR__ . '/../..' . '/app/Http/Controllers/KeuanganSiswa.php',
         'App\\Http\\Controllers\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/LoginController.php',
+        'App\\Http\\Controllers\\ProfilController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProfilController.php',
         'App\\Http\\Controllers\\QRController' => __DIR__ . '/../..' . '/app/Http/Controllers/QRController.php',
         'App\\Http\\Controllers\\RapatController' => __DIR__ . '/../..' . '/app/Http/Controllers/RapatController.php',
         'App\\Http\\Controllers\\SekolahController' => __DIR__ . '/../..' . '/app/Http/Controllers/SekolahController.php',

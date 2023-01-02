@@ -1,7 +1,8 @@
 <div class="uk-margin">
     <h5>Rekap Absen Siswa</h5>
+    <p><a href="" uk-icon="future" class="uk-margin"></a></p>
 </div>
-<table class="table table-borderless">
+<table class="uk-table uk-table-hover uk-table-small">
     <thead>
         <tr>
             <th scope="col">#</th>

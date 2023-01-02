@@ -6,3 +6,4 @@
         @endforeach
     </select>
 </form>
+@include('jadwal.hari.alert')

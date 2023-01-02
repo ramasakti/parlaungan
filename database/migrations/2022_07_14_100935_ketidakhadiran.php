@@ -13,15 +13,20 @@ class Ketidakhadiran extends Migration
      */
     public function up()
     {
-        Schema::create('ketidakhadiran', function (Blueprint $table) {
-            $table->increments('id_ketidakhadiran');
+        Schema::create('inval', function (Blueprint $table) {
+            $table->increments('id_inval');
             $table->date('tanggal');
             $table->integer('jadwal_id')->unsigned();
             $table->string('keterangan', '10');
+            $table->string('penginval');
         });
 
-        Schema::table('ketidakhadiran', function (Blueprint $table) {
+        Schema::table('inval', function (Blueprint $table) {
             $table->foreign('jadwal_id')->references('id_jadwal')->on('jadwal')->onDelete('cascade')->onUpdate('cascade');
+        });
+
+        Schema::table('inval', function (Blueprint $table) {
+            $table->foreign('penginval')->references('id_guru')->on('guru')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
@@ -32,6 +37,6 @@ class Ketidakhadiran extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ketidakhadiran');
+        Schema::dropIfExists('inval');
     }
 }

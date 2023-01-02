@@ -11,6 +11,7 @@ use App\Http\Controllers\AbsenController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RapatController;
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\JurnalController;
@@ -66,9 +67,14 @@ Route::get('/web', [WebController::class, 'index'])->middleware('auth');
 Route::get('/web/blog/create', [BlogController::class, 'create'])->middleware('auth');
 
 //User
+Route::get('/profile', [UserController::class, 'profile']);
+Route::post('/profile', [UserController::class, 'updateProfile']);
 Route::get('/user', [UserController::class, 'index']);
 Route::post('/user/import', [UserController::class, 'import'])->middleware('auth');
 Route::post('/user/update', [UserController::class, 'updateUser'])->middleware('auth');
+
+//Profil
+Route::post('/biodata/update', [ProfilController::class, 'updateBiodata']);
 
 //Sekolah
 Route::get('/sekolah', [SekolahController::class, 'index'])->middleware('auth');
@@ -109,6 +115,8 @@ Route::post('/absen/engine', [AbsenController::class, 'engine']);
 Route::get('/jadwal', [JadwalController::class, 'index'])->middleware('auth');
 Route::post('/jadwal/store', [JadwalController::class, 'storeJadwal'])->middleware('auth');
 Route::post('/jadwal/import', [JadwalController::class, 'import'])->middleware('auth');
+Route::post('/jadwal/delete', [JadwalController::class, 'deleteJadwal'])->middleware('auth');
+Route::post('/jadwal/manual', [JadwalController::class, 'absenGuruManual'])->middleware('auth');
 
 //Jurnal
 Route::get('/jurnal', [JurnalController::class, 'index'])->middleware('auth');

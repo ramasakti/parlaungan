@@ -17,6 +17,7 @@ class RekapSiswa extends Migration
             $table->date('tanggal');
             $table->string('siswa_id');
             $table->char('keterangan', 1);
+            $table->time('waktu_absen')->nullable();
         });
 
         Schema::table('rekap_siswa', function (Blueprint $table) {

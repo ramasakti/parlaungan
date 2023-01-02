@@ -12,19 +12,28 @@
                     <p>{{ session('gagal') }}</p>
                 </div>
             @endif
-            <form action="/login" method="POST">
-                @csrf									 
+            <form action="/login" method="POST" id="formLogin">
+                @csrf
                 <div class="mb-3 align-self-center">
                     <label for="exampleInputEmail1" class="form-label">Username</label>
-                    <input type="text" name="username" class="form-control" value="{{ old('username') }}" required>
+                    <input type="text" name="username" class="form-control" value="{{ old('username') }}">
                 </div>
                 <div class="mb-3 align-self-center">
                     <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input type="password" name="password" class="form-control" id="password" required>
+                    <input type="password" name="password" class="form-control" id="password">
                 </div>
-                <button type="submit" class="uk-button uk-button-primary uk-width-1-1">Login</button>
+                <button id="loginButton" type="submit" onclick="login()" onsubmit="login()" class="uk-button uk-button-primary uk-width-1-1">Login</button>
             </form>
         </div>
     </div>	
 </div>
+<script>
+    const formLogin = document.getElementById('formLogin')
+    const buttonLogin = document.getElementById('loginButton')
+    const login = () => {
+        buttonLogin.setAttribute('disabled', '')
+        buttonLogin.innerHTML = `<div uk-spinner="ratio: 0.5"></div>`
+        formLogin.submit()
+    }
+</script>
 @endsection

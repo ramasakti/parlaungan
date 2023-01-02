@@ -29,7 +29,7 @@
         <h5>Absen Siswa Kelas {{ $kelas->tingkat }} {{ $kelas->jurusan }}</h5>
     </div>
 @endforeach
-<table class="table table-borderless">
+<table class="uk-table uk-table-hover uk-table-small">
     <thead>
         <tr>
             <th scope="col">#</th>

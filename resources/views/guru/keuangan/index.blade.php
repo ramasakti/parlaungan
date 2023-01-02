@@ -34,6 +34,7 @@
                                                 ->select('jadwal.guru_id', DB::raw('SUM(jurnal.lama) as tertunaikan'))
                                                 ->where('jadwal.guru_id', $showJadwal->id_guru)
                                                 ->where('jurnal.jadwal_id', '=', DB::raw('jadwal.id_jadwal'))
+                                                ->where('jurnal.inval', '=', FALSE)
                                                 ->where('jurnal.tanggal', '>=', request('dari'))
                                                 ->where('jurnal.tanggal', '<=', request('sampai'))
                                                 ->groupBy('jurnal.jadwal_id')
@@ -51,6 +52,7 @@
                                             ->crossJoin('jadwal')
                                             ->select('jurnal.id_jurnal')
                                             ->where('jadwal.guru_id', $showJadwal->id_guru)
+                                            ->where('jurnal.inval', '=', FALSE)
                                             ->where('jurnal.tanggal', '>=', request('dari'))
                                             ->where('jurnal.tanggal', '<=', request('sampai'))
                                             ->get();
@@ -64,12 +66,12 @@
                 <td>
                     @php
                         $dataSakit = DB::table('jadwal')
-                                        ->crossJoin('ketidakhadiran')
+                                        ->crossJoin('inval')
                                         ->select('jadwal.guru_id', DB::raw('SUM(TIME_TO_SEC(TIMEDIFF(jadwal.sampai, jadwal.mulai)))/40/60 as sakit'))
-                                        ->where('ketidakhadiran.tanggal', '>=', request('dari'))
-                                        ->where('ketidakhadiran.tanggal', '<=', request('sampai'))
-                                        ->where('ketidakhadiran.keterangan', '=', 'S')
-                                        ->where('jadwal.id_jadwal', '=', DB::raw('ketidakhadiran.jadwal_id'))
+                                        ->where('inval.tanggal', '>=', request('dari'))
+                                        ->where('inval.tanggal', '<=', request('sampai'))
+                                        ->where('inval.keterangan', '=', 'S')
+                                        ->where('jadwal.id_jadwal', '=', DB::raw('inval.jadwal_id'))
                                         ->where('jadwal.guru_id', '=', $showJadwal->id_guru)
                                         ->groupBy('jadwal.guru_id')
                                         ->get();
@@ -86,12 +88,12 @@
                 <td>
                     @php
                         $dataIzin = DB::table('jadwal')
-                                        ->crossJoin('ketidakhadiran')
+                                        ->crossJoin('inval')
                                         ->select('jadwal.guru_id', DB::raw('SUM(TIME_TO_SEC(TIMEDIFF(jadwal.sampai, jadwal.mulai)))/40/60 as izin'))
-                                        ->where('ketidakhadiran.tanggal', '>=', request('dari'))
-                                        ->where('ketidakhadiran.tanggal', '<=', request('sampai'))
-                                        ->where('ketidakhadiran.keterangan', '=', 'I')
-                                        ->where('jadwal.id_jadwal', '=', DB::raw('ketidakhadiran.jadwal_id'))
+                                        ->where('inval.tanggal', '>=', request('dari'))
+                                        ->where('inval.tanggal', '<=', request('sampai'))
+                                        ->where('inval.keterangan', '=', 'I')
+                                        ->where('jadwal.id_jadwal', '=', DB::raw('inval.jadwal_id'))
                                         ->where('jadwal.guru_id', '=', $showJadwal->id_guru)
                                         ->groupBy('jadwal.guru_id')
                                         ->get();
@@ -108,12 +110,12 @@
                 <td>
                     @php
                         $dataAlfa = DB::table('jadwal')
-                                        ->crossJoin('ketidakhadiran')
+                                        ->crossJoin('inval')
                                         ->select('jadwal.guru_id', DB::raw('SUM(TIME_TO_SEC(TIMEDIFF(jadwal.sampai, jadwal.mulai)))/40/60 as alfa'))
-                                        ->where('ketidakhadiran.tanggal', '>=', request('dari'))
-                                        ->where('ketidakhadiran.tanggal', '<=', request('sampai'))
-                                        ->where('ketidakhadiran.keterangan', '=', 'A')
-                                        ->where('jadwal.id_jadwal', '=', DB::raw('ketidakhadiran.jadwal_id'))
+                                        ->where('inval.tanggal', '>=', request('dari'))
+                                        ->where('inval.tanggal', '<=', request('sampai'))
+                                        ->where('inval.keterangan', '=', 'A')
+                                        ->where('jadwal.id_jadwal', '=', DB::raw('inval.jadwal_id'))
                                         ->where('jadwal.guru_id', '=', $showJadwal->id_guru)
                                         ->groupBy('jadwal.guru_id')
                                         ->get();

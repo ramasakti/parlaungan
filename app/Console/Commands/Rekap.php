@@ -35,7 +35,8 @@ class Rekap extends Command
     
     public function hariIni()
     {
-        $cekHari = DB::table('hari')->where('nama_hari', Carbon::now()->isoFormat('dddd'))->get();
+        $cekHari = DB::table('hari')
+                    ->where('nama_hari', Carbon::now()->isoFormat('dddd'))->get();
         return $cekHari;
     }
 
@@ -85,15 +86,31 @@ class Rekap extends Command
                 
                 $absen = DB::table('absen')
                             ->select('id_siswa', 'keterangan')
-                            ->where('keterangan', '!=', '')
+                            ->where('keterangan', '!=')
                             ->get();
+
+                $terlambat = DB::table('absen')
+                                ->select('id_siswa', 'waktu_absen')
+                                ->where('waktu_absen', '>', $this->hariIni()[0]->masuk)
+                                ->get();
 
                 foreach ($absen as $siswa) {
                     DB::table('rekap_siswa')
                         ->insert([
                             'tanggal' => date('Y-m-d'),
                             'siswa_id' => $siswa->id_siswa,
-                            'keterangan' => $siswa->keterangan
+                            'keterangan' => $siswa->keterangan,
+                            'waktu_absen' => NULL
+                        ]);
+                }
+
+                foreach ($terlambat as $siswaTerlambat) {
+                    DB::table('rekap_siswa')
+                        ->insert([
+                            'tanggal' => date('Y-m-d'),
+                            'siswa_id' => $siswaTerlambat->id_siswa,
+                            'keterangan' => 'T',
+                            'waktu_absen' => $siswaTerlambat->waktu_absen
                         ]);
                 }
             }else{
@@ -111,7 +128,5 @@ class Rekap extends Command
                 }
             }
         }
-
-
     }
 }

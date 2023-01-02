@@ -28,4 +28,27 @@
             @include('jadwal.hari.Sabtu')
         </li>
     </ul>
+    <script>
+        const status = `<div id="status">
+                <div class="uk-margin">
+                    <select id="status" class="uk-select" name="status" required>
+                        <option value="I">Izin</option>
+                        <option value="S">Sakit</option>
+                        <option value="A">Alfa</option>
+                    </select>
+                </div>
+            </div>`
+        
+        const invalidation = (id_jadwal) => {
+            const wadah = document.getElementById('wadah-' + id_jadwal)
+            const guru = document.getElementById('guru-' + id_jadwal)
+            const inval = document.getElementById('status-inval-' + id_jadwal)
+            if (inval.checked) {
+                inval.innerHTML = status
+                guru.removeAttribute('disabled')
+            }else{
+                guru.setAttribute('disabled', '')
+            }
+        }
+    </script>
 </x-admintemplate>
