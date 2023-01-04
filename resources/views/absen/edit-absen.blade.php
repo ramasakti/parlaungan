@@ -28,7 +28,7 @@
     const bEditAbsen = document.getElementById('bEditAbsen')
     const updateAbsen = () => {
         bEditAbsen.setAttribute('disabled', '')
-        fEditAbsen.innerHTML = `<div uk-spinner="ratio: 0.5"></div>`
+        bEditAbsen.innerHTML = `<div uk-spinner="ratio: 0.5"></div>`
         fEditAbsen.submit()
     }
 </script>
