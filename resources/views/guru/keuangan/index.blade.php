@@ -16,126 +16,76 @@
                 <th>Jml Jam (/Week)</th>
                 <th>Tertunaikan</th>
                 <th>Transport</th>
-                <th>S</th>
-                <th>I</th>
-                <th>A</th>
+                <th>S/I/A</th>
+                <th>Menginval</th>
                 <th>Total</th>
             </tr>
         </thead>
-        @foreach ($dataJadwal as $showJadwal)
-        <tbody>
-            <tr>
-                <td>{{ $showJadwal->nama_guru }}</td>
-                <td>{{ ceil($showJadwal->jumlah_jam) }}</td>
-                <td>
-                    @php
-                        $dataTertunaikan = DB::table('jurnal')
-                                                ->crossJoin('jadwal') 
-                                                ->select('jadwal.guru_id', DB::raw('SUM(jurnal.lama) as tertunaikan'))
-                                                ->where('jadwal.guru_id', $showJadwal->id_guru)
-                                                ->where('jurnal.jadwal_id', '=', DB::raw('jadwal.id_jadwal'))
-                                                ->where('jurnal.inval', '=', FALSE)
-                                                ->where('jurnal.tanggal', '>=', request('dari'))
-                                                ->where('jurnal.tanggal', '<=', request('sampai'))
-                                                ->groupBy('jurnal.jadwal_id')
-                                                ->get()->toArray();
-                        if (count($dataTertunaikan) > 0) {
-                            echo $dataTertunaikan[0]->tertunaikan;
-                        }else{
-                            echo 0;
-                        }
-                    @endphp 
-                </td>
-                <td>
-                    @php
-                        $dataTransport = DB::table('jurnal')
-                                            ->crossJoin('jadwal')
-                                            ->select('jurnal.id_jurnal')
-                                            ->where('jadwal.guru_id', $showJadwal->id_guru)
-                                            ->where('jurnal.inval', '=', FALSE)
-                                            ->where('jurnal.tanggal', '>=', request('dari'))
-                                            ->where('jurnal.tanggal', '<=', request('sampai'))
-                                            ->get();
-                        if (count($dataTransport)) {
-                            echo count($dataTransport) * $dataNominal[1]->harga;
-                        }else{
-                            echo 0;
-                        }
-                    @endphp
-                </td>
-                <td>
-                    @php
-                        $dataSakit = DB::table('jadwal')
-                                        ->crossJoin('inval')
-                                        ->select('jadwal.guru_id', DB::raw('SUM(TIME_TO_SEC(TIMEDIFF(jadwal.sampai, jadwal.mulai)))/40/60 as sakit'))
-                                        ->where('inval.tanggal', '>=', request('dari'))
-                                        ->where('inval.tanggal', '<=', request('sampai'))
-                                        ->where('inval.keterangan', '=', 'S')
-                                        ->where('jadwal.id_jadwal', '=', DB::raw('inval.jadwal_id'))
-                                        ->where('jadwal.guru_id', '=', $showJadwal->id_guru)
+        @foreach ($dataGuru as $guru)
+            @php
+                $dataTertunaikan = DB::table('jurnal')
+                                        ->select(DB::raw('SUM(jurnal.lama) as tertunaikan'), DB::raw('SUM(jurnal.transport) as transport'))
+                                        ->join('jadwal', 'jadwal.id_jadwal', '=', 'jurnal.jadwal_id')
+                                        ->where('jadwal.guru_id', $guru->id_guru)
+                                        ->where('jurnal.inval', FALSE)
+                                        ->where('jurnal.tanggal', '>=', request('dari'))
+                                        ->where('jurnal.tanggal', '<=', request('sampai'))
                                         ->groupBy('jadwal.guru_id')
                                         ->get();
+            
+                $jadwal = DB::table('jadwal')
+                                ->select(DB::raw("SUM(TIME_TO_SEC(TIMEDIFF(jadwal.sampai, jadwal.mulai)))/$jampel/60 as jumlah_jam"))
+                                ->where('guru_id', $guru->id_guru)
+                                ->groupBy('guru_id')
+                                ->get();
 
-                        if (count($dataSakit) > 0){
-                            echo ceil($dataSakit[0]->sakit);
-                            echo " Jam";
-                        }else{
-                            echo 0;
-                            echo " Jam";
-                        }
-                    @endphp 
-                </td>
-                <td>
-                    @php
-                        $dataIzin = DB::table('jadwal')
-                                        ->crossJoin('inval')
-                                        ->select('jadwal.guru_id', DB::raw('SUM(TIME_TO_SEC(TIMEDIFF(jadwal.sampai, jadwal.mulai)))/40/60 as izin'))
-                                        ->where('inval.tanggal', '>=', request('dari'))
-                                        ->where('inval.tanggal', '<=', request('sampai'))
-                                        ->where('inval.keterangan', '=', 'I')
-                                        ->where('jadwal.id_jadwal', '=', DB::raw('inval.jadwal_id'))
-                                        ->where('jadwal.guru_id', '=', $showJadwal->id_guru)
-                                        ->groupBy('jadwal.guru_id')
-                                        ->get();
-
-                        if (count($dataIzin) > 0){
-                            echo ceil($dataIzin[0]->izin);
-                            echo " Jam";
-                        }else{
-                            echo 0;
-                            echo " Jam";
-                        }
-                    @endphp 
-                </td>
-                <td>
-                    @php
-                        $dataAlfa = DB::table('jadwal')
-                                        ->crossJoin('inval')
-                                        ->select('jadwal.guru_id', DB::raw('SUM(TIME_TO_SEC(TIMEDIFF(jadwal.sampai, jadwal.mulai)))/40/60 as alfa'))
-                                        ->where('inval.tanggal', '>=', request('dari'))
-                                        ->where('inval.tanggal', '<=', request('sampai'))
-                                        ->where('inval.keterangan', '=', 'A')
-                                        ->where('jadwal.id_jadwal', '=', DB::raw('inval.jadwal_id'))
-                                        ->where('jadwal.guru_id', '=', $showJadwal->id_guru)
-                                        ->groupBy('jadwal.guru_id')
-                                        ->get();
-
-                        if (count($dataAlfa) > 0){
-                            echo ceil($dataAlfa[0]->alfa);
-                            echo " Jam";
-                        }else{
-                            echo 0;
-                            echo " Jam";
-                        }
-                    @endphp 
-                </td>
-                <td>
-                    @if ($total === [])
-                        {{ 0 }}
-                    @endif    
-                </td>
-            </tr>
-        </tbody>
+                $menginval = DB::table('inval')
+                                ->select(DB::raw("SUM(jurnal.lama) AS menginval"))
+                                ->join('jadwal', 'jadwal.id_jadwal', '=', 'inval.jadwal_id')
+                                ->join('jurnal', 'jurnal.jadwal_id', '=', 'jadwal.id_jadwal')
+                                ->where('jurnal.inval', TRUE)
+                                ->where('penginval', $guru->id_guru)
+                                ->groupBy('penginval')
+                                ->get();
+                
+                $sia = DB::table('inval')
+            @endphp
+            <tbody>
+                <tr>
+                    <td>{{ $guru->nama_guru }}</td>
+                    <td>
+                        @if (count($jadwal) > 0)
+                            {{ ceil($jadwal[0]->jumlah_jam) }}
+                        @else
+                            0
+                        @endif
+                    </td>
+                    <td>
+                        @if (count($dataTertunaikan) > 0)
+                            {{ $dataTertunaikan[0]->tertunaikan; }}
+                        @else
+                            0
+                        @endif
+                    </td>
+                    <td>
+                        @if (count($dataTertunaikan) > 0)
+                            {{ $dataTertunaikan[0]->transport; }}
+                        @else
+                            0
+                        @endif
+                    </td>
+                    <td>
+                        S/I/A
+                    </td>
+                    <td>
+                        @if (count($menginval) > 0)
+                            {{ $menginval[0]->menginval; }}
+                        @else
+                            0
+                        @endif
+                    </td>
+                </tr>
+            </tbody>
         @endforeach
     </table>
 </x-admintemplate>

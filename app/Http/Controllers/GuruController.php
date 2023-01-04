@@ -22,83 +22,14 @@ class GuruController extends Controller
         return DB::table('nominal')->get();
     }
 
-    public function dataJadwal()
-    {
-        $jampel = $this->jampel()[0]->jampel;
-        $dataJadwal = DB::table('jadwal')
-                        ->crossJoin('guru')
-                        ->select('guru.id_guru', 'guru.nama_guru', DB::raw("SUM(TIME_TO_SEC(TIMEDIFF(jadwal.sampai, jadwal.mulai)))/$jampel/60 as jumlah_jam"))
-                        ->where('guru.id_guru','=',DB::raw('jadwal.guru_id'))
-                        ->groupBy('jadwal.guru_id')
-                        ->get();
-        return $dataJadwal;
-    }
-
-    public function dataPerGuru()
-    {
-        
-    }
-
-    public function tertunaikan()
-    {
-        if (count($this->dataJadwal()) < 1) {
-            return [];
-        }
-        $dataTertunaikan = DB::table('jurnal')
-                            ->crossJoin('jadwal') 
-                            ->select('jadwal.guru_id', DB::raw('SUM(jurnal.lama) as tertunaikan'))
-                            ->where('jadwal.guru_id', $this->dataJadwal()[0]->id_guru)
-                            ->where('jurnal.jadwal_id', '=', DB::raw('jadwal.id_jadwal'))
-                            ->where('jurnal.tanggal', '>=', request('dari'))
-                            ->where('jurnal.tanggal', '<=', request('sampai'))
-                            ->groupBy('jurnal.jadwal_id')
-                            ->get();
-        return ($dataTertunaikan);
-    }
-
-    public function dataTransport()
-    {
-        if (count($this->dataJadwal()) < 1) {
-            return [];
-        }
-        $dataTransport = DB::table('jurnal')
-                            ->crossJoin('jadwal')
-                            ->select('jurnal.id_jurnal')
-                            ->where('jadwal.guru_id', $this->dataJadwal()[0]->id_guru)
-                            ->where('jurnal.tanggal', '>=', request('dari'))
-                            ->where('jurnal.tanggal', '<=', request('sampai'))
-                            ->get();
-        return $dataTransport;
-    }
-
-    public function total()
-    {
-        if (count($this->tertunaikan()) < 1) {
-            return [];
-        }
-        return $this->tertunaikan()[0]->tertunaikan * ($this->nominal()[0]->harga / 4);
-    }
-
     public function keuangan(Request $request)
     {
         return view('guru.keuangan.index', [
             'title' => 'Keuangan Guru',
             'navactive' => 'guru',
-            'dataTertunaikan' => $this->tertunaikan(),
-            'dataJadwal' => $this->dataJadwal(),
-            'dataTransport' => $this->dataTransport(),
+            'dataGuru' => DB::table('guru')->get(),
+            'jampel' => $this->jampel(),
             'dataNominal' => $this->nominal(),
-            'total' => $this->dataPerGuru()
-        ]);
-    }
-
-    public function index()
-    {
-        return view('guru.data.index', [
-            'title' => 'Data Guru',
-            'navactive' => 'guru',
-            'ai' => 1,
-            'dataGuru' => DB::table('guru')->get()
         ]);
     }
 
@@ -114,5 +45,15 @@ class GuruController extends Controller
                 'tanggal_lahir' => $request->tanggal_lahir,
             ]);
         return back()->with('success', 'Berhasil menambah data guru!');
+    }
+
+    public function index()
+    {
+        return view('guru.data.index', [
+            'title' => 'Data Guru',
+            'navactive' => 'guru',
+            'ai' => 1,
+            'dataGuru' => DB::table('guru')->get()
+        ]);
     }
 }

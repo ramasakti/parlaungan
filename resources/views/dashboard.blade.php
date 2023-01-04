@@ -6,8 +6,8 @@
             </div>
         </div>
         <div>
-            <div class="uk-card uk-card-default uk-card-body" id="card" onclick="printDiv()">
-                <p class="uk-margin-remove uk-position-top-right"><span class="uk-margin-small-right" uk-icon="print"></span></p>
+            <div class="uk-card uk-card-default uk-card-body" id="card">
+                <p class="uk-margin-remove uk-position-top-right"><a href="/profile" class="uk-margin-small-right" uk-icon="user"></a></p>
                 <div class="uk-panel">
                     <img class="uk-border-circle uk-align-left uk-margin-small-right uk-margin-small-bottom" width="35%" height="35%" src="img/default-user.jpg">
                     <h5 class="uk-card-title uk-margin-remove ">

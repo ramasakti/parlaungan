@@ -34,7 +34,7 @@
     const bAddGuru = document.getElementById('bAddGuru')
     const addGuru = () => {
         bAddGuru.setAttribute('disabled', '')
-        fAddGuru.innerHTML = `<div uk-spinner="ratio: 0.5"></div>`
+        bAddGuru.innerHTML = `<div uk-spinner="ratio: 0.5"></div>`
         fAddGuru.submit()
     }
 </script>
