@@ -17,14 +17,14 @@
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://metatags.io/">
+    <meta property="og:url" content="https://smaispa.sch.id">
     <meta property="og:title" content="SMA Islam Parlaungan">
     <meta property="og:description" content="Berkarya, berkarakter, berakhlakul karimah">
     <meta property="og:image" content="https://smaispa.sch.id/img/smaispa.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://metatags.io/">
+    <meta property="twitter:url" content="https://smaispa.sch.id">
     <meta property="twitter:title" content="SMA Islam Parlaungan">
     <meta property="twitter:description" content="Berkarya, berkarakter, berakhlakul karimah">
     <meta property="twitter:image" content="https://smaispa.sch.id/img/smaispa.png">
