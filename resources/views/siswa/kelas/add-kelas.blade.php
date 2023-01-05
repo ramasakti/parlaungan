@@ -18,7 +18,7 @@
                 <input class="uk-input" type="text" name="jurusan" placeholder="Jurusan" required>
             </div>
             <div class="uk-margin">
-                <select class="uk-select" name="piket" required>
+                <select name="walas" class="uk-select" name="piket" required>
                     <option value="">Pilih Walas</option>
                     @foreach ($dataGuru as $guru)
                         <option value="{{ $guru->id_guru }}">{{ $guru->nama_guru }}</option>
