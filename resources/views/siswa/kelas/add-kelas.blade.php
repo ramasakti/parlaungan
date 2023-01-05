@@ -6,6 +6,9 @@
             @csrf
             <div class="uk-margin">
                 <select name="tingkat" class="uk-select">
+                    <option value="VII">VII</option>
+                    <option value="VIII">VIII</option>
+                    <option value="IX">IX</option>
                     <option value="XII">XII</option>
                     <option value="XI">XI</option>
                     <option value="X">X</option>
