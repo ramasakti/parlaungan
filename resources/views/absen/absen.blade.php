@@ -11,6 +11,19 @@
     </form>
 @endif
 
+@if (session('status') === 'Admin')    
+    <form action="/absen" method="get">
+        <div class="uk-margin">
+            <select name="id_kelas" class="uk-select" id="" onchange="this.form.submit()">
+                <option value="">Pilih Kelas</option>
+                @foreach ($dataKelas as $kelas)
+                    &nbsp; <option {{ ($kelas->id_kelas === request('id_kelas')) ? 'selected' : '' }} value="{{ $kelas->id_kelas }}">{{ $kelas->tingkat }} {{ $kelas->jurusan }}</option>
+                @endforeach
+            </select>
+        </div>
+    </form>
+@endif
+
 @if (session('piket'))
     <form action="/absen" method="get">
         <div class="uk-margin">
