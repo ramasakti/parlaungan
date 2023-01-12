@@ -44,7 +44,27 @@ class GuruController extends Controller
                 'tempat_lahir' => $request->tempat_lahir,
                 'tanggal_lahir' => $request->tanggal_lahir,
             ]);
+
+        DB::table('user')
+            ->insert([
+                'username' => $request->id_guru,
+                'password' => bcrypt($request->password),
+                'foto' => '',
+                'status' => 'Guru'
+            ]);
+
         return back()->with('success', 'Berhasil menambah data guru!');
+    }
+
+    public function deleteGuru(Request $request)
+    {
+        DB::table('guru')
+            ->where('id_guru', $request->id_guru)
+            ->delete();
+        DB::table('user')
+            ->where('username', $request->id_guru)
+            ->delete();
+        return back()->with('success', 'Berhasil delete guru');
     }
 
     public function index()
@@ -53,7 +73,7 @@ class GuruController extends Controller
             'title' => 'Data Guru',
             'navactive' => 'guru',
             'ai' => 1,
-            'dataGuru' => DB::table('guru')->get()
+            'dataGuru' => DB::table('guru')->join('user', 'user.username', '=', 'guru.id_guru')->get()
         ]);
     }
 }
