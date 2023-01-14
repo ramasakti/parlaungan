@@ -21,7 +21,7 @@ class CreateSiswaTable extends Migration
             $table->string('alamat');
             $table->text('telp');
             $table->string('tempat_lahir');
-            $table->date('tanggal_lahir');
+            $table->date('tanggal_lahir')->nullable();
         });
 
         Schema::table('siswa', function (Blueprint $table) {
