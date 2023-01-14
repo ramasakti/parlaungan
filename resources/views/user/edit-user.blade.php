@@ -7,6 +7,12 @@
             <div class="uk-margin">
                 <input class="uk-input" type="text" name="username" placeholder="Username" value="{{ $user[0]->username }}" readonly>
             </div>
+            <div class="uk-margin">
+                <div class="uk-inline uk-width-1-1">
+                    <a class="uk-form-icon uk-form-icon-flip" id="iconNewPass-{{ $user[0]->username }}" href="#" uk-icon="icon: lock" onclick="showhidePassword('{{ $user[0]->username }}')"></a>
+                    <input class="uk-input" type="password" name="password" id="passwordBaru-{{ $user[0]->username }}" placeholder="Password Baru">
+                </div>
+            </div>
             <div class="js-upload uk-placeholder uk-text-center">
                 <span uk-icon="icon: cloud-upload"></span>
                 <span class="uk-text-middle">Upload file excel dengan ekstensi .xlsx</span>
@@ -32,3 +38,17 @@
         </form>
     </div>
 </div>
+<script>
+    const showhidePassword = (username) => {
+        const passwordBaru = document.getElementById('passwordBaru-' + username)
+        const iconNewPass = document.getElementById('iconNewPass-' + username)
+
+        if (iconNewPass.getAttribute('uk-icon') == 'icon: lock') {
+            passwordBaru.setAttribute('type', 'text')
+            iconNewPass.setAttribute('uk-icon', 'icon: unlock')
+        }else{
+            passwordBaru.setAttribute('type', 'password')
+            iconNewPass.setAttribute('uk-icon', 'icon: lock')
+        }
+    }
+</script>

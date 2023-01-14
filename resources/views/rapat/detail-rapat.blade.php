@@ -38,6 +38,14 @@
                     <p>{{ session('fail') }}</p>
                 </div>
             @endif
+
+            @if (session('bePresent'))
+                <div class="uk-alert-warning" uk-alert>
+                    <a class="uk-alert-close" uk-close></a>
+                    <p>{{ session('bePresent') }}</p>
+                </div>
+            @endif
+
             <h2 class="uk-margin-small">
                 <div id="txt"></div>
             </h2>
@@ -45,7 +53,7 @@
             
             <form method="post">
                 @csrf
-                <input type="text" name="userabsen" id="userabsen" required autofocus readonly>
+                <input type="text" name="userabsen" id="userabsen" required autofocus>
             </form>
 
             <table class="table table-borderless">

@@ -2,7 +2,7 @@
     <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
         <button class="uk-modal-close-default" type="button" uk-close></button>
         <h5>Edit Rapat</h5>
-        <form method="POST" action="/rapat/store" class="uk-margin">
+        <form method="POST" action="/rapat/update" class="uk-margin">
             @csrf
             <input type="hidden" name="id_rapat" value="{{ $rapat->id_rapat }}">
             <input type="text" class="uk-input" name="judul" id="judul" placeholder="Judul Rapat" value="{{ $rapat->judul }}">

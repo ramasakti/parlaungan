@@ -2,19 +2,19 @@
     <a href="#modal-center" uk-toggle="target: #add-rapat" uk-icon="icon: plus" class="uk-margin-small-bottom"></a>
     @include('rapat.add-rapat')
     @if (session()->has('success'))
-        <div uk-alert>
+        <div class="uk-alert-success" uk-alert>
             <a class="uk-alert-close" uk-close></a>
             <p>{{ session('success') }}</p>
         </div>
     @endif
     @if (session()->has('failed'))
-        <div uk-alert>
+        <div class="uk-alert-danger" uk-alert>
             <a class="uk-alert-close" uk-close></a>
             <p>{{ session('failed') }}</p>
         </div>
     @endif
     @if (session()->has('deleted'))
-        <div uk-alert>
+        <div class="uk-alert-warning" uk-alert>
             <a class="uk-alert-close" uk-close></a>
             <p>{{ session('deleted') }}</p>
         </div>
