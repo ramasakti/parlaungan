@@ -1,10 +1,18 @@
 <x-admintemplate title='{{ $title }}' navactive='{{ $navactive }}'>
     @if (session()->has('imported'))
-        <div uk-alert>
+        <div class="uk-alert-success" uk-alert>
             <a class="uk-alert-close" uk-close></a>
             <p>{{ session('imported') }}</p>
         </div>
     @endif
+
+    @if (session()->has('siswa'))
+        <div class="uk-alert-success" uk-alert>
+            <a class="uk-alert-close" uk-close></a>
+            <p>{{ session('siswa')['success'] }}</p>
+        </div>
+    @endif
+
     <ul uk-tab>
         <li class="{{ (session()->has('kelas')) ? 'uk-active' : '' }}"><a href="#">Kelas</a></li>
         <li class="{{ (session()->has('siswa')) ? 'uk-active' : '' }}"><a href="#">Data Siswa</a></li>

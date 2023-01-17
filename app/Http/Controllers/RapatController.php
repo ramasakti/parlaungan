@@ -38,22 +38,16 @@ class RapatController extends Controller
         return back()->with('success', 'Berhasil menambahkan jadwal rapat!');
     }
 
-    public function userRapat(Request $request, $slug)
+    public function detail(Request $request, $slug)
     {
         $dataRapat = DB::table('rapat')->where('slug', $slug)->get();
         $pesertaRapat = explode('#', $dataRapat[0]->peserta);
         $userRapat = DB::table('user')->whereIn('username', $pesertaRapat)->get();
-
-    }
-
-    public function detail(Request $request, $slug)
-    {
-        $dataRapat = DB::table('rapat')->where('slug', $slug)->get();
         return view('rapat.detail-rapat', [
             'title' => 'Sistem Absen Rapat',
             'ai' => 1,
             'dataRapat' => $dataRapat,
-            'dataPeserta' => $dataUser
+            'dataPeserta' => $userRapat
         ]);
     }
 
@@ -68,6 +62,18 @@ class RapatController extends Controller
         if (count($userabsen) < 1) {
             return back()->with('fail', 'ID anda tidak terdaftar!');
         }
+        if (date('Y-m-d') < $rapat[0]->tanggal) {
+            return back()->with('fail', 'Rapat belum dimulai');
+        }
+        if (date('Y-m-d') == $rapat[0]->tanggal && date('H:i:s') < $rapat[0]->mulai) {
+            return back()->with('fail', 'Rapat belum dimulai');
+        }
+        if (date('Y-m-d') > $rapat[0]->tanggal) {
+            return back()->with('fail', 'Rapat telah selesai');
+        }
+        if (date('Y-m-d') == $rapat[0]->tanggal && date('H:i:s') > $rapat[0]->sampai) {
+            return back()->with('fail', 'Rapat telah selesai');
+        }
         if (!array_search($userabsen[0]->status, $kategoriPeserta)) {
             return back()->with('nonpeserta', 'Anda bukan kategori peserta rapat!');
         }
@@ -77,7 +83,7 @@ class RapatController extends Controller
         DB::table('rapat')
             ->where('slug', $slug)
             ->update([
-                'peserta' => '#'.$request->userabsen
+                'peserta' => $rapat[0]->peserta.'#'.$request->userabsen
             ]);
         return back()->with('success', 'Berhasil absen!');
     }
@@ -103,5 +109,6 @@ class RapatController extends Controller
                 'penyelenggara' => $request->penyelenggara,
                 'kategori_peserta' => '#' .$kategori,
             ]);
+        return back()->with('success', 'Berhasil update jadwal!');
     }
 }

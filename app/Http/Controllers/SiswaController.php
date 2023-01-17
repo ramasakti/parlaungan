@@ -163,7 +163,10 @@ class SiswaController extends Controller
                 'keterangan' => '',
             ]);
             
-        return back()->with('siswa', 'uk-active');
+        return back()->with('siswa', [
+            'active' => 'uk-active',
+            'success' => 'Berhasil tambah siswa!'
+        ]);
     }
 
     public function updateSiswa(Request $request)
