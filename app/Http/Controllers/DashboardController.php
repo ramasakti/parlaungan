@@ -62,8 +62,11 @@ class DashboardController extends Controller
         return $dataTerlambat;
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->cookie('username') != NULL) {
+            return redirect('/absen/engine');
+        }
         return view('dashboard', [
             'title' => 'Dashboard',
             'navactive' => 'dashboard',
@@ -74,7 +77,7 @@ class DashboardController extends Controller
             'dataQR' => QrCode::size(200)->generate(session('username')),
             'dataAbsen' => $this->diagramAbsen(),
             'rangeTanggal' => $this->batasBawah(),
-            'dataTerlambat' => $this->dataTerlambat(),
+            'dataTerlambat' => $this->dataTerlambat()
         ]);
     }
 
