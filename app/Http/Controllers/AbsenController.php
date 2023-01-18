@@ -60,30 +60,36 @@ class AbsenController extends Controller
 
     public function updateAbsen(Request $request)
     {
+        $jamMasuk = $this->jamSekarang();
+        $dataAbsen = DB::table('absen')->where('id_siswa', $request->id_siswa)->get();
+
+        if ($dataAbsen[0]->waktu_absen != NULL) {
+            return back()->with('bePresent', 'Sudah absen');
+        }
+
         if ($request->keterangan === 'Hadir'){
-            $dataAbsen = DB::table('absen')->where('id_siswa', $request->id_siswa)->get();
-            if ($dataAbsen[0]->waktu_absen != NULL) {
-                return back()->with('bePresent', 'Sudah absen');
-            }
-
-            $jamMasuk = $this->jamSekarang();
-            if (date('H:i:s') > $jamMasuk[0]->masuk){
-                DB::table('absen')->where('id_siswa', $request->id_siswa)->increment('jumlah_terlambat');
-                DB::table('rekap_siswa')
-                    ->insert([
-                        'tanggal' => date('Y-m-d'),
-                        'siswa_id' => $request->id_siswa,
-                        'keterangan' => 'T',
-                        'waktu_absen' => date('H:i:s')
-                    ]);
-            }
-
             DB::table('absen')
                 ->where('id_siswa', $request->id_siswa)
                 ->update([
-                    'waktu_absen' => date('H:i:s'),
+                    'waktu_absen' => date('06:30:00'),
                     'izin' => NULL,
                     'keterangan' => ''
+                ]);
+        }elseif ($request->keterangan == 'Terlambat'){
+            DB::table('absen')->where('id_siswa', $request->id_siswa)->increment('jumlah_terlambat');
+            DB::table('absen')
+                ->where('id_siswa', $request->id_siswa)
+                ->update([
+                    'waktu_absen' => date('06:50:01'),
+                    'izin' => NULL,
+                    'keterangan' => ''
+                ]);
+            DB::table('rekap_siswa')
+                ->insert([
+                    'tanggal' => date('Y-m-d'),
+                    'siswa_id' => $request->id_siswa,
+                    'keterangan' => 'T',
+                    'waktu_absen' => date('H:i:s')
                 ]);
         }else{
             DB::table('absen')
@@ -94,7 +100,7 @@ class AbsenController extends Controller
                     'izin' => date('Y-m-d')
                 ]);
         }
-        return back();
+        return back()->with('success', 'Berhasil update absen!');
     }
 
     public function reset()

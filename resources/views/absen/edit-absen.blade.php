@@ -17,6 +17,7 @@
                     <option {{ ($siswa->keterangan === 'I') ? 'selected' : '' }} value="I">Izin</option>
                     <option {{ ($siswa->keterangan === 'A') ? 'selected' : '' }} value="A">Alfa</option>
                     <option value="Hadir">Hadir</option>
+                    <option value="Terlambat">Terlambat</option>
                 </select>
             </div>
             <button id="bEditAbsen" type="submit" class="uk-button uk-button-primary uk-button-small" onclick="updateAbsen()" onsubmit="updateAbsen()">Simpan</button>
