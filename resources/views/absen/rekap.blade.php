@@ -1,6 +1,7 @@
 <div class="uk-margin">
     <h5>Rekap Absen Siswa</h5>
-    <p><a href="" uk-icon="future" class="uk-margin"></a></p>
+    <p><a href="#modal-center" uk-toggle="target: #reset-absen" uk-icon="future" class="uk-margin"></a></p>
+    @include('absen.reset')
 </div>
 <table class="uk-table uk-table-hover uk-table-small">
     <thead>
@@ -14,7 +15,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($dataAbsen as $siswa)    
+        @foreach ($dataAbsen as $siswa) 
             <tr>
                 <td>{{ $ai++ }}</td>
                 <td>{{ $siswa->nama_siswa }}</td>

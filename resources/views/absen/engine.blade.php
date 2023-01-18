@@ -37,6 +37,7 @@
                 <input type="text" class="input" name="userabsen" style="outline: 0ch" id="userabsen" autofocus autocomplete="off" required>
                 <input id="submitButton" class="button" type="submit" hidden>
             </form>
+            
             @if (session()->has('unregistered'))
                 <div class="uk-alert-danger" uk-alert>
                     <p>{{ session('unregistered') }}</p>

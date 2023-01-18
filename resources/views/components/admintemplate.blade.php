@@ -54,7 +54,7 @@
         <div class="sidebar-menu">
             <div class="sidebar-header">
                 <div class="logo">
-                    <a href="#"><img src="/img/mid-white.png" class="uk-border-circle" alt="logo"></a>
+                    <a href="#"><img src="/img/logo.png" class="uk-border-circle" alt="logo"></a>
                 </div>
             </div>
             <div class="main-menu">

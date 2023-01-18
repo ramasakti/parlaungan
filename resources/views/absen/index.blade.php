@@ -1,4 +1,11 @@
 <x-admintemplate title='{{ $title }}' navactive='{{ $navactive }}'>
+    @if (session()->has('success'))
+        <div class="uk-alert-success" uk-alert>
+            <a class="uk-alert-close" uk-close></a>
+            <p>{{ session('success') }}</p>
+        </div>
+    @endif
+
     <ul uk-tab>
         <li class="{{ (session()->has('absen')) ? 'uk-active' : '' }}"><a href="#">Absen</a></li>
         <li><a href="#">Keterlambatan</a></li>
