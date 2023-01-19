@@ -22,24 +22,17 @@
     </thead>
     <tbody>
         @foreach ($dataAbsen as $siswa)
-            @php
-                $sakit = DB::table('rekap_siswa')
-                            ->where('siswa_id', $siswa->id_siswa)
-                            ->where('keterangan', $siswa->id_siswa)
-                            ->get();
-                dd($rekap);
-            @endphp
             <tr>
                 <td>{{ $ai++ }}</td>
                 <td>{{ $siswa->nama_siswa }}</td>
                 <td>
-                    {{ substr_count($rekap->keterangan, 'S') }}
+                    {{ substr_count($siswa->keterangan, 'S') }}
                 </td>
                 <td>
-                    {{ substr_count($rekap->keterangan, 'I') }}
+                    {{ substr_count($siswa->keterangan, 'I') }}
                 </td>
                 <td>
-                    {{ substr_count($rekap->keterangan, 'A') }}
+                    {{ substr_count($siswa->keterangan, 'A') }}
                 </td>
                 <td>
                     {{ $siswa->jumlah_terlambat }}
