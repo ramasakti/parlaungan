@@ -42,6 +42,15 @@ class AbsenController extends Controller
         return $dataKetidakhadiran;
     }
 
+    public function rekap()
+    {
+        $rekap = DB::table('siswa')
+                    ->join('rekap_siswa', 'rekap_siswa.siswa_id', '=', 'siswa.id_siswa')
+                    ->where('siswa.kelas_id', request('id_kelas'))
+                    ->get();
+        return $rekap;
+    }
+
     public function index()
     {
         return view('absen.index', [
@@ -52,7 +61,7 @@ class AbsenController extends Controller
             'dataKelas' => DB::table('kelas')->get(),
             'kelasSelected' => DB::table('kelas')->where('id_kelas', request('id_kelas'))->get(),
             'jamMasuk' => DB::table('hari')->where('nama_hari', Carbon::now()->isoFormat('dddd'))->get(),
-            'dataAbsen' => $this->absen()->where('siswa.kelas_id', request('id_kelas'))->orderBy('siswa.nama_siswa')->get(),
+            'dataAbsen' => $this->absen()->where('siswa.kelas_id', request('id_kelas'))->orderBy('siswa.id_siswa')->get(),
             'dataTerlambat' => $this->terlambat()->get(),
             'dataKetidakhadiran' => $this->ketidakhadiran()->get(),
         ]);

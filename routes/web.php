@@ -11,6 +11,7 @@ use App\Http\Controllers\AbsenController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RapatController;
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\InfrastrukturIOT;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\JadwalController;
@@ -142,3 +143,6 @@ Route::post('/rapat/delete', [RapatController::class, 'delete']);
 Route::post('/rapat/update', [RapatController::class, 'update']);
 Route::get('/rapat/{slug}', [RapatController::class, 'detail']);
 Route::post('/rapat/{slug}', [RapatController::class, 'engine']);
+
+//Infrastruktur IOT dan Otomasi
+Route::get('/infrastruktur', [InfrastrukturIOT::class, 'restapi']);
