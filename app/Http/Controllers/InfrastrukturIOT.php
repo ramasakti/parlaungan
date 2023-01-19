@@ -10,10 +10,6 @@ class InfrastrukturIOT extends Controller
 {
     public function restapi()
     {
-        return response()->json([
-            'id' => 1,
-            'nama' => 'Muhamad',
-            'status' => 1,
-        ]);
+        return response('panasonic');
     }
 }
