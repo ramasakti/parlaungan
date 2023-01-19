@@ -10,8 +10,8 @@ class InfrastrukturIOT extends Controller
 {
     public function restapi()
     {
-        return response()->json([
+        return response()->json(
             DB::table('infrastruktur')->get()
-        ]);
+        );
     }
 }
