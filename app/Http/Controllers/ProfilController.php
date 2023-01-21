@@ -45,6 +45,20 @@ class ProfilController extends Controller
         return back()->with('biodata', 'Berhasil update biodata!');
     }
 
+    public function updateAkun(Request $request)
+    {
+        $user = DB::table('user')->where('username', $request->username)->get();
+        if (bcrypt($request->passwordLama) != $user[0]->password) {
+            return back()->with('fail', 'Masukkan password lama dengan benar!');
+        }
+        DB::table('user')
+            ->where('username', $request->username)
+            ->update([
+                'password' => bcrypt($request->passwordBaru),
+            ]);
+        return back();
+    }
+
     public function siswa()
     {
         return DB::table('siswa')

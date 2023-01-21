@@ -76,6 +76,7 @@ Route::post('/user/update', [UserController::class, 'updateUser'])->middleware('
 
 //Profil
 Route::post('/biodata/update', [ProfilController::class, 'updateBiodata']);
+Route::post('/profile/updateAkun', [ProfilController::class, 'updateAkun']);
 
 //Sekolah
 Route::get('/sekolah', [SekolahController::class, 'index'])->middleware('auth');

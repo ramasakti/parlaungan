@@ -1,9 +1,11 @@
 <div class="container">
-    <form class="uk-form-horizontal uk-margin-small mt-3" method="POST" action="/profile/updatePassword">
+    @csrf
+    <form class="uk-form-horizontal uk-margin-small mt-3" method="POST" action="/profile/updateAkun">
+        @csrf
         <div class="uk-margin">
             <label class="uk-form-label" for="form-horizontal-text">Username</label>
             <div class="uk-form-controls">
-                <input class="uk-input" id="form-horizontal-text" type="text" value="{{ session('username') }}" readonly disabled>
+                <input class="uk-input" id="form-horizontal-text" name="username" type="text" value="{{ session('username') }}" readonly>
             </div>
         </div>
 

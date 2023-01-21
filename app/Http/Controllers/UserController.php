@@ -123,6 +123,7 @@ class UserController extends Controller
         DB::table('user')
             ->where('username', $request->username)
             ->update([
+                'password' => bcrypt($request->password),
                 'foto' => '',
                 'status' => $request->status,
             ]);
