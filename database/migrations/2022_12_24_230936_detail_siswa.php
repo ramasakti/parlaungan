@@ -48,6 +48,6 @@ class DetailSiswa extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('detail_siswa');
     }
 }

@@ -26,6 +26,6 @@ class JenisTinggal extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('jenis_tinggal');
     }
 }

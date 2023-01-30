@@ -22,17 +22,25 @@
     </thead>
     <tbody>
         @foreach ($dataAbsen as $siswa)
+        @php
+            $rekap = DB::table('siswa')
+                        ->select('siswa.id_siswa', 'siswa.nama_siswa', DB::raw('COUNT(rekap_siswa.keterangan)'))
+                        ->join('rekap_siswa', 'rekap_siswa.siswa_id', '=', 'siswa.id_siswa')
+                        ->where('siswa.id_siswa', $siswa->id_siswa)
+                        ->groupBy('rekap_siswa.siswa_id')
+                        ->get();
+        @endphp
             <tr>
                 <td>{{ $ai++ }}</td>
                 <td>{{ $siswa->nama_siswa }}</td>
                 <td>
-                    {{ substr_count($siswa->keterangan, 'S') }}
+                    {{ substr_count($siswa->rekap, 'S') }}
                 </td>
                 <td>
-                    {{ substr_count($siswa->keterangan, 'I') }}
+                    {{ substr_count($siswa->rekap, 'I') }}
                 </td>
                 <td>
-                    {{ substr_count($siswa->keterangan, 'A') }}
+                    {{ substr_count($siswa->rekap, 'A') }}
                 </td>
                 <td>
                     {{ $siswa->jumlah_terlambat }}

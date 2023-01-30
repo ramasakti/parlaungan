@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Transportasi extends Migration
+class Pesan extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class Transportasi extends Migration
      */
     public function up()
     {
-        Schema::create('transportasi', function (Blueprint $table) {
-            $table->increments('id_transport');
-            $table->string('transport');
+        Schema::create('pesan', function (Blueprint $table) {
+            $table->increments('id_pesan');
+            $table->string('nama_pesan');
+            $table->text('isi_pesan');
         });
     }
 
@@ -26,6 +27,6 @@ class Transportasi extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('transportasi');
+        Schema::dropIfExists('pesan');
     }
 }

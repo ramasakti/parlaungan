@@ -27,6 +27,6 @@ class Infrastruktur extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('infrastruktur');
     }
 }

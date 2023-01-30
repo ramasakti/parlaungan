@@ -16,8 +16,6 @@ class CreateAbsenTable extends Migration
         Schema::create('absen', function (Blueprint $table) {
             $table->string('id_siswa')->primary();
             $table->time('waktu_absen')->nullable();
-            $table->text('rekap');
-            $table->integer('jumlah_terlambat');
             $table->date('izin')->nullable();
             $table->char('keterangan', '1');
         });

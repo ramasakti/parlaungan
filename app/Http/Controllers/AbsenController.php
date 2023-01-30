@@ -32,7 +32,7 @@ class AbsenController extends Controller
                         ->where('waktu_absen', '>', $jamMasuk[0]->masuk);
         return $dataTerlambat;
     }
-
+ 
     public function ketidakhadiran()
     {
         $dataKetidakhadiran = DB::table('absen')
@@ -45,8 +45,10 @@ class AbsenController extends Controller
     public function rekap()
     {
         $rekap = DB::table('siswa')
+                    ->select('siswa.id_siswa', 'siswa.nama_siswa', DB::raw("COUNT(keterangan) WHERE"))
                     ->join('rekap_siswa', 'rekap_siswa.siswa_id', '=', 'siswa.id_siswa')
-                    ->where('siswa.kelas_id', request('id_kelas'))
+                    ->where('siswa.id_siswa', request('id_kelas'))
+                    ->groupBy('rekap_siswa.siswa_id')
                     ->get();
         return $rekap;
     }
@@ -63,7 +65,7 @@ class AbsenController extends Controller
             'jamMasuk' => DB::table('hari')->where('nama_hari', Carbon::now()->isoFormat('dddd'))->get(),
             'dataAbsen' => $this->absen()->where('siswa.kelas_id', request('id_kelas'))->orderBy('siswa.id_siswa')->get(),
             'dataTerlambat' => $this->terlambat()->get(),
-            'dataKetidakhadiran' => $this->ketidakhadiran()->get(),
+            'dataKetidakhadiran' => $this->ketidakhadiran()->get()
         ]);
     }
 

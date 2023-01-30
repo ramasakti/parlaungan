@@ -5,7 +5,7 @@
         <div class="uk-margin">
             <label class="uk-form-label" for="form-horizontal-text">Username</label>
             <div class="uk-form-controls">
-                <input class="uk-input" id="form-horizontal-text" name="username" type="text" value="{{ session('username') }}" readonly>
+                <input class="uk-input" name="username" type="text" value="{{ session('username') }}" readonly>
             </div>
         </div>
 
@@ -13,8 +13,8 @@
             <label class="uk-form-label" for="form-horizontal-text">Password Lama</label>
             <div class="uk-form-controls">
                 <div class="uk-inline uk-width-1-1">
-                    <a class="uk-form-icon uk-form-icon-flip" href="#" id="passwordLama" onclick="showhidePassLama()" uk-icon="icon: lock"></a>
-                    <input class="uk-input" name="passwordLama" id="form-horizontal-text" type="password">
+                    <a class="uk-form-icon uk-form-icon-flip" href="#" onclick="showHide('passwordLama', '{{ session('username') }}')" uk-icon="icon: lock"></a>
+                    <input class="uk-input" name="passwordLama" value="{{ session('username') }}" type="password">
                 </div>
             </div>
         </div>
@@ -24,7 +24,7 @@
             <div class="uk-form-controls">
                 <div class="uk-inline uk-width-1-1">
                     <a class="uk-form-icon uk-form-icon-flip" href="#" id="passwordBaru" uk-icon="icon: lock"></a>
-                    <input class="uk-input" name="passwordBaru" id="form-horizontal-text" type="password">
+                    <input class="uk-input" name="passwordBaru" type="password">
                 </div>
             </div>
         </div>
@@ -34,7 +34,7 @@
             <div class="uk-form-controls">
                 <div class="uk-inline uk-width-1-1">
                     <a class="uk-form-icon uk-form-icon-flip" href="#" uk-icon="icon: lock"></a>
-                    <input class="uk-input" name="passwordConfirm" id="form-horizontal-text" type="password">
+                    <input class="uk-input" name="passwordConfirm" type="password">
                 </div>
             </div>
         </div>
@@ -42,3 +42,9 @@
         <button class="uk-button uk-button-primary uk-width-1-1 uk-margin" type="submit">Simpan</button>
     </form>
 </div>
+<script>
+    const showHide = (id, value) => {
+        const passwordLama = document.getElementsByName('passwordLama')
+        const 
+    }
+</script>

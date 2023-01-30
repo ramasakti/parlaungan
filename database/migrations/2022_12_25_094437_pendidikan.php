@@ -26,6 +26,6 @@ class Pendidikan extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('pendidikan');
     }
 }
