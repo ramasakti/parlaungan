@@ -23,10 +23,43 @@
     <tbody>
         @foreach ($dataAbsen as $siswa)
         @php
-            $rekap = DB::table('siswa')
-                        ->select('siswa.id_siswa', 'siswa.nama_siswa', DB::raw('COUNT(rekap_siswa.keterangan)'))
+            $sakit = DB::table('siswa')
+                        ->select(DB::raw('COUNT(rekap_siswa.keterangan) AS sakit'))
                         ->join('rekap_siswa', 'rekap_siswa.siswa_id', '=', 'siswa.id_siswa')
+                        ->where('rekap_siswa.keterangan', 'S')
                         ->where('siswa.id_siswa', $siswa->id_siswa)
+                        ->where('rekap_siswa.tanggal', '>=', request('mulai'))
+                        ->where('rekap_siswa.tanggal', '<=', request('sampai'))
+                        ->groupBy('rekap_siswa.siswa_id')
+                        ->get();
+            
+            $alfa = DB::table('siswa')
+                        ->select(DB::raw('COUNT(rekap_siswa.keterangan) AS alfa'))
+                        ->join('rekap_siswa', 'rekap_siswa.siswa_id', '=', 'siswa.id_siswa')
+                        ->where('rekap_siswa.keterangan', 'A')
+                        ->where('siswa.id_siswa', $siswa->id_siswa)
+                        ->where('rekap_siswa.tanggal', '>=', request('mulai'))
+                        ->where('rekap_siswa.tanggal', '<=', request('sampai'))
+                        ->groupBy('rekap_siswa.siswa_id')
+                        ->get();
+
+            $izin = DB::table('siswa')
+                        ->select(DB::raw('COUNT(rekap_siswa.keterangan) AS izin'))
+                        ->join('rekap_siswa', 'rekap_siswa.siswa_id', '=', 'siswa.id_siswa')
+                        ->where('rekap_siswa.keterangan', 'I')
+                        ->where('siswa.id_siswa', $siswa->id_siswa)
+                        ->where('rekap_siswa.tanggal', '>=', request('mulai'))
+                        ->where('rekap_siswa.tanggal', '<=', request('sampai'))
+                        ->groupBy('rekap_siswa.siswa_id')
+                        ->get();
+
+            $terlambat = DB::table('siswa')
+                        ->select(DB::raw('COUNT(rekap_siswa.keterangan) AS terlambat'))
+                        ->join('rekap_siswa', 'rekap_siswa.siswa_id', '=', 'siswa.id_siswa')
+                        ->where('rekap_siswa.keterangan', 'T')
+                        ->where('siswa.id_siswa', $siswa->id_siswa)
+                        ->where('rekap_siswa.tanggal', '>=', request('mulai'))
+                        ->where('rekap_siswa.tanggal', '<=', request('sampai'))
                         ->groupBy('rekap_siswa.siswa_id')
                         ->get();
         @endphp
@@ -34,7 +67,11 @@
                 <td>{{ $ai++ }}</td>
                 <td>{{ $siswa->nama_siswa }}</td>
                 <td>
-                    {{ substr_count($siswa->rekap, 'S') }}
+                    @if (count($sakit) > 0)
+                        {{ $sakit[0]->sakit }}
+                    @else
+                        0
+                    @endif
                 </td>
                 <td>
                     {{ substr_count($siswa->rekap, 'I') }}

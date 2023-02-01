@@ -40,11 +40,6 @@ class Rekap extends Command
         return $cekHari;
     }
 
-    /**
-     * Execute the console command.
-     *
-     * @return int
-     */
     public function handle()
     {
         //Cek Pengondisian Hari Libur/Minggu
@@ -66,7 +61,7 @@ class Rekap extends Command
 
                 //Ambil data keterangan absen siswa untuk direkap
                 $dataRekap = DB::table('absen')
-                    ->select('id_siswa','rekap', 'keterangan')
+                    ->select('id_siswa', 'keterangan')
                     ->where('keterangan', '!=', '')
                     ->get();
 
@@ -77,32 +72,19 @@ class Rekap extends Command
                     ->get();
 
                 foreach ($dataRekap as $updateRekap) {
-                    DB::table('absen')
-                        ->where('id_siswa', $updateRekap->id_siswa)
-                        ->update([
-                            'rekap' => $updateRekap->rekap ."". $updateRekap->keterangan
+                    DB::table('rekap_siswa')
+                        ->insert([
+                            'tanggal' => date('Y-m-d'),
+                            'siswa_id' => $updateRekap->id_siswa,
+                            'keterangan' => $updateRekap->keterangan,
+                            'waktu_absen' => NULL
                         ]);
                 }
-                
-                $absen = DB::table('absen')
-                            ->select('id_siswa', 'keterangan')
-                            ->where('keterangan', '!=')
-                            ->get();
 
                 $terlambat = DB::table('absen')
                                 ->select('id_siswa', 'waktu_absen')
                                 ->where('waktu_absen', '>', $this->hariIni()[0]->masuk)
                                 ->get();
-
-                foreach ($absen as $siswa) {
-                    DB::table('rekap_siswa')
-                        ->insert([
-                            'tanggal' => date('Y-m-d'),
-                            'siswa_id' => $siswa->id_siswa,
-                            'keterangan' => $siswa->keterangan,
-                            'waktu_absen' => NULL
-                        ]);
-                }
 
                 foreach ($terlambat as $siswaTerlambat) {
                     DB::table('rekap_siswa')
