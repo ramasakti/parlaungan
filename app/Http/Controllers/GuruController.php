@@ -11,10 +11,11 @@ class GuruController extends Controller
 {
     public function jampel()
     {
-        return DB::table('hari')
+        $jampel = DB::table('hari')
                     ->select(DB::raw('TIME_TO_SEC(jampel)/60 as jampel'))
                     ->where('nama_hari', Carbon::now()->isoFormat('dddd'))
                     ->get();
+        return intval(array_column($jampel->toArray(), 'jampel')[0]);
     }
     
     public function nominal()

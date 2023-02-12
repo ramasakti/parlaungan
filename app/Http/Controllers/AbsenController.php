@@ -195,6 +195,13 @@ class AbsenController extends Controller
             if (count($siswaAbsen) > 0){
                 if ($siswaAbsen[0]->waktu_absen === NULL){
                     $jamMasuk = jam();
+                    DB::table('absen')
+                        ->where('id_siswa', $siswaAbsen[0]->id_siswa)
+                        ->update([
+                            'waktu_absen' => date('H:i:s'),
+                            'izin' => NULL,
+                            'keterangan' => ''
+                        ]);
                     if (date('H:i:s') > $jamMasuk[0]->masuk){
                         DB::table('rekap_siswa')
                             ->insert([
@@ -204,13 +211,6 @@ class AbsenController extends Controller
                                 'waktu_absen' => date('H:i:s')
                             ]);
                     }
-                    DB::table('absen')
-                        ->where('id_siswa', $siswaAbsen[0]->id_siswa)
-                        ->update([
-                            'waktu_absen' => date('H:i:s'),
-                            'izin' => NULL,
-                            'keterangan' => '',
-                        ]);
                     return back()->with('success', $siswaAbsen[0]->nama_siswa);
                 }else{
                     return back()->with('bePresent', $siswaAbsen[0]->nama_siswa);

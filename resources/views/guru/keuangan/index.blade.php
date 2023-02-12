@@ -48,7 +48,6 @@
                                 ->groupBy('penginval')
                                 ->get();
                 
-                $sia = DB::table('inval')
             @endphp
             <tbody>
                 <tr>

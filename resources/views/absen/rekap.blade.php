@@ -8,9 +8,9 @@
                 @endforeach
             </select>
             <p class="uk-margin-small-top">Dari</p>
-            <input class="uk-input" type="date" name="mulai" id="mulai" required>
+            <input class="uk-input" type="date" name="mulai" id="mulai" value="{{ request('mulai') }}" required>
             <p class="uk-margin-small-top">Sampai</p>
-            <input class="uk-input" type="date" name="sampai" id="sampai" required>
+            <input class="uk-input" type="date" name="sampai" id="sampai" value="{{ request('sampai') }}" required>
             <button type="submit" class="uk-button uk-margin uk-width-1-1 uk-button-primary uk-button-small">TAMPILKAN</button>
         </div>
     </form>

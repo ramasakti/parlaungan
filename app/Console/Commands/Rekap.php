@@ -40,6 +40,15 @@ class Rekap extends Command
         return $hariIni;
     }
 
+    public function jampel()
+    {
+        $jampel = DB::table('hari')
+                    ->select(DB::raw('TIME_TO_SEC(jampel)/60 as jampel'))
+                    ->where('nama_hari', Carbon::now()->isoFormat('dddd'))
+                    ->get();
+        return intval(array_column($jampel->toArray(), 'jampel')[0]);
+    }
+
     public function handle()
     {
         //Cek Pengondisian Hari Libur/Minggu
@@ -49,7 +58,9 @@ class Rekap extends Command
                         ->where('sampai', '>=', date('Y-m-d'))
                         ->get();
 
+        //Cek apakah hari aktif
         if (count($cekHari->status) == TRUE){
+            //Cek apakah bukan hari libur
             if (count($cekLibur) == 0){
                 //Update ke alfa jika belum diset status hadirnya
                 DB::table('absen')
@@ -103,7 +114,7 @@ class Rekap extends Command
                             'tanggal' => date('Y-m-d'),
                             'jadwal_id' => $insertJadwal->id,
                             'masuk' => $insertJadwal->mulai,
-                            'lama' => (strtotime($insertJadwal->sampai)-strtotime($insertJadwal->mulai))/40/60,
+                            'lama' => (strtotime($insertJadwal->sampai)-strtotime($insertJadwal->mulai))/$this->jampel()/60,
                             'transport' => 0,
                             'materi' => "Libur"
                         ]);
