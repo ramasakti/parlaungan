@@ -155,8 +155,6 @@ class SiswaController extends Controller
             ->insert([
                 'id_siswa' => $request->id_siswa,
                 'waktu_absen' => NULL,
-                'rekap' => '',
-                'jumlah_terlambat' => 0,
                 'izin' => NULL,
                 'keterangan' => '',
             ]);

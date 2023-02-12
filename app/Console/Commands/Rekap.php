@@ -49,7 +49,7 @@ class Rekap extends Command
                         ->where('sampai', '>=', date('Y-m-d'))
                         ->get();
 
-        if (count($cekHari->status) == TRUE) {
+        if (count($cekHari->status) == TRUE){
             if (count($cekLibur) == 0){
                 //Update ke alfa jika belum diset status hadirnya
                 DB::table('absen')
