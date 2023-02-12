@@ -35,9 +35,9 @@ class Rekap extends Command
     
     public function hariIni()
     {
-        $cekHari = DB::table('hari')
+        $hariIni = DB::table('hari')
                     ->where('nama_hari', Carbon::now()->isoFormat('dddd'))->get();
-        return $cekHari;
+        return $hariIni;
     }
 
     public function handle()
@@ -49,7 +49,7 @@ class Rekap extends Command
                         ->where('sampai', '>=', date('Y-m-d'))
                         ->get();
 
-        if (count($cekHari) > 0){
+        if (count($cekHari->status) == TRUE) {
             if (count($cekLibur) == 0){
                 //Update ke alfa jika belum diset status hadirnya
                 DB::table('absen')

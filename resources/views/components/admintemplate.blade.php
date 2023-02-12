@@ -69,6 +69,15 @@
                                     <a href="/web"><span>Web</span></a>
                                 </li>
                             </li>
+                            @php
+                                if (date('d') <= 15) {
+                                    $mulai = date('Y-m-d', strtotime('-1 month', strtotime(date('Y-m-15'))));
+                                    $sampai = date('Y-m-15');
+                                }else{
+                                    $mulai = date('Y-m-15');
+                                    $sampai = date('Y-m-d', strtotime('+1 month', strtotime(date('Y-m-15'))));
+                                }
+                            @endphp
                             @switch(session('status'))
                                 @case('Admin')
                                     <li class="{{ ($navactive === 'rapat' ? 'active' : '') }}">
@@ -85,6 +94,7 @@
                                         <ul class="collapse">
                                             <li><a href="/siswa">Data Siswa</a></li>
                                             <li><a href="/absen">Absen Siswa</a></li>
+                                            <li><a href="/absen/rekap">Rekap Absen Siswa</a></li>
                                             <li><a href="/siswa/keuangan">Keuangan Siswa</a></li>
                                         </ul>
                                     </li>
@@ -92,15 +102,6 @@
                                         <a href="javascript:void(0)" aria-expanded="true"><span>Guru</span></a>
                                         <ul class="collapse">
                                             <li><a href="/guru">Data Guru</a></li>
-                                            @php
-                                                if (date('d') <= 15) {
-                                                    $mulai = date('Y-m-d', strtotime('-1 month', strtotime(date('Y-m-15'))));
-                                                    $sampai = date('Y-m-15');
-                                                }else{
-                                                    $mulai = date('Y-m-15');
-                                                    $sampai = date('Y-m-d', strtotime('+1 month', strtotime(date('Y-m-15'))));
-                                                }
-                                            @endphp
                                             <li><a href="/guru/keuangan?dari={{ $mulai }}&sampai={{ $sampai }}">Keuangan Guru</a></li>
                                         </ul>
                                     </li>
@@ -118,6 +119,7 @@
                                         <ul class="collapse">
                                             <li><a href="/siswa">Data Siswa</a></li>
                                             <li><a href="/absen">Absen Siswa</a></li>
+                                            <li><a href="/absen/rekap">Rekap Absen Siswa</a></li>
                                             <li><a href="/siswa/keuangan">Keuangan Siswa</a></li>
                                         </ul>
                                     </li>
@@ -162,6 +164,7 @@
                                         <ul class="collapse">
                                             <li><a href="/siswa">Data Siswa</a></li>
                                             <li><a href="/absen">Absen Siswa</a></li>
+                                            <li><a href="/absen/rekap">Rekap Absen Siswa</a></li>
                                             <li><a href="/siswa/keuangan">Keuangan Siswa</a></li>
                                         </ul>
                                     </li>
@@ -179,6 +182,7 @@
                                         @if (session('piket'))
                                             <li class="{{ ($navactive === 'siswa' ? 'active' : '') }}">
                                                 <a href="/absen"><span>Absen Siswa</span></a>
+                                                <li><a href="/absen/rekap">Rekap Absen Siswa</a></li>
                                             </li>
                                         @endif
                                     @endif

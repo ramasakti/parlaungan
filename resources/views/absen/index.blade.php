@@ -10,7 +10,6 @@
         <li class="{{ (session()->has('absen')) ? 'uk-active' : '' }}"><a href="#">Absen</a></li>
         <li><a href="#">Keterlambatan</a></li>
         <li><a href="#">Ketidakhadiran</a></li>
-        <li class="{{ (session()->has('rekap')) ? 'uk-active' : '' }}"><a href="#">Rekap</a></li>
     </ul>
 
     <ul class="uk-switcher uk-margin">
@@ -22,9 +21,6 @@
         </li>
         <li class="{{ (session()->has('ketidakhadiran')) ? 'uk-active' : '' }}">
             @include('absen.ketidakhadiran')
-        </li>
-        <li class="{{ (session()->has('rekap')) ? 'uk-active' : '' }}">
-            @include('absen.rekap')
         </li>
     </ul>
 </x-admintemplate>

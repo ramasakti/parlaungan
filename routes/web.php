@@ -109,6 +109,7 @@ Route::post('/pembayaran/payment', [KeuanganSiswa::class, 'payment'])->middlewar
 //Absen
 Route::get('/absen', [AbsenController::class, 'index'])->middleware('auth');
 Route::post('/absen/update', [AbsenController::class, 'updateAbsen'])->middleware('auth');
+Route::get('/absen/rekap', [AbsenController::class, 'rekap'])->middleware('auth');
 Route::get('/absen/reset', [AbsenController::class, 'reset'])->middleware('auth');
 //Engine Absen RFID
 Route::get('/absen/engine', [AbsenController::class, 'viewEngine']);

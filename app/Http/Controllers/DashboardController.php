@@ -15,7 +15,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class DashboardController extends Controller
 {
-    public function jamSekarang()
+    public function hariIni()
     {
         $jamMasuk = DB::table('hari')
                         ->where('nama_hari', Carbon::now()->isoFormat('dddd'))
@@ -26,10 +26,11 @@ class DashboardController extends Controller
     public function diagramAbsen()
     {
         $hadir = DB::table('absen')
-                    ->where('waktu_absen', '<', $this->jamSekarang()[0]->masuk)
+                    ->where('waktu_absen', '<', $this->hariIni()[0]->masuk)
                     ->get();
-        $terlambat = DB::table('absen')
-                        ->where('waktu_absen', '>', $this->jamSekarang()[0]->masuk)
+        $terlambat = DB::table('rekap_siswa')
+                        ->where('keterangan', 'T')
+                        ->where('tanggal', date('Y-m-d'))
                         ->get();
         $izin = DB::table('absen')
                     ->where('keterangan', 'I')
@@ -50,16 +51,17 @@ class DashboardController extends Controller
         return $range;
     }
 
-    public function dataTerlambat()
+    public function grafikMingguan()
     {
-        $dataTerlambat = DB::table('rekap_siswa')
+        $dataGrafik = DB::table('rekap_siswa')
                             ->select('tanggal', DB::raw("COUNT(tanggal) as terlambat"))
-                            ->where('tanggal', '>=', $this->batasBawah())
                             ->where('tanggal', '<=', date('Y-m-d'))
                             ->where('keterangan', 'T')
                             ->groupBy('tanggal')
+                            ->orderBy('tanggal', 'DESC')
+                            ->limit(7)
                             ->get()->toArray();
-        return $dataTerlambat;
+        return $dataGrafik;
     }
 
     public function index(Request $request)
@@ -75,9 +77,9 @@ class DashboardController extends Controller
             'dataKelas' => count(DB::table('kelas')->get()),
             'detailUser' => $this->userCard(),
             'dataQR' => QrCode::size(200)->generate(session('username')),
-            'dataAbsen' => $this->diagramAbsen(),
+            'diagramAbsen' => $this->diagramAbsen(),
             'rangeTanggal' => $this->batasBawah(),
-            'dataTerlambat' => $this->dataTerlambat()
+            'grafikMingguan' => $this->grafikMingguan()
         ]);
     }
 

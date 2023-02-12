@@ -22,6 +22,9 @@
                     @endforeach
                 </select>
             </div>
+            <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
+                <label><input class="uk-checkbox" type="checkbox" {{ ($hari->status == TRUE) ? 'checked' : ''}}> &nbsp; Aktif</label>
+            </div>
             <button type="submit" class="uk-button uk-button-primary uk-button-small">Simpan</button>
         </form>
     </div>

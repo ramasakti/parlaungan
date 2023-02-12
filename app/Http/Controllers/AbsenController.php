@@ -44,13 +44,13 @@ class AbsenController extends Controller
 
     public function rekap()
     {
-        $rekap = DB::table('siswa')
-                    ->select('siswa.id_siswa', 'siswa.nama_siswa', DB::raw("COUNT(keterangan) WHERE"))
-                    ->join('rekap_siswa', 'rekap_siswa.siswa_id', '=', 'siswa.id_siswa')
-                    ->where('siswa.id_siswa', request('id_kelas'))
-                    ->groupBy('rekap_siswa.siswa_id')
-                    ->get();
-        return $rekap;
+        return view('absen.rekap', [
+            'title' => 'Rekap Absen Siswa',
+            'navactive' => 'siswa',
+            'ai' => 1,
+            'dataKelas' => DB::table('kelas')->get(),
+            'dataSiswa' => DB::table('siswa')->where('kelas_id', request('id_kelas'))->get()
+        ]);
     }
 
     public function index()

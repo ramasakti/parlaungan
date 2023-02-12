@@ -65,9 +65,9 @@
     </div>
     <script type="text/javascript">
         //Data Diagram
-        const dataAbsen = {!! json_encode($dataAbsen) !!}
-        const rangeTanggal = {!! json_encode(array_column($dataTerlambat, 'tanggal')) !!}
-        const dataTerlambat = {!! json_encode(array_column($dataTerlambat, 'terlambat')) !!}
+        const diagramAbsen = {!! json_encode($diagramAbsen) !!}
+        const rangeTanggalGrafik = {!! json_encode(array_column($grafikMingguan, 'tanggal')) !!}
+        const grafikMingguan = {!! json_encode(array_column($grafikMingguan, 'terlambat')) !!}
     </script>
     <script type="text/javascript" src="{{ mix('/js/app.js') }}"></script>
     <script>

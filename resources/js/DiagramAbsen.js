@@ -26,7 +26,7 @@ const data = {
                 'rgb(255, 243, 140)',
                 'rgb(240, 80, 110)'
             ],
-            data: dataAbsen
+            data: diagramAbsen
         },
     ]
 }

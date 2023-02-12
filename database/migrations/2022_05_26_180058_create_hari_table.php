@@ -20,6 +20,7 @@ class CreateHariTable extends Migration
             $table->time('pulang');
             $table->time('jampel');
             $table->string('piket');
+            $table->boolean('status');
         });
 
         Schema::table('hari', function (Blueprint $table) {

@@ -1,5 +1,5 @@
 import Chart from 'chart.js/auto'
-const label = rangeTanggal
+const label = rangeTanggalGrafik
 
 const data = {
     labels: label,
@@ -9,7 +9,7 @@ const data = {
             backgroundColor: 'rgb(250, 160, 90)',
             fill: false,
             borderColor: 'rgb(250, 160, 90)',
-            data: dataTerlambat,
+            data: grafikMingguan,
             tension: 0.1
         },
     ]

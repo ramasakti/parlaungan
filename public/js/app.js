@@ -2077,7 +2077,7 @@ var data = {
     label: 'Data Absen',
     backgroundColor: ['rgb(50, 210, 150)', 'rgb(250, 160, 90)', 'rgb(30, 135, 240)', 'rgb(255, 243, 140)', 'rgb(240, 80, 110)'],
     borderColor: ['rgb(50, 210, 150)', 'rgb(250, 160, 90)', 'rgb(30, 135, 240)', 'rgb(255, 243, 140)', 'rgb(240, 80, 110)'],
-    data: dataAbsen
+    data: diagramAbsen
   }]
 };
 var config = {
@@ -2099,7 +2099,7 @@ new chart_js_auto__WEBPACK_IMPORTED_MODULE_0__["default"](document.getElementByI
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var chart_js_auto__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! chart.js/auto */ "./node_modules/chart.js/auto/auto.js");
 
-var label = rangeTanggal;
+var label = rangeTanggalGrafik;
 var data = {
   labels: label,
   datasets: [{
@@ -2107,7 +2107,7 @@ var data = {
     backgroundColor: 'rgb(250, 160, 90)',
     fill: false,
     borderColor: 'rgb(250, 160, 90)',
-    data: dataTerlambat,
+    data: grafikMingguan,
     tension: 0.1
   }]
 };
