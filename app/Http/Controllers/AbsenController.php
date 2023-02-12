@@ -87,7 +87,6 @@ class AbsenController extends Controller
                     'keterangan' => ''
                 ]);
         }elseif ($request->keterangan == 'Terlambat'){
-            DB::table('absen')->where('id_siswa', $request->id_siswa)->increment('jumlah_terlambat');
             DB::table('absen')
                 ->where('id_siswa', $request->id_siswa)
                 ->update([
@@ -197,7 +196,6 @@ class AbsenController extends Controller
                 if ($siswaAbsen[0]->waktu_absen === NULL){
                     $jamMasuk = jam();
                     if (date('H:i:s') > $jamMasuk[0]->masuk){
-                        DB::table('absen')->where('id_siswa', $siswaAbsen[0]->id_siswa)->increment('jumlah_terlambat');
                         DB::table('rekap_siswa')
                             ->insert([
                                 'tanggal' => date('Y-m-d'),
