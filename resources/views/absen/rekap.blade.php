@@ -7,10 +7,16 @@
                     &nbsp; <option {{ ($kelas->id_kelas === request('id_kelas')) ? 'selected' : '' }} value="{{ $kelas->id_kelas }}">{{ $kelas->tingkat }} {{ $kelas->jurusan }}</option>
                 @endforeach
             </select>
-            <p class="uk-margin-small-top">Dari</p>
-            <input class="uk-input" type="date" name="mulai" id="mulai" value="{{ request('mulai') }}" required>
-            <p class="uk-margin-small-top">Sampai</p>
-            <input class="uk-input" type="date" name="sampai" id="sampai" value="{{ request('sampai') }}" required>
+            <div class="uk-grid-small uk-margin-small-top" uk-grid>
+                <div class="uk-width-1-2@s">
+                    <p>Dari</p>
+                    <input class="uk-input" type="date" name="mulai" id="mulai" value="{{ request('mulai') }}" required>
+                </div>
+                <div class="uk-width-1-2@s">
+                    <p>Sampai</p>
+                    <input class="uk-input" type="date" name="sampai" id="sampai" value="{{ request('sampai') }}" required>
+                </div>
+            </div>
             <button type="submit" class="uk-button uk-margin uk-width-1-1 uk-button-primary uk-button-small">TAMPILKAN</button>
         </div>
     </form>

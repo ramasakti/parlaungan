@@ -1,12 +1,16 @@
 <x-admintemplate title='{{ $title }}' navactive='{{ $navactive }}'>
     <form method="GET">
-        <div class="uk-margin">
-            <input type="date" name="dari" value="{{ request('dari') }}">
-            <input type="date" name="sampai" value="{{ request('sampai') }}">
-            <p class="uk-margin">
-                <button class="uk-button uk-button-primary uk-button-small" type="submit">SHOW</button>
-            </p>
+        <div class="uk-grid-small" uk-grid>
+            <div class="uk-width-1-2@s">
+                <p>Dari</p>
+                <input class="uk-input" type="date" name="dari" value="{{ request('dari') }}">
+            </div>
+            <div class="uk-width-1-2@s">
+                <p>Sampai</p>
+                <input class="uk-input" type="date" name="sampai" value="{{ request('sampai') }}">
+            </div>
         </div>
+        <button class="uk-button uk-margin uk-button-primary uk-button-small uk-width-1-1" type="submit">TAMPILKAN</button>
     </form>
 
     <table class="table table-borderless" id="data-table">
