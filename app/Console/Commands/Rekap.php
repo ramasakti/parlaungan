@@ -59,7 +59,7 @@ class Rekap extends Command
                         ->get();
 
         //Cek apakah hari aktif
-        if (count($cekHari->status) == TRUE){
+        if ($cekHari[0]->status == TRUE){
             //Cek apakah bukan hari libur
             if (count($cekLibur) == 0){
                 //Update ke alfa jika belum diset status hadirnya

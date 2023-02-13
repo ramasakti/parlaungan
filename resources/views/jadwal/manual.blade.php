@@ -24,7 +24,7 @@
                 </select>
             </div>
             <div class="uk-margin">
-                <input name="masuk" placeholder="Mulai" class="textbox-n uk-input" type="text" onfocus="(this.type='time')" id="time" value="{{ $jadwal->mulai }}">
+                <input name="masuk" placeholder="Mulai" class="textbox-n uk-input" type="text" onfocus="(this.type='time')" id="time" value="{{ date('H:i') }}">
             </div>
             <div class="uk-margin">
                 <input name="sampai" placeholder="Sampai" class="textbox-n uk-input" type="text" onfocus="(this.type='time')" id="time" value="{{ $jadwal->sampai }}">
