@@ -587,6 +587,7 @@ class ComposerStaticInit398c4bbcca9c2dd2750d19eedd068038
         'App\\Http\\Controllers\\DashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/DashboardController.php',
         'App\\Http\\Controllers\\GaleriController' => __DIR__ . '/../..' . '/app/Http/Controllers/GaleriController.php',
         'App\\Http\\Controllers\\GuruController' => __DIR__ . '/../..' . '/app/Http/Controllers/GuruController.php',
+        'App\\Http\\Controllers\\InfrastrukturIOT' => __DIR__ . '/../..' . '/app/Http/Controllers/InfrastrukturIOT.php',
         'App\\Http\\Controllers\\JadwalController' => __DIR__ . '/../..' . '/app/Http/Controllers/JadwalController.php',
         'App\\Http\\Controllers\\JurnalController' => __DIR__ . '/../..' . '/app/Http/Controllers/JurnalController.php',
         'App\\Http\\Controllers\\KeuanganSiswa' => __DIR__ . '/../..' . '/app/Http/Controllers/KeuanganSiswa.php',

@@ -60,6 +60,6 @@ class LoginController extends Controller
         $request->session()->forget('username');
         $request->session()->forget('status');
         $request->session()->forget('walas');
-        return redirect()->intended('/login');
+        return redirect()->intended('/');
     }
 }
