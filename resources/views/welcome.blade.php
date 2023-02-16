@@ -58,9 +58,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#about">About</a>
                     </li>
-                    {{-- <li class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link" href="#service">Filosofi</a>
-                    </li>                    --}}
+                    </li>                   
                     <li class="nav-item">
                         <a class="nav-link" href="#portfolio">Galeri</a>
                     </li>
@@ -74,7 +74,7 @@
                         <a class="nav-link" href="#contact">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="- btn btn-primary rounded mb-2" id="openLogin" href="#modal-login" uk-toggle>Login</a>
+                        <a class="- btn btn-primary rounded" id="modalLogin" href="#modal-login" uk-toggle>Login</a>
                         @include('modal-login')
                     </li>
                 </ul>
@@ -88,7 +88,7 @@
         <div class="container">
             <div class="infos">
                 <h6 class="title">SMA Islam</h6>
-                <h6 class="title uk-margin-remove-top">Parlaungan</h6>
+                <h6 class="title">Parlaungan</h6>
 
                 <div class="buttons pt-3">
                     <button class="btn btn-primary rounded">PPDB</button>
@@ -98,7 +98,7 @@
                 <div class="socials mt-4">
                     <a class="social-item" href="https://instagram.com/officialsmaispa"><i class="ti-instagram"></i></a>
                     <a class="social-item" href="https://www.youtube.com/@officialsmaislamparlaungan3823"><i class="ti-youtube"></i></a>
-                    <a class="social-item" href="https://www.facebook.com/profile.php?id=100087308974868"><i class="ti-facebook"></i></a>
+                    <a class="social-item" href="javascript:void(0)"><i class="ti-facebook"></i></a>
                 </div>
             </div>              
             <div class="img-holder">
@@ -163,6 +163,86 @@
         </div>
     </section>
 
+    <!-- Service section -->
+    <section id="service" class="section">
+        <div class="container text-center">
+            <h6 class="section-title mb-4">Filosofi</h6>
+            <p class="mb-5 pb-4">Berkarya, Berkarakter, Berakhlakhul Karimah</p>
+
+            <div class="row justify-content-center">
+                <!-- <div class="col-sm-6 col-md-3 mb-4">
+                    <div class="custom-card card border">
+                        <div class="card-body">
+                            <i class="icon ti-crown"></i>
+                            <h5>UI/UX Design</h5>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="col-sm-6 col-md-3 mb-4">
+                    <div class="custom-card card border">
+                        <div class="card-body">
+                            <i class="icon ti-wand"></i>
+                            <h5>Berkarya</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3 mb-4">
+                    <div class="custom-card card border">
+                        <div class="card-body">
+                            <i class="icon ti-face-smile"></i>
+                            <h5>Berkarakter</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3 mb-4">
+                    <div class="custom-card card border">
+                        <div class="card-body">
+                            <i class="icon ti-book"></i>
+                            <h5>Berakhlakhul Karimah</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End of Sectoin -->
+
+    <!-- Skills section -->
+    <!-- <section class="section">
+        <div class="container text-center">
+            <h6 class="section-title mb-4">Why Choose me</h6>
+            <p class="mb-5 pb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. In alias dignissimos. <br> rerum commodi corrupti, temporibus non quam.</p>
+
+            <div class="row text-left">
+                <div class="col-sm-6">
+                    <h6 class="mb-3">Photoshop</h6>
+                    <div class="progress">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 89%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><span>89%</span></div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <h6 class="mb-3">Web Design</h6>
+                    <div class="progress">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 83%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><span>83%</span></div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <h6 class="mb-3">App Design</h6>
+                    <div class="progress">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 95%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><span>95%</span></div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <h6 class="mb-3">SEO</h6>
+                    <div class="progress">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 90%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><span>90%</span></div>
+                    </div>
+                </div>
+            </div>  
+        </div>
+    </section> -->
+    <!-- End of Skills sections -->
+
     <!-- Portfolio section -->
     <section id="portfolio" class="section">
         <div class="container text-center">
@@ -176,6 +256,8 @@
                         <div class="overlay">
                             <div class="overlay-infos">
                                 <h5>Project Title</h5>
+                                <a href="javascript:void(0)"><i class="ti-zoom-in"></i></a>
+                                <a href="javascript:void(0)"><i class="ti-link"></i></a>
                             </div>  
                         </div>
                     </div>
@@ -184,6 +266,8 @@
                         <div class="overlay">
                             <div class="overlay-infos">
                                 <h5>Project Title</h5>
+                                <a href="javascript:void(0)"><i class="ti-zoom-in"></i></a>
+                                <a href="javascript:void(0)"><i class="ti-link"></i></a>
                             </div>                              
                         </div>
                     </div>                  
@@ -194,6 +278,8 @@
                         <div class="overlay">
                             <div class="overlay-infos">
                                 <h5>Project Title</h5>
+                                <a href="javascript:void(0)"><i class="ti-zoom-in"></i></a>
+                                <a href="javascript:void(0)"><i class="ti-link"></i></a>
                             </div>  
                         </div>
                     </div>
@@ -202,6 +288,8 @@
                         <div class="overlay">
                             <div class="overlay-infos">
                                 <h5>Project Title</h5>
+                                <a href="javascript:void(0)"><i class="ti-zoom-in"></i></a>
+                                <a href="javascript:void(0)"><i class="ti-link"></i></a>
                             </div>                              
                         </div>
                     </div>                  
@@ -212,6 +300,8 @@
                         <div class="overlay">
                             <div class="overlay-infos">
                                 <h5>Project Title</h5>
+                                <a href="javascript:void(0)"><i class="ti-zoom-in"></i></a>
+                                <a href="javascript:void(0)"><i class="ti-link"></i></a>
                             </div>  
                         </div>
                     </div>
@@ -220,6 +310,8 @@
                         <div class="overlay">
                             <div class="overlay-infos">
                                 <h5>Project Title</h5>
+                                <a href="javascript:void(0)"><i class="ti-zoom-in"></i></a>
+                                <a href="javascript:void(0)"><i class="ti-link"></i></a>
                             </div>                              
                         </div>
                     </div>                  
@@ -293,12 +385,12 @@
                         <div class="card-body">
                             <h5 class="card-title">Designe for Everyone</h5>
                             <div class="post-details">
-                                {{-- <a href="javascript:void(0)">Posted By: Admin</a>
+                                <a href="javascript:void(0)">Posted By: Admin</a>
                                 <a href="javascript:void(0)"><i class="ti-thumb-up"></i> 456</a>
-                                <a href="javascript:void(0)"><i class="ti-comment"></i> 123</a> --}}
+                                <a href="javascript:void(0)"><i class="ti-comment"></i> 123</a>
                             </div>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut ad vel dolorum, iusto velit, minima? Voluptas nemo harum impedit nisi.</p>
-                            <a href="/blog/">Read more ...</a>
+                            <a href="javascript:void(0)">Read More..</a>
                         </div>
                     </div>
                 </div>
@@ -308,12 +400,12 @@
                         <div class="card-body">
                             <h5 class="card-title">Web Layouts</h5>
                             <div class="post-details">
-                                {{-- <a href="javascript:void(0)">Posted By: Admin</a>
+                                <a href="javascript:void(0)">Posted By: Admin</a>
                                 <a href="javascript:void(0)"><i class="ti-thumb-up"></i> 456</a>
-                                <a href="javascript:void(0)"><i class="ti-comment"></i> 123</a> --}}
+                                <a href="javascript:void(0)"><i class="ti-comment"></i> 123</a>
                             </div>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut ad vel dolorum, iusto velit, minima? Voluptas nemo harum impedit nisi.</p>
-                            <a href="/blog/">Read more ...</a>
+                            <a href="javascript:void(0)">Read More..</a>
                         </div>
                     </div>
                 </div>
@@ -323,12 +415,12 @@
                         <div class="card-body">
                             <h5 class="card-title">Bootstrap Framework</h5>
                             <div class="post-details">
-                                {{-- <a href="javascript:void(0)">Posted By: Admin</a>
+                                <a href="javascript:void(0)">Posted By: Admin</a>
                                 <a href="javascript:void(0)"><i class="ti-thumb-up"></i> 456</a>
-                                <a href="javascript:void(0)"><i class="ti-comment"></i> 123</a> --}}
+                                <a href="javascript:void(0)"><i class="ti-comment"></i> 123</a>
                             </div>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut ad vel dolorum, iusto velit, minima? Voluptas nemo harum impedit nisi.</p>
-                            <a href="/blog/">Read more ...</a>
+                            <a href="javascript:void(0)">Read More..</a>
                         </div>
                     </div>
                 </div>
@@ -343,7 +435,7 @@
                 <div class="card-body text-light">
                     <div class="row align-items-center">
                         <div class="col-sm-9 text-center text-sm-left">
-                            <p class="mb-3"><b>Join with us!</b></p>
+                            <h5 class="mt-3">Join with us!</h5>
                             <p class="mb-3">Mari bergabung dan berkarya bersama SMA Islam Parlaungan</p>
                         </div>
                         <div class="col-sm-3 text-center text-sm-right">
@@ -364,6 +456,7 @@
 
             <div class="contact text-left">
                 <div class="form">
+                    <h6 class="subtitle">Available 24/7</h6>
                     <h6 class="section-title mb-4">Kirim Pesan</h6>
                     <form>
                         <div class="form-group">
@@ -404,7 +497,7 @@
             </div>
         </div>  
         <div id="map">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.0449583563723!2d112.75798391477532!3d-7.348848594696815!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7fb2f27eae595%3A0x355fe4fdf318c115!2sSMP-SMA%20Islam%20Parlaungan!5e0!3m2!1sid!2sid!4v1676137180758!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="SMA Islam Parlaungan"></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.0449583563723!2d112.75798391477532!3d-7.348848594696815!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7fb2f27eae595%3A0x355fe4fdf318c115!2sSMP-SMA%20Islam%20Parlaungan!5e0!3m2!1sid!2sid!4v1676137180758!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>      
     </section>
     <!-- End of Contact Section -->
@@ -414,13 +507,13 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-sm-6">
-                    <p>Copyright 2022 &copy; <a href="https://developer.smaispa.sch.id" target="_blank">Staf Data Informasi Pengembangan dan Infrastruktur Teknologi - SMA Islam Parlaungan</a></p>
+                    <p>Copyright <script>document.write(new Date().getFullYear())</script> &copy; <a href="https://developer.smaispa.sch.id" target="_blank">Staf Data Informasi Pengembangan dan Infrastruktur Teknologi - SMA Islam Parlaungan</a></p>
                 </div>
                 <div class="col-sm-6">
                     <div class="socials">
-                        <a class="social-item" href="https://instagram.com/officialsmaispa"><i class="ti-instagram"></i></a>
-                        <a class="social-item" href="https://www.youtube.com/@officialsmaislamparlaungan3823"><i class="ti-youtube"></i></a>
-                        <a class="social-item" href="https://www.facebook.com/profile.php?id=100087308974868"><i class="ti-facebook"></i></a>
+                        <a class="social-item" href="javascript:void(0)"><i class="ti-instagram"></i></a>
+                        <a class="social-item" href="javascript:void(0)"><i class="ti-youtube"></i></a>
+                        <a class="social-item" href="javascript:void(0)"><i class="ti-facebook"></i></a>
                     </div>
                 </div>
             </div>
@@ -430,26 +523,26 @@
 	
 	<!-- core  -->
     <script src="steller/vendors/jquery/jquery-3.4.1.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="steller/vendors/bootstrap/bootstrap.bundle.js"></script>
     <!-- bootstrap 3 affix -->
 	<script src="steller/vendors/bootstrap/bootstrap.affix.js"></script>
 
     <!-- steller js -->
     <script src="steller/js/steller.js"></script>
 
+    <script>
+        function fOpenLogin () {
+            const modalLogin = document.getElementById('modalLogin')
+            modalLogin.click()
+        }
+    </script>
+    <script src="{{ asset('/sw.js') }}"></script>
+    <script>
+        if (!navigator.serviceWorker.controller) {
+            navigator.serviceWorker.register("/sw.js").then(function (reg) {
+                console.log("Service worker has been registered for scope: " + reg.scope);
+            });
+        }
+    </script>
 </body>
 </html>
-<script>
-    function fOpenLogin () {
-        const modalLogin = document.getElementById('openLogin')
-        modalLogin.click()
-    }
-</script>
-<script src="{{ asset('/sw.js') }}"></script>
-<script>
-    if (!navigator.serviceWorker.controller) {
-        navigator.serviceWorker.register("/sw.js").then(function (reg) {
-            console.log("Service worker has been registered for scope: " + reg.scope);
-        });
-    }
-</script>
