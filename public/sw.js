@@ -11,7 +11,10 @@ self.addEventListener("install", function (event) {
 
 const filesToCache = [
     '/',
-    '/offline.html'
+    '/adminlte',
+    '/audio',
+    '/img',
+    '/steller',
 ];
 
 const checkResponse = function (request) {
