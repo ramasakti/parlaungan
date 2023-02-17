@@ -88,7 +88,7 @@
         <div class="container">
             <div class="infos">
                 <h6 class="title">SMA Islam</h6>
-                <h6 class="title">Parlaungan</h6>
+                <h6 class="title uk-margin-remove-top">Parlaungan</h6>
 
                 <div class="buttons pt-3">
                     <button class="btn btn-primary rounded">PPDB</button>
