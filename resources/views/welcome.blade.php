@@ -74,7 +74,7 @@
                         <a class="nav-link" href="#contact">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="- btn btn-primary rounded" id="modalLogin" href="#modal-login" uk-toggle>Login</a>
+                        <a class="- btn btn-primary rounded mb-2" id="modalLogin" href="#modal-login" uk-toggle>Login</a>
                         @include('modal-login')
                     </li>
                 </ul>

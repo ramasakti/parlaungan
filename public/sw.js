@@ -11,10 +11,16 @@ self.addEventListener("install", function (event) {
 
 const filesToCache = [
     '/',
-    '/adminlte',
-    '/audio',
-    '/img',
-    '/steller',
+    '/adminlte/bootstrap.min.css',
+    '/adminlte/default-css.css',
+    '/adminlte/font-awesome.min.css',
+    '/adminlte/metisMenu.css',
+    '/adminlte/owl.carousel.min.css',
+    '/adminlte/responsive.css',
+    '/adminlte/slicknav.min.css',
+    '/adminlte/styles.css',
+    '/adminlte/themify-icons.css',
+    '/adminlte/typography.css',
 ];
 
 const checkResponse = function (request) {
