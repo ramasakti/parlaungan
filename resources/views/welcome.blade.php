@@ -40,13 +40,13 @@
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.15.24/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.15.24/dist/js/uikit-icons.min.js"></script>
 </head>
-<body onload="fOpenLogin()" data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
+<body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
 
     <!-- Page navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" data-spy="affix" data-offset-top="0">
         <div class="container">
             <!-- <a class="navbar-brand" href="#"><img height="60px" src="steller/imgs/logo.png" alt=""></a> -->
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" id="togglerNav" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -74,7 +74,7 @@
                         <a class="nav-link" href="#contact">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="- btn btn-primary rounded mb-2" id="modalLogin" href="#modal-login" uk-toggle>Login</a>
+                        <a class="- btn btn-primary rounded mb-2" id="modalLogin" onclick="closeNav()" href="#modal-login" uk-toggle>Login</a>
                         @include('modal-login')
                     </li>
                 </ul>
@@ -531,9 +531,10 @@
     <script src="steller/js/steller.js"></script>
 
     <script>
-        function fOpenLogin () {
-            const modalLogin = document.getElementById('modalLogin')
-            modalLogin.click()
+        const modalLogin = document.getElementById('modalLogin')
+        
+        const closeNav = () => {
+            togglerNav.click()
         }
     </script>
     <script src="{{ asset('/sw.js') }}"></script>
