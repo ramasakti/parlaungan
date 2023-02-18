@@ -45,7 +45,7 @@
     <!-- Page navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" data-spy="affix" data-offset-top="0">
         <div class="container">
-            <!-- <a class="navbar-brand" href="#"><img height="60px" src="steller/imgs/logo.png" alt=""></a> -->
+            <a class="navbar-brand" href="#"><img height="60px" src="steller/imgs/lambang.png" alt=""></a>
             <button class="navbar-toggler" id="togglerNav" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -129,13 +129,14 @@
         <div class="container mt-5">
             <div class="row text-center text-md-left">
                 <div class="col-md-3">
-                    <img src="steller/imgs/berkarya.svg" alt="" class="img-thumbnail mb-4">
+                    <img src="steller/imgs/diniyah.jpg" alt="" class="img-thumbnail mb-4">
+                    <img src="steller/imgs/diniyah-2.jpg" alt="" class="img-thumbnail mb-4">
                 </div>
                 <div class="pl-md-4 col-md-9">
-                    <h6 class="title">Berkarya</h6>
-                    <p class="subtitle">Tentang Kami</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident, pariatur, aperiam aut autem voluptas odit. Odio ducimus delectus totam sed aliquam sequi praesentium mollitia, illum repudiandae quidem quod, magni magnam.</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim, eius, nam. Quo praesentium qui temporibus voluptatum, facilis aliquid eligendi fugiat beatae neque inventore non. Laborum repellendus consequatur ullam voluptatum asperiores.</p>
+                    <h6 class="title">Program Diniyah</h6>
+                    <p class="subtitle">Pembelajaran Mengaji Berdiferensiasi</p>
+                    <p>Program Diniyah merupakan program unggulan SMA Islam Parlaungan. Program ini dilaksanakan setiap pagi sebelum siswa siswi memulai pembelajaran. Program Diniyah merupakan bagian dari kegiatan belajar mengajar di SMA Islam Parlaungan yang telah terintegrasi dengan kurikulum sebagai muatan lokal. Pada program ini siswa siswi SMA Islam Parlaungan akan belajar mengaji sesuai dengan tingkat kemampuannya masing masing. </p>
+                    <p>Tingkat pertama yakni kelas dasar untuk siswa siswi yang belum bisa membaca Al Quran. Pada tingkat ini siswa siswi akan belajar tilawati. Tingkat kedua atau reguler yakni siswa siswi yang sudah bisa membaca Al Quran dengan lancar. Pada tingkat ini siswa siswi akan mempelajari tajwid atau hukum bacaan pada Al Quran. Kemudian tingkat terakhir atau akselerasi yakni siswa siswi yang telah mahir. Pada tingkat ini siswa siswi akan diterjunkan untuk mengajar teman sebayanya dan bahkan diturunkan untuk mengajar di TPQ.</p>
                 </div>
             </div>
             <div class="row text-center text-md-left">
@@ -143,7 +144,7 @@
                     <img src="steller/imgs/berkarak.svg" alt="" class="img-thumbnail mb-4">
                 </div>
                 <div class="pl-md-4 col-md-9">
-                    <h6 class="title">Berkarakter</h6>
+                    <h6 class="title">Karya Tulis Ilmiah</h6>
                     <p class="subtitle">Tentang Kami</p>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident, pariatur, aperiam aut autem voluptas odit. Odio ducimus delectus totam sed aliquam sequi praesentium mollitia, illum repudiandae quidem quod, magni magnam.</p>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim, eius, nam. Quo praesentium qui temporibus voluptatum, facilis aliquid eligendi fugiat beatae neque inventore non. Laborum repellendus consequatur ullam voluptatum asperiores.</p>
@@ -154,7 +155,7 @@
                     <img src="steller/imgs/berakhlak.svg" alt="" class="img-thumbnail mb-4">
                 </div>
                 <div class="pl-md-4 col-md-9">
-                    <h6 class="title">Berakhlakhul Karimah</h6>
+                    <h6 class="title">Enterpreneur</h6>
                     <p class="subtitle">Tentang Kami</p>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident, pariatur, aperiam aut autem voluptas odit. Odio ducimus delectus totam sed aliquam sequi praesentium mollitia, illum repudiandae quidem quod, magni magnam.</p>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim, eius, nam. Quo praesentium qui temporibus voluptatum, facilis aliquid eligendi fugiat beatae neque inventore non. Laborum repellendus consequatur ullam voluptatum asperiores.</p>

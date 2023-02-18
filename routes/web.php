@@ -131,19 +131,19 @@ Route::get('/csv', [TestingController::class, 'csv']);
 
 //Guru
 Route::get('/mencowba', [GuruController::class, 'dataPerGuru']);
-Route::get('/guru', [GuruController::class, 'index']);
-Route::get('/guru/keuangan', [GuruController::class, 'keuangan']);
-Route::post('/guru/store', [GuruController::class, 'addGuru']);
-Route::post('/guru/update', [GuruController::class, 'updateGuru']);
-Route::post('/guru/delete', [GuruController::class, 'deleteGuru']);
+Route::get('/guru', [GuruController::class, 'index'])->middleware('auth');
+Route::get('/guru/keuangan', [GuruController::class, 'keuangan'])->middleware('auth');
+Route::post('/guru/store', [GuruController::class, 'addGuru'])->middleware('auth');
+Route::post('/guru/update', [GuruController::class, 'updateGuru'])->middleware('auth');
+Route::post('/guru/delete', [GuruController::class, 'deleteGuru'])->middleware('auth');
 
 //Absen Rapat
-Route::get('/rapat', [RapatController::class, 'index']);
-Route::post('/rapat/store', [RapatController::class, 'store']);
-Route::post('/rapat/delete', [RapatController::class, 'delete']);
-Route::post('/rapat/update', [RapatController::class, 'update']);
-Route::get('/rapat/{slug}', [RapatController::class, 'detail']);
-Route::post('/rapat/{slug}', [RapatController::class, 'engine']);
+Route::get('/rapat', [RapatController::class, 'index'])->middleware('auth');
+Route::post('/rapat/store', [RapatController::class, 'store'])->middleware('auth');
+Route::post('/rapat/delete', [RapatController::class, 'delete'])->middleware('auth');
+Route::post('/rapat/update', [RapatController::class, 'update'])->middleware('auth');
+Route::get('/rapat/{slug}', [RapatController::class, 'detail'])->middleware('auth');
+Route::post('/rapat/{slug}', [RapatController::class, 'engine'])->middleware('auth');
 
 //Infrastruktur IOT dan Otomasi
 Route::get('/infrastruktur', [InfrastrukturIOT::class, 'restapi']);
