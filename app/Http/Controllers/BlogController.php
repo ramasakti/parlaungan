@@ -8,6 +8,10 @@ use DB;
 
 class BlogController extends Controller
 {
+    public function apiBlog()
+    {
+        return response()->json(DB::table('blog')->get(), 200);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -43,9 +47,22 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'slug' => 'unique:blog',
+            'foto' => 'image|file'
+        ]);
+
+        $request->file('foto')->store('blog');
+
         DB::table('blog')
             ->insert([
-
+                'slug' => $request->slug,
+                'foto' => $validated['foto'],
+                'judul' => $request->judul,
+                'isi' => $request->isi,
+                'kategori' => $request->kategori,
+                'uploaded' => date('Y-m-d'),
+                'uploader' => $request->uploader
             ]);
     }
 

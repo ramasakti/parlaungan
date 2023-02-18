@@ -65,6 +65,8 @@ Route::get('/about', [WebController::class, 'about']);
 //Update galeri, blog, about
 Route::get('/web', [WebController::class, 'index'])->middleware('auth');
 Route::get('/web/blog/create', [BlogController::class, 'create'])->middleware('auth');
+Route::post('/web/blog/store', [BlogController::class, 'store'])->middleware('auth');
+Route::get('/web/api', [BlogController::class, 'apiBlog']);
 
 //User
 Route::get('/profile', [UserController::class, 'profile']);
