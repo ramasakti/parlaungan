@@ -38,11 +38,11 @@ Route::get('/', function () {
     return view('welcome', [
         'title' => 'Home | SMA Islam Parlaungan',
         'navactive' => 'home'
-    ])->name('login');
-});
+    ]);
+})->middleware('guest')->name('login');
 
 //Login, logout, dashboard
-Route::get('/login', [LoginController::class, 'index'])->middleware('guest');
+Route::get('/login', [LoginController::class, 'index'])->middleware('guest')->name('login');
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::get('/logout', [LoginController::class, 'logout'])->middleware('auth');
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
