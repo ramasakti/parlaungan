@@ -45,7 +45,7 @@
     <!-- Page navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" data-spy="affix" data-offset-top="0">
         <div class="container">
-            <a class="navbar-brand" href="#"><img height="60px" src="steller/imgs/lambang.png" alt=""></a>
+            <a class="navbar-brand" href="#"><img src="steller/imgs/lambang.png" alt="Logo SMA Islam Parlaungan"></a>
             <button class="navbar-toggler" id="togglerNav" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -98,7 +98,7 @@
                 <div class="socials mt-4">
                     <a class="social-item" href="https://instagram.com/officialsmaispa"><i class="ti-instagram"></i></a>
                     <a class="social-item" href="https://www.youtube.com/@officialsmaislamparlaungan3823"><i class="ti-youtube"></i></a>
-                    <a class="social-item" href="javascript:void(0)"><i class="ti-facebook"></i></a>
+                    <a class="social-item" href="https://www.facebook.com/profile.php?id=100087308974868"><i class="ti-facebook"></i></a>
                 </div>
             </div>              
             <div class="img-holder">
@@ -512,9 +512,9 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="socials">
-                        <a class="social-item" href="javascript:void(0)"><i class="ti-instagram"></i></a>
-                        <a class="social-item" href="javascript:void(0)"><i class="ti-youtube"></i></a>
-                        <a class="social-item" href="javascript:void(0)"><i class="ti-facebook"></i></a>
+                        <a class="social-item" href="https://instagram.com/officialsmaispa"><i class="ti-instagram"></i></a>
+                        <a class="social-item" href="https://www.youtube.com/@officialsmaislamparlaungan3823"><i class="ti-youtube"></i></a>
+                        <a class="social-item" href="https://www.facebook.com/profile.php?id=100087308974868"><i class="ti-facebook"></i></a>
                     </div>
                 </div>
             </div>
