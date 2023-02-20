@@ -80,14 +80,17 @@
                             @endphp
                             @switch(session('status'))
                                 @case('Admin')
-                                    <li class="{{ ($navactive === 'rapat' ? 'active' : '') }}">
-                                        <a href="/rapat"><span>Rapat</span></a>
-                                    </li>
-                                    <li class="{{ ($navactive === 'sekolah' ? 'active' : '') }}">
-                                        <a href="/sekolah"><span>Sekolah</span></a>
-                                    </li>
                                     <li class="{{ ($navactive === 'user' ? 'active' : '') }}">
                                         <a href="/user"><span>User</span></a>
+                                    </li>
+                                    <li class="{{ ($navactive === 'sekolah' ? 'active' : '') }}">
+                                        <a href="javascript:void(0)" aria-expanded="true"><span>Sekolah</span></a>
+                                        <ul class="collapse">
+                                            <li><a href="/sekolah"><span>Harian & Libur</span></a></li>
+                                            <li><a href="/rapat"><span>Rapat</span></a></li>
+                                            <li><a href="#"><span>Administrasi Surat</span></a></li>
+                                            <li><a href="#"><span>E Library</span></a></li>
+                                        </ul>
                                     </li>
                                     <li class="{{ ($navactive === 'siswa' ? 'active' : '') }}">
                                         <a href="javascript:void(0)" aria-expanded="true"><span>Siswa</span></a>
@@ -133,7 +136,11 @@
                                     @break
                                 @case('Kurikulum')
                                     <li class="{{ ($navactive === 'sekolah' ? 'active' : '') }}">
-                                        <a href="/sekolah"><span>Sekolah</span></a>
+                                        <a href="javascript:void(0)" aria-expanded="true"><span>Sekolah</span></a>
+                                        <ul class="collapse">
+                                            <li><a href="/sekolah"><span>Harian & Libur</span></a></li>
+                                            <li><a href="/rapat"><span>Rapat</span></a></li>
+                                        </ul>
                                     </li>
                                     <li class="{{ ($navactive === 'guru' ? 'active' : '') }}">
                                         <a href="javascript:void(0)" aria-expanded="true"><span>Guru</span></a>
@@ -157,7 +164,11 @@
                                     @break    
                                 @case('Kesiswaan')
                                     <li class="{{ ($navactive === 'sekolah' ? 'active' : '') }}">
-                                        <a href="/sekolah"><span>Sekolah</span></a>
+                                        <a href="javascript:void(0)" aria-expanded="true"><span>Sekolah</span></a>
+                                        <ul class="collapse">
+                                            <li><a href="/sekolah"><span>Harian & Libur</span></a></li>
+                                            <li><a href="/rapat"><span>Rapat</span></a></li>
+                                        </ul>
                                     </li>
                                     <li class="{{ ($navactive === 'siswa' ? 'active' : '') }}">
                                         <a href="javascript:void(0)" aria-expanded="true"><span>Siswa</span></a>
