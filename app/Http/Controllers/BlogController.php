@@ -20,6 +20,7 @@ class BlogController extends Controller
     public function index()
     {
         return view('blog.index', [
+            'ai' => 1,
             'title' => 'Blog | SMA Islam Parlaungan',
             'navactive' => 'blog',
             'data' => Blog::all()
@@ -52,7 +53,11 @@ class BlogController extends Controller
             'foto' => 'image|file'
         ]);
 
-        $request->file('foto')->store('blog');
+        $filenameWithExt = $request->file('foto')->getClientOriginalName();
+        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+        $extension = $request->file('foto')->getClientOriginalExtension();
+        $filenameSimpan = $filename.'_'.time().'.'.$extension;
+        $path = $request->file('foto')->storeAs('public/posts_image', $filenameSimpan);
 
         DB::table('blog')
             ->insert([

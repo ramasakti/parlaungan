@@ -59,7 +59,7 @@ class Rekap extends Command
                         ->get();
 
         //Cek apakah hari aktif
-        if ($cekHari[0]->status == TRUE){
+        if ($cekHari[0]->status == TRUE) {
             //Cek apakah bukan hari libur
             if (count($cekLibur) == 0){
                 //Update ke alfa jika belum diset status hadirnya
@@ -89,21 +89,6 @@ class Rekap extends Command
                             'siswa_id' => $updateRekap->id_siswa,
                             'keterangan' => $updateRekap->keterangan,
                             'waktu_absen' => NULL
-                        ]);
-                }
-
-                $terlambat = DB::table('absen')
-                                ->select('id_siswa', 'waktu_absen')
-                                ->where('waktu_absen', '>', $this->hariIni()[0]->masuk)
-                                ->get();
-
-                foreach ($terlambat as $siswaTerlambat) {
-                    DB::table('rekap_siswa')
-                        ->insert([
-                            'tanggal' => date('Y-m-d'),
-                            'siswa_id' => $siswaTerlambat->id_siswa,
-                            'keterangan' => 'T',
-                            'waktu_absen' => $siswaTerlambat->waktu_absen
                         ]);
                 }
             }else{
