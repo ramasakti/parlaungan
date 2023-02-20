@@ -459,7 +459,7 @@
                 <div class="form">
                     <h6 class="subtitle">Available 24/7</h6>
                     <h6 class="section-title mb-4">Kirim Pesan</h6>
-                    <form>
+                    <form action="/saran" method="post">
                         <div class="form-group">
                             <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
                         </div>

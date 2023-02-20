@@ -18,8 +18,8 @@
             <tr>
                 <td>{{ $ai++ }}</td>
                 <td>{{ $blog->judul }}</td>
-                <td>{{ $blog->deskripsi }}</td>
-                <td>{{ $blog->deskripsi }}</td>
+                <td>{{ $blog->uploader }}</td>
+                <td>{{ $blog->uploaded }}</td>
                 <td>
                     {{-- <a href="#modal-center" uk-toggle="target: #edit-absen-{{ $blog->id_siswa }}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">

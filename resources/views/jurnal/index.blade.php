@@ -1,6 +1,7 @@
 <x-admintemplate title='{{ $title }}' navactive='{{ $navactive }}'>
     <form method="get">
-        <input type="date" name="tanggal" onchange="this.form.submit()" class="uk-margin">
+        Tanggal
+        <input class="uk-input uk-margin" type="date" name="tanggal" onchange="this.form.submit()" value="{{ request('tanggal') }}">
     </form>
     <table class="table table-borderless" id="data-table">
         <thead>
