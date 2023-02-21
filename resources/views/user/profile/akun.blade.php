@@ -13,8 +13,8 @@
             <label class="uk-form-label" for="form-horizontal-text">Password Lama</label>
             <div class="uk-form-controls">
                 <div class="uk-inline uk-width-1-1">
-                    <a class="uk-form-icon uk-form-icon-flip" href="#" onclick="showHide('passwordLama', '{{ session('username') }}')" uk-icon="icon: lock"></a>
-                    <input class="uk-input" name="passwordLama" value="{{ session('username') }}" type="password">
+                    <a class="uk-form-icon uk-form-icon-flip" href="#" id="passwordLama" onclick="showHide('passwordLama')" uk-icon="icon: eye-slash"></a>
+                    <input class="uk-input" name="passwordLama" type="password">
                 </div>
             </div>
         </div>
@@ -23,7 +23,7 @@
             <label class="uk-form-label" for="form-horizontal-text">Password Baru</label>
             <div class="uk-form-controls">
                 <div class="uk-inline uk-width-1-1">
-                    <a class="uk-form-icon uk-form-icon-flip" href="#" id="passwordBaru" uk-icon="icon: lock"></a>
+                    <a class="uk-form-icon uk-form-icon-flip" href="#" id="passwordBaru" uk-icon="icon: eye-slash"></a>
                     <input class="uk-input" name="passwordBaru" type="password">
                 </div>
             </div>
@@ -33,7 +33,7 @@
             <label class="uk-form-label" for="form-horizontal-text">Konfirmasi Password Baru</label>
             <div class="uk-form-controls">
                 <div class="uk-inline uk-width-1-1">
-                    <a class="uk-form-icon uk-form-icon-flip" href="#" uk-icon="icon: lock"></a>
+                    <a class="uk-form-icon uk-form-icon-flip" href="#" id="confPasswordBaru" uk-icon="icon: eye-slash"></a>
                     <input class="uk-input" name="passwordConfirm" type="password">
                 </div>
             </div>
@@ -43,8 +43,7 @@
     </form>
 </div>
 <script>
-    const showHide = (id, value) => {
-        const passwordLama = document.getElementsByName('passwordLama')
-        const 
+    const showHide = (id) => {
+        const passwordLama = document.getElementById('passwordLama')
     }
 </script>
