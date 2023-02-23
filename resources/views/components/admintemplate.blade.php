@@ -13,7 +13,7 @@
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
     <!-- PWA  -->
     <meta name="theme-color" content="#FFFFFF"/>
-    <link rel="apple-touch-icon" href="{{ asset('img/mid-white.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('/img/logo.png') }}">
     <link rel="manifest" href="{{ asset('/manifest.json') }}">
     <!-- UIkit CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.15.24/dist/css/uikit.min.css" />

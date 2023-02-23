@@ -12,7 +12,7 @@ class RapatController extends Controller
     {
         return view('rapat.index', [
             'title' => 'Absen Rapat',
-            'navactive' => 'rapat',
+            'navactive' => 'sekolah',
             'ai' => 1,
             'dataRapat' => DB::table('rapat')->get()
         ]);

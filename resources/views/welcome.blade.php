@@ -6,7 +6,7 @@
 
     <!-- PWA  -->
     <meta name="theme-color" content="#FFFFFF"/>
-    <link rel="apple-touch-icon" href="{{ asset('logo.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('/img/logo.png') }}">
     <link rel="manifest" href="{{ asset('/manifest.json') }}">
 
     <!-- Primary Meta Tags -->
@@ -35,10 +35,6 @@
 
     <!-- UIkit CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.15.24/dist/css/uikit.min.css" />
-
-    <!-- UIkit JS -->
-    <script src="https://cdn.jsdelivr.net/npm/uikit@3.15.24/dist/js/uikit.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/uikit@3.15.24/dist/js/uikit-icons.min.js"></script>
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
 
@@ -525,11 +521,16 @@
 	<!-- core  -->
     <script src="steller/vendors/jquery/jquery-3.4.1.js"></script>
     <script src="steller/vendors/bootstrap/bootstrap.bundle.js"></script>
+    
     <!-- bootstrap 3 affix -->
 	<script src="steller/vendors/bootstrap/bootstrap.affix.js"></script>
 
     <!-- steller js -->
     <script src="steller/js/steller.js"></script>
+
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.15.24/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.15.24/dist/js/uikit-icons.min.js"></script>
 
     <script>
         const modalLogin = document.getElementById('modalLogin')
