@@ -6,8 +6,8 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>{{ $title }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="SMA Islam Parlaungan" content="Berkarya, Berkarakter, Berakhlakul Karimah">
     {{-- Data Tables --}}
-    <meta name="dicoding:email" content="ramasakti1337@gmail.com">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
@@ -17,7 +17,7 @@
     <link rel="manifest" href="{{ asset('/manifest.json') }}">
     <!-- UIkit CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.15.24/dist/css/uikit.min.css" />
-    
+    {{-- AdminLTE --}}
     <link rel="shortcut icon" type="image/png" href="/adminlte/images/icon/favicon.ico">
     <link rel="stylesheet" href="/adminlte/css/bootstrap.min.css">
     <link rel="stylesheet" href="/adminlte/css/font-awesome.min.css">
@@ -34,6 +34,7 @@
     <link rel="stylesheet" href="/adminlte/css/responsive.css">
     <!-- modernizr css -->
     <script src="/adminlte/js/vendor/modernizr-2.8.3.min.js"></script>
+    {{-- TinyMCE --}}
     <script src="https://cdn.tiny.cloud/1/zgg0gxpkj4s833bnso32wri5w42hrq17ebnjci64yppegu0j/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 </head>
 
@@ -86,7 +87,7 @@
                                         <ul class="collapse">
                                             <li><a href="/sekolah"><span>Harian & Libur</span></a></li>
                                             <li><a href="/rapat"><span>Rapat</span></a></li>
-                                            <li><a href="#"><span>Administrasi Surat</span></a></li>
+                                            <li><a href="/arsip"><span>Administrasi Surat</span></a></li>
                                             <li><a href="#"><span>E Library</span></a></li>
                                         </ul>
                                     </li>
@@ -138,6 +139,8 @@
                                         <ul class="collapse">
                                             <li><a href="/sekolah"><span>Harian & Libur</span></a></li>
                                             <li><a href="/rapat"><span>Rapat</span></a></li>
+                                            <li><a href="/arsip"><span>Administrasi Surat</span></a></li>
+                                            <li><a href="#"><span>E Library</span></a></li>
                                         </ul>
                                     </li>
                                     <li class="{{ ($navactive === 'guru' ? 'active' : '') }}">
@@ -166,6 +169,8 @@
                                         <ul class="collapse">
                                             <li><a href="/sekolah"><span>Harian & Libur</span></a></li>
                                             <li><a href="/rapat"><span>Rapat</span></a></li>
+                                            <li><a href="/arsip"><span>Administrasi Surat</span></a></li>
+                                            <li><a href="#"><span>E Library</span></a></li>
                                         </ul>
                                     </li>
                                     <li class="{{ ($navactive === 'siswa' ? 'active' : '') }}">

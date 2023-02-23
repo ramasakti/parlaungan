@@ -45,5 +45,13 @@
 <script>
     const showHide = (id) => {
         const passwordLama = document.getElementById('passwordLama')
+        const oldPassword = document.getElementsByName('passwordLama')[0]
+        if (oldPassword.getAttribute('type') == 'password') {
+            passwordLama.setAttribute('uk-icon', 'icon: eye')
+            oldPassword.setAttribute('type', 'text')
+        }else{
+            passwordLama.setAttribute('uk-icon', 'icon: eye-slash')
+            oldPassword.setAttribute('type', 'password')
+        }
     }
 </script>

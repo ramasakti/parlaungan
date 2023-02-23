@@ -19,14 +19,14 @@
     <meta property="og:url" content="https://smaispa.sch.id/">
     <meta property="og:title" content="SMA Islam Parlaungan">
     <meta property="og:description" content="Berkarya, berkarakter, berakhlakul karimah">
-    <meta property="og:image" content="https://smaispa.sch.id/img/smaispa.png">
+    <meta property="og:image" content="https://smaispa.sch.id/steller/imgs/lambang.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://smaispa.sch.id/">
     <meta property="twitter:title" content="SMA Islam Parlaungan">
     <meta property="twitter:description" content="Berkarya, berkarakter, berakhlakul karimah">
-    <meta property="twitter:image" content="https://smaispa.sch.id/img/smaispa.png">
+    <meta property="twitter:image" content="https://smaispa.sch.id/steller/imgs/lambang.png">
 
     <!-- font icons -->
     <link rel="stylesheet" href="steller/vendors/themify-icons/css/themify-icons.css">

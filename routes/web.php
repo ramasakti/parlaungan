@@ -19,6 +19,7 @@ use App\Http\Controllers\JurnalController;
 use App\Http\Controllers\SekolahController;
 use App\Http\Controllers\TestingController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ArsipController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,9 +31,6 @@ use App\Http\Controllers\DashboardController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-//API
-Route::get('/api', [ApiController::class, 'userAPI']);
 
 Route::get('/', function () {
     return view('welcome', [
@@ -149,3 +147,9 @@ Route::post('/rapat/{slug}', [RapatController::class, 'engine'])->middleware('au
 
 //Infrastruktur IOT dan Otomasi
 Route::get('/infrastruktur', [InfrastrukturIOT::class, 'restapi']);
+
+//Surat
+Route::get('/arsip', [ArsipController::class, 'index']);
+Route::post('/arsip/store', [ArsipController::class, 'store']);
+Route::post('/arsip/update', [ArsipController::class, 'update']);
+Route::post('/arsip/delete', [ArsipController::class, 'delete']);

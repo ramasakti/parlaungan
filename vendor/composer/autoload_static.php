@@ -583,6 +583,7 @@ class ComposerStaticInit398c4bbcca9c2dd2750d19eedd068038
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\AbsenController' => __DIR__ . '/../..' . '/app/Http/Controllers/AbsenController.php',
         'App\\Http\\Controllers\\ApiController' => __DIR__ . '/../..' . '/app/Http/Controllers/ApiController.php',
+        'App\\Http\\Controllers\\ArsipController' => __DIR__ . '/../..' . '/app/Http/Controllers/ArsipController.php',
         'App\\Http\\Controllers\\BlogController' => __DIR__ . '/../..' . '/app/Http/Controllers/BlogController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\DashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/DashboardController.php',
