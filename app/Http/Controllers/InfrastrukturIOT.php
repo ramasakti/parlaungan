@@ -20,6 +20,6 @@ class InfrastrukturIOT extends Controller
 
     public function arduino()
     {
-        return 1;
+        return view('arduino.index', []);
     }
 }
