@@ -17,4 +17,9 @@ class InfrastrukturIOT extends Controller
             'status' => $data[0]->status
         ]);
     }
+
+    public function arduino()
+    {
+        return 1;
+    }
 }
