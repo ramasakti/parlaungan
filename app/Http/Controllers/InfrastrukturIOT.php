@@ -18,8 +18,23 @@ class InfrastrukturIOT extends Controller
         ]);
     }
 
-    public function arduino()
+    public function daftar()
     {
-        return view('arduino.index', []);
+        DB::table('infrastruktur')
+            ->insert([
+                'tanggal' => date('Y-m-d'),
+                'confirmed' => 0,
+            ]);
+        
+        return DB::table('infrastruktur')->orderBy('id_infrastruktur', 'desc')->limit(1)->get()[0]->id_infrastruktur;
     }
+
+    public function antrean($nomor)
+    {
+        $nomorAntrean = DB::table('infrastruktur')->where('id_infrastruktur', $nomor)->get();
+        return view('antrean.index', [
+            'nomorAntrean' => $nomorAntrean
+        ]);
+    }
+
 }

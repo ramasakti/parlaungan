@@ -23,7 +23,7 @@
             <label class="uk-form-label" for="form-horizontal-text">Password Baru</label>
             <div class="uk-form-controls">
                 <div class="uk-inline uk-width-1-1">
-                    <a class="uk-form-icon uk-form-icon-flip" href="#" id="passwordBaru" uk-icon="icon: eye-slash"></a>
+                    <a class="uk-form-icon uk-form-icon-flip" href="#" id="passwordBaru" onclick="showHide('passwordBaru')" uk-icon="icon: eye-slash"></a>
                     <input class="uk-input" name="passwordBaru" type="password">
                 </div>
             </div>
@@ -33,8 +33,8 @@
             <label class="uk-form-label" for="form-horizontal-text">Konfirmasi Password Baru</label>
             <div class="uk-form-controls">
                 <div class="uk-inline uk-width-1-1">
-                    <a class="uk-form-icon uk-form-icon-flip" href="#" id="confPasswordBaru" uk-icon="icon: eye-slash"></a>
-                    <input class="uk-input" name="passwordConfirm" type="password">
+                    <a class="uk-form-icon uk-form-icon-flip" href="#" id="confPasswordBaru" onclick="showHide('confPasswordBaru')" uk-icon="icon: eye-slash"></a>
+                    <input class="uk-input" name="confPasswordBaru" type="password">
                 </div>
             </div>
         </div>
@@ -44,8 +44,8 @@
 </div>
 <script>
     const showHide = (id) => {
-        const passwordLama = document.getElementById('passwordLama')
-        const oldPassword = document.getElementsByName('passwordLama')[0]
+        const passwordLama = document.getElementById(id)
+        const oldPassword = document.getElementsByName(id)[0]
         if (oldPassword.getAttribute('type') == 'password') {
             passwordLama.setAttribute('uk-icon', 'icon: eye')
             oldPassword.setAttribute('type', 'text')

@@ -15,8 +15,8 @@ class Infrastruktur extends Migration
     {
         Schema::create('infrastruktur', function (Blueprint $table) {
             $table->increments('id_infrastruktur');
-            $table->string('infrastruktur');
-            $table->boolean('status');
+            $table->date('tanggal');
+            $table->boolean('confirmed');
         });
     }
 

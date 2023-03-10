@@ -147,7 +147,8 @@ Route::post('/rapat/{slug}', [RapatController::class, 'engine'])->middleware('au
 
 //Infrastruktur IOT dan Otomasi
 Route::get('/infrastruktur', [InfrastrukturIOT::class, 'restapi']);
-Route::get('/arduino', [InfrastrukturIOT::class, 'arduino']);
+Route::get('/daftar', [InfrastrukturIOT::class, 'daftar']);
+Route::get('/antrean/{nomor}', [InfrastrukturIOT::class, 'antrean']);
 
 //Surat
 Route::get('/arsip', [ArsipController::class, 'index']);

@@ -51,12 +51,15 @@ class ProfilController extends Controller
         if (bcrypt($request->passwordLama) != $user[0]->password) {
             return back()->with('fail', 'Masukkan password lama dengan benar!');
         }
+        if ($request->passwordBaru != $request->confPasswordBaru) {
+            return back()->with('fail', 'Password tidak valid!');
+        }
         DB::table('user')
             ->where('username', $request->username)
             ->update([
                 'password' => bcrypt($request->passwordBaru),
             ]);
-        return back();
+        return back()->with('success', 'Berhasil update password');
     }
 
     public function siswa()
