@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use DB;
 
 class ProfilController extends Controller
@@ -48,11 +49,11 @@ class ProfilController extends Controller
     public function updateAkun(Request $request)
     {
         $user = DB::table('user')->where('username', $request->username)->get();
-        if (bcrypt($request->passwordLama) != $user[0]->password) {
-            return back()->with('fail', 'Masukkan password lama dengan benar!');
-        }
         if ($request->passwordBaru != $request->confPasswordBaru) {
             return back()->with('fail', 'Password tidak valid!');
+        }
+        if (!Hash::check($request->passwordLama, $user[0]->password)) {
+            return back()->with('fail', 'Masukkan password lama dengan benar!');
         }
         DB::table('user')
             ->where('username', $request->username)

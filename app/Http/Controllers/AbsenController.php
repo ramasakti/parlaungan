@@ -115,12 +115,6 @@ class AbsenController extends Controller
 
     public function reset()
     {
-        DB::table('absen')
-            ->update([
-                'rekap' => '',
-                'jumlah_terlambat' => 0,
-            ]);
-
         DB::table('rekap_siswa')->delete();
         
         return back()->with('success', 'Berhasil reset rekap absen');

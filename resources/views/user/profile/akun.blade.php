@@ -1,4 +1,16 @@
 <div class="container">
+    @if (session()->has('fail'))
+        <div class="uk-alert-warning uk-margin-small-top" uk-alert>
+            <a class="uk-alert-close" uk-close></a>
+            <p>{{ session('fail') }}</p>
+        </div>
+    @endif
+    @if (session()->has('success'))
+        <div class="uk-alert-success uk-margin-small-top" uk-alert>
+            <a class="uk-alert-close" uk-close></a>
+            <p>{{ session('success') }}</p>
+        </div>
+    @endif
     @csrf
     <form class="uk-form-horizontal uk-margin-small mt-3" method="POST" action="/profile/updateAkun">
         @csrf
