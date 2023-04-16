@@ -100,6 +100,7 @@ Route::post('/siswa/delete', [SiswaController::class, 'destroySiswa'])->middlewa
 Route::post('/siswa/import', [SiswaController::class, 'import'])->middleware('auth');
 //Keuangan Siswa
 Route::get('/siswa/keuangan', [KeuanganSiswa::class, 'index'])->middleware('auth');
+Route::get('/siswa/keuangan/scan', [KeuanganSiswa::class, 'scan'])->middleware('auth');
 Route::post('/pembayaran/store', [KeuanganSiswa::class, 'addPembayaran'])->middleware('auth');
 Route::post('/pembayaran/update', [KeuanganSiswa::class, 'updatePembayaran'])->middleware('auth');
 Route::post('/pembayaran/transaksi', [KeuanganSiswa::class, 'engineTransaction'])->middleware('auth');

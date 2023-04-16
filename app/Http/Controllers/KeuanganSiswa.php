@@ -8,9 +8,14 @@ use DB;
 
 class KeuanganSiswa extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        
+        $dataSiswa = DB::table('siswa')->where('id_siswa', request('siswa_id'))->get();
+        if (count($dataSiswa) < 1) {
+            $dataSiswa = array(
+                (object) array('nama_siswa' => 'undefined')
+            );
+        }
         return view('siswa.keuangan.index', [
             'title' => 'Keuangan Siswa',
             'navactive' => 'siswa',
@@ -19,7 +24,8 @@ class KeuanganSiswa extends Controller
             'allPembayaran' => DB::table('pembayaran')->get(),
             'detailPembayaran' => $this->detailPembayaran(),
             'allTransaksi' => $this->allTransaksi(),
-            'detailTransaksi' => $this->detailTransaksi()
+            'detailTransaksi' => $this->detailTransaksi(),
+            'dataSiswa' => $dataSiswa[0]
         ]);
     }
 
@@ -61,8 +67,11 @@ class KeuanganSiswa extends Controller
         if (!request('siswa_id')) {
             return [];
         }
-        $siswa = DB::table('siswa')->where('id_siswa', request('siswa_id'))->get()[0]->kelas_id;
-        $kelas = '%' .$siswa. '%';
+        $siswa = DB::table('siswa')->where('id_siswa', request('siswa_id'))->get();
+        if (count($siswa) < 1) {
+            return [];
+        }
+        $kelas = '%' .$siswa[0]->kelas_id. '%';
         $detilPembayaran = DB::table('pembayaran')
                                 ->where('pembayaran.kelas', 'like', $kelas)
                                 ->get();
