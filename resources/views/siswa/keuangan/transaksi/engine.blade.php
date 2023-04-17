@@ -72,21 +72,10 @@
                     <td>{{ $ai++ }}</td>
                     <td>{{ $transaksi->kwitansi }}</td>
                     <td>{{ $transaksi->waktu_transaksi }}</td>
-                    <td>{{ $transaksi->total_transaksi }}</td>
+                    <td>Rp. {{ number_format($transaksi->total_transaksi,0,'','.') }}</td>
                     <td>
-                        <a href="#detail-trx-{{ $transaksi->kwitansi }}" uk-toggle="target: #detail-trx-{{ $transaksi->kwitansi }}">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-square" viewBox="0 0 16 16">
-                                <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
-                                <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
-                            </svg>
-                        </a> &nbsp;
+                        <a href="#detail-trx-{{ $transaksi->kwitansi }}" uk-toggle="target: #detail-trx-{{ $transaksi->kwitansi }}" uk-icon="info"></a>
                         @include('siswa.keuangan.transaksi.detail-transaksi')
-                        <a href="#detail-trx-{{ $transaksi->kwitansi }}" uk-toggle="target: #print-transaksi-{{ $transaksi->id_transaksi }}">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16">
-                                <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/>
-                                <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z"/>
-                            </svg>
-                        </a> &nbsp;
                     </td>
                 </tr>
             @endforeach

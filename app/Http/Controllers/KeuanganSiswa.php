@@ -142,7 +142,7 @@ class KeuanganSiswa extends Controller
                     'waktu_transaksi' => date('Y-m-d H:i:s'),
                     'siswa_id' => $request->id_siswa,
                     'pembayaran_id' => $request->id_pembayaran[$i],
-                    'terbayar' => $request->nominal[$i]
+                    'terbayar' => preg_replace('/[^0-9]/', '', $request->nominal[$i])
                 ]);
         }
         return redirect('/siswa/keuangan?siswa_id='.$request->id_siswa)->with('success', 'Berhasil melakukan transaksi!');

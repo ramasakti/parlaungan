@@ -7,7 +7,7 @@
             <div>
                 <div id="card-{{ $detilPembayaran->id_pembayaran }}" class="uk-card uk-card-default uk-card-small uk-card-body uk-margin-small">
                     <h6 class="uk-margin-small">
-                        <a id="closer" uk-icon="icon: close" onclick="closeCard()" class="uk-position-top-right"></a>
+                        <a id="closer" uk-icon="icon: close" onclick="closeCard('card-{{ $detilPembayaran->id_pembayaran }}')" class="uk-position-top-right"></a>
                         {{ $detilPembayaran->nama_pembayaran }}
                     </h6>
                     @php
@@ -29,7 +29,7 @@
                     @endif
                     <input class="uk-input uk-margin" type="hidden" name="id_siswa" value="{{ $id_siswa }}">
                     <input class="uk-input uk-margin" type="hidden" name="id_pembayaran[]" value="{{ $detilPembayaran->id_pembayaran }}">
-                    <input class="uk-input uk-margin" type="number" name="nominal[]">
+                    <input class="uk-input uk-margin" type="text" id="{{ $detilPembayaran->id_pembayaran }}" name="nominal[]" onkeyup="rupiah('{{ $detilPembayaran->id_pembayaran }}', this.value)">
                 </div>
             </div>
         @endforeach
@@ -37,9 +37,7 @@
     <button class="uk-margin uk-button uk-button-primary" type="submit">Payment</button>
     </form>
     <script>
-        const close = document.getElementById('closer')
-        function closeCard() {
-            close.parentElement.parentElement.remove()
-        }
+        const closeCard = (cardId) => document.getElementById(cardId).remove()
+        const rupiah = (id, value) => document.getElementById(id).value = formatRupiah(value)
     </script>
 </x-admintemplate>

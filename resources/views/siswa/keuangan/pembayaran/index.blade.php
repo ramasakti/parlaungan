@@ -14,7 +14,7 @@
             <tr>
                 <td>{{ $ai++ }}</td>
                 <td>{{ $pembayaran->nama_pembayaran }}</td>
-                <td>{{ $pembayaran->nominal }}</td>
+                <td>Rp. {{ number_format($pembayaran->nominal,0,'','.') }}</td>
                 <td>
                     <a href="#modal-center" uk-toggle="target: #edit-pembayaran-{{ $pembayaran->id_pembayaran }}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
