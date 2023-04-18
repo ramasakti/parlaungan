@@ -48,6 +48,9 @@ class KeuanganSiswa extends Controller
 
     public function addPembayaran(Request $request)
     {
+        if ($request->kelas == null) {
+            return back()->with('fail', 'Gagal menambah pembayaran! Wajib menentukan kelas pembayaran');
+        }
         $kelas = implode('#', $request->kelas);
         DB::table('pembayaran')
             ->insert([
@@ -152,6 +155,7 @@ class KeuanganSiswa extends Controller
     {
         $kwitansi = 'K' . date('Ymdhis');
         $jenisPem = count($request->id_pembayaran);
+
         for ($i=0; $i < $jenisPem; $i++) {
             $pembayaran_terbayar = DB::table('transaksi')
                                     ->select(
@@ -160,28 +164,28 @@ class KeuanganSiswa extends Controller
                                     ->where('siswa_id', $request->id_siswa)
                                     ->where('pembayaran_id', $request->id_pembayaran[$i])
                                     ->groupBy('pembayaran_id')
-                                    ->get()->toArray();
-            if (count($pembayaran_terbayar) > 0) {
-                $x = preg_replace('/[^0-9]/', '', $request->nominal[$i]) - preg_replace('/[^0-9]/', '', $pembayaran_terbayar[0]->pembayaran_terbayar);
-                $y = preg_replace('/[^0-9]/', '', $request->terbayar[$i]);
-                $z = $x-$y;
-            }else{
-                $z = 1;
-            }
-            if ($z < 0) {
+                                    ->first();
+
+            $nominal = preg_replace('/[^0-9]/', '', $request->nominal[$i]);
+            $terbayar = preg_replace('/[^0-9]/', '', $request->terbayar[$i]);
+            $pembayaran_terbayar = preg_replace('/[^0-9]/', '', $pembayaran_terbayar->pembayaran_terbayar ?? 0);
+            $selisih = $nominal - $pembayaran_terbayar - $terbayar;
+
+            if ($selisih < 0 || $terbayar > $nominal) {
                 return redirect('/siswa/keuangan?siswa_id='.$request->id_siswa)->with('fail', 'Jumlah pembayaran melebihi jumlah kekurangan pembayaran');
-            }else{
-                DB::table('transaksi')
-                    ->insert([
-                        'kwitansi' => $kwitansi,
-                        'waktu_transaksi' => date('Y-m-d H:i:s'),
-                        'siswa_id' => $request->id_siswa,
-                        'pembayaran_id' => $request->id_pembayaran[$i],
-                        'terbayar' => preg_replace('/[^0-9]/', '', $request->terbayar[$i])
-                    ]);
-                return redirect('/siswa/keuangan?siswa_id='.$request->id_siswa)->with('success', 'Berhasil melakukan transaksi!');
             }
+
+            DB::table('transaksi')
+                ->insert([
+                    'kwitansi' => $kwitansi,
+                    'waktu_transaksi' => date('Y-m-d H:i:s'),
+                    'siswa_id' => $request->id_siswa,
+                    'pembayaran_id' => $request->id_pembayaran[$i],
+                    'terbayar' => $terbayar
+                ]);
         }
+
+        return redirect('/siswa/keuangan?siswa_id='.$request->id_siswa)->with('success', 'Berhasil melakukan transaksi!');
     }
 
     public function numberFormat($angka)

@@ -1,4 +1,16 @@
 <x-admintemplate title='{{ $title }}' navactive='{{ $navactive }}'>
+    @if (session()->has('success'))
+        <div class="uk-alert-success" uk-alert>
+            <a class="uk-alert-close" uk-close></a>
+            <p>{{ session('success') }}</p>
+        </div>
+    @endif
+    @if (session()->has('fail'))
+        <div class="uk-alert-danger" uk-alert>
+            <a class="uk-alert-close" uk-close></a>
+            <p>{{ session('fail') }}</p>
+        </div>
+    @endif
     <ul uk-tab>
         <li><a href="#">Pembayaran</a></li>
         <li><a href="#">Data Transaksi</a></li>
