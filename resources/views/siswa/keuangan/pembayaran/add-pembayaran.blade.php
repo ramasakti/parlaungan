@@ -8,7 +8,7 @@
                 <input class="uk-input" type="text" name="nama_pembayaran" placeholder="Nama pembayaran" required>
             </div>
             <div class="uk-margin">
-                <input class="uk-input" id="nominal" type="number" name="nominal" placeholder="Nominal" required>
+                <input class="uk-input" id="nominal" type="text" name="nominal" onkeyup="rupiah('nominal', this.value)" placeholder="Nominal" required>
             </div>
             <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
                 @foreach ($dataKelas as $kelas)
@@ -22,3 +22,6 @@
         </form>
     </div>
 </div>
+<script>
+    const rupiah = (id, value) => document.getElementById(id).value = formatRupiah(value)
+</script>

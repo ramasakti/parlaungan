@@ -29,16 +29,33 @@ class KeuanganSiswa extends Controller
         ]);
     }
 
+    public function kwitansi(Request $request)
+    {
+        $detailTransaksi = DB::table('transaksi')
+                        ->select(
+                            '*',
+                            DB::raw('SUM(terbayar) as total_transaksi')
+                        )
+                        ->where('transaksi.kwitansi', request('id'))
+                        ->join('siswa', 'siswa.id_siswa', '=', 'transaksi.siswa_id')
+                        ->orderBy('transaksi.waktu_transaksi', 'desc')
+                        ->groupBy('transaksi.kwitansi')
+                        ->get();
+        return view('siswa.keuangan.transaksi.kwitansi', [
+            'data' => $detailTransaksi,
+        ]);
+    }
+
     public function addPembayaran(Request $request)
     {
         $kelas = implode('#', $request->kelas);
         DB::table('pembayaran')
             ->insert([
                 'nama_pembayaran' => $request->nama_pembayaran,
-                'nominal' => $request->nominal,
+                'nominal' => preg_replace('/[^0-9]/', '', $request->nominal),
                 'kelas' => '#' .$kelas
             ]);
-        return back();
+        return back()->with('success', 'Berhasil menambahkan pembayaran baru!');
     }
 
     public function updatePembayaran(Request $request)
@@ -133,19 +150,38 @@ class KeuanganSiswa extends Controller
 
     public function payment(Request $request)
     {
-        $kwitansi = 'K' . date('Ymdhis') . 
+        $kwitansi = 'K' . date('Ymdhis');
         $jenisPem = count($request->id_pembayaran);
         for ($i=0; $i < $jenisPem; $i++) {
-            DB::table('transaksi')
-                ->insert([
-                    'kwitansi' => $kwitansi,
-                    'waktu_transaksi' => date('Y-m-d H:i:s'),
-                    'siswa_id' => $request->id_siswa,
-                    'pembayaran_id' => $request->id_pembayaran[$i],
-                    'terbayar' => preg_replace('/[^0-9]/', '', $request->nominal[$i])
-                ]);
+            $pembayaran_terbayar = DB::table('transaksi')
+                                    ->select(
+                                        DB::raw('SUM(terbayar) as pembayaran_terbayar')
+                                    )
+                                    ->where('siswa_id', $request->id_siswa)
+                                    ->where('pembayaran_id', $request->id_pembayaran[$i])
+                                    ->groupBy('pembayaran_id')
+                                    ->get()->toArray();
+            if (count($pembayaran_terbayar) > 0) {
+                $x = preg_replace('/[^0-9]/', '', $request->nominal[$i]) - preg_replace('/[^0-9]/', '', $pembayaran_terbayar[0]->pembayaran_terbayar);
+                $y = preg_replace('/[^0-9]/', '', $request->terbayar[$i]);
+                $z = $x-$y;
+            }else{
+                $z = 1;
+            }
+            if ($z < 0) {
+                return redirect('/siswa/keuangan?siswa_id='.$request->id_siswa)->with('fail', 'Jumlah pembayaran melebihi jumlah kekurangan pembayaran');
+            }else{
+                DB::table('transaksi')
+                    ->insert([
+                        'kwitansi' => $kwitansi,
+                        'waktu_transaksi' => date('Y-m-d H:i:s'),
+                        'siswa_id' => $request->id_siswa,
+                        'pembayaran_id' => $request->id_pembayaran[$i],
+                        'terbayar' => preg_replace('/[^0-9]/', '', $request->terbayar[$i])
+                    ]);
+                return redirect('/siswa/keuangan?siswa_id='.$request->id_siswa)->with('success', 'Berhasil melakukan transaksi!');
+            }
         }
-        return redirect('/siswa/keuangan?siswa_id='.$request->id_siswa)->with('success', 'Berhasil melakukan transaksi!');
     }
 
     public function numberFormat($angka)

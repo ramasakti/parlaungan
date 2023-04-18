@@ -29,7 +29,8 @@
                     @endif
                     <input class="uk-input uk-margin" type="hidden" name="id_siswa" value="{{ $id_siswa }}">
                     <input class="uk-input uk-margin" type="hidden" name="id_pembayaran[]" value="{{ $detilPembayaran->id_pembayaran }}">
-                    <input class="uk-input uk-margin" type="text" id="{{ $detilPembayaran->id_pembayaran }}" name="nominal[]" onkeyup="rupiah('{{ $detilPembayaran->id_pembayaran }}', this.value)">
+                    <input class="uk-input uk-margin" type="hidden" value="{{ $detilPembayaran->nominal }}" name="nominal[]">
+                    <input class="uk-input uk-margin" type="text" id="{{ $detilPembayaran->id_pembayaran }}" name="terbayar[]" onkeyup="rupiah('{{ $detilPembayaran->id_pembayaran }}', this.value)">
                 </div>
             </div>
         @endforeach

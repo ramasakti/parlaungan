@@ -14,6 +14,12 @@
             <p>{{ session('success') }}</p>
         </div>
     @endif
+    @if (session()->has('fail'))
+        <div class="uk-alert-danger" uk-alert>
+            <a class="uk-alert-close" uk-close></a>
+            <p>{{ session('fail') }}</p>
+        </div>
+    @endif
     <h5 class="uk-margin">Detail Pembayaran {{ $dataSiswa->nama_siswa }}</h5>
     <form action="/pembayaran/transaksi?siswa_id={{ request('siswa_id') }}" method="post">
         @csrf
@@ -76,6 +82,7 @@
                     <td>
                         <a href="#detail-trx-{{ $transaksi->kwitansi }}" uk-toggle="target: #detail-trx-{{ $transaksi->kwitansi }}" uk-icon="info"></a>
                         @include('siswa.keuangan.transaksi.detail-transaksi')
+                        <a href="/transaksi/kwitansi?id={{ $transaksi->kwitansi }}" target="_blank" uk-icon="print"></a>
                     </td>
                 </tr>
             @endforeach

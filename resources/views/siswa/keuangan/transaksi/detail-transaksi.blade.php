@@ -15,7 +15,7 @@
             $pmbyrn = DB::table('pembayaran')->whereIn('id_pembayaran', $newArr)->get();
         @endphp
 
-        <table class="uk-table">
+        <table id="kwitansi" class="uk-table">
             <thead>
                 <tr>
                     <th>Pembayaran</th>

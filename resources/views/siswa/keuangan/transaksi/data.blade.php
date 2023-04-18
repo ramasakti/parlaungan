@@ -18,7 +18,7 @@
                 <td>{{ $transaksi->nama_siswa }}</td>
                 <td>Rp. {{ number_format($transaksi->terbayar,0,'','.') }}</td>
                 <td>
-                    <a href="#detail-trx-{{ $transaksi->kwitansi }}" uk-toggle="target: #detail-trx-{{ $transaksi->kwitansi }}" uk-icon="info"></a>
+                    <a href="#detail-trx-{{ $transaksi->kwitansi }}" uk-toggle="target: #detail-trx-{{ $transaksi->kwitansi }}" uk-icon="info"></a>&nbsp;
                     @include('siswa.keuangan.transaksi.detail-transaksi')
                 </td>
             </tr>
