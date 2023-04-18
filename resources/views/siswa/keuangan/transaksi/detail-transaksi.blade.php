@@ -1,8 +1,5 @@
 <div id="detail-trx-{{ $transaksi->kwitansi }}" class="uk-flex-top" uk-modal>
     <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
-
-        <button class="uk-modal-close-default" type="button" uk-close></button>
-        <h6>{{ $transaksi->kwitansi }}</h6>
         @php
             $trx = DB::table('transaksi')->select('pembayaran_id', 'terbayar')->where('kwitansi', $transaksi->kwitansi)->get()->toArray();
             
@@ -14,6 +11,9 @@
 
             $pmbyrn = DB::table('pembayaran')->whereIn('id_pembayaran', $newArr)->get();
         @endphp
+
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+        <h6>{{ $transaksi->kwitansi }} <a href="#" onclick="editable()" uk-icon="icon: file-edit"></a></h6>
 
         <table id="kwitansi" class="uk-table">
             <thead>
@@ -28,7 +28,7 @@
                     <tr>
                         <td>{{ $pmbyrn[$i]->nama_pembayaran }}</td>
                         <td>Rp. {{ number_format(intval($pmbyrn[$i]->nominal),0,'','.') }}</td>
-                        <td>Rp. {{ number_format($trx[$i]->terbayar,0,'','.') }}</td>
+                        <td id="terbayar-{{ $i }}">Rp. {{ number_format($trx[$i]->terbayar,0,'','.') }}</td>
                     </tr>
                 @endfor
                     <tr>
@@ -44,3 +44,8 @@
         </table>
     </div>
 </div>
+<script>
+    const editable = () => {
+        document.getElementById()
+    }
+</script>
