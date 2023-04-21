@@ -24,12 +24,3 @@
         </form>
     </div>
 </div>
-<script>
-    const fEditAbsen = document.getElementById('fEditAbsen')
-    const bEditAbsen = document.getElementById('bEditAbsen')
-    const updateAbsen = () => {
-        bEditAbsen.setAttribute('disabled', '')
-        bEditAbsen.innerHTML = `<div uk-spinner="ratio: 0.5"></div>`
-        fEditAbsen.submit()
-    }
-</script>

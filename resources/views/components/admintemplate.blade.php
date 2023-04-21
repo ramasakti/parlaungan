@@ -7,10 +7,6 @@
     <title>{{ $title }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="SMA Islam Parlaungan" content="Berkarya, Berkarakter, Berakhlakul Karimah">
-    {{-- Data Tables --}}
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
     <!-- PWA  -->
     <meta name="theme-color" content="#FFFFFF"/>
     <link rel="apple-touch-icon" href="{{ asset('/img/logo.png') }}">
@@ -34,7 +30,7 @@
     <link rel="stylesheet" href="/adminlte/css/responsive.css">
     <!-- modernizr css -->
     <script src="/adminlte/js/vendor/modernizr-2.8.3.min.js"></script>
-    {{-- TinyMCE --}}
+    <!-- TinyMCE -->
     <script src="https://cdn.tiny.cloud/1/zgg0gxpkj4s833bnso32wri5w42hrq17ebnjci64yppegu0j/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 </head>
 
