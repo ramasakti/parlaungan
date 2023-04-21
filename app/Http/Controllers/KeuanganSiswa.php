@@ -105,6 +105,7 @@ class KeuanganSiswa extends Controller
                             '*',
                             DB::raw('SUM(terbayar) as terbayar')
                         )
+                        ->whereBetween('transaksi.waktu_transaksi', [request('tanggal') . ' 00:00:00', request('tanggal') . ' 23:59:59'])
                         ->join('siswa', 'siswa.id_siswa', '=', 'transaksi.siswa_id')
                         ->orderBy('transaksi.waktu_transaksi', 'desc')
                         ->groupBy('transaksi.kwitansi')

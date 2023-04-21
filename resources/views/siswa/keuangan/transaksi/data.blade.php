@@ -1,3 +1,6 @@
+<form action="" method="get">
+    <input class="uk-input uk-margin-top" type="date" name="tanggal" onchange="this.form.submit()" value="{{ request('tanggal') }}">
+</form>
 <table class="table table-borderless">
     <thead>
         <tr>

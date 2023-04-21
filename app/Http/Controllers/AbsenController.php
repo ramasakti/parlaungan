@@ -133,9 +133,7 @@ class AbsenController extends Controller
     public function engine(Request $request)
     {
         function jam() {
-            $jamMasuk = DB::table('hari')
-                        ->where('nama_hari', Carbon::now()->isoFormat('dddd'))
-                        ->get();
+            $jamMasuk = DB::table('hari')->where('nama_hari', Carbon::now()->isoFormat('dddd'))->get();
             return $jamMasuk;
         }
         
