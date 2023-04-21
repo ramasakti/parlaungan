@@ -29,8 +29,5 @@
         <li class="uk-active">
             @include('user.walmur')
         </li>
-    </ul>
-
-
-    
+    </ul> 
 </x-admintemplate>
