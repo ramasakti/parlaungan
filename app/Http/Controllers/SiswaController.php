@@ -65,9 +65,6 @@ class SiswaController extends Controller
 
     public function index(Request $request)
     {
-        if (request()->has('id_kelas')){
-            session()->put('siswa', 'uk-active');
-        }
         $this->importAbsenData();
         $this->importDetailSiswa();
         return view('siswa.index', [
@@ -89,7 +86,7 @@ class SiswaController extends Controller
                 'jurusan' => $request->jurusan,
                 'walas' => $request->walas,
             ]);
-        return back()->with('kelas', 'uk-active');
+        return back()->with('kelas', 'Berhasil menambah kelas!');
     }
 
     public function updateKelas(Request $request)
@@ -101,7 +98,7 @@ class SiswaController extends Controller
                 'jurusan' => $request-> jurusan,
                 'walas' => $request-> walas,
             ]);
-        return back()->with('kelas', 'uk-active');
+        return back()->with('kelas', 'Berhasil edit kelas!');
     }
 
     public function destroyKelas(Request $request)
@@ -109,7 +106,7 @@ class SiswaController extends Controller
         DB::table('kelas')
             ->where('id_kelas', $request->id_kelas)
             ->delete();
-        return back()->with('kelas', 'uk-active');
+        return back()->with('kelas', 'Berhasil delete kelas!');
     }
 
     public function graduation(Request $request)
@@ -130,7 +127,7 @@ class SiswaController extends Controller
                 'tingkat' => 'XI'
             ]);
 
-        return back()->with('kelas', 'uk-active');
+        return back()->with('kelas', 'Berhasil menaikkan tingkatan kelas!');
     }
 
     public function storeSiswa(Request $request)
@@ -160,7 +157,6 @@ class SiswaController extends Controller
             ]);
             
         return back()->with('siswa', [
-            'active' => 'uk-active',
             'success' => 'Berhasil tambah siswa!'
         ]);
     }
@@ -193,7 +189,7 @@ class SiswaController extends Controller
                 'id_siswa' => $request->id_siswa
             ]);
 
-        return back()->with('siswa', 'uk-active');
+        return back()->with('siswa', 'Berhasil update data siswa!');
     }
 
     public function destroySiswa(Request $request)
@@ -206,6 +202,6 @@ class SiswaController extends Controller
             ->where('id_siswa', $request->id_siswa)
             ->delete();
 
-        return back()->with('siswa', 'uk-active');
+        return back()->with('siswa', 'Berhasil delete data siswa!');
     }
 }
