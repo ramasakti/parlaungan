@@ -28,7 +28,7 @@
                     <tr>
                         <td>{{ $pmbyrn[$i]->nama_pembayaran }}</td>
                         <td>Rp. {{ number_format(intval($pmbyrn[$i]->nominal),0,'','.') }}</td>
-                        <td id="terbayar-{{ $i }}">Rp. {{ number_format($trx[$i]->terbayar,0,'','.') }}</td>
+                        <td>Rp. {{ number_format($trx[$i]->terbayar,0,'','.') }}</td>
                     </tr>
                 @endfor
                     <tr>
@@ -44,8 +44,3 @@
         </table>
     </div>
 </div>
-<script>
-    const editable = () => {
-        document.getElementById()
-    }
-</script>

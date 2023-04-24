@@ -29,6 +29,15 @@ class KeuanganSiswa extends Controller
         ]);
     }
 
+    public function editTransaksi(Request $request, $kwitansi)
+    {
+        return view('siswa.keuangan.transaksi.edit-transaksi', [
+            'title' => 'Edit Transaksi',
+            'navactive' => 'siswa',
+            'data' => DB::table('transaksi')->join('pembayaran', 'pembayaran.id_pembayaran', '=', 'transaksi.pembayaran_id')->where('kwitansi', $kwitansi)->get()
+        ]);
+    }
+
     public function kwitansi(Request $request)
     {
         $detailTransaksi = DB::table('transaksi')
@@ -144,6 +153,9 @@ class KeuanganSiswa extends Controller
 
     public function engineTransaction(Request $request)
     {
+        if (!$request->pembayaran) {
+            return back()->with('fail', 'Gagal Checkout! Tidak ada pembayaran yang terdeteksi');
+        }
         return view('siswa.keuangan.transaksi.checkout', [
             'title' => 'Siswa',
             'navactive' => 'siswa',
