@@ -25,7 +25,8 @@ class KeuanganSiswa extends Controller
             'detailPembayaran' => $this->detailPembayaran(),
             'allTransaksi' => $this->allTransaksi(),
             'detailTransaksi' => $this->detailTransaksi(),
-            'dataSiswa' => $dataSiswa[0]
+            'dataSiswa' => $dataSiswa[0],
+            'listSiswa' => DB::table('siswa')->get()
         ]);
     }
 

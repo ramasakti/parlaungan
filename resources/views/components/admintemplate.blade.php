@@ -28,6 +28,10 @@
     <link rel="stylesheet" href="/adminlte/css/default-css.css">
     <link rel="stylesheet" href="/adminlte/css/styles.css">
     <link rel="stylesheet" href="/adminlte/css/responsive.css">
+    <!-- Live Search -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/css/select2.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script>
     <!-- modernizr css -->
     <script src="/adminlte/js/vendor/modernizr-2.8.3.min.js"></script>
     <!-- TinyMCE -->

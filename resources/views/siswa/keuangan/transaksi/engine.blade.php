@@ -1,11 +1,18 @@
 <script src="/js/html5-qrcode.min.js" type="text/javascript"></script>
     <center>
         <br>
-            <div class="uk-postion-center" style="width: 500px" id="reader"></div>
+            <div class="uk-postion-center" style="width:40%" id="reader"></div>
             <form action="/siswa/keuangan" method="get" id="formPembayar">
                 <input type="hidden" name="siswa_id" id="calonPembayar">
             </form>
         <br>
+        <form action="" method="GET">
+            <select class="uk-select" style="width: 40%" name="siswa_id" onchange="this.form.submit()">
+                @foreach ($listSiswa as $siswa)
+                    <option value="{{ $siswa->id_siswa }}">{{ $siswa->nama_siswa }}</option>
+                @endforeach
+            </select>        
+        </form>
     </center>
 
     <h5 class="uk-margin">Detail Pembayaran {{ $dataSiswa->nama_siswa }}</h5>
@@ -108,4 +115,6 @@
     let html5QrcodeScanner = new Html5QrcodeScanner(
         "reader", { fps: 120, qrbox: 250 });
     html5QrcodeScanner.render(onScanSuccess);
+
+	$(".uk-select").select2();
 </script>
