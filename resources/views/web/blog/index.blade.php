@@ -23,6 +23,8 @@
                 <td>
                     <a href="/blog/edit/{{ $blog->slug }}" target="_blank" uk-icon="file-edit">
                     </a> &nbsp;
+                    <a href="/blog/view/{{ $blog->slug }}" target="_blank" uk-icon="link"></a>
+                    <a href="/blog/delete/{{ $blog->slug }}" uk-icon="trash"></a>
                 </td>
             </tr>
         @endforeach
