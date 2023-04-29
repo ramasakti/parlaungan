@@ -15,9 +15,11 @@
     <meta property="og:title" content="{{ $data[0]->judul }}">
     <meta property="og:description" content="SMA Islam Parlaungan">
     <meta property="og:image" content="https://smaispa.sch.id/storage/blog/blog/{{ $data[0]->foto }}">
+    <meta property="og:image:height" content="364">
+    <meta property="og:image:width" content="648">
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://smaispa.sch.id/">
+    <meta property="twitter:url" content="https://smaispa.sch.id/blog/view/{{ $data[0]->slug }}">
     <meta property="twitter:title" content="{{ $data[0]->judul }}">
     <meta property="twitter:description" content="SMA Islam Parlaungan">
     <meta property="twitter:image" content="https://smaispa.sch.id/storage/blog/blog/{{ $data[0]->foto }}">
