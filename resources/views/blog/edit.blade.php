@@ -5,21 +5,21 @@
             <p>Judul telah digunakan!</p>
         </div>
     @enderror
-    <form action="/blog/store" method="post" class="uk-margin" enctype="multipart/form-data">
+    <form action="/blog/update/{{ $dataBlog[0]->slug }}" method="post" class="uk-margin" enctype="multipart/form-data">
         @csrf
-        <img src="" alt="" class="foto-preview img-fluid uk-align-center uk-height-max-medium">
+        <img src="/storage/blog/{{ $dataBlog[0]->foto }}" alt="" class="foto-preview img-fluid uk-align-center uk-height-max-medium">
         <div class="mb-3">
             <label for="foto" class="form-label">Image Post</label>
-            <input type="file" class="form-control" id="foto" name="foto" onchange="previewImage()" required>
+            <input type="file" class="form-control" id="foto" name="foto" onchange="previewImage()">
         </div>
-        <input type="text" class="uk-input uk-margin uk-margin-remove-top" id="judul" name="judul" placeholder="Judul Berita" value="{{ old('judul') }}">
+        <input type="text" class="uk-input uk-margin uk-margin-remove-top" id="judul" name="judul" placeholder="Judul Berita" value="{{ $dataBlog[0]->judul }}">
         <select name="kategori" id="" class="uk-select uk-margin uk-margin-remove-top" value="{{ old('kategori') }}" required>
             <option value="">Kategori Berita</option>
             <option value="Pengumuman">Pengumuman</option>
         </select>
         <input type="hidden" id="uploader" name="uploader" value="{{ session('username') }}">
         <input type="hidden" id="slug" name="slug" value="{{ old('slug') }}">
-        <textarea name="isi" id="isi" cols="30" rows="10">{{ old('isi') }}</textarea>
+        <textarea name="isi" id="isi" cols="30" rows="10">{{ $dataBlog[0]->isi }}</textarea>
         <button class="uk-button uk-button-primary uk-width-1-1 uk-margin" type="submit">Simpan</button>
     </form>
     <script>

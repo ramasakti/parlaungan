@@ -44,27 +44,18 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 Route::get('/logout', [LoginController::class, 'logout'])->middleware('auth');
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 
-//Blog
-Route::get('/blog', [BlogController::class, 'index']);
-Route::get('/blog/view/{slug}', [BlogController::class, 'show']);
-Route::get('/blog/create', [BlogController::class, 'create'])->middleware('auth');
-Route::post('/blog/create', [BlogController::class, 'store'])->middleware('auth');
-Route::get('/blog/edit/{slug}', [BlogController::class, 'edit'])->middleware('auth');
-Route::get('/blog/edit/{slug}', [BlogController::class, 'update'])->middleware('auth');
-Route::get('/blog/delete/{slug}', [BlogController::class, 'update'])->middleware('auth');
-
-//Galeri
-Route::get('/galeri', [GaleriController::class, 'index']);
-
-//About
-Route::get('/about', [WebController::class, 'about']);
-
 //Web
 //Update galeri, blog, about
 Route::get('/web', [WebController::class, 'index'])->middleware('auth');
-Route::get('/web/blog/create', [BlogController::class, 'create'])->middleware('auth');
-Route::post('/web/blog/store', [BlogController::class, 'store'])->middleware('auth');
-Route::get('/web/api', [BlogController::class, 'apiBlog']);
+Route::get('/blog/api', [BlogController::class, 'api']);
+Route::get('/blog/api/{slug}', [BlogController::class, 'showBlogAPI']);
+//Blog
+Route::get('/blog/view/{slug}', [BlogController::class, 'show']);
+Route::get('/blog/create', [BlogController::class, 'create'])->middleware('auth');
+Route::post('/blog/store', [BlogController::class, 'store'])->middleware('auth');
+Route::get('/blog/edit/{slug}', [BlogController::class, 'edit'])->middleware('auth');
+Route::post('/blog/update/{slug}', [BlogController::class, 'update'])->middleware('auth');
+Route::post('/blog/delete/{slug}', [BlogController::class, 'delete'])->middleware('auth');
 
 //User
 Route::get('/profile', [UserController::class, 'profile']);

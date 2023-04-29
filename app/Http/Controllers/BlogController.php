@@ -3,35 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use DB;
 
 class BlogController extends Controller
 {
-    public function apiBlog()
+    public function api()
     {
         return response()->json(DB::table('blog')->get(), 200);
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+    public function showBlogAPI($slug)
     {
-        return view('blog.index', [
-            'ai' => 1,
-            'title' => 'Blog | SMA Islam Parlaungan',
-            'navactive' => 'blog',
-            'data' => Blog::all()
-        ]);
+        return response()->json(DB::table('blog')->where('slug', $slug)->get(), 200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('blog.create', [
@@ -40,12 +27,6 @@ class BlogController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -53,65 +34,93 @@ class BlogController extends Controller
             'foto' => 'image|file'
         ]);
 
-        $filenameWithExt = $request->file('foto')->getClientOriginalName();
-        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-        $extension = $request->file('foto')->getClientOriginalExtension();
-        $filenameSimpan = $filename.'_'.time().'.'.$extension;
-        $path = $request->file('foto')->storeAs('public/posts_image', $filenameSimpan);
+        //Upload Foto Baru
+        $ext = $request->file('foto')->getClientOriginalExtension();
+        $filename = date('YmdHis') . '.' . $ext;
+        $request->file('foto')->storeAs('/blog', $filename);
 
         DB::table('blog')
             ->insert([
-                'slug' => $request->slug,
-                'foto' => $validated['foto'],
+                'slug' => $validated['slug'],
+                'foto' => $filename,
                 'judul' => $request->judul,
                 'isi' => $request->isi,
                 'kategori' => $request->kategori,
                 'uploaded' => date('Y-m-d'),
                 'uploader' => $request->uploader
             ]);
+        
+        return redirect('/web')->with('success', 'Berhasil menambahkan berita');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Blog  $blog
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Blog $blog)
+    public function show($blog)
     {
-        //
+        return view('blog.show', [
+            'data' => DB::table('blog')->where('slug', $blog)->get()
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Blog  $blog
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Blog $blog)
+    public function edit($slug)
     {
-        //
+        return view('blog.edit', [
+            'title' => 'Blog Edit',
+            'navactive' => 'web',
+            'dataBlog' => DB::table('blog')->where('slug', $slug)->get()
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Blog  $blog
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Blog $blog)
+    public function update(Request $request, $slug)
     {
-        //
+        $detailBlog = DB::table('blog')->where('slug', $slug)->first();
+        
+        $validated = $request->validate([
+            'slug' => 'unique:blog',
+            'foto' => 'image|file'
+        ]);
+
+        if ($validated['slug'] == null) {
+            $validated['slug'] = $detailBlog->slug;
+        }
+
+        if ($request->file('foto')) {
+            //Hapus Foto Lama
+            Storage::delete('blog/' . $detailBlog->foto);
+
+            //Upload Foto Baru
+            $ext = $request->file('foto')->getClientOriginalExtension();
+            $filename = date('YmdHis') . '.' . $ext;
+            $request->file('foto')->storeAs('/blog', $filename);
+
+            //Update Data
+            DB::table('blog')
+                ->where('slug', $slug)
+                ->update([
+                    'slug' => $validated['slug'],
+                    'foto' => $filename,
+                    'judul' => $request->judul,
+                    'isi' => $request->isi,
+                    'kategori' => $request->kategori,
+                    'uploaded' => date('Y-m-d'),
+                    'uploader' => $request->uploader
+                ]);
+        }else{
+            //Update Data
+            DB::table('blog')
+                ->where('slug', $slug)
+                ->update([
+                    'slug' => $validated['slug'],
+                    'judul' => $request->judul,
+                    'isi' => $request->isi,
+                    'kategori' => $request->kategori,
+                    'uploaded' => date('Y-m-d'),
+                    'uploader' => $request->uploader
+                ]);
+        }
+
+        return redirect('/web')->with('success', 'Berhasil menambahkan berita');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Blog  $blog
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Blog $blog)
+    public function destroy($blog)
     {
         //
     }
