@@ -29,5 +29,19 @@
         <li class="uk-active">
             @include('user.walmur')
         </li>
-    </ul> 
+    </ul>
+    <script>
+        const showhidePassword = (username) => {
+            const passwordBaru = document.getElementById('passwordBaru-' + username)
+            const iconNewPass = document.getElementById('iconNewPass-' + username)
+
+            if (iconNewPass.getAttribute('uk-icon') == 'icon: lock') {
+                passwordBaru.setAttribute('type', 'text')
+                iconNewPass.setAttribute('uk-icon', 'icon: unlock')
+            }else{
+                passwordBaru.setAttribute('type', 'password')
+                iconNewPass.setAttribute('uk-icon', 'icon: lock')
+            }
+        }
+    </script>
 </x-admintemplate>

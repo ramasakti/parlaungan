@@ -9,7 +9,7 @@
             <div class="uk-card uk-card-default uk-card-body uk-background-cover uk-background-image@s" style="background-image: url('/img/bgkp.svg');" id="card">
                 <p class="uk-margin-remove uk-position-top-right"><a href="/profile" class="uk-margin-small-right" uk-icon="user"></a></p>
                 <div class="uk-panel">
-                    <img class="uk-border-circle uk-align-left uk-margin-small-right uk-margin-small-bottom" width="35%" height="35%" src="img/default-user.jpg">
+                    <img class="image-wrapper uk-border-circle uk-align-left uk-margin-small-right uk-margin-small-bottom" src="{{ ($detailUser[0]->foto == '') ? '/img/default-user.jpg' : '/storage/profil/'.$detailUser[0]->foto }}">
                     <h5 class="uk-card-title uk-margin-remove ">
                         @switch(session('status'))
                             @case('Siswa')

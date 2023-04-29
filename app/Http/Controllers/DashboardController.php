@@ -88,6 +88,7 @@ class DashboardController extends Controller
         switch (session('status')) {
             case 'Siswa':
                 $detailUser = DB::table('siswa')
+                                ->join('user', 'user.username', '=', 'siswa.id_siswa')
                                 ->where('id_siswa', session('username'))
                                 ->get();
                 return $detailUser;
@@ -101,6 +102,7 @@ class DashboardController extends Controller
             default:
                 $detailUser = DB::table('guru')
                                 ->where('id_guru', session('username'))
+                                ->join('user', 'user.username', '=', 'guru.id_guru')
                                 ->get();
                 return $detailUser;
                 break;

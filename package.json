@@ -17,6 +17,7 @@
     },
     "dependencies": {
         "chart.js": "^4.0.1",
+        "cropperjs": "^1.5.13",
         "html5-qrcode": "^2.2.1"
     }
 }

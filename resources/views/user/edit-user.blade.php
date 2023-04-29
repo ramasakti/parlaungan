@@ -13,13 +13,12 @@
                     <input class="uk-input" type="password" name="password" id="passwordBaru-{{ $user[0]->username }}" placeholder="Password Baru">
                 </div>
             </div>
-            <div class="js-upload uk-placeholder uk-text-center">
-                <span uk-icon="icon: cloud-upload"></span>
-                <span class="uk-text-middle">Upload file excel dengan ekstensi .xlsx</span>
-                <div uk-form-custom>
-                    <input type="file">
-                    <span class="uk-link">select one</span>
-                </div>
+            @if ($user[0]->foto != '')
+                <img class="image-wrapper uk-border-circle uk-align-center" src="/storage/profil/{{ $user[0]->foto }}" alt="" srcset="">
+            @endif
+            <div class="uk-margin">
+                <label for="foto" class="form-label">Foto Profil</label>
+                <input type="file" class="form-control" id="foto" name="foto">
             </div>
             @if ($user[0]->status != 'Siswa' and $user[0]->status != 'Walmur')
                 <div class="uk-margin">
@@ -33,6 +32,9 @@
                         <option value="Admin" {{ ($user[0]->status === 'Admin') ? 'selected' : '' }}>Admin</option>
                     </select>
                 </div>
+            @endif
+            @if ($user[0]->status == 'Siswa')
+                <input type="hidden" name="status" value="Siswa">
             @endif
             <button type="submit" class="uk-button uk-button-primary uk-button-small">Simpan</button>
         </form>
@@ -51,4 +53,6 @@
             iconNewPass.setAttribute('uk-icon', 'icon: lock')
         }
     }
+    
+    
 </script>

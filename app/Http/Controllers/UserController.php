@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -120,13 +121,41 @@ class UserController extends Controller
 
     public function updateUser(Request $request)
     {
-        DB::table('user')
-            ->where('username', $request->username)
-            ->update([
-                'password' => bcrypt($request->password),
-                'foto' => '',
-                'status' => $request->status,
-            ]);
+        $detailUser = DB::table('user')->where('username', $request->username)->first();
+        if ($request->file('foto')) {
+            //Hapus Foto Lama
+            Storage::delete('profil/' . $detailUser->foto);
+
+            //Upload Foto Baru
+            $ext = $request->file('foto')->getClientOriginalExtension();
+            $filename = $request->username . '.' . $ext;
+            $request->file('foto')->storeAs('/profil', $filename);
+            
+            if ($request->password) {
+                DB::table('user')
+                    ->where('username', $request->username)
+                    ->update([
+                        'password' => bcrypt($request->password),
+                        'foto' => $filename,
+                        'status' => $request->status,
+                    ]);
+            }else{
+                DB::table('user')
+                    ->where('username', $request->username)
+                    ->update([
+                        'foto' => $filename,
+                        'status' => $request->status,
+                    ]);
+            }
+        }else{
+            DB::table('user')
+                ->where('username', $request->username)
+                ->update([
+                    'password' => bcrypt($request->password),
+                    'foto' => '',
+                    'status' => $request->status,
+                ]);
+        }
         return back()->with('success', 'Berhasil update data!');
     }
 }
