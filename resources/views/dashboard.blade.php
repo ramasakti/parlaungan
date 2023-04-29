@@ -28,7 +28,9 @@
                     <p class="uk-margin-remove"><span class="uk-margin-small-right" uk-icon="calendar"></span>{{ $detailUser[0]->tempat_lahir }}, {{ $detailUser[0]->tanggal_lahir }}</p>
                     <p class="uk-margin-remove"><span class="uk-margin-small-right" uk-icon="location"></span>{{ $detailUser[0]->alamat }}</p>
                     <p class="uk-margin-remove"><span class="uk-margin-small-right" uk-icon="whatsapp"></span>{{ $detailUser[0]->telp }}</p>
-                    <p class="uk-margin-small">{{ QrCode::size(50)->generate('smaispa.sch.id/ktp/'.$detailUser[0]->id_siswa) }}</p>
+                    @if (session('status') == 'Siswa')
+                        <p class="uk-margin-small">{{ QrCode::size(50)->generate('smaispa.sch.id/ktp/'.$detailUser[0]->id_siswa) }}</p>
+                    @endif
                 </div>
             </div>
         </div>
