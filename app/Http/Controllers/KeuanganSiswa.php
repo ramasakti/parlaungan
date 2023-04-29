@@ -169,16 +169,10 @@ class KeuanganSiswa extends Controller
     {
         $kwitansi = 'K' . date('Ymdhis');
         $jenisPem = count($request->id_pembayaran);
-
         for ($i=0; $i < $jenisPem; $i++) {
-            $pembayaran_terbayar = DB::table('transaksi')
-                                    ->select(
-                                        DB::raw('SUM(terbayar) as pembayaran_terbayar')
-                                    )
-                                    ->where('siswa_id', $request->id_siswa)
-                                    ->where('pembayaran_id', $request->id_pembayaran[$i])
-                                    ->groupBy('pembayaran_id')
-                                    ->first();
+            if ($request->terbayar[$i] === null) {
+                return redirect('/siswa/keuangan?siswa_id='.$request->id_siswa)->with('fail', 'Wajib mengisi nominal yang dibayarkan');
+            }
 
             $nominal = preg_replace('/[^0-9]/', '', $request->nominal[$i]);
             $terbayar = preg_replace('/[^0-9]/', '', $request->terbayar[$i]);
@@ -188,6 +182,16 @@ class KeuanganSiswa extends Controller
             if ($selisih < 0 || $terbayar > $nominal) {
                 return redirect('/siswa/keuangan?siswa_id='.$request->id_siswa)->with('fail', 'Jumlah pembayaran melebihi jumlah kekurangan pembayaran');
             }
+        }
+        for ($i=0; $i < $jenisPem; $i++) {
+            $pembayaran_terbayar = DB::table('transaksi')
+                                    ->select(
+                                        DB::raw('SUM(terbayar) as pembayaran_terbayar')
+                                    )
+                                    ->where('siswa_id', $request->id_siswa)
+                                    ->where('pembayaran_id', $request->id_pembayaran[$i])
+                                    ->groupBy('pembayaran_id')
+                                    ->first();
 
             DB::table('transaksi')
                 ->insert([

@@ -9,7 +9,7 @@
         <form action="" method="GET">
             <select class="uk-select" style="width: 40%" name="siswa_id" onchange="this.form.submit()">
                 @foreach ($listSiswa as $siswa)
-                    <option value="{{ $siswa->id_siswa }}">{{ $siswa->nama_siswa }}</option>
+                    <option @selected($siswa->id_siswa == request('siswa_id')) value="{{ $siswa->id_siswa }}">{{ $siswa->nama_siswa }}</option>
                 @endforeach
             </select>        
         </form>
