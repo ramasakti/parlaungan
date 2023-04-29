@@ -65,7 +65,7 @@
                 title.innerHTML = data[0].judul
                 author.innerHTML = 'Penulis: ' + data[0].uploader
                 uploaded.innerHTML = 'Tanggal: ' + data[0].uploaded
-                banner.setAttribute('src', url + '/storage/blog/blog/' + data[0].foto)
+                banner.setAttribute('src', url + '/storage/blog/' + data[0].foto)
             })
             .catch(error => console.error(error));
     </script>
