@@ -39,6 +39,9 @@ Route::get('/', function () {
     ]);
 })->middleware('guest')->name('login');
 
+//KTP
+Route::get('/ktp/{idSiswa}', [SiswaController::class, 'ktp']);
+
 //Login, logout, dashboard
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::get('/logout', [LoginController::class, 'logout'])->middleware('auth');
@@ -55,7 +58,7 @@ Route::get('/blog/create', [BlogController::class, 'create'])->middleware('auth'
 Route::post('/blog/store', [BlogController::class, 'store'])->middleware('auth');
 Route::get('/blog/edit/{slug}', [BlogController::class, 'edit'])->middleware('auth');
 Route::post('/blog/update/{slug}', [BlogController::class, 'update'])->middleware('auth');
-Route::post('/blog/delete/{slug}', [BlogController::class, 'delete'])->middleware('auth');
+Route::get('/blog/delete/{slug}', [BlogController::class, 'delete'])->middleware('auth');
 
 //User
 Route::get('/profile', [UserController::class, 'profile']);

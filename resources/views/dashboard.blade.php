@@ -6,7 +6,7 @@
             </div>
         </div>
         <div>
-            <div class="uk-card uk-card-default uk-card-body" id="card">
+            <div class="uk-card uk-card-default uk-card-body uk-background-cover uk-background-image@s" style="background-image: url('/img/bgkp.svg');" id="card">
                 <p class="uk-margin-remove uk-position-top-right"><a href="/profile" class="uk-margin-small-right" uk-icon="user"></a></p>
                 <div class="uk-panel">
                     <img class="uk-border-circle uk-align-left uk-margin-small-right uk-margin-small-bottom" width="35%" height="35%" src="img/default-user.jpg">
@@ -22,9 +22,13 @@
                                 {{ $detailUser[0]->nama_guru }}
                         @endswitch
                     </h5>
+                    @if (session('status') == 'Siswa')
+                        <p class="uk-margin-remove"><span class="uk-margin-small-right" uk-icon="hashtag"></span>{{ $detailUser[0]->id_siswa }}</p>
+                    @endif
                     <p class="uk-margin-remove"><span class="uk-margin-small-right" uk-icon="calendar"></span>{{ $detailUser[0]->tempat_lahir }}, {{ $detailUser[0]->tanggal_lahir }}</p>
                     <p class="uk-margin-remove"><span class="uk-margin-small-right" uk-icon="location"></span>{{ $detailUser[0]->alamat }}</p>
                     <p class="uk-margin-remove"><span class="uk-margin-small-right" uk-icon="whatsapp"></span>{{ $detailUser[0]->telp }}</p>
+                    <p class="uk-margin-small">{{ QrCode::size(50)->generate('smaispa.sch.id/ktp/'.$detailUser[0]->id_siswa) }}</p>
                 </div>
             </div>
         </div>

@@ -120,8 +120,10 @@ class BlogController extends Controller
         return redirect('/web')->with('success', 'Berhasil menambahkan berita');
     }
 
-    public function destroy($blog)
+    public function destroy($slug)
     {
-        //
+        $detailBlog = DB::table('blog')->where('slug', $slug)->first();
+        
+        DB::table('blog')->where('slug', $slug)->delete();
     }
 }
