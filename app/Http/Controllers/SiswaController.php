@@ -204,4 +204,11 @@ class SiswaController extends Controller
 
         return back()->with('siswa', 'Berhasil delete data siswa!');
     }
+
+    public function ktp($id_siswa)
+    {
+        return view('ktp', [
+            'data' => DB::table('siswa')->join('user', 'user.username', '=', 'siswa.id_siswa')->where('id_siswa', $id_siswa)->first()
+        ]);
+    }
 }

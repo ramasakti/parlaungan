@@ -40,7 +40,7 @@ Route::get('/', function () {
 })->middleware('guest')->name('login');
 
 //KTP
-Route::get('/ktp/{idSiswa}', [SiswaController::class, 'ktp']);
+Route::get('/ktp/{id_siswa}', [SiswaController::class, 'ktp']);
 
 //Login, logout, dashboard
 Route::post('/login', [LoginController::class, 'authenticate']);

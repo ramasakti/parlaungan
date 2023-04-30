@@ -29,7 +29,7 @@
         <article>
 			<header class="uk-margin-medium-bottom">
 				<h1 class="uk-article-title" id="title">Judul Artikel</h1>
-				<p id="author" class="uk-margin-remove-bottom">Penulis: John Doe</p>
+				<p id="author" class="uk-margin-remove-bottom">Penulis: Penulis</p>
 				<p id="uploaded" class="uk-margin-remove-top">Tanggal: 1 Mei 2023</p>
 			</header>
 
