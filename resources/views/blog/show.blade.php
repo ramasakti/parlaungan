@@ -32,7 +32,7 @@
 			<header class="uk-margin-medium-bottom">
 				<h1 class="uk-article-title" id="title">{{ $data->judul }}</h1>
 				<p id="author" class="uk-margin-remove-bottom">Penulis: {{ $data->uploader }}</p>
-				<p id="uploaded" class="uk-margin-remove-top">Tanggal: {{ $data->uploaded }}</p>
+				<p id="uploaded" class="uk-margin-remove-top">Tanggal: {!! htmlspecialchars_decode(date('j<\s\up>S</\s\up> F Y', strtotime($data->uploaded))) !!}</p>
 			</header>
 
 			<div class="uk-margin-small-bottom">
