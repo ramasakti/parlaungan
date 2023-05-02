@@ -40,6 +40,8 @@
 			</div>
             <div class="uk-margin">
                 <a href="https://wa.me/?text=https://smaispa.sch.id/blog/view/{{ $data->slug }}" class="uk-icon-button" style="background: #075E54" uk-icon="icon: whatsapp"></a>
+                <a href="https://facebook.com/sharer.php?u=https://smaispa.sch.id/blog/view/{{ $data->slug }}" class="uk-icon-button" style="background: #4267B2" target="_blank" uk-icon="icon: facebook"></a>
+                <a href="#" class="uk-icon-button" style="background: #E76161" uk-icon="icon: link" onclick="copyLink()"></a>
             </div>
 
 			<section class="uk-margin-medium-bottom">
@@ -54,6 +56,12 @@
 		</article>
     </div>
 
+    <script>
+        const copyLink = () => { 
+            navigator.clipboard.writeText(window.location.href)
+            alert('URL telah disalin ke papan klip')
+        }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.16.15/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.16.15/dist/js/uikit-icons.min.js"></script>
 </body>
