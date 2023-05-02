@@ -4,25 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ $data[0]->judul }}</title>
+    <title>{{ $data->judul }}</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.16.15/dist/css/uikit.min.css" />
     <!-- Primary Meta Tags -->
-    <meta name="title" content="{{ $data[0]->judul }}">
+    <meta name="title" content="{{ $data->judul }}">
     <meta name="description" content="SMA Islam Parlaungan">
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://smaispa.sch.id/blog/view/{{ $data[0]->slug }}">
-    <meta property="og:title" content="{{ $data[0]->judul }}">
+    <meta property="og:url" content="https://smaispa.sch.id/blog/view/{{ $data->slug }}">
+    <meta property="og:title" content="{{ $data->judul }}">
     <meta property="og:description" content="SMA Islam Parlaungan">
-    <meta property="og:image" content="https://smaispa.sch.id/storage/blog/blog/{{ $data[0]->foto }}">
+    <meta property="og:image" content="https://smaispa.sch.id/storage/blog/blog/{{ $data->foto }}">
     <meta property="og:image:height" content="364">
     <meta property="og:image:width" content="648">
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://smaispa.sch.id/blog/view/{{ $data[0]->slug }}">
+    <meta property="twitter:url" content="https://smaispa.sch.id/blog/view/{{ $data->slug }}">
     <meta property="twitter:title" content="{{ $data->judul }}">
     <meta property="twitter:description" content="SMA Islam Parlaungan">
-    <meta property="twitter:image" content="https://smaispa.sch.id/storage/blog/blog/{{ $data[0]->foto }}">
+    <meta property="twitter:image" content="https://smaispa.sch.id/storage/blog/blog/{{ $data->foto }}">
 </head>
 <body>
     <div class="uk-container uk-container-xsmall">
@@ -39,7 +39,7 @@
 
 			<section class="uk-margin-medium-bottom">
                 <div id="artikel">
-                    {{ $data->isi }}
+                    {!! $data->isi !!}
                 </div>
 			</section>
 
