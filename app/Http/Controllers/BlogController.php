@@ -56,7 +56,7 @@ class BlogController extends Controller
     public function show($blog)
     {
         return view('blog.show', [
-            'data' => DB::table('blog')->where('slug', $blog)->get()
+            'data' => DB::table('blog')->where('slug', $blog)->first()
         ]);
     }
 
