@@ -1,3 +1,9 @@
+@if (session()->has('success'))
+    <div class="uk-alert-success uk-margin-remove-top" uk-alert>
+        <a class="uk-alert-close" uk-close></a>
+        <p>{{ session('success') }}</p>
+    </div>
+@endif
 @if (session()->has('unschedule'))
     <div class="uk-alert-warning uk-margin-remove-top" uk-alert>
         <a class="uk-alert-close" uk-close></a>

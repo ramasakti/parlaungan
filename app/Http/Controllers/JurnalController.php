@@ -20,7 +20,7 @@ class JurnalController extends Controller
 
         return view('jurnal.index', [
                 'title' => 'Jurnal',
-                'navactive' => 'jurnal',
+                'navactive' => 'akademik',
                 'ai' => 1,
                 'dataJurnal' => $dataJurnal
         ]);

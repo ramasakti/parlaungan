@@ -53,7 +53,7 @@ class JadwalController extends Controller
     {
         return view('jadwal.index', [
             'title' => 'Jadwal Pelajaran',
-            'navactive' => 'jadwal',
+            'navactive' => 'akademik',
             'ai' => 1,
             'dataKelas' => DB::table('kelas')->get(),
             'kelasSelected' => DB::table('kelas')->where('id_kelas', request('id_kelas'))->get(),
@@ -80,7 +80,7 @@ class JadwalController extends Controller
                 'sampai' => $request->sampai,
                 'status' => ''
             ]);
-        return back();
+        return back()->with('success', 'Berhasil menambahkan jadwal!');
     }
 
     public function import(Request $request)
@@ -100,21 +100,19 @@ class JadwalController extends Controller
     public function absenGuruManual(Request $request)
     {
         function jam() {
-            $jamMasuk = DB::table('hari')
-                        ->where('nama_hari', Carbon::now()->isoFormat('dddd'))
-                        ->get();
-            return $jamMasuk;
+            return DB::table('hari')->where('nama_hari', Carbon::now()->isoFormat('dddd'))->first();
         }
 
         $dataJadwal = DB::table('jadwal')
-                ->where('id_jadwal', $request->id_jadwal)
-                ->where('mulai', '<', date('H:i:s'))
-                ->where('sampai', '>', date('H:i:s'))
-                ->get();
+                        ->where('id_jadwal', $request->id_jadwal)
+                        ->where('hari', Carbon::now()->isoFormat('dddd'))
+                        ->where('mulai', '<', date('H:i:s'))
+                        ->where('sampai', '>', date('H:i:s'))
+                        ->get();
         $dataJurnal = DB::table('jurnal')
-                ->where('jadwal_id', $request->id_jadwal)
-                ->where('tanggal', date('Y-m-d'))
-                ->get();
+                        ->where('jadwal_id', $request->id_jadwal)
+                        ->where('tanggal', date('Y-m-d'))
+                        ->get();
 
         if (count($dataJadwal) < 1) {
             return back()->with('unschedule', 'Jadwal belum dimulai atau telah selesai');
@@ -153,7 +151,7 @@ class JadwalController extends Controller
                 ->where('id_jadwal', $request->id_jadwal)
                 ->update(['status' => 'H']); //HVSIA
             //Insert ke jurnal
-            $jamPelajaran = jam()[0]->jampel;
+            $jamPelajaran = jam()->jampel;
             DB::table('jurnal')
                 ->insert([
                     'tanggal' => date('Y-m-d'),

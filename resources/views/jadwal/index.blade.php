@@ -1,4 +1,5 @@
 <x-admintemplate title='{{ $title }}' navactive='{{ $navactive }}'>
+    @include('jadwal.hari.alert')
     <ul uk-tab>
         <li class="uk-active"><a href="#">Senin</a></li>
         <li class="uk-active"><a href="#">Selasa</a></li>
