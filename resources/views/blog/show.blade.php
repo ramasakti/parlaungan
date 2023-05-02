@@ -10,9 +10,11 @@
     <meta name="title" content="{{ $data->judul }}">
     <meta name="description" content="SMA Islam Parlaungan">
     <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
+    <meta property="og:type" content="article">
     <meta property="og:url" content="https://smaispa.sch.id/blog/view/{{ $data->slug }}">
     <meta property="og:title" content="{{ $data->judul }}">
+    <meta property="og:site_name" content="smaispa">
+    <meta property="article:publisher" content="https://www.instagram.com/officialsmaispa/"/>
     <meta property="og:description" content="SMA Islam Parlaungan">
     <meta property="og:image" content="https://smaispa.sch.id/storage/blog/{{ $data->foto }}">
     <meta property="og:image:height" content="364">
