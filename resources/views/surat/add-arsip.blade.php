@@ -2,7 +2,7 @@
     <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
         <button class="uk-modal-close-default" type="button" uk-close></button>
         <h5>Add Arsip</h5>
-        <form method="POST" action="/arsip/store">
+        <form method="POST" action="/arsip/store" enctype="multipart/form-data">
             @csrf
             <div class="uk-margin">
                 <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
@@ -18,10 +18,7 @@
                 <input class="uk-input" type="text" name="perihal" placeholder="Perihal" required>
             </div>
             <div class="uk-margin">
-                <div class="uk-inline uk-width-1-1">
-                    <a class="uk-form-icon uk-form-icon-flip" id="urlOnClick" target="_blank" href="#" uk-icon="icon: link"></a>
-                    <input class="uk-input" type="text" id="url" name="url" placeholder="URL Google Drive" onchange="gDriveURL()" required>
-                </div>
+                <input class="uk-input" type="file" name="surat" id="surat" required>
             </div>
             <button type="submit" class="uk-button uk-button-primary uk-button-small">Tambah</button>
         </form>
@@ -94,12 +91,6 @@
                 <input class="uk-input" type="text" name="nomor" value="K.6/${regex()}{{ $lastData+1 }}/E.14/404.31.046/${bulanRomawi()}/{{ date('Y') }}" required>
             </div>
     `
-
-    const gDriveURL = () => {
-        const url = document.getElementById('url').value
-        const urlOnClick = document.getElementById('urlOnClick')
-        urlOnClick.setAttribute('href', url)
-    }
     
     const InOut = (status) => status == 'in' ? formArsip.innerHTML = formMasuk : formArsip.innerHTML = formKeluar
 </script>

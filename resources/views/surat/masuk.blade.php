@@ -22,7 +22,7 @@
                     <a href="#modal-center" uk-icon="trash" uk-toggle="target: #delete-arsip-masuk-{{ $masuk->id_arsip }}">
                     </a> &nbsp;
                     @include('surat.delete-arsip-masuk')
-                    <a target="_blank" href="{{ $masuk->url }}" uk-icon="link">
+                    <a target="_blank" href="/storage/arsip/{{ $masuk->url }}" uk-icon="link">
                     </a>
                 </td>
             </tr>

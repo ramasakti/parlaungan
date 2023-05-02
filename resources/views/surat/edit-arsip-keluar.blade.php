@@ -4,6 +4,7 @@
         <h5>Edit Arsip Surat</h5>
         <form method="POST" action="/arsip/update">
             @csrf
+            <input type="hidden" name="id_arsip" value="{{ $keluar->id_arsip }}">
             <div class="uk-margin">
                 <input class="uk-input" type="date" name="tanggal" value="{{ date('Y-m-d') }}" required>
             </div>
@@ -14,7 +15,7 @@
                 <input class="uk-input" type="text" name="perihal" value="{{ $keluar->perihal }}" required>
             </div>
             <div class="uk-margin">
-                <input class="uk-input" type="text" name="url" value="{{ $keluar->url }}" required>
+                <input class="uk-input" type="file" name="surat" id="surat">
             </div>
             <button type="submit" class="uk-button uk-button-primary uk-button-small">Simpan</button>
         </form>

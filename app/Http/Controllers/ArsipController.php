@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use DB;
 
 class ArsipController extends Controller
@@ -31,13 +32,18 @@ class ArsipController extends Controller
 
     public function store(Request $request)
     {
+        //Upload File Baru
+        $ext = $request->file('surat')->getClientOriginalExtension();
+        $filename = $request->perihal . '_' . date('YmdHis') . '.' . $ext;
+        $request->file('surat')->storeAs('/arsip', $filename);
+
         DB::table('arsip_surat')
             ->insert([
-                'tanggal' => date('Y-m-d'),
+                'tanggal' => $request->tanggal,
                 'jenis' => $request->jenis,
                 'nomor' => $request->nomor,
                 'perihal' => $request->perihal,
-                'url' => $request->url
+                'url' => $filename
             ]);
 
         return back()->with('add-arsip', 'Berhasil menambahkan arsip!');
@@ -45,21 +51,45 @@ class ArsipController extends Controller
 
     public function update(Request $request)
     {
-        DB::table('arsip_surat')
-            ->where('id_arsip', $request->id_arsip)
-            ->update([
-                'tanggal' => date('Y-m-d'),
-                'nomor' => $request->nomor,
-                'nama' => $request->nama,
-                'penerbit' => $request->penerbit,
-                'url' => $request->url
-            ]);
+        $detailArsip = DB::table('arsip_surat')->where('id_arsip', $request->id_arsip)->first();
+
+        if ($request->file('surat')) {
+            //Hapus File Lama
+            Storage::delete('arsip/' . $detailArsip->url);
+    
+            //Upload File Baru
+            $ext = $request->file('surat')->getClientOriginalExtension();
+            $filename = $request->perihal . '_' . date('YmdHis') . '.' . $ext;
+            $request->file('surat')->storeAs('/arsip', $filename);
+            
+            DB::table('arsip_surat')
+                ->where('id_arsip', $request->id_arsip)
+                ->update([
+                    'tanggal' => $request->tanggal,
+                    'nomor' => $request->nomor,
+                    'perihal' => $request->perihal,
+                    'url' => $filename
+                ]);
+        }else{
+            DB::table('arsip_surat')
+                ->where('id_arsip', $request->id_arsip)
+                ->update([
+                    'tanggal' => $request->tanggal,
+                    'nomor' => $request->nomor,
+                    'perihal' => $request->perihal,
+                ]);
+        }
 
         return back()->with('update-arsip', 'Berhasil mengedit arsip!');
     }
 
     public function delete(Request $request)
     {
+        $detailArsip = DB::table('arsip_surat')->where('id_arsip', $request->id_arsip)->first();
+
+        //Hapus File Lama
+        Storage::delete('arsip/' . $detailArsip->url);
+
         DB::table('arsip_surat')
             ->where('id_arsip', $request->id_arsip)
             ->delete();

@@ -32,7 +32,6 @@
     <a class="uk-margin uk-margin-remove-bottom" href="#modal-center" uk-toggle="target: #add-arsip" uk-icon="icon: plus"></a>
     @include('surat.add-arsip')
     &nbsp;
-    <a target="_blank" href="https://drive.google.com/drive/folders/1pP2zWEntLsFHq8-535i53YqlQbewexFs?usp=sharing" uk-icon="icon: folder"></a>
 
     <ul class="uk-switcher uk-margin">
         <li>
