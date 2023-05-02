@@ -10,7 +10,7 @@
         <img src="" alt="" class="foto-preview img-fluid uk-align-center uk-height-max-medium">
         <div class="mb-3">
             <label for="foto" class="form-label">Image Post</label>
-            <input type="file" class="form-control" id="foto" name="foto" onchange="previewImage()" required>
+            <input type="file" class="form-control" id="foto" name="foto" onchange="previewImage()" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" required>
         </div>
         <input type="text" class="uk-input uk-margin uk-margin-remove-top" id="judul" name="judul" placeholder="Judul Berita" value="{{ old('judul') }}">
         <select name="kategori" id="" class="uk-select uk-margin uk-margin-remove-top" value="{{ old('kategori') }}" required>

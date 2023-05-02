@@ -18,7 +18,7 @@
             @endif
             <div class="uk-margin">
                 <label for="foto" class="form-label">Foto Profil</label>
-                <input type="file" class="form-control" id="foto" name="foto">
+                <input type="file" class="form-control" id="foto" name="foto" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
             </div>
             @if ($user[0]->status != 'Siswa' and $user[0]->status != 'Walmur')
                 <div class="uk-margin">
