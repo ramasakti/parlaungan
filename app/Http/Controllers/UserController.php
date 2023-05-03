@@ -148,13 +148,20 @@ class UserController extends Controller
                     ]);
             }
         }else{
-            DB::table('user')
-                ->where('username', $request->username)
-                ->update([
-                    'password' => bcrypt($request->password),
-                    'foto' => '',
-                    'status' => $request->status,
-                ]);
+            if ($request->password) {
+                DB::table('user')
+                    ->where('username', $request->username)
+                    ->update([
+                        'password' => bcrypt($request->password),
+                        'status' => $request->status,
+                    ]);
+            }else{
+                DB::table('user')
+                    ->where('username', $request->username)
+                    ->update([
+                        'status' => $request->status,
+                    ]);
+            }
         }
         return back()->with('success', 'Berhasil update data!');
     }
