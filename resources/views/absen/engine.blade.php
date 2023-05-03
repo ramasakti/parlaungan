@@ -97,27 +97,25 @@
         html5QrcodeScanner.render(onScanSuccess);
         </script>
         <script>
-            const form = document.getElementsByTagName('form')[0]
-            form.addEventListener('submit', (e) => {
-                e.preventDefault()
-                
-                const userabsen = document.getElementById('userabsen').value
-                const csrfToken = document.getElementsByName('_token').value
-
-                fetch('http://127.0.0.1:8000/absen/engine', {
-                    method: 'POST',
-                    body: JSON.stringify({
-                        _token: csrfToken,
-                        userabsen   : userabsen
-                    }),
-                    headers: {
-                        'Content-type': 'application/json; charset=UTF-8',
-                    }
-                })
-                .then((res) => res.json())
-                .then((data) => console.log(data))
-                .catch(error => console.error('Error:', error));
+            fetch('http://127.0.0.1:8000/absen/engine', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
             })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
         </script>
 </body>
 </html>
