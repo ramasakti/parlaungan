@@ -42,6 +42,13 @@
                 <button class="uk-button uk-button-primary uk-width-1-1" type="submit" id="buttonCek">Periksa</button>
             </form>
             <div class="uk-margin-top" id="result">
+                @if (session()->has('wrong'))
+                    <div uk-alert class="uk-alert-warning">
+                        <a class="uk-alert-close" uk-close></a>
+                        <h3>{{ session('wrong') }}</h3>
+                        <p>Silahkan cek kembali NISN anda di ijazah jenjang sebelumnya</p>
+                    </div>
+                @endif
                 @if (session()->has('lulus'))    
                     <div uk-alert class="uk-alert-success">
                         <a class="uk-alert-close" uk-close></a>
