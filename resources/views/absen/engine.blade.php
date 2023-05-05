@@ -32,7 +32,7 @@
             </h2>
 
             <p class="uk-margin-small uk-text-default">Aplikasi ini dibuat dan dikembangkan oleh &copy; Staf Data, Informasi, Pengembangan dan Infrastruktur Teknologi - SMA Islam Parlaungan</p>
-            <form action="/absen/engine" method="POST">
+            <form action="/absen/engine" method="POST" id="formabsen">
                 @csrf
                 <input type="text" class="input" name="userabsen" style="outline: 0ch" id="userabsen" autofocus autocomplete="off" required>
                 <input id="submitButton" class="button" type="submit" hidden>
@@ -95,27 +95,6 @@
 
         let html5QrcodeScanner = new Html5QrcodeScanner("reader", { fps: 120, qrbox: 250 });
         html5QrcodeScanner.render(onScanSuccess);
-        </script>
-        <script>
-            fetch('http://127.0.0.1:8000/absen/engine', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log(data);
-            })
-            .catch(error => {
-                console.error('There was a problem with the fetch operation:', error);
-            });
         </script>
 </body>
 </html>

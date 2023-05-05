@@ -20,6 +20,7 @@ use App\Http\Controllers\SekolahController;
 use App\Http\Controllers\TestingController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ArsipController;
+use App\Http\Controllers\KelulusanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,10 @@ Route::get('/', function () {
 
 //KTP
 Route::get('/ktp/{id_siswa}', [SiswaController::class, 'ktp']);
+
+//Kelulusan
+Route::get('/kelulusan', [KelulusanController::class, 'index']);
+Route::post('/kelulusan', [KelulusanController::class, 'engine']);
 
 //Login, logout, dashboard
 Route::post('/login', [LoginController::class, 'authenticate']);
