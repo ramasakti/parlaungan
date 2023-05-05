@@ -5,6 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Pengumuman Kelulusan SMA Islam Parlaungan</title>
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="Pengumuman Kelulusan SMA Islam Parlaungan">
+    <meta name="description" content="SMA Islam Parlaungan">
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://smaispa.sch.id/kelulusan">
+    <meta property="og:title" content="Pengumuman Kelulusan SMA Islam Parlaungan">
+    <meta property="og:site_name" content="smaispa">
+    <meta property="article:publisher" content="https://www.instagram.com/officialsmaispa/"/>
+    <meta property="og:description" content="SMA Islam Parlaungan">
+    <meta property="og:image" content="https://smaispa.sch.id/steller/imgs/lambang.png">
+    <meta property="og:image:height" content="364">
+    <meta property="og:image:width" content="648">
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://smaispa.sch.id/kelulusan">
+    <meta property="twitter:title" content="Pengumuman Kelulusan SMA Islam Parlaungan">
+    <meta property="twitter:description" content="SMA Islam Parlaungan">
+    <meta property="twitter:image" content="https://smaispa.sch.id/steller/imgs/lambang.png">
     <!-- UIkit CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.16.15/dist/css/uikit.min.css" />
 </head>
