@@ -46,14 +46,14 @@
                     <div uk-alert class="uk-alert-success">
                         <a class="uk-alert-close" uk-close></a>
                         <h3>Selamat! {{ session('lulus') }}</h3>
-                        <p>Anda dinyatakan lulus! Semoga harimu menyenangkan.</p>
+                        <p>Anda dinyatakan <b>LULUS!</b> semoga bermanfaat ilmunya dan mempersiapkan persyaratan mengikuti WISUDA PURNA SISWA tanggal 21 Mei 2023</p>
+                        <p>Segera lengkapi semua persyaratannya</p>
                     </div>
                 @endif
                 @if (session()->has('gagal'))    
                     <div uk-alert class="uk-alert-danger">
                         <a class="uk-alert-close" uk-close></a>
-                        <h3>Selamat! {{ session('gagal') }}</h3>
-                        <p>Anda dinyatakan lulus! Semoga harimu menyenangkan.</p>
+                        <h3>SEGERA LENGKAPI ADMINISTRASI NILAI!</h3>
                     </div>
                 @endif
             </div>
