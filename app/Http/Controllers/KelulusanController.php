@@ -24,14 +24,6 @@ class KelulusanController extends Controller
 
     public function engine(Request $request)
     {
-        $glulus = DB::table('kelulusan')
-                    ->where('nisn', $request->nisn)
-                    ->where('lulus', FALSE)
-                    ->join('siswa', 'siswa.id_siswa', '=', 'kelulusan.siswa_id')
-                    ->first();
-        if (!$glulus) {
-            return back()->with('wrong', 'NISN yang anda masukkan tidak terdaftar!');
-        }
         $data = DB::table('kelulusan')
                     ->where('nisn', $request->nisn)
                     ->where('lulus', TRUE)
@@ -40,6 +32,12 @@ class KelulusanController extends Controller
         if ($data) {
             return back()->with('lulus', $data->nama_siswa);
         }else{
+            $x = DB::table('kelulusan')
+                    ->whereNotIn('nisn', $request->nisn)
+                    ->first();
+            if (!$x) {
+                return back()->with('wrong', 'NISN tidak terdaftar!');
+            }
             return back()->with('gagal', 'Tidak Lulus');
         }
     }
