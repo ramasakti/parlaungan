@@ -33,7 +33,7 @@ class KelulusanController extends Controller
             return back()->with('lulus', $data->nama_siswa);
         }else{
             $x = DB::table('kelulusan')
-                    ->whereNotIn('nisn', $request->nisn)
+                    ->where('nisn', $request->nisn)
                     ->first();
             if (!$x) {
                 return back()->with('wrong', 'NISN tidak terdaftar!');
