@@ -37,7 +37,7 @@
         <div class="uk-text-center">
             <h4 class="uk-margin-remove">Kartu Pelajar Digital</h4>
             <h4 class="uk-margin-remove">SMA ISLAM PARLAUNGAN</h4>
-            <img class="image-wrapper uk-border-circle uk-margin-top uk-margin-bottom-remove" src="/storage/profil/{{ $data->foto }}">
+            <img class="image-wrapper uk-border-circle uk-margin-top uk-margin-bottom-remove" src="{{ ($data->foto != '' ? '/storage/profil/' . $data->foto : '/img/default-user.jpg') }}">
             <h2 class="uk-margin-small">{{ $data->nama_siswa }}</h2>
         </div>
         <div class="uk-margin">

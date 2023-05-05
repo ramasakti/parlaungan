@@ -11,28 +11,28 @@
         <input type="hidden" name="siswa_id" value="{{ session('username') }}">
         <h5>Data Siswa</h5>
         <div class="uk-margin">
-            <label class="uk-form-label" for="form-horizontal-text">NISN</label>
+            <label class="uk-form-label" for="nisn">NISN</label>
             <div class="uk-form-controls">
                 <input class="uk-input"  type="number" name="nisn" id="nisn" value="{{ $dataUser[0]->nisn }}">
             </div>
         </div>
 
         <div class="uk-margin">
-            <label class="uk-form-label" for="form-horizontal-text">NIK</label>
+            <label class="uk-form-label" for="nik">NIK</label>
             <div class="uk-form-controls">
                 <input class="uk-input"  type="number" name="nik" id="nik" value="{{ $dataUser[0]->nik }}">
             </div>
         </div>
 
         <div class="uk-margin">
-            <label class="uk-form-label" for="form-horizontal-text">NO KK</label>
+            <label class="uk-form-label" for="nokk">NO KK</label>
             <div class="uk-form-controls">
                 <input class="uk-input"  type="number" name="nokk" id="nokk" value="{{ $dataUser[0]->nokk }}">
             </div>
         </div>
 
         <div class="uk-margin">
-            <label class="uk-form-label" for="form-horizontal-text">Transportasi</label>
+            <label class="uk-form-label" for="transportasi">Transportasi</label>
             <div class="uk-form-controls">
                 <select name="transportasi" id="transportasi" class="uk-select">
                     <option value=""></option>
@@ -44,14 +44,14 @@
         </div>
         
         <div class="uk-margin">
-            <label class="uk-form-label" for="form-horizontal-text">Anak Ke- (Sesuai dengan KK)</label>
+            <label class="uk-form-label" for="anak">Anak Ke- (Sesuai dengan KK)</label>
             <div class="uk-form-controls">
-                <input class="uk-input"  type="number" name="anak" id="anak" value="{{ $dataUser[0]->anak }}">
+                <input class="uk-input"  type="number" min="1" name="anak" id="anak" value="{{ $dataUser[0]->anak }}">
             </div>
         </div>
         
         <div class="uk-margin">
-            <label class="uk-form-label" for="form-horizontal-text">Jenis Tinggal</label>
+            <label class="uk-form-label" for="jenis_tinggal">Jenis Tinggal</label>
             <div class="uk-form-controls">
                 <select name="jenis_tinggal" id="jenis_tinggal" class="uk-select">
                     <option value=""></option>
@@ -129,6 +129,13 @@
                 <input class="uk-input rupiah" type="number" name="penghasilan_ibu" id="penghasilan_ibu" value="{{ $dataUser[0]->penghasilan_ibu }}">
             </div>
         </div>
+        
+        <div class="uk-margin">
+            <label class="uk-form-label" for="form-horizontal-text">Telp Ibu</label>
+            <div class="uk-form-controls">
+                <input class="uk-input rupiah" type="text" name="telp_ibu" id="telp_ibu" value="{{ $dataUser[0]->telp_ibu }}">
+            </div>
+        </div>
 
         <h5>Data Ayah</h5>
         <div class="uk-margin">
@@ -175,20 +182,106 @@
                 <input class="uk-input rupiah"  type="number" name="penghasilan_ayah" id="penghasilan_ayah" value="{{ $dataUser[0]->penghasilan_ayah }}">
             </div>
         </div>
+
+        <div class="uk-margin">
+            <label class="uk-form-label" for="form-horizontal-text">Telp Ayah</label>
+            <div class="uk-form-controls">
+                <input class="uk-input rupiah" type="text" name="telp_ayah" id="telp_ayah" value="{{ $dataUser[0]->telp_ayah }}">
+            </div>
+        </div>
+
+        <div class="uk-margin">
+            <div class="uk-form-label">Memiliki Wali?</div>
+            <div class="uk-form-controls uk-form-controls-text">
+                <label><input class="uk-radio" type="radio" name="wali" onclick="wali(true)"> Ya</label><br>
+                <label><input class="uk-radio" type="radio" name="wali" onclick="wali(false)"> Tidak</label>
+            </div>
+        </div>
+
+        <div id="wali"></div>
     
         <button id="bBiodata" class="uk-button uk-button-primary uk-width-1-1 uk-margin" type="submit" onclick="savingBiodata()" onsubmit="savingBiodata()">Simpan</button>
     </form>
 </div>
 <script>
+    setTimeout(() => {
+        setPenghasilanIbu()
+        setPenghasilanAyah()
+    }, 100);
+
     const setPenghasilanIbu = () => {
         const profesi_ibu = document.getElementById('profesi_ibu').value
         const penghasilan_ibu = document.getElementById('penghasilan_ibu')
         if (profesi_ibu == 12 || profesi_ibu == 13) {
             penghasilan_ibu.setAttribute('value', '0')
             penghasilan_ibu.setAttribute('disabled', '')
+            telp_ibu.setAttribute('value', '-')
+            telp_ibu.setAttribute('disabled', '')
         }else{
             penghasilan_ibu.removeAttribute('value', '0')
             penghasilan_ibu.removeAttribute('disabled', '')
+            telp_ibu.removeAttribute('value', '-')
+            telp_ibu.removeAttribute('disabled', '')
+        }
+    }
+
+    const wali = (status) => {
+        if (status) {
+            const formWali = `<h5>Data Ayah</h5>
+            <div class="uk-margin">
+                <label class="uk-form-label" for="form-horizontal-text">Nama Ayah</label>
+                <div class="uk-form-controls">
+                    <input class="uk-input"  type="text" name="ayah" id="ayah" value="{{ $dataUser[0]->ayah }}">
+                </div>
+            </div>
+            
+            <div class="uk-margin">
+                <label class="uk-form-label" for="form-horizontal-text">NIK Ayah</label>
+                <div class="uk-form-controls">
+                    <input class="uk-input"  type="number" name="nikayah" id="nikayah" value="{{ $dataUser[0]->nik_ayah }}">
+                </div>
+            </div>
+            
+            <div class="uk-margin">
+                <label class="uk-form-label" for="form-horizontal-text">Pendidikan Ayah</label>
+                <div class="uk-form-controls">
+                    <select name="pendidikan_ayah" id="pendidikan_ayah" class="uk-select">
+                        <option value=""></option>
+                        @foreach ($pendidikan as $pend)
+                            <option {{ ($pend->id_pendidikan == $dataUser[0]->pendidikan_ayah) ? 'selected' : '' }} value="{{ $pend->id_pendidikan }}">{{ $pend->pendidikan }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+
+            <div class="uk-margin">
+                <label class="uk-form-label" for="form-horizontal-text">Profesi Ayah</label>
+                <div class="uk-form-controls">
+                    <select name="profesi_ayah" id="profesi_ayah" class="uk-select" onchange="setPenghasilanAyah()">
+                        <option value=""></option>
+                        @foreach ($profesi as $profesi_ayah)
+                            <option {{ ($profesi_ayah->id_profesi == $dataUser[0]->profesi_ayah) ? 'selected' : '' }} value="{{ $profesi_ayah->id_profesi }}">{{ $profesi_ayah->profesi }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+
+            <div class="uk-margin">
+                <label class="uk-form-label" for="form-horizontal-text">Penghasilan Ayah</label>
+                <div class="uk-form-controls">
+                    <input class="uk-input rupiah"  type="number" name="penghasilan_ayah" id="penghasilan_ayah" value="{{ $dataUser[0]->penghasilan_ayah }}">
+                </div>
+            </div>
+
+            <div class="uk-margin">
+                <label class="uk-form-label" for="form-horizontal-text">Telp Ayah</label>
+                <div class="uk-form-controls">
+                    <input class="uk-input rupiah" type="text" name="telp_ayah" id="telp_ayah" value="{{ $dataUser[0]->telp_ayah }}">
+                </div>
+            </div>`
+            document.getElementById('wali').innerHTML = formWali
+        }else{
+            document.getElementById('wali').innerHTML = ``
         }
     }
 
@@ -198,9 +291,13 @@
         if (profesi_ayah == 12 || profesi_ayah == 13) {
             penghasilan_ayah.setAttribute('disabled', '')
             penghasilan_ayah.setAttribute('value', '0')
+            telp_ayah.setAttribute('value', '-')
+            telp_ayah.setAttribute('disabled', '')
         }else{
             penghasilan_ayah.removeAttribute('disabled', '')
             penghasilan_ayah.removeAttribute('value', '0')
+            telp_ayah.removeAttribute('value', '-')
+            telp_ayah.removeAttribute('disabled', '')
         }
     }
 

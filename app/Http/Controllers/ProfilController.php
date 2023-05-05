@@ -35,6 +35,7 @@ class ProfilController extends Controller
                 'pendidikan_ibu' => $request->pendidikan_ibu,
                 'profesi_ibu' => $request->profesi_ibu,
                 'penghasilan_ibu' => $request->penghasilan_ibu,
+                'telp_ibu' => $request->telp_ibu,
                 'ayah' => $request->ayah,
                 'nik_ayah' => $request->nikayah,
                 'pendidikan_ayah' => $request->pendidikan_ayah,

@@ -6,13 +6,13 @@
             <div class="uk-form-controls">
                 @switch(session('status'))
                     @case('Siswa')
-                        <input class="uk-input" id="form-horizontal-text" type="text" value="{{ $dataUser[0]->nama_siswa }}">
+                        <input class="uk-input" type="text" value="{{ $dataUser[0]->nama_siswa }}">
                         @break
                     @case('Walmur')
-                        <input class="uk-input" id="form-horizontal-text" type="text" value="{{ $dataUser[0]->nama_walmur }}">
+                        <input class="uk-input" type="text" value="{{ $dataUser[0]->nama_walmur }}">
                         @break
                     @default
-                        <input class="uk-input" id="form-horizontal-text" type="text" value="{{ $dataUser[0]->nama_guru }}">
+                        <input class="uk-input" type="text" value="{{ $dataUser[0]->nama_guru }}">
                 @endswitch
             </div>
         </div>
@@ -20,21 +20,21 @@
         <div class="uk-margin">
             <label class="uk-form-label" for="form-horizontal-text">Tempat Lahir</label>
             <div class="uk-form-controls">
-                <input class="uk-input" id="form-horizontal-text" type="text" value="{{ $dataUser[0]->tempat_lahir }}">
+                <input class="uk-input" type="text" value="{{ $dataUser[0]->tempat_lahir }}">
             </div>
         </div>
     
         <div class="uk-margin">
             <label class="uk-form-label" for="form-horizontal-text">Tanggal Lahir</label>
             <div class="uk-form-controls">
-                <input class="uk-input" id="form-horizontal-text" type="date" value="{{ $dataUser[0]->tanggal_lahir }}">
+                <input class="uk-input" type="date" value="{{ $dataUser[0]->tanggal_lahir }}">
             </div>
         </div>
 
         <div class="uk-margin">
             <label class="uk-form-label" for="form-horizontal-text">Telp / WA</label>
             <div class="uk-form-controls">
-                <input class="uk-input" id="form-horizontal-text" type="text" value="{{ $dataUser[0]->telp }}">
+                <input class="uk-input" type="text" value="{{ $dataUser[0]->telp }}">
             </div>
         </div>
 

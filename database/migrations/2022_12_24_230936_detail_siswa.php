@@ -27,11 +27,13 @@ class DetailSiswa extends Migration
             $table->string('pendidikan_ibu')->nullable();
             $table->char('profesi_ibu', '2')->nullable();
             $table->string('penghasilan_ibu')->nullable();
+            $table->string('telp_ibu')->nullable();
             $table->string('ayah')->nullable();
             $table->string('nik_ayah')->nullable();
             $table->string('pendidikan_ayah')->nullable();
             $table->char('profesi_ayah', '2')->nullable();
             $table->string('penghasilan_ayah')->nullable();
+            $table->string('telp_ayah')->nullable();
             $table->integer('tinggi')->nullable();
             $table->integer('berat')->nullable();
         });
