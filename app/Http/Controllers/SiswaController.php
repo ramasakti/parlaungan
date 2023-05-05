@@ -75,6 +75,7 @@ class SiswaController extends Controller
             'kelasSelected' => DB::table('kelas')->where('id_kelas', request('id_kelas'))->get(),
             'dataSiswa' => DB::table('siswa')->where('kelas_id', request('id_kelas'))->orderBy('nama_siswa')->get(),
             'dataGuru' => DB::table('guru')->get(),
+            'dataKelulusan' => app('App\Http\Controllers\KelulusanController')->dataKelulusan()
         ]);
     }
 

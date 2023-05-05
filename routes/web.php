@@ -46,6 +46,9 @@ Route::get('/ktp/{id_siswa}', [SiswaController::class, 'ktp']);
 //Kelulusan
 Route::get('/kelulusan', [KelulusanController::class, 'index']);
 Route::post('/kelulusan', [KelulusanController::class, 'engine']);
+Route::get('/kelulusan/data', [KelulusanController::class, 'data']);
+Route::post('/kelulusan/update', [KelulusanController::class, 'update']);
+Route::post('/kelulusan/import', [KelulusanController::class, 'import']);
 
 //Login, logout, dashboard
 Route::post('/login', [LoginController::class, 'authenticate']);

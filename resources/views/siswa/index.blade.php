@@ -21,6 +21,7 @@
     <ul uk-tab>
         <li><a href="#">Kelas</a></li>
         <li class="uk-active"><a href="#">Data Siswa</a></li>
+        <li><a href="#">Kelulusan</a></li>
     </ul>
 
     <ul class="uk-switcher uk-margin uk-margin-remove-top">
@@ -29,6 +30,9 @@
         </li>
         <li class="uk-active">
             @include('siswa.data.index')
+        </li>
+        <li class="uk-active">
+            @include('siswa.kelulusan.data')
         </li>
     </ul>
 </x-admintemplate>
