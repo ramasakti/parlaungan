@@ -54,6 +54,7 @@
                     <p>{{ session('success') }} berhasil absen!</p>
                 </div>
             @endif
+
             @if (session()->has('filled'))
                 <div class="uk-alert-warning" uk-alert>
                     <p>{{ session('filled') }}</p>
@@ -91,6 +92,8 @@
         const userabsen = document.getElementById('userabsen')
         const response = document.getElementById('response')
         const spinner = document.getElementById('mySpinner')
+
+        userabsen.addEventListener('blur', () => userabsen.focus())
 
         const engine = (event) => {
             event.preventDefault();
