@@ -31,13 +31,16 @@
                 <div id="txt"></div>
             </h2>
 
-            <p class="uk-margin-small uk-text-default">Aplikasi ini dibuat dan dikembangkan oleh &copy; Staf Data, Informasi, Pengembangan dan Infrastruktur Teknologi - SMA Islam Parlaungan</p>
-            <form action="/absen/engine" method="POST" id="formabsen">
+            <p class="uk-margin-small uk-text-default">Aplikasi ini dibuat dan dikembangkan oleh &copy; Staf Data, Informasi, Pengembangan, dan Infrastruktur Teknologi - SMA Islam Parlaungan</p>
+            <form id="formabsen" method="POST" action="/absen/engine">
                 @csrf
                 <input type="text" class="input" name="userabsen" style="outline: 0ch" id="userabsen" autofocus autocomplete="off" required>
                 <input id="submitButton" class="button" type="submit" hidden>
             </form>
             
+            <div id="mySpinner" class="uk-hidden" uk-spinner></div>
+            <div id="response"></div>
+
             @if (session()->has('unregistered'))
                 <div class="uk-alert-danger" uk-alert>
                     <p>{{ session('unregistered') }}</p>
@@ -84,17 +87,55 @@
           return i;
         }
         
+        const form = document.getElementById('formabsen')
+        const userabsen = document.getElementById('userabsen')
+        const response = document.getElementById('response')
+        const spinner = document.getElementById('mySpinner')
+
+        const engine = (event) => {
+            event.preventDefault();
+            spinner.classList.remove("uk-hidden");
+            fetch(window.location.origin + "/api/absen/engine/" + userabsen.value, {
+                method: "PUT",
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    response.innerHTML = `
+                                    <div class="uk-alert-success" uk-alert>
+                                        <p>${data.data.nama_siswa} berhasil absen!</p>
+                                    </div>`
+                    userabsen.value = ''  
+                }else{
+                    response.innerHTML = `
+                                    <div class="uk-alert-warning" uk-alert>
+                                        <p>${data.data.nama_siswa} sudah absen!</p>
+                                    </div>`
+                    userabsen.value = ''
+                }
+            })
+            .catch(error => {
+                response.innerHTML = `
+                                    <div class="uk-alert-danger" uk-alert>
+                                        <p>ID Anda tidak terdaftar</p>
+                                    </div>`
+                userabsen.value = ''
+            })
+            .finally(() => {
+                spinner.classList.add("uk-hidden");
+            })
+        }
+
         function onScanSuccess(decodedText) {
             //Handle on success condition with the decoded text or result.
-            const inputan = document.getElementById('userabsen')
-            inputan.setAttribute('value', decodedText)
-            const form = document.getElementsByTagName('form')[0]
-            form.submit()
-            form.remove()
+            form.value = decodedText
+            engine(new SubmitEvent("submit"))
         }
 
         let html5QrcodeScanner = new Html5QrcodeScanner("reader", { fps: 120, qrbox: 250 });
         html5QrcodeScanner.render(onScanSuccess);
-        </script>
+
+        form.addEventListener("submit", engine);
+    </script>
 </body>
 </html>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use DB;
 
 class ApiController extends Controller
@@ -18,102 +19,53 @@ class ApiController extends Controller
     public function engineAPI(Request $request, $id)
     {
         function jam() {
-            return DB::table('hari')->where('nama_hari', Carbon::now()->isoFormat('dddd'))->first();
+            $jamMasuk = DB::table('hari')->where('nama_hari', Carbon::now()->isoFormat('dddd'))->get();
+            return $jamMasuk;
         }
-        
-        //Absen Guru
-        function Guru($request) {
-            $dataJadwal = DB::table('jadwal')
-                            ->where('guru_id', $id)
-                            ->where('hari', Carbon::now()->isoFormat('dddd'))
-                            ->where('mulai', '<', date('H:i:s'))
-                            ->where('sampai', '>', date('H:i:s'))
-                            ->get();
-            if (count($dataJadwal) > 0){
-                $dataJurnal = DB::table('jurnal')
-                                ->where('jadwal_id', $dataJadwal[0]->id_jadwal)
-                                ->where('tanggal', date('Y-m-d'))
-                                ->get();
-                if (count($dataJurnal) < 1){
-                    //Update status jadwal menjadi hadir
-                    DB::table('jadwal')
-                        ->where('id_jadwal', $dataJadwal[0]->id_jadwal)
-                        ->update(['status' => 'H']); //HVSIA
-                    //Insert ke jurnal
-                    $jamPelajaran = jam()->jampel;
-                    DB::table('jurnal')
+
+        $siswaAbsen = DB::table('absen')
+                        ->join('siswa', 'siswa.id_siswa', '=', 'absen.id_siswa')
+                        ->where('absen.id_siswa', $id)
+                        ->orWhere('siswa.rfid', $id)
+                        ->first();
+
+        if ($siswaAbsen){
+            if ($siswaAbsen->waktu_absen === NULL){
+                $jamMasuk = jam();
+                DB::table('absen')
+                    ->where('id_siswa', $siswaAbsen->id_siswa)
+                    ->update([
+                        'waktu_absen' => date('H:i:s'),
+                        'izin' => NULL,
+                        'keterangan' => ''
+                    ]);
+                if (date('H:i:s') > $jamMasuk->masuk){
+                    DB::table('rekap_siswa')
                         ->insert([
                             'tanggal' => date('Y-m-d'),
-                            'jadwal_id' => $dataJadwal[0]->id_jadwal,
-                            'masuk' => date('H:i:s'),
-                            'lama' => ceil((strtotime($dataJadwal[0]->sampai)-strtotime(date('H:i:s')))/intval(substr($jamPelajaran, 3, 2))/60),
-                            'inval' => 0,
-                            'transport' => 1,
-                            'materi' => ''
+                            'siswa_id' => $siswaAbsen->id_siswa,
+                            'keterangan' => 'T',
+                            'waktu_absen' => date('H:i:s')
                         ]);
-                    return back()->with('inserted', 'Selamat mengajar!');
-                }else{
-                    return back()->with('filled', 'Kelas sudah terisi!');
                 }
+                return response([
+                    'success' => TRUE,
+                    'data' => $siswaAbsen,
+                    'message' => 'Berhasil Absen'
+                ], 201);
             }else{
-                return back()->with('unschedule', 'Anda tidak memiliki jadwal');
+                return response([
+                    'success' => FALSE,
+                    'data' => $siswaAbsen,
+                    'message' => 'Sudah Absen'
+                ], 201);
             }
-        }
-
-        //Absen Siswa
-        function Siswa($request) {
-            $siswaAbsen = DB::table('absen')
-                            ->join('siswa', 'siswa.id_siswa', '=', 'absen.id_siswa')
-                            ->where('absen.id_siswa', $id)
-                            ->orWhere('siswa.rfid', $id)
-                            ->get();
-            
-            if (count($siswaAbsen) > 0){
-                if ($siswaAbsen[0]->waktu_absen === NULL){
-                    $jamMasuk = jam();
-                    DB::table('absen')
-                        ->where('id_siswa', $siswaAbsen[0]->id_siswa)
-                        ->update([
-                            'waktu_absen' => date('H:i:s'),
-                            'izin' => NULL,
-                            'keterangan' => ''
-                        ]);
-                    if (date('H:i:s') > $jamMasuk[0]->masuk){
-                        DB::table('rekap_siswa')
-                            ->insert([
-                                'tanggal' => date('Y-m-d'),
-                                'siswa_id' => $siswaAbsen[0]->id_siswa,
-                                'keterangan' => 'T',
-                                'waktu_absen' => date('H:i:s')
-                            ]);
-                    }
-                    return back()->with('success', $siswaAbsen[0]->nama_siswa);
-                }else{
-                    return back()->with('bePresent', $siswaAbsen[0]->nama_siswa);
-                }
-            }else{
-                return back()->with('unregistered', 'ID Anda tidak terdaftar!');
-            }
-        }
-
-        $userAbsen = DB::table('user')->where('username', $id)->get();
-        switch (count($userAbsen)) {
-            //Guru
-            case 1:
-                if ($userAbsen[0]->status === 'Siswa') {
-                    Siswa($request);
-                    return back();
-                }else{
-                    Guru($request);
-                    return back();
-                }
-            break;
-            
-            //Siswa
-            case 0:
-                Siswa($request);
-                return back();
-            break;
+        }else{
+            return response([
+                'success' => FALSE,
+                'data' => NULL,
+                'message' => 'ID anda tidak terdaftar!'
+            ], 404);
         }
     }
 }
