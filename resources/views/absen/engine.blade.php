@@ -71,7 +71,7 @@
     </div>
 
     <script>
-        function startTime() {
+        const startTime = () => {
           const today = new Date();
           let h = today.getHours();
           let m = today.getMinutes();
@@ -82,8 +82,8 @@
           setTimeout(startTime, 1000);
         }
         
-        function checkTime(i) {
-          if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+        const checkTime = (i) => {
+          if (i < 10) i = "0" + i  // add zero in front of numbers < 10
           return i;
         }
         
@@ -128,7 +128,7 @@
 
         function onScanSuccess(decodedText) {
             //Handle on success condition with the decoded text or result.
-            form.value = decodedText
+            userabsen.value = decodedText
             engine(new SubmitEvent("submit"))
         }
 
