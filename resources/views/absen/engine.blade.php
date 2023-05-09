@@ -108,7 +108,7 @@
                                     <div class="uk-alert-success" uk-alert>
                                         <p>${data.data.nama_siswa} berhasil absen!</p>
                                     </div>`
-                    userabsen.value = ''  
+                    userabsen.value = ''
                 }else{
                     response.innerHTML = `
                                     <div class="uk-alert-warning" uk-alert>

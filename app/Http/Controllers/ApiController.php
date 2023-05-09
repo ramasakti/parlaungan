@@ -19,7 +19,7 @@ class ApiController extends Controller
     public function engineAPI(Request $request, $id)
     {
         function jam() {
-            $jamMasuk = DB::table('hari')->where('nama_hari', Carbon::now()->isoFormat('dddd'))->get();
+            $jamMasuk = DB::table('hari')->where('nama_hari', Carbon::now()->isoFormat('dddd'))->first();
             return $jamMasuk;
         }
 
@@ -58,7 +58,7 @@ class ApiController extends Controller
                     'success' => FALSE,
                     'data' => $siswaAbsen,
                     'message' => 'Sudah Absen'
-                ], 201);
+                ], 200);
             }
         }else{
             return response([

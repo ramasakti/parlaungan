@@ -157,9 +157,7 @@ class SiswaController extends Controller
                 'keterangan' => '',
             ]);
             
-        return back()->with('siswa', [
-            'success' => 'Berhasil tambah siswa!'
-        ]);
+        return back()->with('siswa', 'Berhasil tambah siswa!');
     }
 
     public function updateSiswa(Request $request)
