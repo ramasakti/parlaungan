@@ -90,7 +90,7 @@ class AbsenController extends Controller
             DB::table('absen')
                 ->where('id_siswa', $request->id_siswa)
                 ->update([
-                    'waktu_absen' => $jamMasuk,
+                    'waktu_absen' => date('H:i:s'),
                     'izin' => NULL,
                     'keterangan' => ''
                 ]);
