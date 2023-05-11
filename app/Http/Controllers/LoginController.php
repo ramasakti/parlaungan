@@ -29,9 +29,9 @@ class LoginController extends Controller
             'password' => 'required'
         ]);
 
-        $detailUser = DB::table('user')->where('username', request('username'))->get();
-        $statusWalas = DB::table('kelas')->where('walas', request('username'))->get();
-        $statusPiket = DB::table('hari')->where('piket', request('username'))->get();
+        $detailUser = DB::table('user')->where('username', request('username'))->first();
+        $statusWalas = DB::table('kelas')->where('walas', request('username'))->first();
+        $statusPiket = DB::table('hari')->where('piket', request('username'))->first();
         if (Auth::attempt($credentials)){
             if ($request->username == 'adminabsen'){
                 $response = new Response(redirect('/absen/engine'));
@@ -39,12 +39,13 @@ class LoginController extends Controller
                 return $response;
             }else{
                 $request->session()->put('username', $request->username);
-                $request->session()->put('status', $detailUser[0]->status);
-                if (count($statusWalas) > 0) {
-                    $request->session()->put('walas', $statusWalas[0]);
-                }
-                if (count($statusPiket) > 0) {
-                    $request->session()->put('piket', $statusPiket[0]);
+                $request->session()->put('status', $detailUser->status);
+                if ($statusPiket && $statusWalas) {
+                    $request->session()->put('piket', $statusPiket);
+                }elseif ($statusWalas){
+                    $request->session()->put('walas', $statusWalas);
+                }else{
+                    $request->session()->put('piket', $statusPiket);
                 }
                 return redirect()->intended('/dashboard');
             }
