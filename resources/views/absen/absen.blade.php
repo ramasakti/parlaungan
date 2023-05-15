@@ -58,8 +58,8 @@
                                         $before = $data->keterangan;
                                     }
                                 }
-                                dd($days);
                             @endphp
+                            {{ $days }}
                         </div>
                     </div>
                 </td>
