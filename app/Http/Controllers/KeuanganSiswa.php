@@ -170,6 +170,15 @@ class KeuanganSiswa extends Controller
         $kwitansi = 'K' . date('Ymdhis');
         $jenisPem = count($request->id_pembayaran);
         for ($i=0; $i < $jenisPem; $i++) {
+            $pembayaran_terbayar = DB::table('transaksi')
+                                    ->select(
+                                        DB::raw('SUM(terbayar) as pembayaran_terbayar')
+                                    )
+                                    ->where('siswa_id', $request->id_siswa)
+                                    ->where('pembayaran_id', $request->id_pembayaran[$i])
+                                    ->groupBy('pembayaran_id')
+                                    ->first();
+
             if ($request->terbayar[$i] === null) {
                 return redirect('/siswa/keuangan?siswa_id='.$request->id_siswa)->with('fail', 'Wajib mengisi nominal yang dibayarkan');
             }
@@ -184,30 +193,16 @@ class KeuanganSiswa extends Controller
             }
         }
         for ($i=0; $i < $jenisPem; $i++) {
-            $pembayaran_terbayar = DB::table('transaksi')
-                                    ->select(
-                                        DB::raw('SUM(terbayar) as pembayaran_terbayar')
-                                    )
-                                    ->where('siswa_id', $request->id_siswa)
-                                    ->where('pembayaran_id', $request->id_pembayaran[$i])
-                                    ->groupBy('pembayaran_id')
-                                    ->first();
-
             DB::table('transaksi')
                 ->insert([
                     'kwitansi' => $kwitansi,
                     'waktu_transaksi' => date('Y-m-d H:i:s'),
                     'siswa_id' => $request->id_siswa,
                     'pembayaran_id' => $request->id_pembayaran[$i],
-                    'terbayar' => $terbayar
+                    'terbayar' => preg_replace('/[^0-9]/', '', $request->terbayar[$i])
                 ]);
         }
 
         return redirect('/siswa/keuangan?siswa_id='.$request->id_siswa)->with('success', 'Berhasil melakukan transaksi!');
-    }
-
-    public function numberFormat($angka)
-    {
-        return number_format($angka,0,'','.');
     }
 }

@@ -112,6 +112,61 @@ class SiswaController extends Controller
 
     public function graduation(Request $request)
     {
+        $dataSiswa = DB::table('siswa')->join('kelas', 'kelas.id_kelas', '=', 'siswa.kelas_id')->get();
+
+        foreach ($dataSiswa as $siswa) {
+            $harusDibayar = DB::table('pembayaran')
+                                ->where('kelas', 'LIKE', '%'.$siswa->kelas_id.'%')
+                                ->select(DB::raw('SUM(nominal) as harusDibayar'))
+                                ->first();
+            $telahDibayar = DB::table('transaksi')
+                                ->join('siswa', 'siswa.id_siswa', '=', 'transaksi.siswa_id')
+                                ->select('siswa_id', 'nama_siswa', DB::raw('SUM(terbayar)'))
+                                ->where('siswa.id_siswa', $siswa->id_siswa)
+                                ->groupBy('transaksi.siswa_id')
+                                ->first();
+            if ($telahDibayar = null) {
+                $telahDibayar = 0;
+            }
+            $tunggakan = DB::table('tunggakan')->where('siswa_id', $siswa->id_siswa)->first();
+            if ($harusDibayar->harusDibayar > $telahDibayar) {
+                if (!$tunggakan) {
+                    $tunggakan = 0;
+                }
+                DB::table('tunggakan')
+                    ->updateOrInsert(
+                        ['siswa_id' => $siswa->id_siswa],
+                        ['tunggakan' => $tunggakan + $harusDibayar->harusDibayar - $telahDibayar->terbayar]
+                    );
+            }
+
+            if ($siswa->tingkat == 'XII') {
+                DB::table('alumni')
+                    ->insert([
+                        'nis' => $siswa->id_siswa,
+                        'nama' => $siswa->nama_siswa,
+                        'kegiatan' => '',
+                        'tunggakan' => $tunggakan,
+                    ]);
+            }
+        }
+
+        $siswaKelas12 = DB::table('siswa')
+                            ->select('id_siswa', 'kelas_id')
+                            ->join('kelas', 'kelas.id_kelas', '=', 'siswa.kelas_id')
+                            ->where('kelas.tingkat', 'XII')
+                            ->get();
+
+        foreach ($siswaKelas12 as $siswaLulus) {
+            DB::table('siswa')
+                ->where('id_siswa', $siswaLulus->id_siswa)
+                ->delete();
+
+            DB::table('user')
+                ->where('username', $siswaLulus->id_siswa)
+                ->delete();
+        }
+        
         DB::table('kelas')
             ->where('tingkat', 'XII')
             ->delete();

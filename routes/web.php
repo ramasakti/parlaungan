@@ -92,7 +92,7 @@ Route::post('/hari/update', [SekolahController::class, 'updateHari'])->middlewar
 Route::post('/kelas/store', [SiswaController::class, 'storeKelas'])->middleware('auth');
 Route::post('/kelas/update', [SiswaController::class, 'updateKelas'])->middleware('auth');
 Route::post('/kelas/delete', [SiswaController::class, 'destroyKelas'])->middleware('auth');
-Route::post('/kelas/graduation', [SiswaController::class, 'graduation'])->middleware('auth');
+Route::get('/kelas/graduation', [SiswaController::class, 'graduation'])->middleware('auth');
 
 //Siswa
 Route::get('/siswa', [SiswaController::class, 'index'])->middleware('auth');
