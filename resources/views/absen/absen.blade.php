@@ -51,11 +51,11 @@
 
                                 $duplikat = DB::table('rekap_siswa')
                                                 ->select('keterangan')
-                                                ->groupBy('keterangan')
+                                                ->where('keterangan', 'A')
                                                 ->havingRaw('COUNT(*) > 1')
                                                 ->whereDate('tanggal', '>=', DB::raw('DATE_SUB(CURDATE(), INTERVAL 1 DAY)'))
                                                 ->get();
-                                dd($duplikat);
+                                dd(count($duplikat));
                             @endphp
                         </div>
                     </div>
