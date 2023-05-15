@@ -47,14 +47,22 @@
                         @endif
                         <div class="uk-card uk-card-body uk-card-default uk-padding-small" uk-drop="pos: left-center">
                             @php
-                                $data = DB::table('rekap_siswa')->where('siswa_id', $siswa->id_siswa)->get();
-
-                                $duplikat = DB::table('rekap_siswa')
-                                                ->select('keterangan')
-                                                ->where('keterangan', 'A')
-                                                ->whereDate('tanggal', '>=', DB::raw('DATE_SUB(CURDATE(), INTERVAL 1 DAY)'))
-                                                ->get();
-                                dd($duplikat);
+                                $dataKetidakhadiran = DB::table('rekap_siswa')
+                                                        ->select('siswa_id', 'tanggal', 'keterangan')
+                                                        ->orderBy('tanggal')
+                                                        ->get();
+                                $days = 0;
+                                $before = null;
+                                foreach ($dataKetidakhadiran as $data) {
+                                    if ($data->keterangan == $before) {
+                                        $days++;
+                                    } else {
+                                        $days = 1;
+                                        $before = $data->keterangan;
+                                    }
+                                }
+                                
+                                dd($days);
                             @endphp
                         </div>
                     </div>
