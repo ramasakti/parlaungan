@@ -47,10 +47,9 @@
                         @endif
                         <div class="uk-card uk-card-body uk-card-default uk-padding-small" uk-drop="pos: left-center">
                             @php
-                                use DB;
                                 $data = DB::table('rekap_siswa')->where('siswa_id', $siswa->id_siswa)->get();
 
-                                $duplikat = DB::table('nama_tabel')
+                                $duplikat = DB::table('rekap_siswa')
                                                 ->select('keterangan')
                                                 ->groupBy('keterangan')
                                                 ->havingRaw('COUNT(*) > 1')
