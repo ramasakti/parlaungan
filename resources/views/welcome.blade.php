@@ -69,10 +69,16 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#contact">Contact</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="- btn btn-primary rounded mb-2" id="modalLogin" onclick="closeNav()" href="#modal-login" uk-toggle>Login</a>
-                        @include('modal-login')
-                    </li>
+                    @if (session()->has('username'))
+                        <li class="nav-item">
+                            <a class="- btn btn-primary rounded mb-2" href="/dashboard" uk-toggle>Dashboard</a>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a class="- btn btn-primary rounded mb-2" id="modalLogin" onclick="closeNav()" href="#modal-login" uk-toggle>Login</a>
+                            @include('modal-login')
+                        </li>
+                    @endif
                 </ul>
             </div>
         </div>          

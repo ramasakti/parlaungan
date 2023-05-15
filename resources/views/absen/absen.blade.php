@@ -31,19 +31,21 @@
                 <td>{{ $ai++ }}</td>
                 <td>{{ $siswa->nama_siswa }}</td>
                 <td>
-                    @if ($siswa->waktu_absen === NULL)
-                        @if ($siswa->keterangan === 'A')
-                            <span class="uk-label uk-label-danger">Alfa</span>
-                        @elseif ($siswa->keterangan === 'S')
-                            <span class="uk-label uk-label-default">Sakit</span>
-                        @elseif ($siswa->keterangan === 'I')
-                            <span class="uk-label uk-label-default">Izin</span>
+                    <div uk-tooltip="title: {{ $siswa->izin }}; pos: left">
+                        @if ($siswa->waktu_absen === NULL)
+                            @if ($siswa->keterangan === 'A')
+                                <span class="uk-label uk-label-danger">Alfa</span>
+                            @elseif ($siswa->keterangan === 'S')
+                                <span class="uk-label uk-label-default">Sakit</span>
+                            @elseif ($siswa->keterangan === 'I')
+                                <span class="uk-label uk-label-default">Izin</span>
+                            @endif
+                        @elseif ($siswa->waktu_absen > $jamMasuk[0]->masuk)
+                            <span class="uk-label uk-label-warning">Terlambat</span>
+                        @else
+                            <span class="uk-label uk-label-success">Hadir</span>
                         @endif
-                    @elseif ($siswa->waktu_absen > $jamMasuk[0]->masuk)
-                        <span class="uk-label uk-label-warning">Terlambat</span>
-                    @else
-                        <span class="uk-label uk-label-success">Hadir</span>
-                    @endif
+                    </div>
                 </td>
                 <td>
                     <a href="#modal-center" uk-icon="settings" uk-toggle="target: #edit-absen-{{ $siswa->id_siswa }}">

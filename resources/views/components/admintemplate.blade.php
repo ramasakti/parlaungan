@@ -215,8 +215,8 @@
                                         @if (session('piket'))
                                             <li class="{{ ($navactive === 'siswa' ? 'active' : '') }}">
                                                 <a href="/absen"><span>Absen Siswa</span></a>
-                                                <li><a href="/absen/rekap">Rekap Absen Siswa</a></li>
                                             </li>
+                                            <li><a href="/absen/rekap">Rekap Absen Siswa</a></li>
                                         @endif
                                     @endif
                                     <li class="{{ ($navactive === 'akademik' ? 'active' : '') }}">
