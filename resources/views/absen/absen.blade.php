@@ -47,10 +47,7 @@
                         @endif
                         <div class="uk-card uk-card-body uk-card-default uk-padding-small" uk-drop="pos: left-center">
                             @php
-                                $dataKetidakhadiran = DB::table('rekap_siswa')
-                                                        ->select('siswa_id', 'tanggal', 'keterangan')
-                                                        ->orderBy('tanggal')
-                                                        ->get();
+                                $dataKetidakhadiran = DB::table('rekap_siswa')->where('siswa_id', $siswa->id_siswa)->get();
                                 $days = 0;
                                 $before = null;
                                 foreach ($dataKetidakhadiran as $data) {
@@ -61,7 +58,6 @@
                                         $before = $data->keterangan;
                                     }
                                 }
-                                
                                 dd($days);
                             @endphp
                         </div>
