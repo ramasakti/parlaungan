@@ -49,13 +49,16 @@
                             @php
                                 $dataKetidakhadiran = DB::table('rekap_siswa')->where('siswa_id', $siswa->id_siswa)->get();
                                 $days = 0;
-                                $before = null;
+                                $keteranganSebelumnya = null;
+                                $tanggalSebelumnya = null;
                                 foreach ($dataKetidakhadiran as $data) {
-                                    if ($data->keterangan == $before) {
+                                    $sekarang = $data;
+                                    if ($keteranganSebelumnya != null && $sekarang->keterangan == $keteranganSebelumnya && (date('Y-m-d', strtotime($sekarang->tanggal . '+' .1. ' days')) = $tanggalSebelumnya)) {
                                         $days++;
                                     } else {
                                         $days = 1;
-                                        $before = $data->keterangan;
+                                        $keteranganSebelumnya = $data->keterangan;
+                                        $tanggalSebelumnya = $data->tanggal;
                                     }
                                 }
                             @endphp
