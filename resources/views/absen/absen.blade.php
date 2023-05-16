@@ -28,6 +28,8 @@
     <tbody>
         @php
             use Carbon\Carbon;
+            use Carbon\CarbonInterface;
+            setlocale(LC_TIME, 'id_ID');
         @endphp
         @foreach ($dataAbsen as $siswa)    
             <tr>
@@ -89,7 +91,7 @@
                                     ->get();
                             @endphp
                             @foreach ($result as $index => $item)
-                                {{ $index+1 .'. Tanggal '. Carbon::parse($item->tanggal)->format('j F') .' keterangan '. $item->keterangan }}
+                                {{ $index+1 .'. Tanggal '. Carbon::parse($item->tanggal)->isoFormat('dddd D MMMM') .' keterangan '. $item->keterangan }}
                                 <br>
                             @endforeach
                         </div>
