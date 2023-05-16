@@ -89,7 +89,7 @@
                                     ->get();
                             @endphp
                             @foreach ($result as $index => $item)
-                                {{ $index+1 .'. '. Carbon::parse($item->tanggal)->format('j F') .' keterangan '. $item->keterangan }}
+                                {{ $index+1 .'. Tanggal '. Carbon::parse($item->tanggal)->format('j F') .' keterangan '. $item->keterangan }}
                                 <br>
                             @endforeach
                         </div>
