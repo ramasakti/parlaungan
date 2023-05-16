@@ -90,6 +90,7 @@
                             @endphp
                             @foreach ($result as $item)
                                 {{ $item->tanggal .' '. $item->keterangan }}
+                                <br>
                             @endforeach
                         </div>
                     </div>
