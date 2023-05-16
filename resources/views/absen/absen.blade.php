@@ -88,8 +88,8 @@
                                     ->orderBy('siswa.nama_siswa')
                                     ->get();
                             @endphp
-                            @foreach ($result as $item)
-                                {{ $item->tanggal .' '. $item->keterangan }}
+                            @foreach ($result as $index => $item)
+                                {{ ($index+1) .' '. $item->tanggal .' keterangan '. $item->keterangan }}
                                 <br>
                             @endforeach
                         </div>
