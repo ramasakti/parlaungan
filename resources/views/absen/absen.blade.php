@@ -54,7 +54,7 @@
                                 foreach ($dataKetidakhadiran as $data) {
                                     $sekarang = $data;
                                     $x = 1;
-                                    if ($keteranganSebelumnya != null && $sekarang->keterangan == $keteranganSebelumnya && (date('Y-m-d', strtotime($sekarang->tanggal . '+' . $x . ' days')) = $tanggalSebelumnya)) {
+                                    if ($keteranganSebelumnya != null && $sekarang->keterangan == $keteranganSebelumnya && date('Y-m-d', strtotime($sekarang->tanggal . '+' . $x . ' days')) == $tanggalSebelumnya) {
                                         $days++;
                                     } else {
                                         $days = 1;
