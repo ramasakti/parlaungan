@@ -87,10 +87,10 @@
                                     ->select('siswa.nama_siswa', 'subquery.tanggal', 'subquery.keterangan')
                                     ->orderBy('siswa.nama_siswa')
                                     ->get();
-                                
-                                print_r($result);
                             @endphp
-                            
+                            @foreach ($result as $item)
+                                {{ $item->tanggal .' '. $item->keterangan }}
+                            @endforeach
                         </div>
                     </div>
                 </td>
