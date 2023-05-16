@@ -70,7 +70,7 @@
                                     ->whereIn('tanggal', $previousDates)
                                     ->where(function ($query) {
                                         $query->whereNull('waktu_absen')
-                                            ->orWhere('keterangan', 'terlambat');
+                                            ->orWhere('keterangan', 'T');
                                     })
                                     ->whereNotExists(function ($query) {
                                         $query->select(DB::raw(1))
