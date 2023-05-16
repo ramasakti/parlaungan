@@ -26,6 +26,9 @@
         </tr>
     </thead>
     <tbody>
+        @php
+            use Carbon\Carbon;
+        @endphp
         @foreach ($dataAbsen as $siswa)    
             <tr>
                 <td>{{ $ai++ }}</td>
@@ -47,23 +50,47 @@
                         @endif
                         <div class="uk-card uk-card-body uk-card-default uk-padding-small" uk-drop="pos: left-center">
                             @php
-                                $dataKetidakhadiran = DB::table('rekap_siswa')->where('siswa_id', $siswa->id_siswa)->get();
-                                $days = 0;
-                                $keteranganSebelumnya = null;
-                                $tanggalSebelumnya = null;
-                                foreach ($dataKetidakhadiran as $data) {
-                                    $sekarang = $data;
-                                    $x = 1;
-                                    if ($keteranganSebelumnya != null && $sekarang->keterangan == $keteranganSebelumnya && date('Y-m-d', strtotime($sekarang->tanggal . '+' . $x . ' days')) == $tanggalSebelumnya) {
-                                        $days++;
-                                    } else {
-                                        $days = 1;
-                                        $keteranganSebelumnya = $data->keterangan;
-                                        $tanggalSebelumnya = $data->tanggal;
-                                    }
-                                }
+                                
+                                // Mendapatkan tanggal hari ini
+                                $today = Carbon::today();
+
+                                // Mencari tanggal-tanggal sebelumnya dengan batasan jumlah hari yang ingin dicek
+                                $numberOfDays = 14; // Ubah sesuai kebutuhan Anda
+                                $previousDates = DB::table('rekap_siswa')
+                                                    ->select('tanggal')
+                                                    ->whereDate('tanggal', '<', $today)
+                                                    ->groupBy('tanggal')
+                                                    ->orderBy('tanggal', 'desc')
+                                                    ->limit($numberOfDays)
+                                                    ->pluck('tanggal');
+
+                                // Membuat subquery untuk mendapatkan siswa yang terlambat atau tidak hadir pada tanggal tertentu
+                                $subquery = DB::table('rekap_siswa')
+                                    ->where('siswa_id', $siswa->id_siswa)
+                                    ->whereIn('tanggal', $previousDates)
+                                    ->where(function ($query) {
+                                        $query->whereNull('waktu_absen')
+                                            ->orWhere('keterangan', 'terlambat');
+                                    })
+                                    ->whereNotExists(function ($query) {
+                                        $query->select(DB::raw(1))
+                                            ->from('libur')
+                                            ->whereRaw('rekap_siswa.tanggal >= libur.mulai')
+                                            ->whereRaw('rekap_siswa.tanggal <= libur.sampai');
+                                    });
+
+                                // Menggabungkan subquery dengan tabel siswa
+                                $result = DB::table('siswa')
+                                    ->joinSub($subquery, 'subquery', function ($join) {
+                                        $join->on('siswa.id_siswa', '=', 'subquery.siswa_id');
+                                    })
+                                    ->select('siswa.nama_siswa', 'subquery.tanggal', 'subquery.keterangan')
+                                    ->orderBy('siswa.nama_siswa')
+                                    ->get();
+                                
+                                print_r($result);
                             @endphp
-                            {{ $days }}
+                            
                         </div>
                     </div>
                 </td>

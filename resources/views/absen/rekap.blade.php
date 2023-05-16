@@ -28,8 +28,8 @@
                 <th scope="col">#</th>
                 <th scope="col">Nama</th>
                 <th scope="col">S</th>
-                <th scope="col">I</th>
                 <th scope="col">A</th>
+                <th scope="col">I</th>
                 <th scope="col">T</th>
             </tr>
         </thead>
