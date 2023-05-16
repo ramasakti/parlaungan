@@ -55,7 +55,7 @@
                                 $today = Carbon::today();
 
                                 // Mencari tanggal-tanggal sebelumnya dengan batasan jumlah hari yang ingin dicek
-                                $numberOfDays = 30; // Ubah sesuai kebutuhan Anda
+                                $numberOfDays = 14; // Ubah sesuai kebutuhan Anda
                                 $previousDates = DB::table('rekap_siswa')
                                                     ->select('tanggal')
                                                     ->whereDate('tanggal', '<', $today)
@@ -89,7 +89,7 @@
                                     ->get();
                             @endphp
                             @foreach ($result as $index => $item)
-                                {{ ($index+1) .' '. $item->tanggal .' keterangan '. $item->keterangan }}
+                                {{ $index+1 .'. '. Carbon::parse($item->tanggal)->format('j F') .' keterangan '. $item->keterangan }}
                                 <br>
                             @endforeach
                         </div>
