@@ -11,7 +11,6 @@
 <body>
     @php
         $trx = DB::table('transaksi')->select('pembayaran_id', 'terbayar')->where('kwitansi', $data[0]->kwitansi)->get()->toArray();
-            
         $newArr = array_map(function($item) {
             return $item->pembayaran_id;
         }, $trx);
