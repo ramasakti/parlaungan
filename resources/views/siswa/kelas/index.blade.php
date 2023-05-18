@@ -1,5 +1,7 @@
 <a class="mx-2 my-2" href="#modal-center" uk-toggle="target: #add-kelas" uk-icon="icon: plus"></a>
 @include('siswa.kelas.add-kelas')
+<a class="mx-2 my-2" href="#modal-center" uk-toggle="target: #graduation" uk-icon="icon: arrow-up"></a>
+@include('siswa.kelas.graduation')
 <table class="table table-borderless">
     <thead>
         <tr>
