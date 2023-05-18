@@ -121,43 +121,47 @@ class SiswaController extends Controller
                                 ->first();
             $telahDibayar = DB::table('transaksi')
                                 ->join('siswa', 'siswa.id_siswa', '=', 'transaksi.siswa_id')
-                                ->select('siswa_id', 'nama_siswa', DB::raw('SUM(terbayar)'))
+                                ->select('siswa_id', 'nama_siswa', DB::raw('SUM(terbayar) as terbayar'))
                                 ->where('siswa.id_siswa', $siswa->id_siswa)
                                 ->groupBy('transaksi.siswa_id')
                                 ->first();
-            if ($telahDibayar = null) {
-                $telahDibayar = 0;
-            }
             $tunggakan = DB::table('tunggakan')->where('siswa_id', $siswa->id_siswa)->first();
-            if ($harusDibayar->harusDibayar > $telahDibayar) {
-                if (!$tunggakan) {
-                    $tunggakan = 0;
-                }
-                DB::table('tunggakan')
-                    ->updateOrInsert(
-                        ['siswa_id' => $siswa->id_siswa],
-                        ['tunggakan' => $tunggakan + $harusDibayar->harusDibayar - $telahDibayar->terbayar]
-                    );
+
+            if (!$tunggakan) {
+                $tunggakan = (object) [
+                    'tunggakan' => 0
+                ];
             }
 
-            if ($siswa->tingkat == 'XII') {
-                DB::table('alumni')
-                    ->insert([
-                        'nis' => $siswa->id_siswa,
-                        'nama' => $siswa->nama_siswa,
-                        'kegiatan' => '',
-                        'tunggakan' => $tunggakan,
-                    ]);
+            if (!$telahDibayar) {
+                $telahDibayar = (object) [
+                    'terbayar' => 0
+                ];
             }
+
+            DB::table('tunggakan')
+                ->updateOrInsert(
+                    ['siswa_id' => $siswa->id_siswa],
+                    ['tunggakan' => (int)$tunggakan->tunggakan + (int)$harusDibayar->harusDibayar - (int)$telahDibayar->terbayar]
+                );
         }
 
         $siswaKelas12 = DB::table('siswa')
-                            ->select('id_siswa', 'kelas_id')
+                            ->select('id_siswa', 'nama_siswa', 'kelas_id')
                             ->join('kelas', 'kelas.id_kelas', '=', 'siswa.kelas_id')
                             ->where('kelas.tingkat', 'XII')
                             ->get();
 
         foreach ($siswaKelas12 as $siswaLulus) {
+            $tunggakanAlumni = DB::table('tunggakan')->where('siswa_id', $siswaLulus->id_siswa)->first();
+            DB::table('alumni')
+                ->insert([
+                    'nis' => $siswaLulus->id_siswa,
+                    'nama' => $siswaLulus->nama_siswa,
+                    'kegiatan' => '',
+                    'tunggakan' => $tunggakanAlumni->tunggakan,
+                ]);
+            
             DB::table('siswa')
                 ->where('id_siswa', $siswaLulus->id_siswa)
                 ->delete();

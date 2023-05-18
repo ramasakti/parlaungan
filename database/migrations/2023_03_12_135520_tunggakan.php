@@ -14,8 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tunggakan', function (Blueprint $table) {
-            $table->string('siswa_id');
+            $table->string('siswa_id')->primary();
             $table->integer('tunggakan');
+        });
+
+        Schema::table('tunggakan', function (Blueprint $table) {
+            $table->foreign('siswa_id')->references('id_siswa')->on('siswa')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
