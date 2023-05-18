@@ -38,7 +38,7 @@ Route::get('/', function () {
         'title' => 'Home | SMA Islam Parlaungan',
         'navactive' => 'home'
     ]);
-})->middleware('guest')->name('login');
+})->name('login');
 
 //KTP
 Route::get('/ktp/{id_siswa}', [SiswaController::class, 'ktp']);
