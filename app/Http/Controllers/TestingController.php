@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
+use Mike42\Escpos\Printer;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -14,7 +16,19 @@ class TestingController extends Controller
 {
     public function index(Request $request)
     {
-        echo date('Y-m-d', strtotime('+1 days', strtotime(date('Y-m-d'))));
+        $connector = new WindowsPrintConnector("pos-58"); // Ganti "printer_name" dengan nama printer Anda
+        $printer = new Printer($connector);
+
+        try {
+            $printer->text("Contoh teks yang akan dicetak\n");
+            $printer->text("Baris berikutnya\n");
+            $printer->cut();
+            $printer->close();
+
+            return "Cetak berhasil";
+        } catch (Exception $e) {
+            return "Cetak gagal: " . $e->getMessage();
+        }
     }
 
     public function getApi(Request $request)

@@ -109,6 +109,7 @@ Route::post('/pembayaran/transaksi', [KeuanganSiswa::class, 'engineTransaction']
 Route::post('/pembayaran/payment', [KeuanganSiswa::class, 'payment'])->middleware('auth');
 Route::get('/transaksi/kwitansi', [KeuanganSiswa::class, 'kwitansi']);
 Route::get('/transaksi/edit/{kwitansi}', [KeuanganSiswa::class, 'editTransaksi'])->middleware('auth');
+Route::post('/kwitansi/print', [KeuanganSiswa::class, 'print'])->middleware('auth');
 
 //Absen
 Route::get('/absen', [AbsenController::class, 'index'])->middleware('auth');

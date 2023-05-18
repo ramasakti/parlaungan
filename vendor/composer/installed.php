@@ -3,7 +3,7 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'e5acbf59a6852c5bf41526a677446d7ad2a02b38',
+        'reference' => '910d1712d8f56d6a97bb56b01bd226649b48ddeb',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -439,7 +439,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'e5acbf59a6852c5bf41526a677446d7ad2a02b38',
+            'reference' => '910d1712d8f56d6a97bb56b01bd226649b48ddeb',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -550,6 +550,24 @@
             'reference' => '728434227fe21be27ff6d86621a1b13107a2562c',
             'type' => 'library',
             'install_path' => __DIR__ . '/../markbaker/matrix',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'mike42/escpos-php' => array(
+            'pretty_version' => 'v4.0',
+            'version' => '4.0.0.0',
+            'reference' => '74fd89a3384135c90a8c6dc4b724e03df7c0e4f9',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../mike42/escpos-php',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'mike42/gfx-php' => array(
+            'pretty_version' => 'v0.6',
+            'version' => '0.6.0.0',
+            'reference' => 'ed9ded2a9298e4084a9c557ab74a89b71e43dbdb',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../mike42/gfx-php',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
@@ -826,8 +844,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '1.0|2.0|3.0',
-                1 => '1.0.0 || 2.0.0 || 3.0.0',
+                0 => '1.0.0 || 2.0.0 || 3.0.0',
+                1 => '1.0|2.0|3.0',
             ),
         ),
         'psr/simple-cache' => array(

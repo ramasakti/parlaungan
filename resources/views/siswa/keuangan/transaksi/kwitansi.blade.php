@@ -21,7 +21,16 @@
         $pmbyrn = DB::table('pembayaran')->whereIn('id_pembayaran', $newArr)->get();
     @endphp
     <div class="uk-container uk-container-xsmall">
-        <h5 class="uk-text-center">Kwitansi Pembayaran SMA Islam Parlaungan</h5>
+        @if (session('status') == 'Bendahara' or session('status') == 'Admin')
+            <form action="/kwitansi/print" method="post">
+                @csrf
+                <input type="hidden" name="id" value="{{ $data[0]->kwitansi }}">
+                <button class="uk-margin-small-top">
+                    <a href="" class="uk-icon-button" uk-icon="print"></a>
+                </button>
+            </form>
+        @endif
+        <h5 class="uk-text-center uk-margin-small-top">Kwitansi Pembayaran SMA Islam Parlaungan</h5>
         <p class="uk-margin-remove">Nomor Kwitansi: {{ $data[0]->kwitansi }}</p>
         <p class="uk-margin-remove">Nama Siswa: {{ $data[0]->nama_siswa }}</p>
         <p class="uk-margin-remove">Tanggal Transaksi: {{ $data[0]->waktu_transaksi }}</p>

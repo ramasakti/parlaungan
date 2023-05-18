@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
+use Mike42\Escpos\Printer;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
@@ -204,5 +207,79 @@ class KeuanganSiswa extends Controller
         }
 
         return redirect('/siswa/keuangan?siswa_id='.$request->id_siswa)->with('success', 'Berhasil melakukan transaksi!');
+    }
+
+    public function print(Request $request)
+    {
+        //Setup Printer
+        $connector = new WindowsPrintConnector("pos-58"); // Ganti "printer_name" dengan nama printer Anda
+        $printer = new Printer($connector);
+        $maxTextLength = 13;
+
+        //Generate QR Code untuk Disimpan
+        $dataQr = "https://smaispa.sch.id/transaksi/kwitansi?id=" . $request->id;
+        $qrCode = QrCode::format('png')->size(160)->generate($dataQr);
+
+        // Simpan QR code sebagai gambar
+        $qrCodePath = storage_path('kwitansi/' . $request->id . '.png'); // Path file untuk menyimpan gambar QR code
+        $qrCode->save($qrCodePath);
+
+        //Data
+        $data = DB::table('transaksi')
+                    ->select(
+                        '*',
+                        DB::raw('SUM(terbayar) as total_transaksi')
+                    )
+                    ->where('transaksi.kwitansi', $request->id)
+                    ->join('siswa', 'siswa.id_siswa', '=', 'transaksi.siswa_id')
+                    ->orderBy('transaksi.waktu_transaksi', 'desc')
+                    ->groupBy('transaksi.kwitansi')
+                    ->first();
+        $trx = DB::table('transaksi')->select('pembayaran_id', 'terbayar')->where('kwitansi', $data->kwitansi)->get()->toArray();
+        $newArr = array_map(function($item) {
+            return $item->pembayaran_id;
+        }, $trx);
+
+        $newArr = array_values($newArr);
+        $pmbyrn = DB::table('pembayaran')->whereIn('id_pembayaran', $newArr)->get();
+
+        //Mencetak
+        try {
+            $printer->text("Kwitansi Pembayaran\n");
+            $printer->text("SMA Islam Parlaungan\n");
+            $printer->text("Jl. Berbek I No. 2 - 4 Sidoarjo\n\n");
+            $printer->text("=========================\n");
+            $printer->text(str_pad($request->id, $maxTextLength, " ", STR_PAD_RIGHT) . "\n");
+            $printer->text(str_pad($data->nama_siswa, $maxTextLength, " ", STR_PAD_RIGHT) . "\n");
+            $printer->text(str_pad($data->waktu_transaksi, $maxTextLength, " ", STR_PAD_RIGHT) . "\n");
+            $printer->text(str_pad('Vinna Alviyatin, S.Sos', $maxTextLength, " ", STR_PAD_RIGHT) . "\n");
+            $printer->text("=========================\n");
+            $printer->text(str_pad("Pembayaran", 13, " ", STR_PAD_RIGHT));
+            $printer->text(str_pad("Nominal", 10, " ", STR_PAD_RIGHT));
+            $printer->text(str_pad("Dibayar", 10, " ", STR_PAD_RIGHT));
+            $printer->text("\n");
+            for ($i=0; $i < count($pmbyrn); $i++) { 
+                $printer->text($pmbyrn[$i]->nama_pembayaran);
+                $printer->text("\n");
+                $printer->text("Nominal " . number_format(intval($pmbyrn[$i]->nominal),0,'','.'));
+                $printer->text("\n");
+                $printer->text("Dibayar " . number_format($trx[$i]->terbayar,0,'','.'));
+                $printer->text("\n");
+                $printer->text("\n");
+            }
+            $printer->text("Total\n");
+            $total = array_reduce($trx, function($acc, $item) {
+                return $acc + $item->terbayar;
+            }, 0);
+            $printer->text(number_format($total,0,'','.'));
+            $printer->text("=========================\n");
+            $printer->bitImage($qrCodePath);
+            $printer->cut();
+            $printer->close();
+
+            return "Cetak berhasil";
+        }catch (Exception $e){
+            return "Cetak gagal: " . $e->getMessage();
+        }
     }
 }
