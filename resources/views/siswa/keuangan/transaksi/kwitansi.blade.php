@@ -25,9 +25,15 @@
                 @csrf
                 <input type="hidden" name="id" value="{{ $data[0]->kwitansi }}">
                 <button class="uk-margin-small-top">
-                    <a href="" class="uk-icon-button" uk-icon="print"></a>
+                    <span uk-icon="icon: print"></span>
                 </button>
             </form>
+        @endif
+        @if (session()->has('success'))
+            <div class="uk-alert-success" uk-alert>
+                <a class="uk-alert-close" uk-close></a>
+                <p>{{ session('success') }}</p>
+            </div>
         @endif
         <h5 class="uk-text-center uk-margin-small-top">Kwitansi Pembayaran SMA Islam Parlaungan</h5>
         <p class="uk-margin-remove">Nomor Kwitansi: {{ $data[0]->kwitansi }}</p>

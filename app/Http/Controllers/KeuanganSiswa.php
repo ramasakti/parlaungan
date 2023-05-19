@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
 use Mike42\Escpos\Printer;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
+use Mike42\Escpos\EscposImage;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
@@ -216,14 +216,6 @@ class KeuanganSiswa extends Controller
         $printer = new Printer($connector);
         $maxTextLength = 13;
 
-        //Generate QR Code untuk Disimpan
-        $dataQr = "https://smaispa.sch.id/transaksi/kwitansi?id=" . $request->id;
-        $qrCode = QrCode::format('png')->size(160)->generate($dataQr);
-
-        // Simpan QR code sebagai gambar
-        $qrCodePath = storage_path('kwitansi/' . $request->id . '.png'); // Path file untuk menyimpan gambar QR code
-        $qrCode->save($qrCodePath);
-
         //Data
         $data = DB::table('transaksi')
                     ->select(
@@ -245,39 +237,40 @@ class KeuanganSiswa extends Controller
 
         //Mencetak
         try {
+            $printer->setJustification(Printer::JUSTIFY_CENTER);
             $printer->text("Kwitansi Pembayaran\n");
-            $printer->text("SMA Islam Parlaungan\n");
-            $printer->text("Jl. Berbek I No. 2 - 4 Sidoarjo\n\n");
-            $printer->text("=========================\n");
+            $img = EscposImage::load(public_path('/lmbg.png'));
+            $printer->bitImage($img);
+            $printer->text("Jl. Berbek I No. 2 - 4 Sidoarjo\n");
+            $printer->text("================================\n");
+            $printer->setJustification(Printer::JUSTIFY_LEFT);
             $printer->text(str_pad($request->id, $maxTextLength, " ", STR_PAD_RIGHT) . "\n");
             $printer->text(str_pad($data->nama_siswa, $maxTextLength, " ", STR_PAD_RIGHT) . "\n");
             $printer->text(str_pad($data->waktu_transaksi, $maxTextLength, " ", STR_PAD_RIGHT) . "\n");
             $printer->text(str_pad('Vinna Alviyatin, S.Sos', $maxTextLength, " ", STR_PAD_RIGHT) . "\n");
-            $printer->text("=========================\n");
-            $printer->text(str_pad("Pembayaran", 13, " ", STR_PAD_RIGHT));
-            $printer->text(str_pad("Nominal", 10, " ", STR_PAD_RIGHT));
-            $printer->text(str_pad("Dibayar", 10, " ", STR_PAD_RIGHT));
-            $printer->text("\n");
+            $printer->text("================================\n");
             for ($i=0; $i < count($pmbyrn); $i++) { 
                 $printer->text($pmbyrn[$i]->nama_pembayaran);
                 $printer->text("\n");
-                $printer->text("Nominal " . number_format(intval($pmbyrn[$i]->nominal),0,'','.'));
+                $printer->text("Nominal : Rp. " . number_format(intval($pmbyrn[$i]->nominal),0,'','.'));
                 $printer->text("\n");
-                $printer->text("Dibayar " . number_format($trx[$i]->terbayar,0,'','.'));
+                $printer->text("Dibayar : Rp. " . number_format($trx[$i]->terbayar,0,'','.'));
                 $printer->text("\n");
                 $printer->text("\n");
             }
-            $printer->text("Total\n");
+            $printer->text("Total : ");
             $total = array_reduce($trx, function($acc, $item) {
                 return $acc + $item->terbayar;
             }, 0);
-            $printer->text(number_format($total,0,'','.'));
-            $printer->text("=========================\n");
-            $printer->bitImage($qrCodePath);
+            $printer->text("Rp. ".number_format($total,0,'','.'));
+            $printer->text("\n================================\n");
+            $printer->setJustification(Printer::JUSTIFY_CENTER);
+            $printer->qrCode('https://smaispa.sch.id/transaksi/kwitansi?id='.$request->id, Printer::QR_ECLEVEL_L, 6);
+            $printer->text("\nScan untuk melihat kwitansi digital");
             $printer->cut();
             $printer->close();
 
-            return "Cetak berhasil";
+            return back()->with('success', 'Berhasil mencetak!');
         }catch (Exception $e){
             return "Cetak gagal: " . $e->getMessage();
         }
