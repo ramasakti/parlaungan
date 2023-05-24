@@ -27,5 +27,9 @@
                 </td>
             </tr>
         @endforeach
+        <tr>
+            <th colspan="5" class="uk-text-center">Total Transaksi Tanggal {{ request('tanggal') }}</td>
+            <th>Rp. {{ number_format($allTransaksi->sum('terbayar'),0,'','.') }}</th>
+        </tr>
     </tbody>
 </table>

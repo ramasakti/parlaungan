@@ -13,7 +13,7 @@
         @endphp
 
         <button class="uk-modal-close-default" type="button" uk-close></button>
-        <h6>{{ $transaksi->kwitansi }} <a href="#" onclick="editable()" uk-icon="icon: file-edit"></a></h6>
+        <h6>{{ $transaksi->kwitansi }}</h6>
 
         <table id="kwitansi" class="uk-table">
             <thead>

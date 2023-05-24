@@ -21,6 +21,7 @@ use App\Http\Controllers\TestingController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ArsipController;
 use App\Http\Controllers\KelulusanController;
+use App\Http\Controllers\SyncController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +43,8 @@ Route::get('/', function () {
 
 //KTP
 Route::get('/ktp/{id_siswa}', [SiswaController::class, 'ktp']);
+
+Route::get('/sync', [SyncController::class, 'sinkronisasi']);
 
 //Kelulusan
 Route::get('/kelulusan', [KelulusanController::class, 'index']);
@@ -109,6 +112,7 @@ Route::post('/pembayaran/transaksi', [KeuanganSiswa::class, 'engineTransaction']
 Route::post('/pembayaran/payment', [KeuanganSiswa::class, 'payment'])->middleware('auth');
 Route::get('/transaksi/kwitansi', [KeuanganSiswa::class, 'kwitansi']);
 Route::get('/transaksi/edit/{kwitansi}', [KeuanganSiswa::class, 'editTransaksi'])->middleware('auth');
+Route::post('/transaksi/update', [KeuanganSiswa::class, 'updateTransaksi']);
 Route::post('/kwitansi/print', [KeuanganSiswa::class, 'print'])->middleware('auth');
 
 //Absen

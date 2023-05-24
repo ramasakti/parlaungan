@@ -76,8 +76,9 @@
                     <td>Rp. {{ number_format($transaksi->total_transaksi,0,'','.') }}</td>
                     <td>
                         <a href="#detail-trx-{{ $transaksi->kwitansi }}" uk-toggle="target: #detail-trx-{{ $transaksi->kwitansi }}" uk-icon="info"></a>
-                        @include('siswa.keuangan.transaksi.detail-transaksi')
-                        <a href="/transaksi/kwitansi?id={{ $transaksi->kwitansi }}" target="_blank" uk-icon="print"></a>
+                        @include('siswa.keuangan.transaksi.detail-transaksi')&nbsp;
+                        <a href="/transaksi/kwitansi?id={{ $transaksi->kwitansi }}" target="_blank" uk-icon="print"></a>&nbsp;
+                        <a href="/transaksi/edit/{{ $transaksi->kwitansi }}" uk-icon="file-edit"></a>
                     </td>
                 </tr>
             @endforeach

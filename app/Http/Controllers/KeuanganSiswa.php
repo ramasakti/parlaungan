@@ -111,6 +111,46 @@ class KeuanganSiswa extends Controller
         return $detilPembayaran;
     }
 
+    public function updateTransaksi(Request $request)
+    {
+        $jenisPem = count($request->id_pembayaran);
+        for ($i=0; $i < $jenisPem; $i++) {
+            $pembayaran_terbayar = DB::table('transaksi')
+                                    ->select(
+                                        DB::raw('SUM(terbayar) as pembayaran_terbayar')
+                                    )
+                                    ->where('kwitansi', '!=', $request->kwitansi)
+                                    ->where('siswa_id', $request->id_siswa)
+                                    ->where('pembayaran_id', $request->id_pembayaran[$i])
+                                    ->groupBy('pembayaran_id')
+                                    ->first();
+
+            if ($request->terbayar[$i] === null) {
+                return back()->with('fail', 'Wajib mengisi nominal yang dibayarkan');
+            }
+
+            $nominal = preg_replace('/[^0-9]/', '', $request->nominal[$i]);
+            $terbayar = preg_replace('/[^0-9]/', '', $request->terbayar[$i]);
+            $pembayaran_terbayar = preg_replace('/[^0-9]/', '', $pembayaran_terbayar->pembayaran_terbayar ?? 0);
+            $selisih = $nominal - $pembayaran_terbayar - $terbayar;
+
+            if ($selisih < 0 || $terbayar > $nominal) {
+                return back()->with('fail', 'Jumlah pembayaran melebihi jumlah kekurangan pembayaran');
+            }
+        }
+
+        for ($i=0; $i < count($request->id_transaksi); $i++) {
+            DB::table('transaksi')
+                ->where('id_transaksi', $request->id_transaksi[$i])
+                ->update([
+                    'waktu_transaksi' => date('Y-m-d H:i:s'),
+                    'terbayar' => preg_replace('/[^0-9]/', '', $request->terbayar[$i])
+                ]);
+        }
+
+        return redirect('/siswa/keuangan?siswa_id='.$request->id_siswa)->with('success', 'Berhasil update transaksi!');
+    }
+
     public function allTransaksi()
     {
         $transaksi = DB::table('transaksi')
