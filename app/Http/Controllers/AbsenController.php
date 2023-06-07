@@ -184,7 +184,7 @@ class AbsenController extends Controller
                             ->orWhere('siswa.rfid', $request->userabsen)
                             ->get();
             
-            if (count($siswaAbsen) > 0){
+            if (count($siswaAbsen) > 0) {
                 if ($siswaAbsen[0]->waktu_absen === NULL){
                     $jamMasuk = jam();
                     DB::table('absen')

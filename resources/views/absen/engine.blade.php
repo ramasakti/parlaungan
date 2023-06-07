@@ -73,14 +73,14 @@
 
     <script>
         const startTime = () => {
-          const today = new Date();
-          let h = today.getHours();
-          let m = today.getMinutes();
-          let s = today.getSeconds();
-          m = checkTime(m);
-          s = checkTime(s);
-          document.getElementById('txt').innerHTML =  h + ":" + m + ":" + s;
-          setTimeout(startTime, 1000);
+            const today = new Date();
+            let h = today.getHours();
+            let m = today.getMinutes();
+            let s = today.getSeconds();
+            m = checkTime(m);
+            s = checkTime(s);
+            document.getElementById('txt').innerHTML =  h + ":" + m + ":" + s;
+            setTimeout(startTime, 1000);
         }
         
         const checkTime = (i) => {
@@ -95,7 +95,7 @@
 
         userabsen.addEventListener('blur', () => userabsen.focus())
 
-        const engine = (event) => {
+        async function engine (event) {
             event.preventDefault();
             spinner.classList.remove("uk-hidden");
             fetch(window.location.origin + "/api/absen/engine/" + userabsen.value, {
@@ -104,24 +104,27 @@
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    response.innerHTML = `
-                                    <div class="uk-alert-success" uk-alert>
-                                        <p>${data.data.nama_siswa} berhasil absen!</p>
-                                    </div>`
+                    UIkit.notification(
+                        {
+                            message: `${data.data.nama_siswa} berhasil absen!`, 
+                            status:'success', 
+                            pos: 'top-center'
+                        }
+                    );
                     userabsen.value = ''
                 }else{
-                    response.innerHTML = `
-                                    <div class="uk-alert-warning" uk-alert>
-                                        <p>${data.data.nama_siswa} sudah absen!</p>
-                                    </div>`
+                    UIkit.notification(
+                        {
+                            message: `${data.data.nama_siswa} sudah absen!`, 
+                            status:'warning', 
+                            pos: 'top-center'
+                        }
+                    );
                     userabsen.value = ''
                 }
             })
             .catch(error => {
-                response.innerHTML = `
-                                    <div class="uk-alert-danger" uk-alert>
-                                        <p>ID Anda tidak terdaftar</p>
-                                    </div>`
+                UIkit.notification({message: 'ID anda tidak terdaftar!', status:'danger', pos: 'top-center'});
                 userabsen.value = ''
             })
             .finally(() => {

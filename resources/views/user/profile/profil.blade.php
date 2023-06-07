@@ -1,5 +1,5 @@
 <div class="container">
-    <form class="uk-form-horizontal uk-margin-small mt-3">
+    <form class="uk-form-horizontal uk-margin-small mt-3" action="/profile" method="post">
 
         <div class="uk-margin">
             <label class="uk-form-label" for="form-horizontal-text">Nama Lengkap</label>
