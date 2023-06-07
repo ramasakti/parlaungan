@@ -14,7 +14,7 @@
                 </div>
             </div>
             @if ($user[0]->foto != '')
-                <img class="image-wrapper uk-border-circle uk-align-center" src="/storage/profil/{{ $user[0]->foto }}" alt="" srcset="">
+                <img class="image-wrapper uk-border-circle uk-align-center" src="data:image/png;base64,{{ $user[0]->foto }}" alt="" srcset="">
             @endif
             <div class="uk-margin">
                 <label for="foto" class="form-label">Foto Profil</label>

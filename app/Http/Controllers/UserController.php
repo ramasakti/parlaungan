@@ -123,27 +123,22 @@ class UserController extends Controller
     {
         $detailUser = DB::table('user')->where('username', $request->username)->first();
         if ($request->file('foto')) {
-            //Hapus Foto Lama
-            Storage::delete('profil/' . $detailUser->foto);
-
-            //Upload Foto Baru
-            $ext = $request->file('foto')->getClientOriginalExtension();
-            $filename = $request->username . '.' . $ext;
-            $request->file('foto')->storeAs('/profil', $filename);
+            $image = $request->file('foto');
+            $encodedImage = base64_encode(file_get_contents($image->getPathname()));
             
             if ($request->password) {
                 DB::table('user')
                     ->where('username', $request->username)
                     ->update([
                         'password' => bcrypt($request->password),
-                        'foto' => $filename,
+                        'foto' => $encodedImage,
                         'status' => $request->status,
                     ]);
             }else{
                 DB::table('user')
                     ->where('username', $request->username)
                     ->update([
-                        'foto' => $filename,
+                        'foto' => $encodedImage,
                         'status' => $request->status,
                     ]);
             }
