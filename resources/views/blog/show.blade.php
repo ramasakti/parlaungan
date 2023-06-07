@@ -36,7 +36,7 @@
 			</header>
 
 			<div class="uk-margin-small-bottom">
-				<img id="banner" src="/storage/blog/{{ $data->foto }}" alt="Gambar artikel" class="uk-align-center">
+				<img id="banner" src="data:image/png;base64,{{ $data->foto }}" alt="Gambar artikel" class="uk-align-center">
 			</div>
             <div class="uk-margin">
                 <a href="https://wa.me/?text=https://smaispa.sch.id/blog/view/{{ $data->slug }}" class="uk-icon-button" style="background: #075E54" uk-icon="icon: whatsapp"></a>

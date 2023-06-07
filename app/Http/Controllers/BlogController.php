@@ -34,15 +34,13 @@ class BlogController extends Controller
             'foto' => 'image|file'
         ]);
 
-        //Upload Foto Baru
-        $ext = $request->file('foto')->getClientOriginalExtension();
-        $filename = date('YmdHis') . '.' . $ext;
-        $request->file('foto')->storeAs('/blog', $filename);
+        $image = $request->file('foto');
+        $encodedImage = base64_encode(file_get_contents($image->getPathname()));
 
         DB::table('blog')
             ->insert([
                 'slug' => $validated['slug'],
-                'foto' => $filename,
+                'foto' => $encodedImage,
                 'judul' => $request->judul,
                 'isi' => $request->isi,
                 'kategori' => $request->kategori,
