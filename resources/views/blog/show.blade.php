@@ -16,7 +16,7 @@
     <meta property="og:site_name" content="smaispa">
     <meta property="article:publisher" content="https://www.instagram.com/officialsmaispa/"/>
     <meta property="og:description" content="SMA Islam Parlaungan">
-    <meta property="og:image" content="https://smaispa.sch.id/storage/blog/{{ $data->foto }}">
+    <meta property="og:image" content="data:image/png;base64,{{ $data->foto }}">
     <meta property="og:image:height" content="364">
     <meta property="og:image:width" content="648">
     <!-- Twitter -->
@@ -24,7 +24,7 @@
     <meta property="twitter:url" content="https://smaispa.sch.id/blog/view/{{ $data->slug }}">
     <meta property="twitter:title" content="{{ $data->judul }}">
     <meta property="twitter:description" content="SMA Islam Parlaungan">
-    <meta property="twitter:image" content="https://smaispa.sch.id/storage/blog/{{ $data->foto }}">
+    <meta property="twitter:image" content="data:image/png;base64,{{ $data->foto }}">
 </head>
 <body>
     <div class="uk-container uk-container-xsmall">

@@ -226,7 +226,14 @@
                                             <li><a href="/jurnal">Jurnal Kelas</a></li>
                                         </ul>
                                     </li>
-                                    @break    
+                                    @break
+                                @default
+                                    <li class="{{ ($navactive === 'user' ? 'active' : '') }}">
+                                        <a href="/kehadiran"><span>Kehadiran</span></a>
+                                    </li>
+                                    <li class="{{ ($navactive === 'user' ? 'active' : '') }}">
+                                        <a href="/pembayaran"><span>Pembayaran</span></a>
+                                    </li>
                             @endswitch
                         </ul>
                     </nav>

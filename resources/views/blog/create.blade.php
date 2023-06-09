@@ -13,10 +13,6 @@
             <input type="file" class="form-control" id="foto" name="foto" onchange="previewImage()" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" required>
         </div>
         <input type="text" class="uk-input uk-margin uk-margin-remove-top" id="judul" name="judul" placeholder="Judul Berita" value="{{ old('judul') }}">
-        <select name="kategori" id="" class="uk-select uk-margin uk-margin-remove-top" value="{{ old('kategori') }}" required>
-            <option value="">Kategori Berita</option>
-            <option value="Pengumuman">Pengumuman</option>
-        </select>
         <input type="hidden" id="uploader" name="uploader" value="{{ session('username') }}">
         <input type="hidden" id="slug" name="slug" value="{{ old('slug') }}">
         <textarea name="isi" id="isi" cols="30" rows="10">{{ old('isi') }}</textarea>

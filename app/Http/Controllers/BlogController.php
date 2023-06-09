@@ -43,9 +43,9 @@ class BlogController extends Controller
                 'foto' => $encodedImage,
                 'judul' => $request->judul,
                 'isi' => $request->isi,
-                'kategori' => $request->kategori,
                 'uploaded' => date('Y-m-d'),
-                'uploader' => $request->uploader
+                'uploader' => $request->uploader,
+                'publish' => FALSE
             ]);
         
         return redirect('/web')->with('success', 'Berhasil menambahkan berita');
@@ -81,25 +81,20 @@ class BlogController extends Controller
         }
 
         if ($request->file('foto')) {
-            //Hapus Foto Lama
-            Storage::delete('blog/' . $detailBlog->foto);
-
-            //Upload Foto Baru
-            $ext = $request->file('foto')->getClientOriginalExtension();
-            $filename = date('YmdHis') . '.' . $ext;
-            $request->file('foto')->storeAs('/blog', $filename);
+            $image = $request->file('foto');
+            $encodedImage = base64_encode(file_get_contents($image->getPathname()));
 
             //Update Data
             DB::table('blog')
                 ->where('slug', $slug)
                 ->update([
                     'slug' => $validated['slug'],
-                    'foto' => $filename,
+                    'foto' => $encodedImage,
                     'judul' => $request->judul,
                     'isi' => $request->isi,
-                    'kategori' => $request->kategori,
                     'uploaded' => date('Y-m-d'),
-                    'uploader' => $request->uploader
+                    'uploader' => $request->uploader,
+                    'publish' => $request->publish
                 ]);
         }else{
             //Update Data
@@ -109,13 +104,13 @@ class BlogController extends Controller
                     'slug' => $validated['slug'],
                     'judul' => $request->judul,
                     'isi' => $request->isi,
-                    'kategori' => $request->kategori,
                     'uploaded' => date('Y-m-d'),
-                    'uploader' => $request->uploader
+                    'uploader' => $request->uploader,
+                    'publish' => $request->publish
                 ]);
         }
 
-        return redirect('/web')->with('success', 'Berhasil menambahkan berita');
+        return redirect('/web')->with('success', 'Berhasil mengupdate berita');
     }
 
     public function delete($slug)

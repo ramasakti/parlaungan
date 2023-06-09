@@ -17,8 +17,8 @@
                     <input type="text" class="uk-input uk-margin-small" name="username" placeholder="Username">
                 </div>
                 <div class="uk-inline uk-width-1-1">
-                    <a class="uk-form-icon uk-form-icon-flip" href="#" uk-icon="icon: eye-slash" id="iconEye" onclick="showHide()"></a>
                     <input type="password" id="password" class="uk-input uk-margin-small" name="password" placeholder="Password">
+                    <a class="uk-form-icon uk-form-icon-flip" href="#" uk-icon="icon: eye-slash" id="iconEye" onclick="showHide()"></a>
                 </div>
                 <button id="loginButton" type="submit" onclick="login()" onsubmit="login()" class="uk-button uk-margin-small uk-button-primary uk-width-1-1">Login</button>
             </form>

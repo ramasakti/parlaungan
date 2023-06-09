@@ -13,13 +13,12 @@
             <input type="file" class="form-control" id="foto" name="foto" onchange="previewImage()" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
         </div>
         <input type="text" class="uk-input uk-margin uk-margin-remove-top" id="judul" name="judul" placeholder="Judul Berita" value="{{ $dataBlog[0]->judul }}">
-        <select name="kategori" id="" class="uk-select uk-margin uk-margin-remove-top" value="{{ old('kategori') }}" required>
-            <option value="">Kategori Berita</option>
-            <option value="Pengumuman">Pengumuman</option>
-        </select>
         <input type="hidden" id="uploader" name="uploader" value="{{ session('username') }}">
         <input type="hidden" id="slug" name="slug" value="{{ old('slug') }}">
         <textarea name="isi" id="isi" cols="30" rows="10">{{ $dataBlog[0]->isi }}</textarea>
+        @if (session('status') == 'Admin' or session('status') == 'Kurikulum' or session('status') == 'Kesiswaan' or session('status') == 'Bendahara')
+            <label class="uk-margin"><input name="publish" class="uk-checkbox" type="checkbox" value="1">&nbsp; Publikasi</label>
+        @endif
         <button class="uk-button uk-button-primary uk-width-1-1 uk-margin" type="submit">Simpan</button>
     </form>
     <script>

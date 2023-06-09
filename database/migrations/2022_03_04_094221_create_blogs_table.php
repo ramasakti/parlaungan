@@ -19,9 +19,9 @@ class CreateBlogsTable extends Migration
             $table->longText('foto');
             $table->string('judul');
             $table->text('isi');
-            $table->string('kategori');
             $table->date('uploaded');
             $table->string('uploader');
+            $table->boolean('publish');
         });
 
         Schema::table('blog', function (Blueprint $table) {

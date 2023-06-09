@@ -9,7 +9,7 @@
             </div>
             <div class="uk-margin">
                 <div class="uk-inline uk-width-1-1">
-                    <a class="uk-form-icon uk-form-icon-flip" id="iconNewPass-{{ $user[0]->username }}" href="#" uk-icon="icon: lock" onclick="showhidePassword('{{ $user[0]->username }}')"></a>
+                    <a class="uk-form-icon uk-form-icon-flip" id="iconNewPass-{{ $user[0]->username }}" href="#" uk-icon="icon: eye-slash" onclick="showhidePassword('{{ $user[0]->username }}')"></a>
                     <input class="uk-input" type="password" name="password" id="passwordBaru-{{ $user[0]->username }}" placeholder="Password Baru">
                 </div>
             </div>
@@ -45,12 +45,12 @@
         const passwordBaru = document.getElementById('passwordBaru-' + username)
         const iconNewPass = document.getElementById('iconNewPass-' + username)
 
-        if (iconNewPass.getAttribute('uk-icon') == 'icon: lock') {
+        if (iconNewPass.getAttribute('uk-icon') == 'icon: eye-slash') {
             passwordBaru.setAttribute('type', 'text')
-            iconNewPass.setAttribute('uk-icon', 'icon: unlock')
+            iconNewPass.setAttribute('uk-icon', 'icon: eye')
         }else{
             passwordBaru.setAttribute('type', 'password')
-            iconNewPass.setAttribute('uk-icon', 'icon: lock')
+            iconNewPass.setAttribute('uk-icon', 'icon: eye-slash')
         }
     }
     
