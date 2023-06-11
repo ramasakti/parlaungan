@@ -43,7 +43,7 @@ class BlogController extends Controller
                 'foto' => $encodedImage,
                 'judul' => $request->judul,
                 'isi' => $request->isi,
-                'uploaded' => date('Y-m-d'),
+                'uploaded' => date('Y-m-d H:i:s'),
                 'uploader' => $request->uploader,
                 'publish' => FALSE
             ]);
@@ -92,7 +92,7 @@ class BlogController extends Controller
                     'foto' => $encodedImage,
                     'judul' => $request->judul,
                     'isi' => $request->isi,
-                    'uploaded' => date('Y-m-d'),
+                    'uploaded' => date('Y-m-d H:i:s'),
                     'uploader' => $request->uploader,
                     'publish' => $request->publish
                 ]);
@@ -104,7 +104,7 @@ class BlogController extends Controller
                     'slug' => $validated['slug'],
                     'judul' => $request->judul,
                     'isi' => $request->isi,
-                    'uploaded' => date('Y-m-d'),
+                    'uploaded' => date('Y-m-d H:i:s'),
                     'uploader' => $request->uploader,
                     'publish' => $request->publish
                 ]);

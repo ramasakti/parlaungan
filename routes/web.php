@@ -22,6 +22,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ArsipController;
 use App\Http\Controllers\KelulusanController;
 use App\Http\Controllers\SyncController;
+use App\Http\Controllers\JampelController;
 
 /*
 |--------------------------------------------------------------------------
@@ -90,6 +91,10 @@ Route::post('/libur/update', [SekolahController::class, 'updateLibur'])->middlew
 Route::post('/libur/delete', [SekolahController::class, 'destroyLibur'])->middleware('auth');
 //Hari & Piket
 Route::post('/hari/update', [SekolahController::class, 'updateHari'])->middleware('auth');
+//Jam Pelajaran
+Route::post('/jampel/store', [JampelController::class, 'storeJampel'])->middleware('auth');
+Route::post('/jampel/update', [JampelController::class, 'updateJampel'])->middleware('auth');
+Route::post('/jampel/delete', [JampelController::class, 'destroyJampel'])->middleware('auth');
 
 //Kelas
 Route::post('/kelas/store', [SiswaController::class, 'storeKelas'])->middleware('auth');

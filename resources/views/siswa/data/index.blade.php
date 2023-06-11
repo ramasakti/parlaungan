@@ -38,7 +38,7 @@
                 <td>
                     <a href="#modal-center" uk-icon="settings" uk-toggle="target: #edit-siswa-{{ $siswa->id_siswa }}"></a> &nbsp;
                     @include('siswa.data.edit-siswa')
-                    <a href="#modal-center" uk-icon="trash" uk-toggle="target: #delete-siswa-{{ $siswa->id_siswa }}"></a>
+                    <a href="#modal-overflow" uk-icon="trash" uk-toggle="target: #delete-siswa-{{ $siswa->id_siswa }}"></a>
                     @include('siswa.data.delete-siswa')
                 </td>
             </tr>

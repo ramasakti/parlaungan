@@ -24,6 +24,7 @@ class SekolahController extends Controller
             'dataHari' => $this->dataHari(),
             'dataGuru' => DB::table('guru')->get(),
             'dataLibur' => DB::table('libur')->get(),
+            'dataJam' => DB::table('jam_pelajaran')->get()
         ]);
     }
 

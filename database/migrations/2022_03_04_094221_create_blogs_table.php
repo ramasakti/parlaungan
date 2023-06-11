@@ -19,7 +19,7 @@ class CreateBlogsTable extends Migration
             $table->longText('foto');
             $table->string('judul');
             $table->text('isi');
-            $table->date('uploaded');
+            $table->dateTime('uploaded');
             $table->string('uploader');
             $table->boolean('publish');
         });

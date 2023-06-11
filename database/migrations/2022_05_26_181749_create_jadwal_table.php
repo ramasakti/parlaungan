@@ -15,12 +15,10 @@ class CreateJadwalTable extends Migration
     {
         Schema::create('jadwal', function (Blueprint $table) {
             $table->increments('id_jadwal');
-            $table->string('hari');
+            $table->foreignId('jampel')->references('id_jampel')->on('jam_pelajaran');
             $table->string('guru_id');
             $table->integer('kelas_id')->unsigned();
             $table->string('mapel');
-            $table->time('mulai');
-            $table->time('sampai');
             $table->string('status', '10')->default('');
         });
 

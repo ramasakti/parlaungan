@@ -22,6 +22,7 @@
             <th scope="col">Judul</th>
             <th scope="col">Uploaded</th>
             <th scope="col">Author</th>
+            <th scope="col">Publikasi</th>
             <th scope="col">Handler</th>
         </tr>
     </thead>
@@ -33,9 +34,17 @@
                 <td>{{ $blog->uploaded }}</td>
                 <td>{{ $blog->uploader }}</td>
                 <td>
+                    @if ($blog->publish)
+                        Sudah
+                    @else
+                        Belum
+                    @endif
+                </td>
+                <td>
+                </a> &nbsp;
+                <a href="/blog/view/{{ $blog->slug }}" target="_blank" uk-icon="link"></a>
+                @if (session('status') == 'Admin' or session('status') == 'Kurikulum' or session('status') == 'Kesiswaan' or session('status') == 'Bendahara')    
                     <a href="/blog/edit/{{ $blog->slug }}" target="_blank" uk-icon="file-edit">
-                    </a> &nbsp;
-                    <a href="/blog/view/{{ $blog->slug }}" target="_blank" uk-icon="link"></a>
                     <a href="#delete-blog-{{ $blog->slug }}" uk-toggle uk-icon="trash"></a>
                     <div id="delete-blog-{{ $blog->slug }}" uk-modal>
                         <div class="uk-modal-dialog uk-modal-body">
@@ -47,6 +56,7 @@
                             </p>
                         </div>
                     </div>
+                @endif
                 </td>
             </tr>
         @endforeach
