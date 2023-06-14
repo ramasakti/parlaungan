@@ -17,8 +17,6 @@ class CreateJurnalsTable extends Migration
             $table->id('id_jurnal');
             $table->date('tanggal');
             $table->integer('jadwal_id')->unsigned();
-            $table->time('masuk');
-            $table->integer('lama');
             $table->boolean('inval');
             $table->boolean('transport');
             $table->text('materi');

@@ -7,76 +7,67 @@ use DB;
 
 class JampelController extends Controller
 {
-    public function validator($request)
-    {
-        return [
-            'hari' => 'required',
-            'mulai' => [
-                'required',
-                'date_format:H:i',
-                function ($attribute, $value, $fail) use ($request) {
-                    $existingJampel = DB::table('jam_pelajaran')
-                        ->where('hari', $request->input('hari'))
-                        ->where(function ($query) use ($value, $request) {
-                            $query->where(function ($query) use ($value, $request) {
-                                $query->where('mulai', '<=', $value)
-                                    ->where('selesai', '>=', $value);
-                            })
-                            ->orWhere(function ($query) use ($value, $request) {
-                                $query->where('mulai', '>=', $value)
-                                    ->where('mulai', '<', $request->input('selesai'));
-                            });
-                        })
-                        ->first();
-        
-                    if ($existingJampel) {
-                        $fail('Range jam sudah terisi pada hari yang sama.');
-                    }
-                },
-            ],
-            'selesai' => [
-                'required',
-                'date_format:H:i',
-            ],
-        ];
-    }
     public function storeJampel(Request $request)
     {
-        $validatedJampel = $request->validate($this->validator($request));
+        $result = DB::table('jam_pelajaran')
+                    ->where(function($query) use ($request) {
+                        $query->whereBetween('mulai', [$request->mulai, $request->selesai])
+                            ->orWhereBetween('selesai', [$request->mulai, $request->selesai]);
+                    })
+                    ->where('hari', $request->hari)
+                    ->get();
 
-        if ($validatedJampel->fails) {
-            return back()->with('gagal', 'Gagal insert data! Jam bertabrakan');
+        if (count($result) < 1) {
+            DB::table('jam_pelajaran')
+                ->insert([
+                    'hari' => $request->hari,
+                    'keterangan' => $request->keterangan,
+                    'mulai' => $request->mulai,
+                    'selesai' => $request->selesai . ':59',
+                ]);
+            return back()->with('success', 'Berhasil menambahkan data!');
         }
 
-        DB::table('jam_pelajaran')
-            ->insert([
-                'hari' => $validatedJampel['hari'],
-                'keterangan' => $request->keterangan,
-                'mulai' => $validatedJampel['mulai'],
-                'selesai' => $validatedJampel['selesai'],
-            ]);
-
-        return back()->with('success', 'Berhasil menambahkan jam pelajaran!');
+        return back()->with('gagal', 'Gagal menambahkan data! Jam berbentrokan');
     }
     
     public function updateJampel(Request $request)
     {
-        $validatedJampel = $request->validate($this->validator($request));
+        $result = DB::table('jam_pelajaran')
+                    ->where(function($query) use ($request) {
+                        $query->whereBetween('mulai', [$request->mulai, $request->selesai])
+                            ->orWhereBetween('selesai', [$request->mulai, $request->selesai]);
+                    })
+                    ->where('hari', $request->hari)
+                    ->get();
 
-        if (validate()->errors) {
-            return back()->with('gagal', 'Gagal insert data! Jam bertabrakan');
+        $hari = DB::table('jam_pelajaran')->where('id_jampel', $request->id_jampel)->first();
+
+        if (count($result) < 1) {
+            DB::table('jam_pelajaran')
+                ->where('id_jampel', $request->id_jampel)
+                ->update([
+                    'hari' => $request->hari,
+                    'keterangan' => $request->keterangan,
+                    'mulai' => $request->mulai,
+                    'selesai' => $request->selesai,
+                ]);
+            return back()->with('success', 'Berhasil update data!');
+        }else{
+            if ($hari->hari === $request->hari) {
+                DB::table('jam_pelajaran')
+                    ->where('id_jampel', $request->id_jampel)
+                    ->update([
+                        'hari' => $request->hari,
+                        'keterangan' => $request->keterangan,
+                        'mulai' => $request->mulai,
+                        'selesai' => $request->selesai,
+                    ]);
+                return back()->with('success', 'Berhasil update data!');
+            }
+            return back()->with('gagal', 'Gagal! Jam berbentrokan!');
         }
-
-        DB::table('jam_pelajaran')
-            ->where('id_jampel', $request->id_jampel)
-            ->update([
-                'hari' => $validatedJampel['hari'],
-                'keterangan' => $request->keterangan,
-                'mulai' => $validatedJampel['mulai'],
-                'selesai' => $validatedJampel['selesai']
-            ]);
-
-        return back()->with('success', 'Berhasil mengedit data jam');
+        return back()->with('gagal', 'Gagal! Jam berbentrokan!');
     }
 
     public function destroyJampel(Request $request)

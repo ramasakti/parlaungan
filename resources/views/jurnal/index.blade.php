@@ -21,7 +21,7 @@
                     <td>{{ $jurnal->tingkat ." ". $jurnal->jurusan }}</td>
                     <td>{{ $jurnal->nama_guru }}</td>
                     <td>{{ $jurnal->mapel }}</td>
-                    <td>{{ $jurnal->mulai ." (". $jurnal->lama }} jam)</td>
+                    <td>{{ $jurnal->mulai . ' - ' . $jurnal->selesai }}</td>
                     <td>
                         <a href="#modal-center" uk-icon="settings" uk-toggle="target: #edit-jurnal-{{ $jurnal->id_jurnal }}">
                         </a> &nbsp;

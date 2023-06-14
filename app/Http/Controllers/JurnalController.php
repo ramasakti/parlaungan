@@ -10,19 +10,29 @@ class JurnalController extends Controller
 {
     public function index(Request $request)
     {
-        $dataJurnal = DB::table('jurnal')
+        $nwJurnal = DB::table('jurnal')
+                        ->select(
+                            'id_jurnal', 
+                            'jam_pelajaran.hari', 
+                            'jam_pelajaran.mulai', 
+                            'jam_pelajaran.selesai', 
+                            'jadwal.mapel', 
+                            'kelas.tingkat', 
+                            'kelas.jurusan', 
+                            'guru.nama_guru',
+                        )
                         ->where('jurnal.tanggal', request('tanggal'))
-                        ->select('jurnal.id_jurnal', 'jurnal.lama', 'jadwal.hari', 'jadwal.mapel', 'jadwal.mulai', 'jadwal.sampai', 'kelas.tingkat', 'kelas.jurusan', 'guru.nama_guru')
                         ->join('jadwal', 'jurnal.jadwal_id', '=', 'jadwal.id_jadwal')
-                        ->join('kelas', 'jadwal.kelas_id', '=', 'kelas.id_kelas')
-                        ->join('guru', 'jadwal.guru_id', '=', 'guru.id_guru')
+                        ->join('jam_pelajaran', 'jam_pelajaran.id_jampel', '=', 'jadwal.jampel')
+                        ->join('kelas', 'kelas.id_kelas', '=', 'jadwal.kelas_id')
+                        ->join('guru', 'guru.id_guru', '=', 'jadwal.guru_id')
                         ->get();
 
         return view('jurnal.index', [
                 'title' => 'Jurnal',
                 'navactive' => 'akademik',
                 'ai' => 1,
-                'dataJurnal' => $dataJurnal
+                'dataJurnal' => $nwJurnal
         ]);
     }
 }

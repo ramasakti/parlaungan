@@ -4,7 +4,6 @@
         <h5>Presensi Guru Manual</h5>
         <form method="POST" action="/jadwal/manual">
             @csrf
-
             <div class="uk-margin">
                 <p>Jadwal Hari {{ $jadwal->hari }} Mapel {{ $jadwal->mapel }}</p>
             </div>
@@ -24,10 +23,10 @@
                 </select>
             </div>
             <div class="uk-margin">
-                <input name="masuk" placeholder="Mulai" class="textbox-n uk-input" type="text" onfocus="(this.type='time')" id="time" value="{{ date('H:i') }}">
+                <input name="masuk" placeholder="Mulai" class="textbox-n uk-input" type="text" onfocus="(this.type='time')" id="time" value="{{ $jadwal->mulai }}">
             </div>
             <div class="uk-margin">
-                <input name="sampai" placeholder="Sampai" class="textbox-n uk-input" type="text" onfocus="(this.type='time')" id="time" value="{{ $jadwal->sampai }}">
+                <input name="selesai" placeholder="Selesai" class="textbox-n uk-input" type="text" onfocus="(this.type='time')" id="time" value="{{ $jadwal->selesai }}">
             </div>
             <button type="submit" class="uk-button uk-button-primary uk-button-small">Simpan</button>
         </form>

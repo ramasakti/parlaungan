@@ -77,4 +77,19 @@ class GuruController extends Controller
             'dataGuru' => DB::table('guru')->join('user', 'user.username', '=', 'guru.id_guru')->get()
         ]);
     }
+
+    public function mengajar()
+    {
+        $dataMengajar = DB::table('guru')
+                            ->select(
+                                'guru.id_guru', 'guru.nama_guru',
+                                DB::raw('COUNT(jadwal.id_jadwal) as jumlah_jam'), 
+                                DB::raw('SUM(jurnal.lama) as tertunaikan'), 
+                                DB::raw('SUM(jurnal.transport) as transport')
+                            )
+                            ->join('jadwal', 'jadwal.guru_id', '=', 'guru.id_guru')
+                            ->join('jurnal', 'jurnal.jadwal_id', '=', 'jadwal.id_jadwal')
+                            ->groupBy('jadwal.guru_id')
+                            ->get();
+    }
 }

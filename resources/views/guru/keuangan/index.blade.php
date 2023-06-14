@@ -28,51 +28,51 @@
         @foreach ($dataGuru as $guru)
             @php
                 $dataTertunaikan = DB::table('jurnal')
-                                        ->select(DB::raw('SUM(jurnal.lama) as tertunaikan'), DB::raw('SUM(jurnal.transport) as transport'))
+                                        ->select(DB::raw('COUNT(jurnal.id_jurnal) as tertunaikan'), DB::raw('SUM(jurnal.transport) as transport'))
                                         ->join('jadwal', 'jadwal.id_jadwal', '=', 'jurnal.jadwal_id')
                                         ->where('jadwal.guru_id', $guru->id_guru)
                                         ->where('jurnal.inval', FALSE)
                                         ->where('jurnal.tanggal', '>=', request('dari'))
                                         ->where('jurnal.tanggal', '<=', request('sampai'))
                                         ->groupBy('jadwal.guru_id')
-                                        ->get();
+                                        ->first();
             
                 $jadwal = DB::table('jadwal')
-                                ->select(DB::raw("SUM(TIME_TO_SEC(TIMEDIFF(jadwal.sampai, jadwal.mulai)))/$jampel/60 as jumlah_jam"))
+                                ->select(DB::raw("COUNT(jadwal.id_jadwal) as jumlah_jam"))
                                 ->where('guru_id', $guru->id_guru)
                                 ->groupBy('guru_id')
-                                ->get();
+                                ->first();
 
                 $menginval = DB::table('inval')
-                                ->select(DB::raw("SUM(jurnal.lama) AS menginval"))
+                                ->select(DB::raw("COUNT(jurnal.id_jurnal) AS menginval"))
                                 ->join('jadwal', 'jadwal.id_jadwal', '=', 'inval.jadwal_id')
                                 ->join('jurnal', 'jurnal.jadwal_id', '=', 'jadwal.id_jadwal')
                                 ->where('jurnal.inval', TRUE)
                                 ->where('penginval', $guru->id_guru)
                                 ->groupBy('penginval')
-                                ->get();
+                                ->first();
                 
             @endphp
             <tbody>
                 <tr>
                     <td>{{ $guru->nama_guru }}</td>
                     <td>
-                        @if (count($jadwal) > 0)
-                            {{ ceil($jadwal[0]->jumlah_jam) }}
+                        @if ($jadwal)
+                            {{ ceil($jadwal->jumlah_jam) }}
                         @else
                             0
                         @endif
                     </td>
                     <td>
-                        @if (count($dataTertunaikan) > 0)
-                            {{ $dataTertunaikan[0]->tertunaikan; }}
+                        @if ($dataTertunaikan)
+                            {{ $dataTertunaikan->tertunaikan; }}
                         @else
                             0
                         @endif
                     </td>
                     <td>
-                        @if (count($dataTertunaikan) > 0)
-                            {{ $dataTertunaikan[0]->transport; }}
+                        @if ($dataTertunaikan)
+                            {{ $dataTertunaikan->transport; }}
                         @else
                             0
                         @endif
@@ -81,8 +81,8 @@
                         S/I/A
                     </td>
                     <td>
-                        @if (count($menginval) > 0)
-                            {{ $menginval[0]->menginval; }}
+                        @if ($menginval)
+                            {{ $menginval->menginval; }}
                         @else
                             0
                         @endif

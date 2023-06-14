@@ -16,12 +16,15 @@
                 <input class="uk-input" type="text" name="keterangan" placeholder="Keterangan" value="{{ $jampel->keterangan }}">
             </div>
             <div class="uk-margin">
-                <input name="mulai" placeholder="Mulai" class="textbox-n uk-input" type="text" onfocus="(this.type='time')" id="time" required>
+                <input name="mulai" placeholder="Mulai" class="textbox-n uk-input" type="text" onfocus="(this.type='time')" id="time" value="{{ $jampel->mulai }}" required>
             </div>
             <div class="uk-margin">
-                <input name="selesai" placeholder="Selesai" class="textbox-n uk-input" type="text" onfocus="(this.type='time')" id="time" required>
+                <input name="selesai" placeholder="Selesai" class="textbox-n uk-input" type="text" onfocus="(this.type='time')" id="time" value="{{ $jampel->selesai }}" required>
             </div>
             <button type="submit" class="uk-button uk-button-primary uk-button-small">Simpan</button>
         </form>
     </div>
 </div>
+<script>  
+    $('#jampel').select2();
+</script>

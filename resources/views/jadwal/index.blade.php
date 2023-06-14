@@ -33,6 +33,7 @@
         const status = `<div id="status">
                 <div class="uk-margin">
                     <select id="status" class="uk-select" name="status" required>
+                        <option value="" selected disabled hidden>Keterangan Inval</option>
                         <option value="I">Izin</option>
                         <option value="S">Sakit</option>
                         <option value="A">Alfa</option>
@@ -45,10 +46,11 @@
             const guru = document.getElementById('guru-' + id_jadwal)
             const inval = document.getElementById('status-inval-' + id_jadwal)
             if (inval.checked) {
-                inval.innerHTML = status
+                wadah.innerHTML = status
                 guru.removeAttribute('disabled')
             }else{
                 guru.setAttribute('disabled', '')
+                wadah.innerHTML = ''
             }
         }
     </script>

@@ -24,7 +24,7 @@
                 <td>{{ $jadwal->id_jadwal }}</td>
                 <td>{{ $jadwal->nama_guru }}</td>
                 <td>{{ $jadwal->mapel }}</td>
-                <td>{{ $jadwal->mulai }} - {{ $jadwal->sampai }}</td>
+                <td>{{ $jadwal->mulai }} - {{ $jadwal->selesai }}</td>
                 <td>
                     @include('jadwal.hari.conditional-status')
                 </td>
