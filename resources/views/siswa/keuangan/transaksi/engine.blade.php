@@ -53,6 +53,18 @@
                     </div>
                 </div>
             @endforeach
+            @if ($tunggakanPembayaran and $tunggakanPembayaran->tunggakan > 0)
+                <div>
+                    <div class="uk-card uk-card-default uk-card-small uk-card-body uk-margin-small">
+                        <h6 class="uk-margin-small">
+                            Tunggakan Sebelumnya
+                            <input class="uk-checkbox uk-position-top-right uk-margin" type="checkbox" name="pembayaran[]" value="1">
+                        </h6>
+                            <p>Jumlah: {{ number_format($tunggakanPembayaran->tunggakan,0,'','.') }}</p>
+                        </div>
+                    </div>
+                </div>
+            @endif
         </div>
         <button class="uk-margin uk-button uk-button-primary" id="checkout" type="submit">Checkout</button> 
     </form>

@@ -271,5 +271,11 @@ class DatabaseSeeder extends Seeder
         DB::table('profesi')->insert([
             'profesi' => 'Sudah Meninggal',
         ]);
+
+        DB::table('pembayaran')->insert([
+            'nama_pembayaran' => 'Tunggakan',
+            'nominal' => NULL,
+            'kelas' => ''
+        ]);
     }
 }

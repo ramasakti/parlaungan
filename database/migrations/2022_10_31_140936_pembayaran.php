@@ -16,7 +16,7 @@ class Pembayaran extends Migration
         Schema::create('pembayaran', function (Blueprint $table) {
             $table->id('id_pembayaran');
             $table->string('nama_pembayaran');
-            $table->integer('nominal');
+            $table->integer('nominal')->nullable();
             $table->text('kelas');
         });
     }

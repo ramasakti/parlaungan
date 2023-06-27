@@ -24,8 +24,9 @@ class KeuanganSiswa extends Controller
             'navactive' => 'siswa',
             'ai' => 1,
             'dataKelas' => DB::table('kelas')->get(),
-            'allPembayaran' => DB::table('pembayaran')->get(),
+            'allPembayaran' => DB::table('pembayaran')->where('nama_pembayaran', '!=', 'Tunggakan')->get(),
             'detailPembayaran' => $this->detailPembayaran(),
+            'tunggakanPembayaran' => $this->tunggakanPembayaran(),
             'allTransaksi' => $this->allTransaksi(),
             'detailTransaksi' => $this->detailTransaksi(),
             'dataSiswa' => $dataSiswa[0],
@@ -100,15 +101,30 @@ class KeuanganSiswa extends Controller
         if (!request('siswa_id')) {
             return [];
         }
-        $siswa = DB::table('siswa')->where('id_siswa', request('siswa_id'))->get();
-        if (count($siswa) < 1) {
+        $siswa = DB::table('siswa')->where('id_siswa', request('siswa_id'))->first();
+        if (!$siswa) {
             return [];
         }
-        $kelas = '%' .$siswa[0]->kelas_id. '%';
+        $kelas = '%' .$siswa->kelas_id. '%';
         $detilPembayaran = DB::table('pembayaran')
-                                ->where('pembayaran.kelas', 'like', $kelas)
+                                ->where('kelas', 'like', $kelas)
                                 ->get();
         return $detilPembayaran;
+    }
+
+    public function tunggakanPembayaran()
+    {
+        if (!request('siswa_id')) {
+            return [];
+        }
+        $siswa = DB::table('siswa')->where('id_siswa', request('siswa_id'))->first();
+        if (!$siswa) {
+            return [];
+        }
+
+        $tunggakanPembayaran = DB::table('tunggakan')->where('siswa_id', request('siswa_id'))->first();
+
+        return $tunggakanPembayaran;
     }
 
     public function updateTransaksi(Request $request)
@@ -204,6 +220,7 @@ class KeuanganSiswa extends Controller
             'title' => 'Siswa',
             'navactive' => 'siswa',
             'id_siswa' => $request->id_siswa,
+            'tunggakanPembayaran' => $this->tunggakanPembayaran(),
             'detailPembayaran' => DB::table('pembayaran')->whereIn('id_pembayaran', $request->pembayaran)->get()
         ]);
     }
@@ -314,5 +331,20 @@ class KeuanganSiswa extends Controller
         }catch (Exception $e){
             return "Cetak gagal: " . $e->getMessage();
         }
+    }
+
+    public function tunggakan(Request $request)
+    {
+        $siswa = DB::table('siswa', request('siswa_id'))->first();
+        $kelas = '%' .$siswa->kelas_id. '%';
+        $tunggakan = DB::table('transaksi')
+                        ->join('pembayaran', 'pembayaran.kelas', 'like', '')
+                        ->where('transaksi.siswa_id', request('siswa_id'))
+                        ->get();
+
+        return view('siswa.keuangan.pembayaran.tunggakan', [
+            'title' => 'Tunggakan',
+            'dataTunggakan' => $tunggakan
+        ]);
     }
 }

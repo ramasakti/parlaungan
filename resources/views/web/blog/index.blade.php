@@ -41,10 +41,10 @@
                     @endif
                 </td>
                 <td>
-                </a> &nbsp;
+                &nbsp;
                 <a href="/blog/view/{{ $blog->slug }}" target="_blank" uk-icon="link"></a>
                 @if (session('status') == 'Admin' or session('status') == 'Kurikulum' or session('status') == 'Kesiswaan' or session('status') == 'Bendahara')    
-                    <a href="/blog/edit/{{ $blog->slug }}" target="_blank" uk-icon="file-edit">
+                    <a href="/blog/edit/{{ $blog->slug }}" target="_blank" uk-icon="file-edit">&nbsp;
                     <a href="#delete-blog-{{ $blog->slug }}" uk-toggle uk-icon="trash"></a>
                     <div id="delete-blog-{{ $blog->slug }}" uk-modal>
                         <div class="uk-modal-dialog uk-modal-body">
