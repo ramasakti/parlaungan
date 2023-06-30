@@ -1,7 +1,8 @@
 <div class="uk-margin">
     <h5>
         Data Siswa Terlambat {{ $hariIni }} 
-        <a href="https://wa.me/?text=Data Siswa Terlambat {{ $hariIni }} %0A @foreach($dataTerlambat as $terlambat) *{{ $terlambat->nama_siswa }}* kelas *{{ $terlambat->tingkat }} {{ $terlambat->jurusan }}* hadir: *{{ $terlambat->waktu_absen }}* %0A @endforeach" class="uk-icon-link" uk-icon="social"></a>
+        <a href="#sharer" class="uk-icon-link" uk-icon="social" uk-toggle></a>
+        @include('absen.share')
     </h5>
 </div>
 <table class="uk-table uk-table-hover uk-table-small">

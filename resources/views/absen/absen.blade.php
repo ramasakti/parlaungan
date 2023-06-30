@@ -16,6 +16,7 @@
         <h5>Absen Siswa Kelas {{ $kelas->tingkat }} {{ $kelas->jurusan }}</h5>
     </div>
 @endforeach
+
 <table class="uk-table uk-table-hover uk-table-small">
     <thead>
         <tr>
