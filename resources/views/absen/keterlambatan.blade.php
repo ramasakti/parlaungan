@@ -1,8 +1,7 @@
 <div class="uk-margin">
     <h5>
         Data Siswa Terlambat {{ $hariIni }} 
-        <a href="#sharer" class="uk-icon-link" uk-icon="social" uk-toggle></a>
-        @include('absen.share')
+        <a href="#sharer" class="uk-icon-link" uk-icon="social" uk-toggle></a>@include('absen.share')
     </h5>
 </div>
 <table class="uk-table uk-table-hover uk-table-small">
