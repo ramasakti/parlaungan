@@ -12,7 +12,7 @@
     <link rel="apple-touch-icon" href="{{ asset('/img/logo.png') }}">
     <link rel="manifest" href="{{ asset('/manifest.json') }}">
     <!-- UIkit CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.15.24/dist/css/uikit.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.16.22/dist/css/uikit.min.css" />
     {{-- AdminLTE --}}
     <link rel="shortcut icon" type="image/png" href="/adminlte/images/icon/favicon.ico">
     <link rel="stylesheet" href="/adminlte/css/bootstrap.min.css">
@@ -304,8 +304,8 @@
     <!-- page container area end -->
     
     <!-- UIkit JS -->
-    <script src="https://cdn.jsdelivr.net/npm/uikit@3.15.24/dist/js/uikit.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/uikit@3.15.24/dist/js/uikit-icons.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.16.22/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.16.22/dist/js/uikit-icons.min.js"></script>
 
     <!-- offset area end -->
     <!-- jquery latest version -->

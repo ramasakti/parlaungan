@@ -53,7 +53,7 @@
                     </div>
                 </div>
             @endforeach
-            @if ($tunggakanPembayaran and $tunggakanPembayaran->tunggakan > 0)
+            {{-- @if ($tunggakanPembayaran and $tunggakanPembayaran->tunggakan > 0)
                 <div>
                     <div class="uk-card uk-card-default uk-card-small uk-card-body uk-margin-small">
                         <h6 class="uk-margin-small">
@@ -64,7 +64,7 @@
                         </div>
                     </div>
                 </div>
-            @endif
+            @endif --}}
         </div>
         <button class="uk-margin uk-button uk-button-primary" id="checkout" type="submit">Checkout</button> 
     </form>

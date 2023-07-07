@@ -84,8 +84,8 @@
         }
         
         const checkTime = (i) => {
-          if (i < 10) i = "0" + i  // add zero in front of numbers < 10
-          return i;
+            if (i < 10) i = "0" + i  // add zero in front of numbers < 10
+            return i;
         }
         
         const form = document.getElementById('formabsen')
@@ -95,41 +95,35 @@
 
         userabsen.addEventListener('blur', () => userabsen.focus())
 
-        async function engine (event) {
+        async function engine(event) {
             event.preventDefault();
             spinner.classList.remove("uk-hidden");
-            fetch(window.location.origin + "/api/absen/engine/" + userabsen.value, {
-                method: "PUT",
-            })
-            .then(response => response.json())
-            .then(data => {
+            try {
+                const response = await fetch(window.location.origin + "/api/absen/engine/" + userabsen.value, {
+                    method: "PUT",
+                });
+                const data = await response.json();
                 if (data.success) {
-                    UIkit.notification(
-                        {
-                            message: `${data.data.nama_siswa} berhasil absen!`, 
-                            status:'success', 
-                            pos: 'top-center'
-                        }
-                    );
-                    userabsen.value = ''
-                }else{
-                    UIkit.notification(
-                        {
-                            message: `${data.data.nama_siswa} sudah absen!`, 
-                            status:'warning', 
-                            pos: 'top-center'
-                        }
-                    );
-                    userabsen.value = ''
+                    UIkit.notification({
+                        message: `${data.data.nama_siswa} berhasil absen!`,
+                        status: 'success',
+                        pos: 'top-center'
+                    });
+                    userabsen.value = '';
+                } else {
+                    UIkit.notification({
+                        message: `${data.data.nama_siswa} sudah absen!`,
+                        status: 'warning',
+                        pos: 'top-center'
+                    });
+                    userabsen.value = '';
                 }
-            })
-            .catch(error => {
-                UIkit.notification({message: 'ID anda tidak terdaftar!', status:'danger', pos: 'top-center'});
-                userabsen.value = ''
-            })
-            .finally(() => {
+            } catch (error) {
+                UIkit.notification({ message: 'ID anda tidak terdaftar!', status: 'danger', pos: 'top-center' });
+                userabsen.value = '';
+            } finally {
                 spinner.classList.add("uk-hidden");
-            })
+            }
         }
 
         function onScanSuccess(decodedText) {

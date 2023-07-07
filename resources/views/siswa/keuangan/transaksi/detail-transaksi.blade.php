@@ -27,7 +27,16 @@
                 @for ($i = 0; $i < count($pmbyrn); $i++) 
                     <tr>
                         <td>{{ $pmbyrn[$i]->nama_pembayaran }}</td>
-                        <td>Rp. {{ number_format(intval($pmbyrn[$i]->nominal),0,'','.') }}</td>
+                        <td>
+                            @if ($pmbyrn[$i]->id_pembayaran == 1)
+                                @php
+                                    $tunggakan = DB::table('tunggakan')->where('siswa_id', request('siswa_id'))->first();
+                                @endphp
+                                {{ number_format(intval($tunggakan->tunggakan),0,'','.') }}
+                            @else
+                                Rp. {{ number_format(intval($pmbyrn[$i]->nominal),0,'','.') }}
+                            @endif
+                        </td>
                         <td>Rp. {{ number_format($trx[$i]->terbayar,0,'','.') }}</td>
                     </tr>
                 @endfor
