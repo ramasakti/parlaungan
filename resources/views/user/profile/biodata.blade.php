@@ -6,7 +6,7 @@
         </div>
     @endif
     
-    <form id="fBiodata" class="uk-form-horizontal uk-margin-small mt-3" method="POST" action="/biodata/update">
+    <form id="fBiodata" class="uk-form-horizontal uk-margin-small mt-3" method="POST" action="/biodata/update" enctype="multipart/form-data">
         @csrf
         <input type="hidden" name="siswa_id" value="{{ session('username') }}">
         <h5>Data Siswa</h5>
@@ -29,6 +29,23 @@
             <div class="uk-form-controls">
                 <input class="uk-input"  type="number" name="nokk" id="nokk" value="{{ $dataUser[0]->nokk }}">
             </div>
+        </div>
+
+        <div class="js-upload uk-placeholder uk-text-center">
+            @if ($dataUser[0]->scan_kk != NULL)
+                Download Scan KK anda <a target="_blank" href="/kk/{{ $dataUser[0]->siswa_id }}">disini</a> dan klik 
+                <div uk-form-custom>
+                    <input type="file" id="kk" name="kk" accept=".pdf" onchange="changeLabelUploader('kk', 'kkLabel')" single>
+                    <span class="uk-link">disini</span>
+                </div> untuk mengubah
+            @else
+                <span uk-icon="icon: cloud-upload"></span>
+                <span id="kkLabel" class="uk-text-middle">Upload Scan KK</span>
+                <div uk-form-custom>
+                    <input type="file" id="kk" name="kk" accept=".pdf" onchange="changeLabelUploader('kk', 'kkLabel')" single>
+                    <span class="uk-link">pilih file</span>
+                </div>
+            @endif
         </div>
 
         <div class="uk-margin">
@@ -68,6 +85,23 @@
             <div class="uk-form-controls">
                 <input class="uk-input"  type="text" name="askol" id="askol" value="{{ $dataUser[0]->askol }}">
             </div>
+        </div>
+
+        <div class="js-upload uk-placeholder uk-text-center">
+            @if ($dataUser[0]->scan_ijazah != NULL)
+                Download Scan Ijazah anda <a target="_blank" href="/ijazah/{{ $dataUser[0]->siswa_id }}">disini</a> dan klik 
+                <div uk-form-custom>
+                    <input type="file" id="ijazah" name="ijazah" accept=".pdf" onchange="changeLabelUploader('ijazah', 'ijazahLabel')" single>
+                    <span class="uk-link">disini</span>
+                </div> untuk mengubah
+            @else
+                <span uk-icon="icon: cloud-upload"></span>
+                <span id="ijazahLabel" class="uk-text-middle">Upload Scan Ijazah Terlegalisir</span>
+                <div uk-form-custom>
+                    <input type="file" id="ijazah" name="ijazah" accept=".pdf" onchange="changeLabelUploader('ijazah', 'ijazahLabel')" single>
+                    <span class="uk-link">pilih file</span>
+                </div>
+            @endif
         </div>
         
         <div class="uk-margin">
@@ -126,14 +160,14 @@
         <div class="uk-margin">
             <label class="uk-form-label" for="form-horizontal-text">Penghasilan Ibu</label>
             <div class="uk-form-controls">
-                <input class="uk-input rupiah" type="number" name="penghasilan_ibu" id="penghasilan_ibu" value="{{ $dataUser[0]->penghasilan_ibu }}">
+                <input class="uk-input"  type="text" name="penghasilan_ibu" id="penghasilan_ibu" value="{{ $dataUser[0]->penghasilan_ibu }}" onkeyup="rupiah('penghasilan_ibu', this.value)">
             </div>
         </div>
         
         <div class="uk-margin">
             <label class="uk-form-label" for="form-horizontal-text">Telp Ibu</label>
             <div class="uk-form-controls">
-                <input class="uk-input rupiah" type="text" name="telp_ibu" id="telp_ibu" value="{{ $dataUser[0]->telp_ibu }}">
+                <input class="uk-input" type="text" name="telp_ibu" id="telp_ibu" value="{{ $dataUser[0]->telp_ibu }}">
             </div>
         </div>
 
@@ -179,7 +213,7 @@
         <div class="uk-margin">
             <label class="uk-form-label" for="form-horizontal-text">Penghasilan Ayah</label>
             <div class="uk-form-controls">
-                <input class="uk-input rupiah"  type="number" name="penghasilan_ayah" id="penghasilan_ayah" value="{{ $dataUser[0]->penghasilan_ayah }}">
+                <input class="uk-input rupiah"  type="text" name="penghasilan_ayah" id="penghasilan_ayah" onkeyup="rupiah('penghasilan_ayah', this.value)" value="{{ $dataUser[0]->penghasilan_ayah }}">
             </div>
         </div>
 
@@ -189,26 +223,11 @@
                 <input class="uk-input rupiah" type="text" name="telp_ayah" id="telp_ayah" value="{{ $dataUser[0]->telp_ayah }}">
             </div>
         </div>
-
-        <div class="uk-margin">
-            <div class="uk-form-label">Memiliki Wali?</div>
-            <div class="uk-form-controls uk-form-controls-text">
-                <label><input class="uk-radio" type="radio" name="wali" onclick="wali(true)"> Ya</label><br>
-                <label><input class="uk-radio" type="radio" name="wali" onclick="wali(false)"> Tidak</label>
-            </div>
-        </div>
-
-        <div id="wali"></div>
     
         <button id="bBiodata" class="uk-button uk-button-primary uk-width-1-1 uk-margin" type="submit" onclick="savingBiodata()" onsubmit="savingBiodata()">Simpan</button>
     </form>
 </div>
 <script>
-    setTimeout(() => {
-        setPenghasilanIbu()
-        setPenghasilanAyah()
-    }, 100);
-
     const setPenghasilanIbu = () => {
         const profesi_ibu = document.getElementById('profesi_ibu').value
         const penghasilan_ibu = document.getElementById('penghasilan_ibu')
@@ -225,8 +244,8 @@
         }
     }
 
-    const wali = (status) => {
-        if (status) {
+    const statusWali = (status) => {
+        if (status == 'TRUE') {
             const formWali = `<h5>Data Ayah</h5>
             <div class="uk-margin">
                 <label class="uk-form-label" for="form-horizontal-text">Nama Ayah</label>
@@ -308,4 +327,17 @@
         bBiodata.innerHTML = `<div uk-spinner="ratio: 0.5"></div>`
         fBiodata.submit()
     }
+
+    const changeLabelUploader = (id, label) => {
+        const uploader = document.getElementById(id)
+        const labelUploader = document.getElementById(label)
+        if (uploader.files.length > 0) {
+            const fileName = uploader.files[0].name;
+            labelUploader.textContent = fileName;
+        } else {
+            labelUploader.textContent = 'pilih file';
+        }
+    }
+
+    const rupiah = (id, value) => document.getElementById(id).value = formatRupiah(value)
 </script>

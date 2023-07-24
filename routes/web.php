@@ -82,6 +82,8 @@ Route::post('/user/update', [UserController::class, 'updateUser'])->middleware('
 //Profil
 Route::post('/biodata/update', [ProfilController::class, 'updateBiodata']);
 Route::post('/profile/updateAkun', [ProfilController::class, 'updateAkun']);
+Route::get('/kk/{id}', [ProfilController::class, 'downloadKK']);
+Route::get('/ijazah/{id}', [ProfilController::class, 'downloadIjazah']);
 
 //Sekolah
 Route::get('/sekolah', [SekolahController::class, 'index'])->middleware('auth');

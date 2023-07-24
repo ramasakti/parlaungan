@@ -55,38 +55,35 @@ class DatabaseSeeder extends Seeder
 
         DB::table('kelas')->insert([
             'tingkat' => 'XII',
-            'jurusan' => 'MIA',
-            'walas' => 'alfansasmiko'
-        ]);
-
-        DB::table('kelas')->insert([
-            'tingkat' => 'XII',
-            'jurusan' => 'IIS',
-            'walas' => 'alfansasmiko'
-        ]);
-
-        DB::table('kelas')->insert([
-            'tingkat' => 'XI',
             'jurusan' => 'SP 2021 1',
             'walas' => 'alfansasmiko'
         ]);
-
         DB::table('kelas')->insert([
-            'tingkat' => 'XI',
+            'tingkat' => 'XII',
             'jurusan' => 'SP 2021 2',
             'walas' => 'alfansasmiko'
         ]);
         DB::table('kelas')->insert([
-            'tingkat' => 'X',
+            'tingkat' => 'XI',
             'jurusan' => 'SP 2022 1',
             'walas' => 'alfansasmiko'
         ]);
         DB::table('kelas')->insert([
-            'tingkat' => 'X',
+            'tingkat' => 'XI',
             'jurusan' => 'SP 2022 2',
             'walas' => 'alfansasmiko'
         ]);
-            
+        DB::table('kelas')->insert([
+            'tingkat' => 'X',
+            'jurusan' => 'SP 2023 1',
+            'walas' => 'alfansasmiko'
+        ]);
+        DB::table('kelas')->insert([
+            'tingkat' => 'X',
+            'jurusan' => 'SP 2023 2',
+            'walas' => 'alfansasmiko'
+        ]);
+
         DB::table('hari')->insert([
             'nama_hari' => 'Senin',
             'masuk' => '06:50:00',
@@ -193,7 +190,7 @@ class DatabaseSeeder extends Seeder
         ]);
         
         DB::table('jenis_tinggal')->insert([
-            'jeting' => 'Kos / Kontrak',
+            'jeting' => 'Kos / Kontrak Sendiri',
         ]);
 
         DB::table('profesi')->insert([

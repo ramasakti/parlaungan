@@ -14,14 +14,16 @@ class DetailSiswa extends Migration
     public function up()
     {
         Schema::create('detail_siswa', function (Blueprint $table) {
-            $table->string('siswa_id');
+            $table->string('siswa_id')->primary();
             $table->string('nisn')->nullable();
             $table->string('nik')->nullable();
             $table->string('nokk')->nullable();
+            $table->longText('scan_kk')->nullable();
             $table->char('transportasi', '2')->nullable();
             $table->char('anak', '2')->nullable();
             $table->char('jenis_tinggal', '2')->nullable();
             $table->string('askol')->nullable();
+            $table->longText('scan_ijazah')->nullable();
             $table->string('ibu')->nullable();
             $table->string('nik_ibu')->nullable();
             $table->string('pendidikan_ibu')->nullable();
