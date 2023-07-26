@@ -13,15 +13,9 @@ class WebController extends Controller
             'ai' => 1,
             'title' => 'Web',
             'navactive' => 'web',
-            'dataBlog' => DB::table('blog')->get()
-        ]);
-    }
-    
-    public function about()
-    {
-        return view('about', [
-            'title' => 'About',
-            'navactive' => 'about',
+            'homePage' => DB::table('home_page')->get(),
+            'dataBlog' => DB::table('blog')->get(),
+            'dataGaleri' => DB::table('galeri')->get()
         ]);
     }
 }

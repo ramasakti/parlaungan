@@ -23,7 +23,7 @@
                     <td>{{ $jurnal->mapel }}</td>
                     <td>{{ $jurnal->mulai . ' - ' . $jurnal->selesai }}</td>
                     <td>
-                        <a href="#modal-center" uk-icon="settings" uk-toggle="target: #edit-jurnal-{{ $jurnal->id_jurnal }}">
+                        <a href="#edit-jurnal-{{ $jurnal->id_jurnal }}" uk-icon="settings" uk-toggle="target: #edit-jurnal-{{ $jurnal->id_jurnal }}">
                         </a> &nbsp;
                         @include('jurnal.edit-jurnal')
                     </td>

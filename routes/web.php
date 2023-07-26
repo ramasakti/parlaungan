@@ -23,6 +23,7 @@ use App\Http\Controllers\ArsipController;
 use App\Http\Controllers\KelulusanController;
 use App\Http\Controllers\SyncController;
 use App\Http\Controllers\JampelController;
+use App\Http\Controllers\HomePageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,6 +72,8 @@ Route::post('/blog/store', [BlogController::class, 'store'])->middleware('auth')
 Route::get('/blog/edit/{slug}', [BlogController::class, 'edit'])->middleware('auth');
 Route::post('/blog/update/{slug}', [BlogController::class, 'update'])->middleware('auth');
 Route::get('/blog/delete/{slug}', [BlogController::class, 'delete'])->middleware('auth');
+//Home Page
+Route::get('/web/home/store', [HomePageController::class, 'add']);
 
 //User
 Route::get('/profile', [UserController::class, 'profile']);
