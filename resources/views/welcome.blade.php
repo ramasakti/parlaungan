@@ -29,9 +29,9 @@
     <meta property="twitter:image" content="https://smaispa.sch.id/steller/imgs/lambang.png">
 
     <!-- font icons -->
-    <link rel="stylesheet" href="/steller/vendors/themify-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="./steller/vendors/themify-icons/css/themify-icons.css">
     <!-- Bootstrap + Steller main styles -->
-	<link rel="stylesheet" href="/steller/css/steller.css">
+	<link rel="stylesheet" href="./steller/css/steller.css">
 
     <!-- UIkit CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.15.24/dist/css/uikit.min.css" />
@@ -41,7 +41,7 @@
     <!-- Page navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" data-spy="affix" data-offset-top="0">
         <div class="container">
-            <a class="navbar-brand" href="#"><img src="/steller/imgs/lambang.png" alt="Logo SMA Islam Parlaungan"></a>
+            <a class="navbar-brand" href="#"><img src="./steller/imgs/lambang.png" alt="Logo SMA Islam Parlaungan"></a>
             <button class="navbar-toggler" id="togglerNav" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -104,7 +104,7 @@
                 </div>
             </div>              
             <div class="img-holder">
-                <img height="700px" src="/steller/imgs/banner.svg" alt="">
+                <img height="700px" src="./steller/imgs/banner.svg" alt="">
             </div>      
         </div>  
 
@@ -131,8 +131,8 @@
         <div class="container mt-5">
             <div class="row text-center text-md-left">
                 <div class="col-md-3">
-                    <img src="/steller/imgs/diniyah.jpg" alt="" class="img-thumbnail mb-4">
-                    <img src="/steller/imgs/diniyah-2.jpg" alt="" class="img-thumbnail mb-4">
+                    <img src="./steller/imgs/diniyah.jpg" alt="" class="img-thumbnail mb-4">
+                    <img src="./steller/imgs/diniyah-2.jpg" alt="" class="img-thumbnail mb-4">
                 </div>
                 <div class="pl-md-4 col-md-9">
                     <h6 class="title">Program Diniyah</h6>
@@ -143,7 +143,7 @@
             </div>
             <div class="row text-center text-md-left">
                 <div class="col-md-3">
-                    <img src="/steller/imgs/berkarak.svg" alt="" class="img-thumbnail mb-4">
+                    <img src="./steller/imgs/berkarak.svg" alt="" class="img-thumbnail mb-4">
                 </div>
                 <div class="pl-md-4 col-md-9">
                     <h6 class="title">Karya Tulis Ilmiah</h6>
@@ -154,7 +154,7 @@
             </div>
             <div class="row text-center text-md-left">
                 <div class="col-md-3">
-                    <img src="/steller/imgs/berakhlak.svg" alt="" class="img-thumbnail mb-4">
+                    <img src="./steller/imgs/berakhlak.svg" alt="" class="img-thumbnail mb-4">
                 </div>
                 <div class="pl-md-4 col-md-9">
                     <h6 class="title">Enterpreneur</h6>
@@ -255,7 +255,7 @@
             <div class="row">
                 <div class="col-sm-4">
                     <div class="img-wrapper">
-                        <img src="/steller/imgs/folio-1.jpg" alt="">
+                        <img src="./steller/imgs/folio-1.jpg" alt="">
                         <div class="overlay">
                             <div class="overlay-infos">
                                 <h5>Project Title</h5>
@@ -265,7 +265,7 @@
                         </div>
                     </div>
                     <div class="img-wrapper">
-                        <img src="/steller/imgs/folio-2.jpg" alt="">
+                        <img src="./steller/imgs/folio-2.jpg" alt="">
                         <div class="overlay">
                             <div class="overlay-infos">
                                 <h5>Project Title</h5>
@@ -277,7 +277,7 @@
                 </div>
                 <div class="col-sm-4">
                     <div class="img-wrapper">
-                        <img src="/steller/imgs/folio-3.jpg" alt="">
+                        <img src="./steller/imgs/folio-3.jpg" alt="">
                         <div class="overlay">
                             <div class="overlay-infos">
                                 <h5>Project Title</h5>
@@ -287,7 +287,7 @@
                         </div>
                     </div>
                     <div class="img-wrapper">
-                        <img src="/steller/imgs/folio-4.jpg" alt="">
+                        <img src="./steller/imgs/folio-4.jpg" alt="">
                         <div class="overlay">
                             <div class="overlay-infos">
                                 <h5>Project Title</h5>
@@ -299,7 +299,7 @@
                 </div>
                 <div class="col-sm-4">
                     <div class="img-wrapper">
-                        <img src="/steller/imgs/folio-5.jpg" alt="">
+                        <img src="./steller/imgs/folio-5.jpg" alt="">
                         <div class="overlay">
                             <div class="overlay-infos">
                                 <h5>Project Title</h5>
@@ -309,7 +309,7 @@
                         </div>
                     </div>
                     <div class="img-wrapper">
-                        <img src="/steller/imgs/folio-6.jpg" alt="">
+                        <img src="./steller/imgs/folio-6.jpg" alt="">
                         <div class="overlay">
                             <div class="overlay-infos">
                                 <h5>Project Title</h5>
@@ -342,7 +342,7 @@
                     <div class="carousel-item active">
                         <div class="card testmonial-card border">
                             <div class="card-body">
-                                <img src="/steller/imgs/avatar-1.jpg" alt="">
+                                <img src="./steller/imgs/avatar-1.jpg" alt="">
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam nostrum voluptates in enim vel amet?</p>
                                 <h1 class="title">Emma Re</h1>
                                 <h1 class="subtitle">Graphic Designer</h1>
@@ -352,7 +352,7 @@
                     <div class="carousel-item">
                         <div class="card testmonial-card border">
                             <div class="card-body">
-                                <img src="/steller/imgs/avatar-2.jpg" alt="">
+                                <img src="./steller/imgs/avatar-2.jpg" alt="">
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam nostrum voluptates in enim vel amet?</p>
                                 <h1 class="title">James Bert</h1>
                                 <h1 class="subtitle">Web Designer</h1>
@@ -362,7 +362,7 @@
                     <div class="carousel-item">
                         <div class="card testmonial-card border">
                             <div class="card-body">
-                                <img src="/steller/imgs/avatar-3.jpg" alt="">
+                                <img src="./steller/imgs/avatar-3.jpg" alt="">
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam nostrum voluptates in enim vel amet?</p>
                                 <h1 class="title">Michael Abra</h1>
                                 <h1 class="subtitle">Web Developer</h1>
@@ -384,7 +384,7 @@
             <div class="row text-left">
                 <div class="col-md-4">
                     <div class="card border mb-4">
-                        <img src="/steller/imgs/blog-1.jpg" alt="" class="card-img-top w-100">
+                        <img src="./steller/imgs/blog-1.jpg" alt="" class="card-img-top w-100">
                         <div class="card-body">
                             <h5 class="card-title">Designe for Everyone</h5>
                             <div class="post-details">
@@ -399,7 +399,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="card border mb-4">
-                        <img src="/steller/imgs/blog-2.jpg" alt="" class="card-img-top w-100">
+                        <img src="./steller/imgs/blog-2.jpg" alt="" class="card-img-top w-100">
                         <div class="card-body">
                             <h5 class="card-title">Web Layouts</h5>
                             <div class="post-details">
@@ -414,7 +414,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="card border mb-4">
-                        <img src="/steller/imgs/blog-3.jpg" alt="" class="card-img-top w-100">
+                        <img src="./steller/imgs/blog-3.jpg" alt="" class="card-img-top w-100">
                         <div class="card-body">
                             <h5 class="card-title">Bootstrap Framework</h5>
                             <div class="post-details">
@@ -525,14 +525,14 @@
     <!-- End of page footer -->
 	
 	<!-- core  -->
-    <script src="/steller/vendors/jquery/jquery-3.4.1.js"></script>
-    <script src="/steller/vendors/bootstrap/bootstrap.bundle.js"></script>
+    <script src="./steller/vendors/jquery/jquery-3.4.1.js"></script>
+    <script src="./steller/vendors/bootstrap/bootstrap.bundle.js"></script>
     
     <!-- bootstrap 3 affix -->
-	<script src="/steller/vendors/bootstrap/bootstrap.affix.js"></script>
+	<script src="./steller/vendors/bootstrap/bootstrap.affix.js"></script>
 
     <!-- steller js -->
-    <script src="/steller/js/steller.js"></script>
+    <script src="./steller/js/steller.js"></script>
 
     <!-- UIkit JS -->
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.15.24/dist/js/uikit.min.js"></script>
