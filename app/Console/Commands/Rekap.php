@@ -57,6 +57,9 @@ class Rekap extends Command
                         ->where('mulai', '<=', date('Y-m-d'))
                         ->where('sampai', '>=', date('Y-m-d'))
                         ->get();
+        $jamPelajaran = DB::table('jam_pelajaran')
+                            ->where('hari', Carbon::now()->isoFormat('dddd'))
+                            ->get();
 
         //Cek apakah hari aktif
         if ($cekHari[0]->status == TRUE) {
@@ -78,8 +81,8 @@ class Rekap extends Command
 
                 //Ambil data jadwal yang notset untuk direkap ketidakhadirannya
                 $dataJadwal = DB::table('jadwal')
-                    ->select('id_jadwal', 'mulai', 'sampai')
-                    ->where('hari', Carbon::now()->isoFormat('dddd'))
+                    ->select('id_jadwal')
+                    ->whereIn('jampel', $jamPelajaran)
                     ->get();
 
                 foreach ($dataRekap as $updateRekap) {
@@ -97,9 +100,7 @@ class Rekap extends Command
                     DB::table('jurnal')
                         ->insert([
                             'tanggal' => date('Y-m-d'),
-                            'jadwal_id' => $insertJadwal->id,
-                            'masuk' => $insertJadwal->mulai,
-                            'lama' => (strtotime($insertJadwal->sampai)-strtotime($insertJadwal->mulai))/$this->jampel()/60,
+                            'jadwal_id' => $insertJadwal->id_jadwal,
                             'transport' => 0,
                             'materi' => "Libur"
                         ]);
