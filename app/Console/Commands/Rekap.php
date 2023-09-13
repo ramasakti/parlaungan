@@ -94,6 +94,27 @@ class Rekap extends Command
                             'waktu_absen' => NULL
                         ]);
                 }
+
+                // Rekap absen guru
+                DB::table('absen_guru')
+                    ->where('waktu_absen', NULL)
+                    ->where('keterangan', '')
+                    ->update([
+                        'keterangan' => 'A'
+                    ]);
+
+                $absenGuru = DB::table('absen_guru')
+                                ->where('waktu_absen', NULL)
+                                ->where('keterangan', 'A')
+                                ->get();
+                
+                foreach ($absenGuru as $guru) {
+                    DB::table('rekap_absen_guru')
+                        ->insert([
+                            'tanggal' => date('Y-m-d'),
+                            'keterangan' => $guru->keterangan
+                        ]);
+                }
             }else{
                 //Jika libur masukkan data jadwal di hari tsb ke jurnal
                 foreach ($dataJadwal as $insertJadwal){

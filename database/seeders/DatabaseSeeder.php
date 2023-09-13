@@ -274,5 +274,15 @@ class DatabaseSeeder extends Seeder
             'nominal' => NULL,
             'kelas' => ''
         ]);
+
+        $dataGuru = DB::table('guru')->get();
+        foreach ($dataGuru as $guru) {
+            DB::table('absen_guru')
+                ->insert([
+                    'id_guru' => $guru->id_guru,
+                    'waktu_absen' => NULL,
+                    'keterangan' => ''
+                ]);
+        }
     }
 }

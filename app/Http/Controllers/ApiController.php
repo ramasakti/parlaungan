@@ -28,8 +28,12 @@ class ApiController extends Controller
                         ->where('absen.id_siswa', $id)
                         ->orWhere('siswa.rfid', $id)
                         ->first();
+        
+        $guruAbsen = DB::table('guru')
+                        ->where('id_guru', $id)
+                        ->first();
 
-        if ($siswaAbsen){
+        if ($siswaAbsen) {
             if ($siswaAbsen->waktu_absen === NULL){
                 $jamMasuk = jam();
                 DB::table('absen')
@@ -60,6 +64,17 @@ class ApiController extends Controller
                     'message' => 'Sudah Absen'
                 ], 200);
             }
+        }else if ($guruAbsen) {
+            DB::table('absen_guru')
+                ->where('id_guru', $id)
+                ->update([
+                    'waktu_absen' => date('H:i:s')
+                ]);
+            return response([
+                'success' => TRUE,
+                'data' => $guruAbsen,
+                'message' => 'Berhasil Absen'
+            ], 201);
         }else{
             return response([
                 'success' => FALSE,

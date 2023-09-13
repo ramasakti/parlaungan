@@ -157,6 +157,8 @@ Route::get('/guru/keuangan', [GuruController::class, 'keuangan'])->middleware('a
 Route::post('/guru/store', [GuruController::class, 'addGuru'])->middleware('auth');
 Route::post('/guru/update', [GuruController::class, 'updateGuru'])->middleware('auth');
 Route::post('/guru/delete', [GuruController::class, 'deleteGuru'])->middleware('auth');
+Route::get('/guru/absen', [GuruController::class, 'absenGuru'])->middleware('auth');
+Route::post('/guru/absen', [GuruController::class, 'updateAbsenGuru'])->middleware('auth');
 
 //Absen Rapat
 Route::get('/rapat', [RapatController::class, 'index'])->middleware('auth');

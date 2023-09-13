@@ -46,6 +46,13 @@ class GuruController extends Controller
                 'tanggal_lahir' => $request->tanggal_lahir,
             ]);
 
+        DB::table('absen_guru')
+            ->insert([
+                'id_guru' => $request->id_guru,
+                'waktu_absen' => NULL,
+                'keterangan' => ''
+            ]);
+
         DB::table('user')
             ->insert([
                 'username' => $request->id_guru,
@@ -55,6 +62,26 @@ class GuruController extends Controller
             ]);
 
         return back()->with('success', 'Berhasil menambah data guru!');
+    }
+
+    public function absenGuru()
+    {
+        return view('guru.absen.index', [
+            'title' => 'Absen Guru',
+            'navactive' => 'guru',
+            'ai' => 1,
+            'dataAbsenGuru' => DB::table('absen_guru')->join('guru', 'guru.id_guru', '=', 'absen_guru.id_guru')->get()
+        ]);
+    }
+
+    public function updateAbsenGuru(Request $request)
+    {
+        DB::table('absen_guru')
+            ->where('id_guru', $request->id_guru)
+            ->update([
+                'keterangan' => $request->keterangan
+            ]);
+        return back()->with('success', 'Berhasil update absen!');
     }
 
     public function deleteGuru(Request $request)
