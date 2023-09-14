@@ -84,6 +84,16 @@ class GuruController extends Controller
         return back()->with('success', 'Berhasil update absen!');
     }
 
+    public function rekapAbsenGuru(Request $request)
+    {
+        return view('guru.absen.rekap', [
+            'title' => 'Rekap Absen Guru',
+            'navactive' => 'guru',
+            'ai' => 1,
+            'rekapAbsen' => DB::table('rekap_absen_guru')->join('guru', 'guru.id_guru', '=', 'rekap_absen_guru.id_guru')->where('tanggal', request('tanggal'))->get()
+        ]);
+    }
+
     public function deleteGuru(Request $request)
     {
         DB::table('guru')

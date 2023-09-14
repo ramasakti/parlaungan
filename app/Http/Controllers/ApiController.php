@@ -30,7 +30,8 @@ class ApiController extends Controller
                         ->first();
         
         $guruAbsen = DB::table('guru')
-                        ->where('id_guru', $id)
+                        ->join('absen_guru', 'absen_guru.id_guru', '=', 'guru.id_guru')
+                        ->where('guru.id_guru', $id)
                         ->first();
 
         if ($siswaAbsen) {
@@ -65,16 +66,24 @@ class ApiController extends Controller
                 ], 200);
             }
         }else if ($guruAbsen) {
-            DB::table('absen_guru')
-                ->where('id_guru', $id)
-                ->update([
-                    'waktu_absen' => date('H:i:s')
-                ]);
-            return response([
-                'success' => TRUE,
-                'data' => $guruAbsen,
-                'message' => 'Berhasil Absen'
-            ], 201);
+            if ($guruAbsen->waktu_absen === NULL) {
+                DB::table('absen_guru')
+                    ->where('id_guru', $id)
+                    ->update([
+                        'waktu_absen' => date('H:i:s')
+                    ]);
+                return response([
+                    'success' => TRUE,
+                    'data' => $guruAbsen,
+                    'message' => 'Berhasil Absen'
+                ], 201);
+            }else{
+                return response([
+                    'success' => FALSE,
+                    'data' => $guruAbsen,
+                    'message' => 'Sudah Absen'
+                ], 200);
+            }
         }else{
             return response([
                 'success' => FALSE,

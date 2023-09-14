@@ -124,6 +124,7 @@
                                         <ul class="collapse">
                                             <li><a href="/guru">Data Guru</a></li>
                                             <li><a href="/guru/absen">Absen Guru</a></li>
+                                            <li><a href="/guru/absen/rekap">Rekap Absen Guru</a></li>
                                             <li><a href="/guru/keuangan?dari={{ $mulai }}&sampai={{ $sampai }}">Keuangan Guru</a></li>
                                         </ul>
                                     </li>
@@ -150,6 +151,7 @@
                                         <ul class="collapse">
                                             <li><a href="/guru">Data Guru</a></li>
                                             <li><a href="/guru/absen">Absen Guru</a></li>
+                                            <li><a href="/guru/absen/rekap">Rekap Absen Guru</a></li>
                                             <li><a href="/guru/keuangan?dari={{ date('Y-m-15') }}&sampai={{ date('Y-m-15') }}">Keuangan Guru</a></li>
                                         </ul>
                                     </li>
@@ -169,6 +171,7 @@
                                         <ul class="collapse">
                                             <li><a href="/guru">Data Guru</a></li>
                                             <li><a href="/guru/absen">Absen Guru</a></li>
+                                            <li><a href="/guru/absen/rekap">Rekap Absen Guru</a></li>
                                             <li><a href="/guru/keuangan?dari={{ date('Y-m-15') }}&sampai={{ date('Y-m-15') }}">Keuangan Guru</a></li>
                                         </ul>
                                     </li>

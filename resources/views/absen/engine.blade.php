@@ -103,19 +103,36 @@
                     method: "PUT",
                 });
                 const data = await response.json();
+
                 if (data.success) {
-                    UIkit.notification({
-                        message: `${data.data.nama_siswa} berhasil absen!`,
-                        status: 'success',
-                        pos: 'top-center'
-                    });
+                    if (data.data.nama_siswa === undefined) {
+                        UIkit.notification({
+                            message: `${data.data.nama_guru} berhasil absen!`,
+                            status: 'success',
+                            pos: 'top-center'
+                        });    
+                    }else{
+                        UIkit.notification({
+                            message: `${data.data.nama_siswa} berhasil absen!`,
+                            status: 'success',
+                            pos: 'top-center'
+                        });
+                    }
                     userabsen.value = '';
                 } else {
-                    UIkit.notification({
-                        message: `${data.data.nama_siswa} sudah absen!`,
-                        status: 'warning',
-                        pos: 'top-center'
-                    });
+                    if (data.data.nama_siswa === undefined) {
+                        UIkit.notification({
+                            message: `${data.data.nama_guru} sudah absen!`,
+                            status: 'warning',
+                            pos: 'top-center'
+                        });
+                    }else{
+                        UIkit.notification({
+                            message: `${data.data.nama_siswa} sudah absen!`,
+                            status: 'warning',
+                            pos: 'top-center'
+                        });
+                    }
                     userabsen.value = '';
                 }
             } catch (error) {
