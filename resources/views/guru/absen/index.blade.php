@@ -1,19 +1,4 @@
 <x-admintemplate title='{{ $title }}' navactive='{{ $navactive }}'>
-    @php
-        $absenGuru = DB::table('absen_guru')->select('id_guru')->get();
-        $guru = DB::table('guru')
-            ->whereNotIn('id_guru', $absenGuru)
-            ->get();
-        
-        foreach ($guru as $guru) {
-            DB::table('absen_guru')
-                ->insert([
-                    'id_guru' => $guru->id_guru,
-                    'waktu_absen' => NULL,
-                    'keterangan' => ''
-            ]);
-        }
-    @endphp
     @if (session()->has('success'))
         <div class="uk-alert-success" uk-alert>
             <a class="uk-alert-close" uk-close></a>
