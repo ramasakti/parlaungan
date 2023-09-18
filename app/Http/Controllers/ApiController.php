@@ -70,7 +70,8 @@ class ApiController extends Controller
                 DB::table('absen_guru')
                     ->where('id_guru', $id)
                     ->update([
-                        'waktu_absen' => date('H:i:s')
+                        'waktu_absen' => date('H:i:s'),
+                        'keterangan' => 'H'
                     ]);
                 return response([
                     'success' => TRUE,

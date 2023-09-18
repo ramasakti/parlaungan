@@ -103,10 +103,7 @@ class Rekap extends Command
                         'keterangan' => 'A'
                     ]);
 
-                $absenGuru = DB::table('absen_guru')
-                                ->where('waktu_absen', NULL)
-                                ->where('keterangan', 'A')
-                                ->get();
+                $absenGuru = DB::table('absen_guru')->get();
                 
                 foreach ($absenGuru as $guru) {
                     DB::table('rekap_absen_guru')
