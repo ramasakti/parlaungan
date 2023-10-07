@@ -79,6 +79,7 @@ class GuruController extends Controller
         DB::table('absen_guru')
             ->where('id_guru', $request->id_guru)
             ->update([
+                'waktu_absen' => date('Y-m-d'),
                 'keterangan' => $request->keterangan
             ]);
         return back()->with('success', 'Berhasil update absen!');

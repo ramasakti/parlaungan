@@ -96,14 +96,9 @@ class Rekap extends Command
                 }
 
                 // Rekap absen guru
-                DB::table('absen_guru')
-                    ->where('waktu_absen', NULL)
-                    ->where('keterangan', '')
-                    ->update([
-                        'keterangan' => 'A'
-                    ]);
-
-                $absenGuru = DB::table('absen_guru')->get();
+                $absenGuru = DB::table('absen_guru')
+                    ->where('waktu_absen', '!=', NULL)
+                    ->get();
                 
                 foreach ($absenGuru as $guru) {
                     DB::table('rekap_absen_guru')
