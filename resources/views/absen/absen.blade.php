@@ -23,6 +23,7 @@
             <th scope="col">#</th>
             <th scope="col">Nama</th>
             <th scope="col">Status</th>
+            <th scope="col">Waktu Absen</th>
             <th scope="col">Handler</th>
         </tr>
     </thead>
@@ -98,6 +99,7 @@
                         </div>
                     </div>
                 </td>
+                <td>{{ $siswa->waktu_absen }}</td>
                 <td>
                     <a href="#modal-center" uk-icon="settings" uk-toggle="target: #edit-absen-{{ $siswa->id_siswa }}">
                     </a> &nbsp;
