@@ -99,7 +99,7 @@
             event.preventDefault();
             spinner.classList.remove("uk-hidden");
             try {
-                const response = await fetch(window.location.origin + "/laravelapi/absen/engine/" + userabsen.value, {
+                const response = await fetch(window.location.origin + "/api/absen/engine/" + userabsen.value, {
                     method: "PUT",
                 });
                 const data = await response.json();
