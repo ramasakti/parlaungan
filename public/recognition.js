@@ -94,13 +94,13 @@ async function getLabeledFaceDescriptions() {
                 descriptions.push(detections.descriptor);
             }
 
-            const loader = document.getElementById('loader')
-            if (loader) loader.remove()
-
             const labeledFaceDescriptor = new faceapi.LabeledFaceDescriptors(label, descriptions);
             labeledFaceDescriptors.push(labeledFaceDescriptor);
 
             return labeledFaceDescriptor;
         })
-    ).then(() => labeledFaceDescriptors);
+    ).then(() => {
+        if (loader) loader.remove();
+        labeledFaceDescriptors
+    });
 }
