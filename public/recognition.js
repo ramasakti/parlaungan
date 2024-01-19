@@ -27,6 +27,8 @@ async function startVideo() {
     );
 }
 
+// Test symlink
+
 async function handleVideo() {
     const canvas = faceapi.createCanvasFromMedia(video);
     document.body.append(canvas);
