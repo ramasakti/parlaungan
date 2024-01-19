@@ -26,7 +26,7 @@ class FaceRecognitionController extends Controller
 
             $data[] = [
                 'label' => $directory,
-                'path' => "./face/{$directory}/",
+                'path' => "./storage/profil/face/{$directory}/",
                 'count' => $fileCount,
             ];
         }

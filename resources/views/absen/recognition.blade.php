@@ -29,6 +29,9 @@
     <video id="video" width="720" height="560" autoplay muted></video>
     <div>
         <canvas id="canvas" width="640" height="480"></canvas>
+        <div id="loader">
+            <div class="spinner-border"></div>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/js/tabler.min.js"></script>
