@@ -24,6 +24,7 @@ use App\Http\Controllers\KelulusanController;
 use App\Http\Controllers\SyncController;
 use App\Http\Controllers\JampelController;
 use App\Http\Controllers\HomePageController;
+use App\Http\Controllers\FaceRecognitionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -179,3 +180,7 @@ Route::get('/arsip', [ArsipController::class, 'index']);
 Route::post('/arsip/store', [ArsipController::class, 'store']);
 Route::post('/arsip/update', [ArsipController::class, 'update']);
 Route::post('/arsip/delete', [ArsipController::class, 'delete']);
+
+//Face Recognition
+Route::get('/recognition', [FaceRecognitionController::class, 'index']);
+Route::get('/recognition/api', [FaceRecognitionController::class, 'api']);

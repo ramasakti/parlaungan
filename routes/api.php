@@ -20,6 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
 Route::put('/absen/engine/{id}', [ApiController::class, 'engineAPI']);
 Route::get('/ucer', [ApiController::class, 'userAPI']);
