@@ -122,9 +122,6 @@ class AbsenController extends Controller
 
     public function viewEngine(Request $request)
     {
-        if (!$request->cookie('username')){
-            return redirect('/login');
-        }
         return view('absen.engine', [
             'title' => 'Sistem Absen',
         ]);

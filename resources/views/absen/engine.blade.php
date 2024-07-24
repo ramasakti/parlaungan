@@ -99,41 +99,17 @@
             event.preventDefault();
             spinner.classList.remove("uk-hidden");
             try {
-                const response = await fetch(window.location.origin + "/api/absen/engine/" + userabsen.value, {
-                    method: "PUT",
-                });
+                const response = await fetch("https://api.smaispa.sch.id/absen/engine/" + userabsen.value);
                 const data = await response.json();
 
-                if (data.success) {
-                    if (data.data.nama_siswa === undefined) {
-                        UIkit.notification({
-                            message: `${data.data.nama_guru} berhasil absen!`,
-                            status: 'success',
-                            pos: 'top-center'
-                        });    
-                    }else{
-                        UIkit.notification({
-                            message: `${data.data.nama_siswa} berhasil absen!`,
-                            status: 'success',
-                            pos: 'top-center'
-                        });
-                    }
-                    userabsen.value = '';
-                } else {
-                    if (data.data.nama_siswa === undefined) {
-                        UIkit.notification({
-                            message: `${data.data.nama_guru} sudah absen!`,
-                            status: 'warning',
-                            pos: 'top-center'
-                        });
-                    }else{
-                        UIkit.notification({
-                            message: `${data.data.nama_siswa} sudah absen!`,
-                            status: 'warning',
-                            pos: 'top-center'
-                        });
-                    }
-                    userabsen.value = '';
+                if (response.ok) {
+                    UIkit.notification({
+                        message: data.message,
+                        status: 'success',
+                        pos: 'top-center'
+                    });
+                }else{
+                    UIkit.notification({ message: data.message, status: 'danger', pos: 'top-center' });
                 }
             } catch (error) {
                 UIkit.notification({ message: 'ID anda tidak terdaftar!', status: 'danger', pos: 'top-center' });
