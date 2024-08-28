@@ -99,7 +99,12 @@
             event.preventDefault();
             spinner.classList.remove("uk-hidden");
             try {
-                const response = await fetch("https://api.smaispa.sch.id/absen/engine/" + userabsen.value);
+                const response = await fetch("https://api.smaispa.sch.id/absen/engine/" + userabsen.value, {
+                    headers: {
+                        'Content-Type': 'application/json'
+                        'x-app-id': 'parlaungan'
+                    }
+                });
                 const data = await response.json();
 
                 if (response.ok) {
