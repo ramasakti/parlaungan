@@ -102,7 +102,7 @@
                 const response = await fetch("https://api.smaispa.sch.id/absen/engine/" + userabsen.value, {
                     headers: {
                         'Content-Type': 'application/json'
-                        'x-app-id': 'parlaungan'
+                        'x-app-id': 'smas5845_ispagram'
                     }
                 });
                 const data = await response.json();
